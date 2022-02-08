@@ -11,6 +11,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Countdown {
+
     private Boolean isActive;
-    private Long time;
+    private Integer time;
+
 }

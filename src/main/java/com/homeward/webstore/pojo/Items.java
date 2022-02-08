@@ -1,5 +1,7 @@
 package com.homeward.webstore.pojo;
 
+import com.homeward.webstore.pojo.Subset.Countdown;
+import com.homeward.webstore.pojo.Subset.Price;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +20,9 @@ public class Items {
     //商品展示图片
     private String image;
     //打折
-    private Object countdown;
+    private Countdown countdown;
     //价格
-    private Object price;
+    private Price price;
     //是否在购物车
     private Boolean inCart;
 

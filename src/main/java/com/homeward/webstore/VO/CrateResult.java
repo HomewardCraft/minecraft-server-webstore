@@ -1,6 +1,7 @@
 package com.homeward.webstore.VO;
 
 
+import com.homeward.webstore.pojo.Items;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,5 @@ public class CrateResult {
     //分类展示方法
     private String display;
     //商品包含的中分类
-    private List<Object> packages;
+    private List<Items> packages;
 }
