@@ -1,6 +1,4 @@
-package com.homeward.webstore.service;
-
-import com.homeward.webstore.VO.PlayerInfoResult;
+package com.homeward.webstore.service.implement.player;
 
 public interface SelectPlayerInfoService {
     String getPlayerUUID(String playerId);

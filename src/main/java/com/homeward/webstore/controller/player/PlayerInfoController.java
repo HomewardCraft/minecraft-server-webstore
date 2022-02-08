@@ -1,7 +1,6 @@
-package com.homeward.webstore.controller;
+package com.homeward.webstore.controller.player;
 
-import com.homeward.webstore.service.SelectPlayerInfoService;
-import com.homeward.webstore.util.JsonResult;
+import com.homeward.webstore.service.implement.player.SelectPlayerInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,7 @@ public class PlayerInfoController {
     }
 
     @GetMapping("/name/{id}")
-    public JsonResult<String> getPlayerInfo(@PathVariable("id") String playerId) {
-        return JsonResult.build().code(JsonResult.SUCCESS).data(playerInfo.getPlayerInfo(playerId));
+    public String getPlayerInfo(@PathVariable("id") String playerId) {
+        return playerInfo.getPlayerInfo(playerId);
     }
 }

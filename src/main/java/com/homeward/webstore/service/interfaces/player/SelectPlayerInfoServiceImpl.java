@@ -1,6 +1,6 @@
-package com.homeward.webstore.service;
+package com.homeward.webstore.service.interfaces.player;
 
-import com.homeward.webstore.VO.PlayerInfoResult;
+import com.homeward.webstore.service.implement.player.SelectPlayerInfoService;
 import com.homeward.webstore.util.JsonMap;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @Service
-public class SelectPlayerInfoServiceImpl implements SelectPlayerInfoService{
+public class SelectPlayerInfoServiceImpl implements SelectPlayerInfoService {
 
     private final RestTemplate restTemplate;
     private final JsonMap jsonMap;
