@@ -1,4 +1,4 @@
-package com.homeward.webstore.service.implement.player;
+package com.homeward.webstore.service.interfaces.player;
 
 public interface SelectPlayerInfoService {
     String getPlayerUUID(String playerId);

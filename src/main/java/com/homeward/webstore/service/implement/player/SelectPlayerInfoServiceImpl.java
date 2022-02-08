@@ -1,6 +1,6 @@
-package com.homeward.webstore.service.interfaces.player;
+package com.homeward.webstore.service.implement.player;
 
-import com.homeward.webstore.service.implement.player.SelectPlayerInfoService;
+import com.homeward.webstore.service.interfaces.player.SelectPlayerInfoService;
 import com.homeward.webstore.util.JsonMap;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

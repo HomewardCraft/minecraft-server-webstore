@@ -1,6 +1,6 @@
 package com.homeward.webstore.controller.player;
 
-import com.homeward.webstore.service.implement.player.SelectPlayerInfoService;
+import com.homeward.webstore.service.interfaces.player.SelectPlayerInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

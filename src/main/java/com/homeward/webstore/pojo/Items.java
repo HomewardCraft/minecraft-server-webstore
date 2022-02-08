@@ -1,4 +1,4 @@
-package com.homeward.webstore.POJO;
+package com.homeward.webstore.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
