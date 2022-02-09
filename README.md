@@ -12,7 +12,7 @@
 <img alt="code" src="https://img.shields.io/badge/Spring-boot-green">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/Ba1oretto/Minecraft-Server-WebStore">
 <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Ba1oretto/Minecraft-Server-WebStore">
-</p>
+</p> 
 
 ### 概述
 
