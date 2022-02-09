@@ -1,5 +1,5 @@
 server:
-  port: 50012
+  port: 8080
 #管理数据源
 spring:
   datasource:
