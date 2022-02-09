@@ -1,4 +1,4 @@
-package com.homeward.webstore.config;
+package com.homeward.webstore.aop;
 
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
