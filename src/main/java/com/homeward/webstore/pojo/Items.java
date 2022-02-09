@@ -30,6 +30,5 @@ public class Items {
     //是否在购物车
     private Boolean inCart;
     //商品类型, 不查询
-    @TableField(select = false)
     private String type;
 }

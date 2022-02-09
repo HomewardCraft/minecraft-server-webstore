@@ -1,6 +1,8 @@
 package com.homeward.webstore.service.interfaces.player;
 
+import com.alibaba.fastjson.JSONObject;
+
 public interface SelectPlayerInfoService {
-    String getPlayerUUID(String playerId);
-    String getPlayerInfo(String playerUUID);
+    JSONObject getAPIMessage(String playerId);
+    JSONObject getPlayerInfo(String playerUUID);
 }

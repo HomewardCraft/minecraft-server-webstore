@@ -11,7 +11,9 @@ import com.homeward.webstore.mapper.PriceMapper;
 import com.homeward.webstore.service.interfaces.StoreService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -33,14 +35,11 @@ public class StoreServiceImpl implements StoreService {
         itemsQueryWrapper.eq("type", type);
         /* 使用mybatis plus进行查询全部操作 */
         List<Items> itemsList = itemsMapper.selectList(itemsQueryWrapper);
+        Price price = priceMapper.selectById(null);
+        Countdown countdown = countdownMapper.selectById(null);
         for (Items items : itemsList) {
             Integer itemId = items.getId();
-            /* Price price = priceMapper.findPriceById(itemId);
-             * 使用mybatis plus查询price表通过id, 见price类 */
-            Price price = priceMapper.selectById(itemId);
-            /* Countdown countdown = countdownMapper.findCountdownById(itemId);
-             * 使用mybatis plus查询countdown表通过id, 见countdown类 */
-            Countdown countdown = countdownMapper.selectById(itemId);
+
             items.setPrice(price).setCountdown(countdown);
         }
         return storeResult.setPackages(itemsList);
