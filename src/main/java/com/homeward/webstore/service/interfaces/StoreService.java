@@ -1,7 +1,7 @@
 package com.homeward.webstore.service.interfaces;
 
-import com.homeward.webstore.VO.CrateResult;
+import com.homeward.webstore.VO.StoreResult;
 
 public interface StoreService {
-    CrateResult getCrateItems(CrateResult crateResult);
+    StoreResult getSpecificItems(String type, StoreResult storeResult);
 }
