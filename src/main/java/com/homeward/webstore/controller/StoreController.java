@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @CrossOrigin
-@RequestMapping("/c")
+@RequestMapping("/category")
 public class StoreController {
     private final StoreService storeService;
 

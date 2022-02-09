@@ -2,9 +2,7 @@ package com.homeward.webstore.pojo.Subset;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 //此对象是计时类，最终要封装至Items
