@@ -1,13 +1,13 @@
 package com.homeward.webstore;
 
-import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.mapper.StoreMapper;
-import com.homeward.webstore.pojo.store.Items;
+import com.homeward.webstore.pojo.packages.ItemsList;
+import com.homeward.webstore.util.FixedJsonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
+import java.util.*;
 
 @SpringBootTest
 public class TestString {
@@ -17,9 +17,14 @@ public class TestString {
 
     @Test
     void concat() {
-        List<Items> crates = storeMapper.getStoreItems("crates");
-        String s = JSONObject.toJSONString(crates);
-        String replace = s.replace("\"", "");
-        System.out.println(JSONObject.parse(replace).toString());
+        List<ItemsList> itemsList= storeMapper.getStoreItems("crates");
+        List<String> list = new ArrayList<>();
+        for (ItemsList items : itemsList) {
+            String s = items.toString();
+            String replace = s.replace("id=null, ", "");
+            list.add(replace);
+        }
+        List<String> list1 = FixedJsonUtil.fixedFormat(list, String.class);
+        System.out.println(list1);
     }
 }
