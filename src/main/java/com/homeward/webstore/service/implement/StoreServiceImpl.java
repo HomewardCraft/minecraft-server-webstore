@@ -18,6 +18,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<Items> getSpecificItems(String type) {
         List<Items> itemsList= storeMapper.getStoreItems(type);
-        return FixedJsonUtil.fixedFormat(itemsList, Items.class);
+        //return FixedJsonUtil.fixedFormat(itemsList, Items.class);
+        return itemsList;
     }
 }
