@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.math.BigInteger;
 import java.nio.charset.Charset;
-//是
+//是s
 @Configuration
 public class DefaultFastjsonConfig {
 
