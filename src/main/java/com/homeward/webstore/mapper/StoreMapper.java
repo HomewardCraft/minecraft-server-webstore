@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface StoreMapper {
     //单个参数传递不加@Param
     List<ItemsList> getStoreItems(String type);
