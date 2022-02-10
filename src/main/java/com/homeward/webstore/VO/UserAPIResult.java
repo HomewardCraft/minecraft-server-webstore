@@ -1,5 +1,6 @@
 package com.homeward.webstore.VO;
 
+import com.homeward.webstore.pojo.userapi.cart.Cart;
 import com.homeward.webstore.pojo.userapi.currency.Currency;
 import com.homeward.webstore.pojo.userapi.modules.Modules;
 import com.homeward.webstore.pojo.userapi.user.User;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserAPIResult {
     private User user;
+    private Cart cart;
     private List<Categories> categories;
     private Currency currency;
     private Modules modules;
