@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 public class StoreResult {
     //是否错误
-    private Boolean isError;
+    private Boolean error;
     //分类名称
     private String name;
     //分类描述
