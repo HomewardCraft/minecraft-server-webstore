@@ -1,5 +1,4 @@
-interceptor:
-  addPath:
-    - "/*"
-  excludePath:
-    - "/login"
+includePath:
+  - ""
+excludePath:
+  - "/name/*"
