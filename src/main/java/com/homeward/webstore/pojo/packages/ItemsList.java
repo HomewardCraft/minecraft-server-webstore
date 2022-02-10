@@ -1,14 +1,12 @@
-package com.homeward.webstore.pojo.store;
+package com.homeward.webstore.pojo.packages;
 
 import com.homeward.webstore.pojo.BasePojo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 @Data
 @Accessors(chain = true)
-public class Items extends BasePojo {
+public class ItemsList extends BasePojo {
     private Integer id;
     private String name;
     private String image;
