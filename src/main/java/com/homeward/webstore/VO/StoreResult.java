@@ -6,12 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 //此对象为传给前端的最终json集
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class StoreResult {
+public class StoreResult implements Serializable {
     //是否错误
     private Boolean error;
     //分类名称

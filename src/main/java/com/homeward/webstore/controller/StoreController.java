@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/category")
+@ResponseBody
 public class StoreController {
     private final StoreService storeService;
 
@@ -30,6 +31,9 @@ public class StoreController {
     @GetMapping("/{items}")
     public StoreResult getSpecificItems(@PathVariable("items") String type) {
         List<Items> crateItems = storeService.getSpecificItems(type);
+
+
+        //return JSONObject.toJSONString(StoreResult.success(type, "", "list", crateItems));
         return StoreResult.success(type, "", "list", crateItems);
     }
 }
