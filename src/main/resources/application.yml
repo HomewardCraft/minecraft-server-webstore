@@ -19,6 +19,7 @@ mybatis-plus:
   #开启驼峰映射
   configuration:
     map-underscore-to-camel-case: true
+    cache-enabled: true
 
 #开启sql语句显示
 logging:

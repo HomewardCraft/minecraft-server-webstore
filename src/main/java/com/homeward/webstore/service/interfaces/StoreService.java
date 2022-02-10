@@ -1,9 +1,9 @@
 package com.homeward.webstore.service.interfaces;
 
-import com.homeward.webstore.VO.StoreResult;
+import com.homeward.webstore.pojo.store.Items;
 
-import java.util.Map;
+import java.util.List;
 
 public interface StoreService {
-    StoreResult getSpecificItems(String type, StoreResult storeResult);
+    List<Items> getSpecificItems(String type);
 }
