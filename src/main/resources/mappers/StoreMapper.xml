@@ -4,7 +4,7 @@
 
 <mapper namespace="com.homeward.webstore.mapper.StoreMapper">
     <cache/>
-    <resultMap id="store" type="Items" autoMapping="true">
+    <resultMap id="store" type="ItemsList" autoMapping="true">
         <id column="id" property="id"/>
         <collection property="countdown" ofType="Countdown">
             <id column="c_id" property="id"/>

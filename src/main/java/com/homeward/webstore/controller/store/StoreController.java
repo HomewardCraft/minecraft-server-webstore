@@ -1,9 +1,8 @@
-package com.homeward.webstore.controller;
+package com.homeward.webstore.controller.store;
 
-import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.VO.StoreResult;
-import com.homeward.webstore.pojo.store.Items;
-import com.homeward.webstore.service.interfaces.StoreService;
+import com.homeward.webstore.pojo.packages.ItemsList;
+import com.homeward.webstore.service.interfaces.store.StoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,10 +29,7 @@ public class StoreController {
      */
     @GetMapping("/{items}")
     public StoreResult getSpecificItems(@PathVariable("items") String type) {
-        List<Items> crateItems = storeService.getSpecificItems(type);
-
-
-        //return JSONObject.toJSONString(StoreResult.success(type, "", "list", crateItems));
+        List<ItemsList> crateItems = storeService.getSpecificItems(type);
         return StoreResult.success(type, "", "list", crateItems);
     }
 

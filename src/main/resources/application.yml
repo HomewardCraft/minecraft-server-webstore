@@ -1,5 +1,6 @@
 server:
   port: 50012
+
 #管理数据源
 spring:
   datasource:
@@ -9,7 +10,10 @@ spring:
     #设定用户名和密码
     username: root
     password: baioretto
-
+  mvc:
+    view:
+      prefix: classpath:/static/
+      suffix: .html
 #SpringBoot整合Mybatis
 mybatis-plus:
   #指定别名包

@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/checkout")
-public class IncreaseController {
+public class OrderController {
 
     @PostMapping("/packages/add/{commodityId}/single")
     public void increase(@PathVariable("commodityId") Integer id) {
-
     }
 }

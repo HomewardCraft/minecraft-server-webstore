@@ -1,5 +1,0 @@
-interceptor:
-  addPath:
-    - "/*"
-  excludePath:
-    - "/login"
