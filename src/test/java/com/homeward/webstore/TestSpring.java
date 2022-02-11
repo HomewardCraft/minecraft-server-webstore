@@ -6,6 +6,7 @@ import com.homeward.webstore.mapper.StoreMapper;
 import com.homeward.webstore.util.RedisUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.Serializable;
 import java.util.Date;
 
+@Slf4j
 @SpringBootTest
 public class TestSpring {
 

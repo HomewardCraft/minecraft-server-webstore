@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +59,17 @@ public class TestNormal {
         map.put("quantity[424123124]", "112144");
         map.put("quantity[42403124]", "1151234");
         map.forEach((key, value) -> System.out.println("key: " + key + "\n" + "value: " + value));
+    }
+
+    @Test
+    void testGetCause() {
+
+        try {
+            File file = new File("");
+            file.getAbsolutePath();
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
     }
 }
 
