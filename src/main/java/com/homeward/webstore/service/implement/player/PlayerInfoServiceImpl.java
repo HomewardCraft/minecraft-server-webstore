@@ -68,7 +68,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
         //获取properties的数组
         JSONArray propertyArray = playerProfile.getJSONArray("properties");
 
-        //转成string格式化
+        //格式化string
         String propertyString = propertyArray.toJSONString();
         String formattedProperty = propertyString.replaceAll("[\\[\\]]", "");
 
