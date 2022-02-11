@@ -108,6 +108,11 @@ public class TestSpring {
         System.out.println("获取到数据：" + redisUtil.get("user") +
         "过期时间: " + redisUtil.getExpire("user"));
     }
+
+    @Test
+    void testRedisValue() {
+        System.out.println(redisUtil.get("Ba1oretto"));
+    }
 }
 
 @Data

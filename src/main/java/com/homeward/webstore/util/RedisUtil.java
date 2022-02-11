@@ -73,6 +73,9 @@ public class RedisUtil {
 
     /**
      * 写入数据，并设置过期时间
+     * @param key key
+     * @param value value
+     * @param expire seconds
      */
     public boolean set(final String key, Object value, long expire) {
         if (StringUtils.isBlank(key)) {

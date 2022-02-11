@@ -5,6 +5,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/checkout")
@@ -21,7 +24,12 @@ public class OrderController {
     }
 
     @PostMapping("/update")
-    public void update(HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
-        orderService.update(httpSession, request, response);
+    public void update(@RequestParam Map<String, String> map, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
+        orderService.update(map, httpSession, request, response);
+    }
+
+    @PostMapping("/packages/remove/{commodityId}")
+    public void remove(@PathVariable("commodityId")  Integer id, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
+        orderService.remove(id, httpSession, request, response);
     }
 }

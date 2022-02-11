@@ -2,7 +2,7 @@ package com.homeward.webstore.aop.Interceptor;
 
 import com.homeward.webstore.mapper.PlayerInfoMapper;
 import com.homeward.webstore.pojo.playerinfo.PlayerInfo;
-import com.homeward.webstore.util.sysconst.Const;
+import com.homeward.webstore.util.ConstUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,7 +49,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
 
         //获取session中的用户信息
-        Object sessionAttribute = session.getAttribute(Const.SYSTEM_USER_SESSION);
+        Object sessionAttribute = session.getAttribute(ConstUtil.SYSTEM_USER_SESSION);
 
         //判断是否过期
         if (sessionAttribute == null) {
