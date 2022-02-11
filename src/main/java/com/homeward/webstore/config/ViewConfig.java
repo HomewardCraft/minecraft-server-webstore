@@ -9,10 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-public class WebConfigurer implements WebMvcConfigurer {
+public class ViewConfig implements WebMvcConfigurer {
     private final LoginInterceptor loginInterceptor;
     private final OrderCreateInterceptor orderCreateInterceptor;
-    public WebConfigurer(LoginInterceptor loginInterceptor, OrderCreateInterceptor orderCreateInterceptor) {
+    public ViewConfig(LoginInterceptor loginInterceptor, OrderCreateInterceptor orderCreateInterceptor) {
         this.loginInterceptor = loginInterceptor;
         this.orderCreateInterceptor = orderCreateInterceptor;
     }
