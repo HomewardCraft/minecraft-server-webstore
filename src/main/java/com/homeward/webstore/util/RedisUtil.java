@@ -7,13 +7,16 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * redis的工具类
+ */
 @Slf4j
 @Component
 public class RedisUtil {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public RedisUtil( RedisTemplate<String, Object> redisTemplate) {
+    public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
