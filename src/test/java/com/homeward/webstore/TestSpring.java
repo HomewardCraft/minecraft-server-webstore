@@ -3,14 +3,17 @@ package com.homeward.webstore;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.mapper.StoreMapper;
+import com.homeward.webstore.util.RedisUtil;
+import lombok.Data;
+import lombok.experimental.Accessors;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Date;
 
 @SpringBootTest
 public class TestSpring {
@@ -19,9 +22,13 @@ public class TestSpring {
     private StoreMapper storeMapper;
 
     @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
     private RestTemplate restTemplate;
 
     @Test
+    @Disabled
     void testGetParam() {
         String URL = String.format("https://api.mojang.com/users/profiles/minecraft/%s", "Ba1oretto");
         String OriginMessage = restTemplate.getForObject(URL, String.class);
@@ -57,5 +64,65 @@ public class TestSpring {
     void testPropertyValue() {
 
     }
+
+    @Test
+    @Disabled
+    void testRedisUtil() {
+        boolean set = redisUtil.set("Ba1oretto", "{\"114514\":1}");
+        System.out.println("set: " + set);
+
+        Object get = redisUtil.get("Ba1oretto");
+        System.out.println(get);
+
+        boolean update = redisUtil.update("Ba1oretto", "{\"114514\":1919810}");
+        System.out.println("update: " + update);
+
+        boolean expire = redisUtil.setExpire("Ba1oretto", 10);
+        System.out.println("expire: " + expire);
+
+        long time1 = redisUtil.getExpire("Ba1oretto");
+        System.out.println("time1: " + time1);
+
+        boolean persist = redisUtil.persist("Ba1oretto");
+        System.out.println("persist: " + persist);
+
+        long time2 = redisUtil.getExpire("Ba1oretto");
+        System.out.println("time2: " + time2);
+
+        boolean delete = redisUtil.del("Ba1oretto");
+        System.out.println("delete: " + delete);
+
+        boolean hasKey = redisUtil.hasKey("Ba1oretto");
+        System.out.println("hasKey: " + hasKey);
+    }
+
+    @Test
+    void testRedis() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(1);
+        userInfo.setName("jack");
+        userInfo.setCreateTime(new Date());
+        // 放入redis
+        redisUtil.set("user", userInfo, 5);
+        // 从redis中获取
+        System.out.println("获取到数据：" + redisUtil.get("user") +
+        "过期时间: " + redisUtil.getExpire("user"));
+    }
 }
 
+@Data
+@Accessors(chain = true)
+class UserInfo implements Serializable {
+    /**
+     * id
+     */
+    private Integer id;
+    /**
+     * 姓名
+     */
+    private String name;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+}
