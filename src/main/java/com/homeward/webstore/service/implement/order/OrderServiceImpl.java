@@ -4,31 +4,37 @@ import com.homeward.webstore.mapper.OrderMapper;
 import com.homeward.webstore.pojo.packages.ItemsList;
 import com.homeward.webstore.service.interfaces.order.OrderService;
 import com.homeward.webstore.util.RedisUtil;
+import com.homeward.webstore.util.VerificationUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class OrderServiceImpl implements OrderService {
     private final RedisUtil redisUtil;
     private final OrderMapper orderMapper;
+    private final VerificationUtil verificationUtil;
 
 
-    public OrderServiceImpl(RedisUtil redisUtil, OrderMapper orderMapper) {
+    public OrderServiceImpl(RedisUtil redisUtil, OrderMapper orderMapper, VerificationUtil verificationUtil) {
         this.redisUtil = redisUtil;
         this.orderMapper = orderMapper;
+        this.verificationUtil = verificationUtil;
     }
 
 
     @Override
     public void create(Integer id, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
-        ItemsList itemId = orderMapper.getItemId(id);
-        if (itemId == null) {
+        //使用自己的工具类判断
+        Boolean orderExist = verificationUtil.orderExist(id, "/RedirectPage.html", response);
+        if (!orderExist) {
             return;
         }
 
@@ -82,8 +88,9 @@ public class OrderServiceImpl implements OrderService {
         Integer orderAmount = Integer.valueOf(singleValue);
         Integer idInteger = Integer.valueOf(orderId);
 
-        ItemsList itemId = orderMapper.getItemId(idInteger);
-        if (itemId == null) {
+
+        Boolean orderExist = verificationUtil.orderExist(idInteger, "/RedirectPage.html", response);
+        if (!orderExist) {
             return;
         }
 
@@ -104,8 +111,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void remove(Integer id, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
-        ItemsList itemId = orderMapper.getItemId(id);
-        if (itemId == null) {
+        Boolean orderExist = verificationUtil.orderExist(id, "/RedirectPage.html", response);
+        if (!orderExist) {
             return;
         }
 
