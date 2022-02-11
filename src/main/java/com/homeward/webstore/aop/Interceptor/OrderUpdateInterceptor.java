@@ -7,21 +7,23 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
-public class OrderCreateInterceptor implements HandlerInterceptor {
+public class OrderUpdateInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookieArray = request.getCookies();
+
         if (cookieArray == null) {
+            response.sendRedirect("/RedirectPage.html");
             return false;
         }
 
         for (Cookie cookie : cookieArray) {
             if ("HOMEWARD_ORDER_INFO".equals(cookie.getName())) {
-                response.sendRedirect("/RedirectPage.html");
-                return false;
+                return true;
             }
         }
 
-        return true;
+        response.sendRedirect("/RedirectPage.html");
+        return false;
     }
 }
