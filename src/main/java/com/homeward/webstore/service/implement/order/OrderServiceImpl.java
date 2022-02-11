@@ -1,7 +1,5 @@
 package com.homeward.webstore.service.implement.order;
 
-import com.homeward.webstore.mapper.OrderMapper;
-import com.homeward.webstore.pojo.packages.ItemsList;
 import com.homeward.webstore.service.interfaces.order.OrderService;
 import com.homeward.webstore.util.RedisUtil;
 import com.homeward.webstore.util.VerificationUtil;
@@ -19,13 +17,11 @@ import java.util.Set;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final RedisUtil redisUtil;
-    private final OrderMapper orderMapper;
     private final VerificationUtil verificationUtil;
 
 
-    public OrderServiceImpl(RedisUtil redisUtil, OrderMapper orderMapper, VerificationUtil verificationUtil) {
+    public OrderServiceImpl(RedisUtil redisUtil, VerificationUtil verificationUtil) {
         this.redisUtil = redisUtil;
-        this.orderMapper = orderMapper;
         this.verificationUtil = verificationUtil;
     }
 
