@@ -32,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //获取cookie中的用户信息
         String cookie_value = null;
         for (Cookie cookie : cookieArrays) {
-            if ("cookie_username".equals(cookie.getName())) {
+            if ("HOMEWARD_USER_INFO".equals(cookie.getName())) {
                 cookie_value = cookie.getValue();
                 break;
             }
@@ -55,7 +55,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             PlayerInfo playerInfo = playerInfoMapper.getPlayerInfo(cookie_value);
 
             //将信息保存到session
-            session.setAttribute("cookie_username", playerInfo);
+            session.setAttribute("HOMEWARD_USER_INFO", playerInfo);
         }
 
         return true;

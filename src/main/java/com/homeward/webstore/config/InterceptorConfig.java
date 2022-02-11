@@ -15,9 +15,10 @@ import java.util.List;
 @PropertySource("classpath:/interceptor.yml")
 public class InterceptorConfig implements WebMvcConfigurer {
 
-//    @Value("interceptor.includePath:")
-//    private List<String> includePath;
-    @Value("interceptor.excludePath:/name/*")
+    @Value("${includePath:/**}")
+    private List<String> includePath;
+
+    @Value("${excludePath}")
     private List<String> excludePath;
 
     private final LoginInterceptor loginInterceptor;
@@ -28,8 +29,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        InterceptorRegistration interceptorRegistration = registry.addInterceptor(loginInterceptor);
-////        interceptorRegistration.addPathPatterns(includePath);
-//        interceptorRegistration.excludePathPatterns(excludePath);
+        InterceptorRegistration interceptorRegistration = registry.addInterceptor(loginInterceptor);
+        interceptorRegistration.addPathPatterns(includePath);
+        interceptorRegistration.excludePathPatterns(excludePath);
     }
 }

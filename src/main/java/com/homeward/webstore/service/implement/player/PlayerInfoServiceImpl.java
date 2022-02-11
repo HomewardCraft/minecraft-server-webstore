@@ -25,10 +25,23 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
 
     @Override
     public JSONObject getPlayerProfile(String playerId, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
+        //创建cookie
+        Cookie cookie = new Cookie("HOMEWARD_USER_INFO", playerId);
+
+        //设置参数
+        cookie.setMaxAge(2592000);
+
+        //设置路径, get context path为空不能用
+        cookie.setPath("/");
+
         //先从数据库找
         PlayerInfo playerInfo = playerInfoMapper.getPlayerInfo(playerId);
         if (playerInfo != null) {
             String playerInfoString = JSONObject.toJSONString(playerInfo);
+
+            //传输cookie
+            response.addCookie(cookie);
+
             return JSONObject.parseObject(playerInfoString);
         }
 
@@ -70,17 +83,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
         String signature = propertyObject.getString("signature");
         Boolean legacy = playerProfile.getBoolean("legacy");
 
-        //新增
         playerInfoMapper.addPlayer(id, playerName, propertyName, value, signature, legacy);
-
-        //创建cookie
-        Cookie cookie = new Cookie("homeward_user_info", playerId);
-
-        //设置参数
-        cookie.setMaxAge(2592000);
-        cookie.setPath(request.getContextPath());
-
-        //传输cookie
         response.addCookie(cookie);
 
         return playerProfile;

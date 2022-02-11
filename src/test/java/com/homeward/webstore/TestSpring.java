@@ -3,7 +3,6 @@ package com.homeward.webstore;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.mapper.StoreMapper;
-import com.homeward.webstore.pojo.playerinfo.Properties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,16 +10,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
+@PropertySource("classpath:/interceptor.yml")
 public class TestSpring {
 
     @Autowired
     private StoreMapper storeMapper;
 
-    @Value("${interceptor.addPath:/**}")
+    @Value("${includePath:/**}")
     private List<String> addPath;
 
     @Autowired
