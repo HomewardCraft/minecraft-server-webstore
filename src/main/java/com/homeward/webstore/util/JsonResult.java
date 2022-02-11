@@ -3,6 +3,9 @@ package com.homeward.webstore.util;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * json结果集的工具类
+ */
 @Getter
 @Setter
 public class JsonResult<T> {

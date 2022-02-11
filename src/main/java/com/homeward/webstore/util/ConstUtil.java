@@ -1,6 +1,6 @@
-package com.homeward.webstore.util.sysconst;
+package com.homeward.webstore.util;
 
-public class Const {
+public class ConstUtil {
 
     /**
      * 项目名称
