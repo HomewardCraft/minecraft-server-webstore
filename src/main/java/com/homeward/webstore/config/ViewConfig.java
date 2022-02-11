@@ -1,8 +1,8 @@
 package com.homeward.webstore.config;
 
-import com.homeward.webstore.aop.Interceptor.OrderCreateInterceptor;
-import com.homeward.webstore.aop.Interceptor.LoginInterceptor;
-import com.homeward.webstore.aop.Interceptor.OrderUpdateInterceptor;
+import com.homeward.webstore.handler.interceptor.OrderCreateInterceptor;
+import com.homeward.webstore.handler.interceptor.LoginInterceptor;
+import com.homeward.webstore.handler.interceptor.OrderUpdateInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

@@ -1,8 +1,8 @@
-package com.homeward.webstore.controller.store;
+package com.homeward.webstore.controller;
 
 import com.homeward.webstore.VO.StoreResult;
 import com.homeward.webstore.pojo.packages.ItemsList;
-import com.homeward.webstore.service.interfaces.store.StoreService;
+import com.homeward.webstore.service.store.StoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

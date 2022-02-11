@@ -1,4 +1,4 @@
-package com.homeward.webstore.aop;
+package com.homeward.webstore.handler.listener;
 
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
