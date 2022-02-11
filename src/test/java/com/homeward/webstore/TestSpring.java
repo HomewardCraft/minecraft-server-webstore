@@ -13,14 +13,10 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @SpringBootTest
-@PropertySource("classpath:/interceptor.yml")
 public class TestSpring {
 
     @Autowired
     private StoreMapper storeMapper;
-
-    @Value("${includePath:/**}")
-    private List<String> addPath;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -59,9 +55,7 @@ public class TestSpring {
 
     @Test
     void testPropertyValue() {
-        for (String s : addPath) {
-            System.out.println(s);
-        }
+
     }
 }
 

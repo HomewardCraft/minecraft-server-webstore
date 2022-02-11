@@ -1,3 +1,0 @@
-includePath: "/*", "/category/crates", "/**"
-
-excludePath: "/name/*", "/redirect", "/RedirectPage.html", "/home"

@@ -41,6 +41,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //二次验证cookie数据
         if (StringUtils.isEmpty(cookie_value)) {
             response.sendRedirect(request.getContextPath() + "/RedirectPage.html");
+            System.out.println("cookie value is empty.");
             return false;
         }
 

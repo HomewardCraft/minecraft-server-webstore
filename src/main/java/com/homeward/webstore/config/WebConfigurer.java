@@ -4,25 +4,17 @@ import com.homeward.webstore.aop.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-@PropertySource("classpath:/interceptor.yml")
-public class InterceptorConfig implements WebMvcConfigurer {
-
-    @Value("${includePath:/**}")
-    private List<String> includePath;
-
-    @Value("${excludePath}")
-    private List<String> excludePath;
-
+public class WebConfigurer implements WebMvcConfigurer {
     private final LoginInterceptor loginInterceptor;
-    public InterceptorConfig(LoginInterceptor loginInterceptor) {
+    public WebConfigurer(LoginInterceptor loginInterceptor) {
         this.loginInterceptor = loginInterceptor;
     }
 
@@ -30,7 +22,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration interceptorRegistration = registry.addInterceptor(loginInterceptor);
-        interceptorRegistration.addPathPatterns(includePath);
-        interceptorRegistration.excludePathPatterns(excludePath);
+        interceptorRegistration.addPathPatterns("/**");
+        interceptorRegistration.excludePathPatterns("/RedirectPage.html");
+        interceptorRegistration.excludePathPatterns("/name/*");
     }
 }
+
