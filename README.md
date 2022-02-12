@@ -17,5 +17,10 @@
 ### 概述
 
 ### 模块
+- Vue 框架 2.0 开发版本
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
 
 ### 特别鸣谢
