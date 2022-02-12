@@ -1,7 +1,7 @@
-package com.homeward.webstore.controller.player;
+package com.homeward.webstore.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.homeward.webstore.service.interfaces.player.PlayerInfoService;
+import com.homeward.webstore.service.player.PlayerInfoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

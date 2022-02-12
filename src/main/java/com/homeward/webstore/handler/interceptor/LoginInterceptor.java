@@ -1,4 +1,4 @@
-package com.homeward.webstore.aop.Interceptor;
+package com.homeward.webstore.handler.interceptor;
 
 import com.homeward.webstore.mapper.PlayerInfoMapper;
 import com.homeward.webstore.pojo.playerinfo.PlayerInfo;

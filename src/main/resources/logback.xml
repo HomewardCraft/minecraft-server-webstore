@@ -27,7 +27,7 @@
             <maxHistory>1</maxHistory>
 
             <!-- 日志文件最大的大小 -->
-            <maxFileSize>10KB</maxFileSize>
+            <maxFileSize>10MB</maxFileSize>
 
         </rollingPolicy>
         <!-- 设置格式 -->

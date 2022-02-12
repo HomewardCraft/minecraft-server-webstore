@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * redis的工具类
  */
-@Slf4j
 @Component
 public class RedisUtil {
 
@@ -46,10 +45,8 @@ public class RedisUtil {
         }
         try {
             redisTemplate.opsForValue().set(key, value);
-            log.info("存入redis成功，key：{}，value：{}", key, value);
             return true;
         } catch (Exception e) {
-            log.error("存入redis失败，key：{}，value：{}", key, value);
             e.printStackTrace();
         }
         return false;
@@ -73,8 +70,9 @@ public class RedisUtil {
 
     /**
      * 写入数据，并设置过期时间
-     * @param key key
-     * @param value value
+     *
+     * @param key    key
+     * @param value  value
      * @param expire seconds
      */
     public boolean set(final String key, Object value, long expire) {
@@ -83,10 +81,8 @@ public class RedisUtil {
         }
         try {
             redisTemplate.opsForValue().set(key, value, expire, TimeUnit.SECONDS);
-            log.info("存入redis成功，key：{}，value：{}", key, value);
             return true;
         } catch (Exception e) {
-            log.error("存入redis失败，key：{}，value：{}", key, value);
             e.printStackTrace();
         }
         return false;

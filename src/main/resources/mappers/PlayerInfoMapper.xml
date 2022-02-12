@@ -5,32 +5,24 @@
 <mapper namespace="com.homeward.webstore.mapper.PlayerInfoMapper">
     <cache/>
     <resultMap id="information" type="PlayerInfo" autoMapping="true">
-        <id column="a_id" property="id"/>
-        <result column="a_player_name" property="name"/>
+        <id column="a_uuid" property="uuid"/>
+        <result column="a_name" property="name"/>
         <result column="a_legacy" property="legacy"/>
-        <collection property="properties" ofType="Properties">
-            <id column="b_id" property="id"/>
-            <result column="b_property_name" property="name"/>
-            <result column="b_value" property="value"/>
-            <result column="b_signature" property="signature"/>
-        </collection>
     </resultMap>
     <select id="getPlayerInfo" resultMap="information" useCache="true">
         SELECT
-        a.id a_id, a.player_name a_player_name, b.property_name b_property_name, b.value b_value, b.signature b_signature, a.legacy
+        a.uuid a_uuid, a.name a_name, a.legacy a_legacy
         FROM player_info a
-        LEFT JOIN player_info b
-        ON a.id = b.id
         <where>
-            <if test="playerName != null and playerName != ''">
-                a.player_name = #{playerName}
+            <if test="name != null and name != ''">
+                a.name = #{name}
             </if>
         </where>
     </select>
 
     <insert id="addPlayer">
         INSERT INTO
-        player_info(id, player_name, property_name, VALUE, signature, legacy)
-        VALUES(#{id}, #{playerName}, #{propertyName}, #{value}, #{signature}, #{legacy})
+        player_info(uuid, name, legacy)
+        VALUES(#{uuid}, #{name}, #{legacy})
     </insert>
 </mapper>

@@ -1,4 +1,4 @@
-package com.homeward.webstore.service.interfaces.order;
+package com.homeward.webstore.service.order;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

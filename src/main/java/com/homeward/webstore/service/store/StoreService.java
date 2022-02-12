@@ -1,4 +1,4 @@
-package com.homeward.webstore.service.interfaces.store;
+package com.homeward.webstore.service.store;
 
 import com.homeward.webstore.pojo.packages.ItemsList;
 
