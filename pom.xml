@@ -17,6 +17,11 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!--aop的依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!--spring web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,13 +58,13 @@
         <dependency>
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>
-            <version>0.1.2</version>
+            <version>0.1.5</version>
         </dependency>
         <!--log日志工具-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.12</version>
+            <version>1.7.35</version>
         </dependency>
         <!--lombok-->
         <dependency>

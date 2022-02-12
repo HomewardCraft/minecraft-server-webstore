@@ -9,8 +9,8 @@ public interface PlayerInfoMapper {
     PlayerInfo getPlayerInfo(String playerName);
 
     void addPlayer(
-            @Param("id") String id, @Param("playerName") String playerName,
-            @Param("propertyName") String propertyName, @Param("value") String value,
-            @Param("signature") String signature, @Param("legacy") Boolean legacy
+            @Param("uuid") String uuid,
+            @Param("name") String name,
+            @Param("legacy") Boolean legacy
     );
 }

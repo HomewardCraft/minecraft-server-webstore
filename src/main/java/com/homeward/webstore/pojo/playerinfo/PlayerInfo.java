@@ -9,8 +9,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class PlayerInfo extends BasePojo {
-    private String id;
+    private String uuid;
     private String name;
-    private List<Properties> properties;
     private Boolean legacy;
 }

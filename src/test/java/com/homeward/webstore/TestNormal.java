@@ -63,13 +63,18 @@ public class TestNormal {
 
     @Test
     void testGetCause() {
-
         try {
             File file = new File("");
             file.getAbsolutePath();
         } catch (Exception e) {
             System.out.println(e.getCause());
         }
+    }
+
+    @Test
+    void testArrayLength() {
+        int[] ints = {1, 2, 3, 4};
+        System.out.println(ints.length);
     }
 }
 
