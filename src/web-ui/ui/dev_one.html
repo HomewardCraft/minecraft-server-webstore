@@ -3,32 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>dev note Vue 001</title>
-    <script type = "text/javascript" src = "../lib/vue.js" ></script>
+    <script src="../lib/vue.js" type="text/javascript"></script>
 </head>
 <body>
 <!--    容器-->
-    <div id="root">
+<div id="root">
     <!--        插值语法-->
-        <h1>Homeward {{version}}</h1>
+    <h1>{{name.toUpperCase()}} {{version}}</h1>
+    <h1>跳转</h1>
+    <!--加了v-bind vue把后面当成js表达式
+        标签体内容一般使用插值语法 {{}}
+        标签属性通常使用指令语法 v-bind: 或者 :
+    -->
+    <a v-bind:href="url">Link1</a>
 
-    </div>
-    <script type = 'text/javascript'>
-        Vue.config.productionTip = false;
+</div>
 
-        //创建vue示例
-        const  x = new Vue({
+<script type='text/javascript'>
+    Vue.config.productionTip = false;
+    
+    //创建vue示例
+    /**
+     * {{}} 这里面要写js表达式或者插入值表达式
+     * @type {Vue}
+     */
+    const x = new Vue({
+        // Vue实例
+        el: '#root', //el用于指定当前vue示例为哪个容器服务器，值通常为css选择器字符串
+        data: { //data中用于储存数据，数据提供el所指定的容器去使用
+            version: '1.2.2',
+            name: 'homeward',
+            url: 'https://www.baidu.com'
+        }
+    })
 
-            // Vue实例
-            el: '#root', //el用于指定当前vue示例为哪个容器服务器，值通常为css选择器字符串
-            data: { //data中用于储存数据，数据提供el所指定的容器去使用
-                version: '1.2.2'
-            }
-
-        })
-
-    </script>
-
-
+</script>
 
 </body>
 </html>
