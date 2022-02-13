@@ -12,10 +12,18 @@
 <img alt="code" src="https://img.shields.io/badge/Spring-boot-green">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/Ba1oretto/Minecraft-Server-WebStore">
 <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Ba1oretto/Minecraft-Server-WebStore">
-</p>
+</p> 
 
 ### 概述
 
 ### 模块
+- Vue 框架 2.0 开发版本
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
 
 ### 特别鸣谢
+
+为什么我的不算呢？
+
