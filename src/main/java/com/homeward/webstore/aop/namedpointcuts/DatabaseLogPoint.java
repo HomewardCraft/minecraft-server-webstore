@@ -6,7 +6,8 @@ import org.aspectj.lang.annotation.Pointcut;
 public class DatabaseLogPoint {
 
     @Pointcut(
-            value = "execution(void com.homeward.webstore.mapper.PlayerInfoMapper.addPlayer(..)) )"
+            value = "execution(void com.homeward.webstore.mapper.PlayerInfoMapper.addPlayer(..)) && args(uuid, name, legacy))",
+            argNames = "uuid, name, legacy"
     )
-    public void OnUserInfoAddedInDataBase() {}
+    public void OnUserInfoAddedInDataBase(String uuid, String name, Boolean legacy) {}
 }

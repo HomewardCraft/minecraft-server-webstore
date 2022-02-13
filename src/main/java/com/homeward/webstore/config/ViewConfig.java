@@ -23,7 +23,7 @@ public class ViewConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //像访问得登录
+        //想访问得登录
         InterceptorRegistration loginInterceptor = registry.addInterceptor(this.loginInterceptor);
         loginInterceptor.addPathPatterns("/**");
         loginInterceptor.excludePathPatterns("/RedirectPage.html");
