@@ -11,3 +11,6 @@ target/
 *.ipr
 
 /log
+
+### web
+/src/main/resources/static/webstore/node_modules/
