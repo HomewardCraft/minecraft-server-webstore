@@ -1,4 +1,4 @@
-package com.homeward.webstore.util;
+package com.homeward.webstore.common.utils;
 
 import com.homeward.webstore.mapper.OrderMapper;
 import com.homeward.webstore.pojo.packages.ItemsList;

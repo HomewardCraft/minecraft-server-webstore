@@ -1,7 +1,7 @@
 package com.homeward.webstore.service.order;
 
-import com.homeward.webstore.util.RedisUtil;
-import com.homeward.webstore.util.VerificationUtil;
+import com.homeward.webstore.common.utils.RedisUtil;
+import com.homeward.webstore.common.utils.VerificationUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

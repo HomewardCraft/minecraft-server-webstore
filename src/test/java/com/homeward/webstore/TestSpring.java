@@ -3,7 +3,7 @@ package com.homeward.webstore;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.mapper.StoreMapper;
-import com.homeward.webstore.util.RedisUtil;
+import com.homeward.webstore.common.utils.RedisUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
