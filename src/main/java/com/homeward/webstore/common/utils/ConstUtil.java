@@ -1,4 +1,4 @@
-package com.homeward.webstore.util;
+package com.homeward.webstore.common.utils;
 
 public class ConstUtil {
 

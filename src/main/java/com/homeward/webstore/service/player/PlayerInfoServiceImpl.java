@@ -105,6 +105,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * @param legacy       player profile whether legacy
      */
     @Override
+    @JoinPointSymbol
     public void addPlayer(String uuid, String name, Boolean legacy) {
         this.playerInfoMapper.addPlayer(uuid, name, legacy);
     }
