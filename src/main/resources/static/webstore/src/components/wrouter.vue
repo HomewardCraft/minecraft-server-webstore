@@ -46,7 +46,7 @@ export default {
 
 .rt {
   list-style-type: none;
-  margin: 0;
+  margin: auto 0;
   padding: 0;
   overflow: hidden;
 }
@@ -61,6 +61,7 @@ a {
   font-weight: bold;
   color: #FFFFFF;
   text-transform: uppercase;
+  line-height: 40px;
 }
 
 </style>

@@ -18,13 +18,13 @@ div{
   text-align: center;
   margin-right: 15px;
   margin-left: 15px;
-
+  border: 1px solid transparent;
 }
 .bt:hover{
 
   background-color: #06a90d;
   border-style:solid;
-  border-color:white;
+  border-color: #94e199;
   border-width:1px;
 }
 </style>

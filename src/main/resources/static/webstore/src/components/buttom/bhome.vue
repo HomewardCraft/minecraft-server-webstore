@@ -20,13 +20,14 @@ div{
   text-align: center;
   margin-right: 15px;
   margin-left: 15px;
+  border: 1px solid transparent;
 
 }
 .bt:hover{
 
   background-color: #d7af11;
   border-style:solid;
-  border-color:white;
-  border-width:1px;
+  border-color: rgb(225, 212, 161);
+  border-width:1px
 }
 </style>
