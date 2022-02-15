@@ -1,10 +1,11 @@
 <template>
 
-  <div>
-
-    <wcrates></wcrates>
+  <div class="grid">
+    <div class="span-row-2">
+      <wcrates></wcrates>
+    </div>
     <wranks></wranks>
-
+    <wextras></wextras>
   </div>
 
 </template>
@@ -24,7 +25,22 @@ export default {
 <style scoped>
 
 div {
-  margin: 0;
+
+}
+
+.grid {
+  margin: auto;
+  width: 1130px;
+  height:500px;
+
+
+  display: grid;
+  grid-template-columns: repeat(2, 0fr);
+}
+
+.span-row-2 {
+  align-self: center;
+  grid-row: span 2 / auto;
 }
 
 </style>

@@ -34,6 +34,9 @@ export default {
 
 <style scoped>
 
+div{
+  margin:10px;
+}
 
 .turndark{
   filter:brightness(0.8);
@@ -64,7 +67,7 @@ span {
   border: 2px solid #9d66ac;
   background-color: #650f7e;
   background-size: 100%;
-  width: 570px;
+  width: 580px;
   height: 240px;
   display: block;
   text-align: center;

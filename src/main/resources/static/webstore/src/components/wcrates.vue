@@ -34,6 +34,10 @@ export default {
 
 <style scoped>
 
+div{
+  margin-left: -20px;
+}
+
 .turndark{
   filter:brightness(0.8);
 }
@@ -60,11 +64,11 @@ span {
 .bg {
   background: linear-gradient(45deg, #da1728, #e8602e);
   background-size: 100%;
-  width: 430px;
-  height: 480px;
+  width: 500px;
+  height: 500px;
   display: block;
   text-align: center;
-  margin-right: 15px;
+  margin-right: 10px;
   margin-left: 15px;
   border: 1px solid transparent;
 }

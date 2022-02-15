@@ -8,6 +8,7 @@
       Categories
     </span>
     <wcategories></wcategories>
+    <br>
   </div>
 </template>
 
@@ -52,6 +53,10 @@ export default {
   display: block;
   text-align: left;
 }
+
+/*wcategories {*/
+/*  text-align: center;*/
+/*}*/
 
 .wsale {
   alignment: center;
