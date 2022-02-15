@@ -1,17 +1,17 @@
 <template>
 
-<div>
+  <div>
 
-      <wlogo></wlogo>
-
-
-      <wrouter></wrouter>
+    <wlogo></wlogo>
 
 
-      <wheaderinfo></wheaderinfo>
+    <wrouter></wrouter>
 
 
-</div>
+    <wheaderinfo></wheaderinfo>
+
+
+  </div>
 
 </template>
 
@@ -24,9 +24,10 @@ import wlogo from "./wlogo";
 
 export default {
   name: "wheader",
-  components: {wrouter, wheaderinfo,wlogo}
+  components: {wrouter, wheaderinfo, wlogo}
 }
 </script>
 
 <style scoped>
+
 </style>

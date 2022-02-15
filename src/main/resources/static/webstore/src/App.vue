@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <wheader></wheader>
-    <wsale></wsale>
+    <wsale class = "wsale"></wsale>
   </div>
 </template>
 
@@ -34,8 +34,13 @@ export default {
 
 <style>
 
+.wsale {
+  alignment: center;
+}
+
 #app {
   background-color: black;
+  margin: auto;
 
 }
 </style>
