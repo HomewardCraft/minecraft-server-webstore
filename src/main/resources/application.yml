@@ -6,7 +6,7 @@ spring:
   datasource:
     #高版本驱动使用
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://123.113.141.236:3306/minecraft_webstore?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3306/minecraft_webstore?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     #设定用户名和密码
     username: root
     password: baioretto
@@ -40,7 +40,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     #开启二级缓存
-    cache-enabled: true
+#    cache-enabled: true
 
 #开启sql语句显示
 logging:

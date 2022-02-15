@@ -18,11 +18,10 @@ import java.util.Map;
 
 @Slf4j
 public class JwtUtil {
-
     /**
      * 密钥
      */
-    private static final String SECRET = SystemConst.SYSTEM_ITEM_NAME + "_secret";
+    private static final String SECRET = SystemConst.SYSTEM_ITEM_NAME + "_SunjiamuCaishangqi";
 
     /**
      * 过期时间（单位：秒）
@@ -45,14 +44,9 @@ public class JwtUtil {
     private static final String PREFIX = "Bearer ";
 
     /**
-     * 存入claim的key1
+     * userId
      */
-    private static final String claimKey1 = "userId";
-
-    /**
-     * 存入claim的key1
-     */
-    private static final String claimKey2 = "phone";
+    private static final String USERID = "userId";
 
     /**
      * 生成用户token,设置token超时时间
@@ -60,33 +54,32 @@ public class JwtUtil {
      * @param userId
      * @return
      */
-    public static String createToken(Integer userId, String phone) {
+    public static String createToken(String userId) {
         Map<String, Object> map = new HashMap<>();
         map.put("alg", "HS256");
         map.put("typ", "JWT");
-        String token = JWT.create()
+        return JWT.create()
                 // 添加头部
                 .withHeader(map)
                 // 放入用户的id
                 .withAudience(String.valueOf(userId))
                 // 可以将基本信息放到claims中
-                .withClaim(claimKey1, userId)
-                .withClaim(claimKey2, phone)
+                .withClaim(USERID, userId)
                 // 超时设置,设置过期的日期
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE_TIME * 1000))
                 // 签发时间
                 .withIssuedAt(new Date())
                 // SECRET加密
                 .sign(Algorithm.HMAC256(SECRET));
-        return token;
     }
+
 
     /**
      * 获取用户userId
      *
      * @return
      */
-    public static Integer getUserId() {
+    public static String getUserId() {
         HttpServletRequest request = SpringContextUtil.getHttpServletRequest();
         // 从请求头部中获取token信息
         String token = request.getHeader(HEADER_KEY);
@@ -94,7 +87,8 @@ public class JwtUtil {
             return null;
         }
         if (!token.startsWith(PREFIX)) {
-            throw new UnLoginException("错误的令牌信息，请重新登录！");
+//            throw new UnLoginException("错误的令牌信息，请重新登录！");
+            return "redirect:/RedirectPage.html";
         }
         token = token.replace(PREFIX, "");
         try {
@@ -102,46 +96,18 @@ public class JwtUtil {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
             if (null == jwt) {
-                throw new UnLoginException("登录信息已过期，请重新登录！");
+//                throw new UnLoginException("登录信息已过期，请重新登录！");
+                return "redirect:/RedirectPage.html";
             }
             // 用户id
-            return jwt.getClaim(claimKey1).asInt();
+            return jwt.getClaim(USERID).asString();
         } catch (Exception e) {
             log.error("token验证异常，{}", e.getMessage());
         }
-        throw new UnLoginException("登录信息已过期，请重新登录！");
+//        throw new UnLoginException("登录信息已过期，请重新登录！");
+        return "redirect:/RedirectPage.html";
     }
 
-    /**
-     * 获取用户account
-     *
-     * @return
-     */
-    public static String getPhone() {
-        HttpServletRequest request = SpringContextUtil.getHttpServletRequest();
-        // 从请求头部中获取token信息
-        String token = request.getHeader(HEADER_KEY);
-        if (StringUtils.isBlank(token)) {
-            return null;
-        }
-        if (!token.startsWith(PREFIX)) {
-            throw new UnLoginException("错误的令牌信息，请重新登录！");
-        }
-        token = token.replace(PREFIX, "");
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(SECRET);
-            JWTVerifier verifier = JWT.require(algorithm).build();
-            DecodedJWT jwt = verifier.verify(token);
-            if (null == jwt) {
-                throw new UnLoginException("登录信息已过期，请重新登录！");
-            }
-            // 用户id
-            return jwt.getClaim(claimKey2).asString();
-        } catch (Exception e) {
-            log.error("token验证异常，{}", e.getMessage());
-        }
-        throw new UnLoginException("登录信息已过期，请重新登录！");
-    }
 
     /**
      * 检验token
@@ -170,7 +136,7 @@ public class JwtUtil {
             long time = (jwt.getExpiresAt().getTime() - System.currentTimeMillis());
             // 有效期只有10分钟，需要刷新token了
             if ((REFRESH_TIME * 1000) > time) {
-                String newToken = createToken(jwt.getClaim(claimKey1).asInt(), jwt.getClaim(claimKey2).asString());
+                String newToken = createToken(jwt.getClaim(USERID).asString());
                 // 将新的token放入响应请求头中
                 SpringContextUtil.getHttpServletResponse().setHeader(HEADER_KEY, newToken);
             }
@@ -180,9 +146,4 @@ public class JwtUtil {
         }
         return false;
     }
-
-    public static void main(String[] args) {
-        System.out.println(createToken(8, "oALoT6I1SNVuSp6Gp1p8UvXA36fE"));
-    }
-
 }

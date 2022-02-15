@@ -29,35 +29,17 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        //获取cookie中的用户信息
-        String cookie_value = null;
+        //获取cookie中的用户名字
+        String jwtToken = null;
         for (Cookie cookie : cookieArrays) {
-            if ("HOMEWARD_USER_INFO".equals(cookie.getName())) {
-                cookie_value = cookie.getValue();
+            if ("homeward_user_info".equals(cookie.getName())) {
+                jwtToken = cookie.getValue();
                 break;
             }
         }
 
-        //二次验证cookie数据
-        if (StringUtils.isEmpty(cookie_value)) {
-            response.sendRedirect(request.getContextPath() + "/RedirectPage.html");
-            System.out.println("cookie value is empty.");
-            return false;
-        }
-
-        //获取session
-        HttpSession session = request.getSession();
-
-        //获取session中的用户信息
-        Object sessionAttribute = session.getAttribute(ConstUtil.SYSTEM_USER_SESSION);
-
-        //判断是否过期
-        if (sessionAttribute == null) {
-            PlayerInfo playerInfo = playerInfoMapper.getPlayerInfo(cookie_value);
-
-            //将信息保存到session
-            session.setAttribute("HOMEWARD_USER_INFO", playerInfo);
-        }
+        //二次验证cookie的数据
+//        if ()
 
         return true;
     }

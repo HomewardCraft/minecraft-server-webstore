@@ -3,31 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.homeward.webstore.mapper.StoreMapper">
-    <cache/>
     <resultMap id="store" type="ItemsList" autoMapping="true">
-        <id column="id" property="id"/>
-        <collection property="countdown" ofType="Countdown">
-            <id column="c_id" property="id"/>
-            <result column="c_is_active" property="isActive"/>
-            <result column="c_time" property="time"/>
-        </collection>
-        <collection property="price" ofType="Price">
-            <id column="p_id" property="id"/>
-            <result column="p_type" property="type"/>
-            <result column="p_discount" property="discount"/>
-            <result column="p_sale" property="sale"/>
+        <id column="i_id" property="id"/>
+        <collection property="onSale" ofType="OnSale">
+            <result column="s_is_onsale" property="isOnsale"/>
+            <result column="s_surplus_time" property="surplusTime"/>
+            <result column="s_onsale_percent" property="onsalePercent"/>
         </collection>
     </resultMap>
     <select id="getStoreItems" resultMap="store" useCache="true">
         SELECT
-        i.id, i.NAME, i.image, i.in_cart,
-        c.is_active c_is_active, c.time c_time,
-        p.type p_type, p.discount p_discount, p.sale p_sale
+        i.id i_id, i.name, i.image, i.price,
+        s.is_onsale s_is_onsale, s.surplus_time s_surplus_time, s.onsale_percent s_onsale_percent
         FROM items i
-        LEFT JOIN count_down c
-        ON i.id = c.id
-        LEFT JOIN price p
-        ON i.id = p.id
+        LEFT JOIN items s
+        ON i.id = s.id
         <where>
             <if test="type != null and type != ''">
                 i.type = #{items}

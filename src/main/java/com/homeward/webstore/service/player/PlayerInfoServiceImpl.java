@@ -1,14 +1,15 @@
 package com.homeward.webstore.service.player;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
+import com.homeward.webstore.common.utils.JwtUtil;
 import com.homeward.webstore.mapper.PlayerInfoMapper;
 import com.homeward.webstore.pojo.playerinfo.PlayerInfo;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,15 +34,6 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     @Override
     @JoinPointSymbol
     public JSONObject getPlayerProfile(String playerId, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
-        //创建cookie
-        Cookie cookie = new Cookie("HOMEWARD_USER_INFO", playerId);
-
-        //设置参数
-        cookie.setMaxAge(2592000);
-
-        //设置路径, get context path为空不能用
-        cookie.setPath("/");
-
         //返回玩家uuid和名字
         String OriginMessage = this.getPlayerInformation(playerId);
 
@@ -71,6 +63,16 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
         if (playerInfo == null) {
             this.addPlayer(uuid, name, legacy);
         }
+
+        //使用jwt加密玩家名字存到cookie
+        String playerIdEncrypted = JwtUtil.createToken(playerId);
+        Cookie cookie = new Cookie("homeward_user_info", playerIdEncrypted);
+
+        //设置多久过期, 应与jwt令牌的过期时间一样, 为1天
+        cookie.setMaxAge(86400);
+
+        //设置路径, 用户登陆验证应为全局的
+        cookie.setPath("/");
 
         //返回一个cookie
         response.addCookie(cookie);
@@ -105,6 +107,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * @param legacy       player profile whether legacy
      */
     @Override
+    @Cacheable(value = "SelectItemsInformation")
     @JoinPointSymbol
     public void addPlayer(String uuid, String name, Boolean legacy) {
         this.playerInfoMapper.addPlayer(uuid, name, legacy);

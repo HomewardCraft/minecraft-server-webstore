@@ -2,8 +2,10 @@ package com.homeward.webstore;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.homeward.webstore.common.utils.JwtUtil;
 import com.homeward.webstore.mapper.StoreMapper;
 import com.homeward.webstore.common.utils.RedisUtil;
+import com.homeward.webstore.pojo.packages.ItemsList;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @SpringBootTest
@@ -63,6 +66,7 @@ public class TestSpring {
     }
 
     @Test
+    @Disabled
     void testPropertyValue() {
 
     }
@@ -99,6 +103,7 @@ public class TestSpring {
     }
 
     @Test
+    @Disabled
     void testRedis() {
         UserInfo userInfo = new UserInfo();
         userInfo.setId(1);
@@ -112,8 +117,23 @@ public class TestSpring {
     }
 
     @Test
+    @Disabled
     void testRedisValue() {
         System.out.println(redisUtil.get("Ba1oretto"));
+    }
+
+    @Test
+    @Disabled
+    void testJWT() {
+        String token = JwtUtil.createToken("Ba1oretto");
+        System.out.println(token);
+        System.out.println(JwtUtil.verity());
+    }
+
+    @Test
+    void testStoreMapper() {
+        List<ItemsList> itemsLists = storeMapper.getStoreItems("crates");
+        itemsLists.forEach(System.out::println);
     }
 }
 
