@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div class = "router">
 
     <ul class="rt">
       <li class="il">
@@ -62,6 +62,12 @@ a {
   color: #FFFFFF;
   text-transform: uppercase;
   line-height: 40px;
+}
+
+.router {
+  position:relative;
+  left:900px;
+  top: -120px;
 }
 
 </style>

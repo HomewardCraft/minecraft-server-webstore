@@ -2,7 +2,7 @@
 
 <div>
 
-  <wrouter></wrouter>
+  <wrouter class></wrouter>
   <wheaderinfo></wheaderinfo>
 
 </div>
@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 
 </style>
