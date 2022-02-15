@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <wlogo></wlogo>
     <wheader></wheader>
     <wsale></wsale>
   </div>
@@ -9,7 +8,6 @@
 <script>
 //导入组件
 import HelloWorld from './components/HelloWorld.vue'
-import wlogo from "./components/wlogo";
 import wheader from "./components/wheader";
 import wsale from "./components/wsale";
 import wcount from "./components/wcount";
@@ -24,7 +22,6 @@ export default {
   components: {
     Wrouter,
     HelloWorld,
-    wlogo,
     wheader,
     wsale,
     wcount,
@@ -36,7 +33,9 @@ export default {
 </script>
 
 <style>
+
 #app {
   background-color: black;
+
 }
 </style>

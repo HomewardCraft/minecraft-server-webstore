@@ -53,7 +53,6 @@ export default {
 
 li {
   float: left;
-
 }
 
 a {
