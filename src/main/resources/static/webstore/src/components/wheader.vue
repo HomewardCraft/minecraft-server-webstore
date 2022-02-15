@@ -3,8 +3,14 @@
 </template>
 
 <script>
+
+import wrouter from "./wrouter";
+import wheaderinfo from "./wheaderinfo";
+
+
 export default {
-  name: "wheader"
+  name: "wheader",
+  components: {wrouter, wheaderinfo}
 }
 </script>
 
