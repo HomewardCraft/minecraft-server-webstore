@@ -6,12 +6,28 @@
 </template>
 
 <script>
+//导入组件
 import HelloWorld from './components/HelloWorld.vue'
+import wlogo from "./components/wlogo";
+import wheader from "./components/wheader";
+import wsale from "./components/wsale";
+import wcount from "./components/wcount";
+import wcategories from "./components/wcategories";
+import whelp from "./components/whelp";
+import wfooter from "./components/wfooter";
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    wlogo,
+    wheader,
+    wsale,
+    wcount,
+    wcategories,
+    whelp,
+    wfooter
   }
 }
 </script>
