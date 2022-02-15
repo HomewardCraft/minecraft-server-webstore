@@ -4,7 +4,7 @@ public class SystemConst {
     /**
      * 项目名称
      */
-    public static final String SYSTEM_ITEM_NAME = "homeward-webstore";
+    public static final String SYSTEM_ITEM_NAME = "homeward_webstore";
 
     /**
      * 登录用户session

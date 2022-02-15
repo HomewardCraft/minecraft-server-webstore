@@ -2,6 +2,7 @@ package com.homeward.webstore.mapper;
 
 import com.homeward.webstore.pojo.packages.ItemsList;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 

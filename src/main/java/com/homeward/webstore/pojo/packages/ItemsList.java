@@ -10,9 +10,7 @@ public class ItemsList extends BasePojo {
     private Integer id;
     private String name;
     private String image;
+    private Integer price;
     //不存在
-    private Countdown countdown;
-    //不存在
-    private Price price;
-    private Boolean inCart;
+    private OnSale onSale;
 }
