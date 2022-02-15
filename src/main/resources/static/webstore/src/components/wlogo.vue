@@ -15,8 +15,8 @@ export default {
 
 .logo {
   position:relative;
-  left:-400px;
-  top: -50px;
+  left:400px;
+  top: 0px;
 }
 
 </style>

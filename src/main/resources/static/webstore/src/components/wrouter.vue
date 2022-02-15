@@ -3,17 +3,25 @@
   <div>
 
     <ul class="rt">
-      <li>
-        <bhome></bhome>
+      <li class="il">
+        <a>
+          <bhome></bhome>
+        </a>
       </li>
       <li>
-        <bblog></bblog>
+        <a>
+          <bblog></bblog>
+        </a>
       </li>
       <li>
-        <brules></brules>
+        <a>
+          <brules></brules>
+        </a>
       </li>
       <li>
-        <bstore></bstore>
+        <a>
+          <bstore></bstore>
+        </a>
       </li>
     </ul>
 
@@ -37,11 +45,22 @@ export default {
 <style scoped>
 
 .rt {
-
   list-style-type: none;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+}
 
+li {
+  float: left;
+
+}
+
+a {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-transform: uppercase;
 }
 
 </style>
