@@ -53,7 +53,7 @@ span {
 
 .img {
   margin-left: 20px;
-  margin-top:15px;
+  margin-top:50px;
   background-image: url(../assets/extras.png);
   background-repeat: no-repeat;
   background-size: 35%;
