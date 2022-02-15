@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Arcane logo" src="./assets/logo_show.png" width="50%" height="50%">
-    <HelloWorld msg="Arcane Homeward"/>
+    <wheader></wheader>
+    <wsale class = "wsale"></wsale>
   </div>
 </template>
 
 <script>
+//导入组件
 import HelloWorld from './components/HelloWorld.vue'
+import wheader from "./components/wheader";
+import wsale from "./components/wsale";
+import wcount from "./components/wcount";
+import wcategories from "./components/wcategories";
+import whelp from "./components/whelp";
+import wfooter from "./components/wfooter";
+import Wrouter from "./components/wrouter";
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Wrouter,
+    HelloWorld,
+    wheader,
+    wsale,
+    wcount,
+    wcategories,
+    whelp,
+    wfooter
   }
 }
 </script>
 
 <style>
+
+.wsale {
+  alignment: center;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: black;
+  margin: auto;
+
 }
 </style>
