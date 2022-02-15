@@ -7,7 +7,7 @@
     <span class="cat">
       Categories
     </span>
-    <wcrates></wcrates>
+    <wcategories></wcategories>
   </div>
 </template>
 

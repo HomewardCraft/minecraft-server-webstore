@@ -1,5 +1,12 @@
 <template>
 
+  <div>
+
+    <wcrates></wcrates>
+    <wranks></wranks>
+
+  </div>
+
 </template>
 
 <script>
@@ -15,5 +22,9 @@ export default {
 </script>
 
 <style scoped>
+
+div {
+  margin: 0;
+}
 
 </style>
