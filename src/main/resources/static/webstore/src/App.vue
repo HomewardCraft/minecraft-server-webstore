@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <img alt="Arcane logo" src="./assets/logo_show.png" width="50%" height="50%">
-    <HelloWorld msg="Arcane Homeward"/>
+    <wlogo></wlogo>
+    <wheader></wheader>
   </div>
 </template>
 
@@ -15,11 +15,13 @@ import wcount from "./components/wcount";
 import wcategories from "./components/wcategories";
 import whelp from "./components/whelp";
 import wfooter from "./components/wfooter";
+import Wrouter from "./components/wrouter";
 
 
 export default {
   name: 'App',
   components: {
+    Wrouter,
     HelloWorld,
     wlogo,
     wheader,

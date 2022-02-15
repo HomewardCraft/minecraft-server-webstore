@@ -1,5 +1,12 @@
 <template>
 
+<div>
+
+  <wrouter></wrouter>
+  <wheaderinfo></wheaderinfo>
+
+</div>
+
 </template>
 
 <script>
