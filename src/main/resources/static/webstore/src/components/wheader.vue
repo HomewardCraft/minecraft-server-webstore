@@ -30,4 +30,10 @@ export default {
 
 <style scoped>
 
+div{
+  /*margin: 0;*/
+  /*width: 1100px;*/
+  /*height: 100px;*/
+  /*display: block;*/
+}
 </style>

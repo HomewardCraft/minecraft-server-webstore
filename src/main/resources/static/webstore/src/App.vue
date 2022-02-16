@@ -46,6 +46,11 @@ export default {
 </script>
 
 <style>
+
+div{
+
+}
+
 .cat {
   padding: 20px 0;
   margin:auto;
@@ -67,8 +72,10 @@ export default {
 }
 
 #app {
+  width:100%;
   background-color: black;
-  margin: auto;
-
+  margin: 0 auto;
+  overflow:hidden;
+  position:relative;
 }
 </style>
