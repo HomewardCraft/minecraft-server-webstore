@@ -14,6 +14,7 @@
     <br>
     <br>
     <whelp></whelp>
+    <wfooter></wfooter>
   </div>
 </template>
 
@@ -48,6 +49,10 @@ export default {
 
 <style>
 
+wcategories{
+
+}
+
 div{
 
 }
@@ -64,9 +69,6 @@ div{
   text-align: left;
 }
 
-/*wcategories {*/
-/*  text-align: center;*/
-/*}*/
 
 .wsale {
   alignment: center;
