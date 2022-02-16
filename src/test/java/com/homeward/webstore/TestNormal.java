@@ -3,6 +3,7 @@ package com.homeward.webstore;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.VO.R;
 import com.homeward.webstore.common.enums.StatusCode;
+import com.homeward.webstore.common.enums.SystemConst;
 import com.homeward.webstore.common.utils.JwtUtil;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -92,6 +93,11 @@ public class TestNormal {
         R ok = R.ok();
         System.out.println(ok);
 
+    }
+
+    @Test
+    void testEnums() {
+        System.out.println(SystemConst.SYSTEM_PROJECT_NAME.getName());
     }
 }
 

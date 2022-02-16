@@ -1,15 +1,15 @@
 package com.homeward.webstore.controller;
 
+import com.homeward.webstore.VO.R;
 import com.homeward.webstore.service.order.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("/checkout")
+@RequestMapping("/order")
 public class OrderController {
     private final OrderService orderService;
 
@@ -17,18 +17,27 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/packages/add/{commodityId}/single")
-    public void create(@PathVariable("commodityId") Integer id, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
-        orderService.create(id, httpSession, request, response);
+    @PostMapping("/insert/{itemId}")
+    public R insert(@PathVariable("itemId") Integer id, HttpServletRequest request, HttpServletResponse response) {
+        orderService.insertCart(id, request, response);
+        return R.ok();
     }
 
     @PostMapping("/update")
-    public void update(@RequestParam Map<String, String> map, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
-        orderService.update(map, httpSession, request, response);
+    public R update(@RequestParam Map<String, String> map, HttpServletRequest request) {
+        orderService.updateCart(map, request);
+        return R.ok();
     }
 
-    @PostMapping("/packages/remove/{commodityId}")
-    public void remove(@PathVariable("commodityId")  Integer id, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
-        orderService.remove(id, httpSession, request, response);
+    @PostMapping("/delete/{itemId}")
+    public R delete(@PathVariable("itemId") Integer id, HttpServletRequest request, HttpServletResponse response) {
+        orderService.deleteCart(id, request, response);
+        return R.ok();
+    }
+
+    @PostMapping("/commit")
+    public R commit() {
+        Float totalPrice = orderService.commit();
+        return R.ok(totalPrice);
     }
 }

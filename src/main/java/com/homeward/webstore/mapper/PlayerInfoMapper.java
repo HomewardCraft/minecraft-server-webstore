@@ -6,11 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface PlayerInfoMapper {
-    PlayerInfo getPlayerInfo(String playerName);
+    PlayerInfo selectPlayer(String uuid);
 
-    void addPlayer(
+    void insertPlayer(
             @Param("uuid") String uuid,
-            @Param("name") String name,
-            @Param("legacy") Boolean legacy
+            @Param("name") String name
     );
 }

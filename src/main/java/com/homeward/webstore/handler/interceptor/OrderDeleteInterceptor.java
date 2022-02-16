@@ -14,19 +14,23 @@ import java.util.Objects;
 
 @Slf4j
 @Component
-public class OrderCreateInterceptor implements HandlerInterceptor {
+public class OrderDeleteInterceptor implements HandlerInterceptor {
+
     private final AuthenticationMapper authenticationMapper;
 
-    public OrderCreateInterceptor(AuthenticationMapper authenticationMapper) {
+    public OrderDeleteInterceptor(AuthenticationMapper authenticationMapper) {
         this.authenticationMapper = authenticationMapper;
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uuid = JwtUtil.getUserId();
+
         Cookie[] cookieArray = request.getCookies();
+
         if (cookieArray == null) {
-            return true;
+            log.error(uuid + " need a cart to update");
+            throw new RuntimeException("no such cart found");
         }
 
         List<Integer> itemIdList = authenticationMapper.isSingleCart(uuid);
@@ -40,11 +44,11 @@ public class OrderCreateInterceptor implements HandlerInterceptor {
 
         for (Cookie cookie : cookieArray) {
             if (Objects.equals(cookieName, cookie.getName()) && itemIdList.contains(itemId)) {
-                log.error(uuid + " have duplicated cart");
-                throw new RuntimeException("duplicated cart found");
+                return true;
             }
         }
 
-        return true;
+        log.error(uuid + " need a cart to update");
+        throw new RuntimeException("no such cart found");
     }
 }

@@ -3,6 +3,8 @@ package com.homeward.webstore;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.mapper.AuthenticationMapper;
+import com.homeward.webstore.mapper.OrderMapper;
 import com.homeward.webstore.mapper.StoreMapper;
 import com.homeward.webstore.common.utils.RedisUtil;
 import com.homeward.webstore.pojo.packages.ItemsList;
@@ -16,8 +18,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @SpringBootTest
@@ -31,6 +36,12 @@ public class TestSpring {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private OrderMapper orderMapper;
+
+    @Autowired
+    private AuthenticationMapper authenticationMapper;
 
     @Test
     @Disabled
@@ -131,9 +142,51 @@ public class TestSpring {
     }
 
     @Test
+    @Disabled
     void testStoreMapper() {
         List<ItemsList> itemsLists = storeMapper.getStoreItems("crates");
         itemsLists.forEach(System.out::println);
+    }
+
+    @Test
+    @Disabled
+    void testOrderMapper() {
+        Float totalPrice = orderMapper.getTotalPrice("619377de9ada41388ef93dbf9fe56320");
+        System.out.println(totalPrice);
+    }
+
+    @Test
+    @Disabled
+    void testStoreMapperGetItemId() {
+        String itemId = storeMapper.getItemName(1);
+        if (itemId == null) {
+            System.out.println("0");
+            return;
+        }
+        System.out.println(itemId);
+    }
+
+    @Test
+    @Disabled
+    void testOrderUpdateCart() {
+        orderMapper.updateCart("619377de9ada41388ef93dbf9fe56320", 1000, 1);
+    }
+
+    @Test
+    @Disabled
+    void testOrderDeleteCart() {
+        long l = orderMapper.deleteCart("619377de9ada41388ef93dbf9fe56320", 1001);
+        System.out.println(l);
+    }
+
+    @Test
+    void testAuthMapperIsSingleCart() {
+        List<Integer> integerList = authenticationMapper.isSingleCart("619377de9ada41388ef93dbf9fe56320");
+        if (integerList.contains(1000)) {
+            System.out.println("1");
+            return;
+        }
+        System.out.println("0");
     }
 }
 

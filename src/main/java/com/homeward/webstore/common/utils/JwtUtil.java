@@ -1,8 +1,7 @@
 package com.homeward.webstore.common.utils;
 
-import com.homeward.webstore.common.consts.SystemConst;
+import com.homeward.webstore.common.enums.SystemConst;
 import com.homeward.webstore.common.exceptions.UnLoginException;
-import com.homeward.webstore.common.utils.SpringContextUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -21,7 +20,7 @@ public class JwtUtil {
     /**
      * 密钥
      */
-    private static final String SECRET = SystemConst.SYSTEM_ITEM_NAME + "_SunjiamuCaishangqi";
+    private static final String SECRET = SystemConst.SYSTEM_PROJECT_NAME.getName() + "_SunjiamuCaishangqi";
 
     /**
      * 过期时间（单位：秒）

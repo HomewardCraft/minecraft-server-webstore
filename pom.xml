@@ -93,7 +93,7 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.79</version>
         </dependency>
-        <!-- 不知道是什么 -->
+        <!-- string utils 是我爹 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>

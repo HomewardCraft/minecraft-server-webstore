@@ -19,9 +19,16 @@
         LEFT JOIN items s
         ON i.id = s.id
         <where>
-            <if test="type != null and type != ''">
-                i.type = #{items}
-            </if>
+            i.type = #{items}
+        </where>
+    </select>
+
+
+    <select id="getItemName" resultType="String" useCache="true">
+        SELECT name
+        FROM items
+        <where>
+            id = #{itemId}
         </where>
     </select>
 </mapper>

@@ -4,16 +4,41 @@
 
 <mapper namespace="com.homeward.webstore.mapper.OrderMapper">
     <cache/>
-    <!--<resultMap id="information" type="PlayerInfo" autoMapping="true">-->
-    <resultMap id="items" type="ItemsList" autoMapping="true">
-        <id column="id" property="id"/>
-    </resultMap>
-    <select id="getItemId" resultMap="items" useCache="true">
-        select id from items
+    <select id="getTotalPrice" resultType="Float" useCache="true">
+        SELECT
+        SUM((i.price / 100) * (i.onsale_percent / 100) * o.amount) price
+        FROM minecraft_webstore.order o
+        LEFT JOIN items i
+        ON o.item_id = i.id
         <where>
-            <if test="itemId != null and itemId != ''">
-                id = #{itemId}
-            </if>
+            o.uuid = #{uuid}
         </where>
     </select>
+
+    <insert id="insertCart" flushCache="true">
+        INSERT INTO
+        minecraft_webstore.order(UUID, item_id, amount)
+        VALUES(#{uuid}, #{itemId}, #{amount})
+    </insert>
+
+    <update id="updateCart" flushCache="true">
+        UPDATE minecraft_webstore.order
+        <set>
+            <if test="amount != null and amount != ''">
+                amount = #{amount}
+            </if>
+        </set>
+        <where>
+            uuid = #{uuid}
+            AND item_id = #{itemId}
+        </where>
+    </update>
+
+    <delete id="deleteCart" flushCache="true">
+        DELETE FROM minecraft_webstore.order
+        <where>
+            UUID = #{uuid}
+            AND item_id = #{itemId}
+        </where>
+    </delete>
 </mapper>

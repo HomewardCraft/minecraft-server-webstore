@@ -2,13 +2,12 @@ package com.homeward.webstore.service.player;
 
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
-import com.homeward.webstore.common.utils.JwtUtil;
 import com.homeward.webstore.mapper.PlayerInfoMapper;
 import com.homeward.webstore.pojo.playerinfo.PlayerInfo;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -35,49 +34,57 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     @JoinPointSymbol
     public JSONObject getPlayerProfile(String playerId, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
         //返回玩家uuid和名字
-        String OriginMessage = this.getPlayerInformation(playerId);
+        String originMessage = this.getPlayerNameAndUUID(playerId);
 
         //名称不可用返回, 这个顺序判断不会npe
-        if (OriginMessage == null || OriginMessage.equals("") || OriginMessage.contains("error")) {
-            OriginMessage = "{\"error\":true}";
-            return JSONObject.parseObject(OriginMessage);
+        if (StringUtils.isBlank(originMessage) || originMessage.contains("error")) {
+            originMessage = "{\"error\":true}";
+            //
+            return JSONObject.parseObject(originMessage);
         }
 
         //转成java对象方便oop
-        JSONObject ObjectedMessage = JSONObject.parseObject(OriginMessage);
+        JSONObject ObjectedMessage = JSONObject.parseObject(originMessage);
 
         //截取玩家uuid, 获取玩家profile
-        String UUID = ObjectedMessage.getString("id");
-        String ProfileString = this.getPlayerProfile(UUID);
+        String uuid = ObjectedMessage.getString("id");
+        String name = ObjectedMessage.getString("name");
+        String ProfileString = this.getPlayerProfile(uuid);
 
         //转成json对象方便oop
         JSONObject playerProfile = JSONObject.parseObject(ProfileString);
 
-        //获取值
-        String uuid = playerProfile.getString("id");
-        String name = playerProfile.getString("name");
-        Boolean legacy = playerProfile.getBoolean("legacy");
+
 
         //查询数据库是否有数据, 没有则录入
-        PlayerInfo playerInfo = this.playerInfoMapper.getPlayerInfo(playerId);
+        PlayerInfo playerInfo = this.selectPlayer(uuid);
         if (playerInfo == null) {
-            this.addPlayer(uuid, name, legacy);
+            this.insertPlayer(uuid, name);
         }
 
-        //使用jwt加密玩家名字存到cookie
-        String playerIdEncrypted = JwtUtil.createToken(playerId);
-        Cookie cookie = new Cookie("homeward_user_info", playerIdEncrypted);
-
-        //设置多久过期, 应与jwt令牌的过期时间一样, 为1天
-        cookie.setMaxAge(86400);
-
-        //设置路径, 用户登陆验证应为全局的
-        cookie.setPath("/");
-
-        //返回一个cookie
-        response.addCookie(cookie);
-
         return playerProfile;
+    }
+
+
+    /**
+     * @param uuid player uuid
+     * @return PlayerInfo
+     * */
+    @Override
+    @Cacheable(value = "SelectItemsInformation")
+    public PlayerInfo selectPlayer(String uuid){
+        return this.playerInfoMapper.selectPlayer(uuid);
+    }
+
+
+    /**
+     * @param uuid           player uuid
+     * @param name   player string name
+     */
+    @Override
+    @JoinPointSymbol
+    public void insertPlayer(String uuid, String name) {
+        this.playerInfoMapper.insertPlayer(uuid, name);
     }
 
 
@@ -85,7 +92,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * @param playerId the player string name
      * @return player json formatted name and UUID
      */
-    private String getPlayerInformation(String playerId) {
+    private String getPlayerNameAndUUID(String playerId) {
         String getInfo = String.format("https://api.mojang.com/users/profiles/minecraft/%s", playerId);
         return this.restTemplate.getForObject(getInfo, String.class);
     }
@@ -98,18 +105,5 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     private String getPlayerProfile(String playerUUID) {
         String getProfile = String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", playerUUID);
         return this.restTemplate.getForObject(getProfile, String.class);
-    }
-
-
-    /**
-     * @param uuid           player uuid
-     * @param name   player string name
-     * @param legacy       player profile whether legacy
-     */
-    @Override
-    @Cacheable(value = "SelectItemsInformation")
-    @JoinPointSymbol
-    public void addPlayer(String uuid, String name, Boolean legacy) {
-        this.playerInfoMapper.addPlayer(uuid, name, legacy);
     }
 }
