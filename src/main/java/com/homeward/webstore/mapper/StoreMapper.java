@@ -8,6 +8,8 @@ import java.util.List;
 
 @Mapper
 public interface StoreMapper {
+    String getItemName(Integer id);
+
     //单个参数传递不加@Param
     List<ItemsList> getStoreItems(String type);
 }

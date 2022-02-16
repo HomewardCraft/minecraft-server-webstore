@@ -1,38 +1,32 @@
 package com.homeward.webstore.common.utils;
 
-import com.homeward.webstore.mapper.OrderMapper;
+import com.homeward.webstore.mapper.StoreMapper;
 import com.homeward.webstore.pojo.packages.ItemsList;
+import com.mysql.cj.log.Log;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.util.annotation.Nullable;
 
+@Slf4j
 @Component
 public class VerificationUtil {
-    private final OrderMapper orderMapper;
+    private final StoreMapper storeMapper;
 
-    public VerificationUtil(OrderMapper orderMapper) {
-        this.orderMapper = orderMapper;
+    public VerificationUtil(StoreMapper storeMapper) {
+        this.storeMapper = storeMapper;
     }
 
     /**
      * return true if the order exist.
-     * @param id item id
-     * @param redirectPage the page you want user redirected empty string or null means no redirect
-     * @param response http servlet response (can be null)
+     * @param itemId item id
      * @return Boolean
      * */
-    public Boolean orderExist(Integer id,@Nullable String redirectPage,@Nullable HttpServletResponse response) {
-        ItemsList itemId = orderMapper.getItemId(id);
-        if (itemId == null) {
-            if (redirectPage != null) {
-                try {
-                    response.sendRedirect(redirectPage);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            return false;
+    public void itemExist(Integer itemId, String uuid) {
+        String item = storeMapper.getItemName(itemId);
+        if (item == null) {
+            log.warn(uuid + " request a item which is not exist.");
+            throw new RuntimeException("request item not exist!");
         }
-        return true;
     }
 }

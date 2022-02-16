@@ -29,7 +29,6 @@ spring:
         max-idle: 20
         min-idle: 2
     timeout: 5000ms
-
 #SpringBoot整合Mybatis
 mybatis-plus:
   #指定别名包

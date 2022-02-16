@@ -1,9 +1,27 @@
 package com.homeward.webstore.mapper;
 
-import com.homeward.webstore.pojo.packages.ItemsList;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 
 @Mapper
 public interface OrderMapper{
-    ItemsList getItemId(Integer id);
+    long insertCart(
+            @Param("uuid") String uuid,
+            @Param("itemId") Integer itemId,
+            @Param("amount") Integer amount
+    );
+
+    long updateCart(
+            @Param("uuid") String uuid,
+            @Param("itemId") Integer itemId,
+            @Param("amount") Integer amount
+    );
+
+    long deleteCart(
+            @Param("uuid") String uuid,
+            @Param("itemId") Integer itemId
+    );
+
+    Float getTotalPrice(String uuid);
 }

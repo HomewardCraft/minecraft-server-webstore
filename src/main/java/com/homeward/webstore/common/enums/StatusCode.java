@@ -8,7 +8,6 @@ public enum StatusCode implements BaseEnums{
     FAIL(500, "failed");
 
 
-
     private final Integer statusCode;
 
     private final String statusMessage;

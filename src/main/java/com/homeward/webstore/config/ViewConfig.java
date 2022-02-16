@@ -2,6 +2,7 @@ package com.homeward.webstore.config;
 
 import com.homeward.webstore.handler.interceptor.LoginInterceptor;
 import com.homeward.webstore.handler.interceptor.OrderCreateInterceptor;
+import com.homeward.webstore.handler.interceptor.OrderDeleteInterceptor;
 import com.homeward.webstore.handler.interceptor.OrderUpdateInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -14,11 +15,13 @@ public class ViewConfig implements WebMvcConfigurer {
     private final LoginInterceptor loginInterceptor;
     private final OrderCreateInterceptor orderCreateInterceptor;
     private final OrderUpdateInterceptor orderUpdateInterceptor;
+    private final OrderDeleteInterceptor orderDeleteInterceptor;
 
-    public ViewConfig(LoginInterceptor loginInterceptor, OrderCreateInterceptor orderCreateInterceptor, OrderUpdateInterceptor orderUpdateInterceptor) {
+    public ViewConfig(LoginInterceptor loginInterceptor, OrderCreateInterceptor orderCreateInterceptor, OrderUpdateInterceptor orderUpdateInterceptor, OrderDeleteInterceptor orderDeleteInterceptor) {
         this.loginInterceptor = loginInterceptor;
         this.orderCreateInterceptor = orderCreateInterceptor;
         this.orderUpdateInterceptor = orderUpdateInterceptor;
+        this.orderDeleteInterceptor = orderDeleteInterceptor;
     }
 
 
@@ -33,9 +36,7 @@ public class ViewConfig implements WebMvcConfigurer {
                 "/RedirectPage.html",
                 "/home",
                 "/emituofo.txt",
-                //商品展示
                 "/category/**",
-                //登录
                 "/name/*"
         );
 
@@ -43,15 +44,20 @@ public class ViewConfig implements WebMvcConfigurer {
         //想创建订单先得保证没有订单
         InterceptorRegistration orderCreateInterceptor = registry.addInterceptor(this.orderCreateInterceptor);
         orderCreateInterceptor.addPathPatterns(
-                "/checkout/packages/add/**"
+                "/order/insert/*"
         );
 
 
-        //想修改订单数先得保证有订单
+        //想改订单数先得保证有订单
         InterceptorRegistration orderUpdateInterceptor = registry.addInterceptor(this.orderUpdateInterceptor);
         orderUpdateInterceptor.addPathPatterns(
-                "/checkout/update",
-                "/checkout/packages/remove/**"
+                "/order/update"
+        );
+
+        //想删订单数先得保证有订单
+        InterceptorRegistration orderDeleteInterceptor = registry.addInterceptor(this.orderDeleteInterceptor);
+        orderDeleteInterceptor.addPathPatterns(
+                "/order/delete/*"
         );
     }
 }
