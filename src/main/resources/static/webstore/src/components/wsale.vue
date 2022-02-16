@@ -2,6 +2,8 @@
   <div>
 
       <span class="uni">
+
+
         <span>
           Happy
         </span>
@@ -29,6 +31,13 @@ export default {
 </script>
 
 <style scoped>
+div{
+  background-image: url(../assets/Valentines_Store.png);
+  background-position: top;
+  background-size: 100%;
+  /*缺少一个颜色渐变*/
+}
+
 .uni {
 
   padding: 60px;
