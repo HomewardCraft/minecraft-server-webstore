@@ -112,6 +112,14 @@ public class TestNormal {
             System.out.println(1);
         }
     }
+
+    @Test
+    void testArrays() {
+        String[] strings = {"10"};
+        System.out.println(Arrays.stream(strings).count());
+        Integer integer = Integer.valueOf(strings[0]);
+        System.out.println(integer);
+    }
 }
 
 

@@ -2,8 +2,6 @@ package com.homeward.webstore.controller;
 
 import com.homeward.webstore.VO.R;
 import com.homeward.webstore.service.order.OrderService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -18,20 +16,20 @@ public class OrderController {
     }
 
     @PostMapping("/insert/{itemId}")
-    public R insert(@PathVariable("itemId") Integer id, HttpServletRequest request, HttpServletResponse response) {
-        orderService.insertCart(id, request, response);
+    public R insert(@PathVariable("itemId") Integer id) {
+        orderService.insertCart(id);
         return R.ok();
     }
 
     @PostMapping("/update")
-    public R update(@RequestParam Map<String, String> map, HttpServletRequest request) {
-        orderService.updateCart(map, request);
+    public R update(@RequestParam Map<String, String> map) {
+        orderService.updateCart(map);
         return R.ok();
     }
 
     @PostMapping("/delete/{itemId}")
-    public R delete(@PathVariable("itemId") Integer id, HttpServletRequest request, HttpServletResponse response) {
-        orderService.deleteCart(id, request, response);
+    public R delete(@PathVariable("itemId") Integer id) {
+        orderService.deleteCart(id);
         return R.ok();
     }
 
