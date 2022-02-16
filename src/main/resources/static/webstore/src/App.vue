@@ -9,12 +9,7 @@
       Categories
     </span>
     <wcategories></wcategories>
-    <br>
-    <br>
-    <br>
-    <br>
     <whelp></whelp>
-    <br>
     <wfooter></wfooter>
   </div>
 </template>

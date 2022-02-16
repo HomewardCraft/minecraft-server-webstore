@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div class = "main">
 
     <div class="firstline">
       <span id="grid">
@@ -55,7 +55,8 @@ export default {
   grid-gap: 10px;
 }
 
-div {
+.main{
+  margin-top: 80px;
 }
 
 .secondline{
