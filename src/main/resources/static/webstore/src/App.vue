@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <br>
     <wheader></wheader>
     <wsale class="wsale"></wsale>
     <br>

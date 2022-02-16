@@ -30,10 +30,10 @@ export default {
 
 <style scoped>
 
+
 .rinfo{
   position:relative;
-  left:930px;
-  top: -100px;
+  margin-left: 30px;
 }
 
 th:hover {
