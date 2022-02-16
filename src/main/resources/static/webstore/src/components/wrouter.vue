@@ -65,8 +65,6 @@ a {
 
 .router {
   position:relative;
-  left:900px;
-  top: -120px;
 }
 
 </style>

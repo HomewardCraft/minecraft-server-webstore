@@ -1,12 +1,14 @@
 <template>
-
-  <div class="grid">
-    <div class="span-row-2">
-      <wcrates></wcrates>
+  <div class = "main">
+    <div class="grid">
+      <div class="span-row-2">
+        <wcrates></wcrates>
+      </div>
+      <wranks></wranks>
+      <wextras></wextras>
     </div>
-    <wranks></wranks>
-    <wextras></wextras>
   </div>
+
 
 </template>
 
@@ -24,14 +26,15 @@ export default {
 
 <style scoped>
 
-div {
-
+.main{
+  margin-bottom: 80px;
 }
 
 .grid {
+
   margin: auto;
   width: 1130px;
-  height:500px;
+  height: 500px;
 
 
   display: grid;

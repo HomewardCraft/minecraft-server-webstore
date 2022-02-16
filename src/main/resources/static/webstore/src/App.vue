@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <br>
     <wheader></wheader>
     <wsale class="wsale"></wsale>
     <br>
@@ -8,11 +9,8 @@
       Categories
     </span>
     <wcategories></wcategories>
-    <br>
-    <br>
-    <br>
-    <br>
     <whelp></whelp>
+    <wfooter></wfooter>
   </div>
 </template>
 
@@ -46,6 +44,15 @@ export default {
 </script>
 
 <style>
+
+wcategories{
+
+}
+
+div{
+
+}
+
 .cat {
   padding: 20px 0;
   margin:auto;
@@ -58,17 +65,16 @@ export default {
   text-align: left;
 }
 
-/*wcategories {*/
-/*  text-align: center;*/
-/*}*/
 
 .wsale {
   alignment: center;
 }
 
 #app {
+  width:100%;
   background-color: black;
-  margin: auto;
-
+  margin: 0 auto;
+  overflow:hidden;
+  position:relative;
 }
 </style>

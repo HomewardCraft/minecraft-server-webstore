@@ -1,6 +1,6 @@
 <template>
   <div class = "logo">
-    <img alt="Arcane logo" src="../assets/logo_show.png" width="20%" height="20%">
+    <img alt="Arcane logo" src="../assets/logo_show.png" width="256px" height="106px" >
   </div>
 
 </template>
@@ -14,9 +14,10 @@ export default {
 <style scoped>
 
 .logo {
-  position:relative;
-  left:400px;
-  top: 0px;
+  display: block;
+  margin-right: 250px;
+  float: right;
+
 }
 
 </style>
