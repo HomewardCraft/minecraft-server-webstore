@@ -2,15 +2,22 @@
 
   <div>
 
-      <span class="firstline">
-      <wshowplayer></wshowplayer>
+    <div class="firstline">
+      <span id="grid">
+        <wshowplayer></wshowplayer>
+        <span class = "mmm"></span>
       </span>
+    </div>
 
-    <span class = "secondline">
+    <div class = "divsec">
+      <span class = "secondline">
       Arcane Homeward, A Untitle network product.
       <br>
       We are in no way affiliated with or endorsed by Mojang, AB.
     </span>
+
+    </div>
+
 
   </div>
 
@@ -28,30 +35,46 @@ export default {
 
 <style scoped>
 
+.divsec {
+  background-color: #f6bc21;
+}
+
+/*footer的杂项菜单，不重要*/
+.mmm{
+  display: block;
+  height: 50px;
+  text-align: center;
+}
+
+#grid {
+  margin:auto;
+  padding-left: 100px;
+  width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(2, 500px);
+  grid-gap: 10px;
+}
 
 div {
-  margin-top: 100px;
 }
 
 .secondline{
 
-  padding-top: 30px;
-  padding-left: 450px;
-
   color: #4a390a;
 
-  position: relative;
-  margin: auto;
-  width: 100%;
-  height: 80px;
+
+  margin:auto;
+  padding: 20px 0;
+
+  width: 1000px;
+  height: 40px;
   display: block;
   background-color: #f6bc21;
 }
 
 .firstline {
+  height:20%;
   position: relative;
-  width: 100%;
-  height: 70px;
   display: block;
   background-color: #e8a11a;
 

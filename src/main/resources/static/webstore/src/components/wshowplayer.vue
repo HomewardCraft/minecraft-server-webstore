@@ -30,10 +30,14 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 .grid {
+
   /*此行暂时摆烂，不应该从组件中调整位置*/
-  margin-left: 500px;
-  padding-top: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: grid;
   grid-template-columns: repeat(3, 0fr);
 
