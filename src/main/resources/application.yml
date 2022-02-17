@@ -38,10 +38,10 @@ mybatis-plus:
   #开启驼峰映射
   configuration:
     map-underscore-to-camel-case: true
-    #开启二级缓存
-#    cache-enabled: true
+#    开启二级缓存
+    cache-enabled: true
 
 #开启sql语句显示
 logging:
   level:
-    com.homeward.webstore.mapper: info
+    com.homeward.webstore.mapper: debug

@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.homeward.webstore.mapper.PlayerInfoMapper">
+    <cache/>
     <resultMap id="information" type="PlayerInfo" autoMapping="true">
         <id column="a_uuid" property="uuid"/>
         <result column="a_name" property="name"/>
@@ -18,7 +19,7 @@
         </where>
     </select>
 
-    <insert id="insertPlayer">
+    <insert id="insertPlayer" flushCache="true">
         INSERT INTO
         player_info(uuid, name)
         <if test="uuid != null and uuid !='' and name != null and name != ''">

@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public interface OrderService {
-    void insertCart(Integer itemName, HttpServletRequest request, HttpServletResponse response);
-    void updateCart(Map<String, String> itemMap, HttpServletRequest request);
-    void deleteCart(Integer itemName, HttpServletRequest request, HttpServletResponse response);
+    void insertCart(Integer itemName);
+    void updateCart(Map<String, String> itemMap);
+    void deleteCart(Integer itemName);
     Float commit();
 }

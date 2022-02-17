@@ -181,7 +181,7 @@ public class TestSpring {
 
     @Test
     void testAuthMapperIsSingleCart() {
-        List<Integer> integerList = authenticationMapper.isSingleCart("619377de9ada41388ef93dbf9fe56320");
+        List<Integer> integerList = authenticationMapper.itemIdList("619377de9ada41388ef93dbf9fe56320", 1000);
         if (integerList.contains(1000)) {
             System.out.println("1");
             return;

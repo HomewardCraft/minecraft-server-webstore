@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TestNormal {
 
@@ -98,6 +95,30 @@ public class TestNormal {
     @Test
     void testEnums() {
         System.out.println(SystemConst.SYSTEM_PROJECT_NAME.getName());
+    }
+
+    @Test
+    void testDuplicatedArray() {
+        ArrayList<Integer> integers = new ArrayList<>();
+//        integers.add(1);
+//        integers.add(2);
+//        integers.add(3);
+//        integers.add(4);
+//        integers.add(5);
+        Set<Integer> set = new HashSet<>(integers);
+        if(set.size() != integers.size()){
+            System.out.println(0);
+        }else{
+            System.out.println(1);
+        }
+    }
+
+    @Test
+    void testArrays() {
+        String[] strings = {"10"};
+        System.out.println(Arrays.stream(strings).count());
+        Integer integer = Integer.valueOf(strings[0]);
+        System.out.println(integer);
     }
 }
 

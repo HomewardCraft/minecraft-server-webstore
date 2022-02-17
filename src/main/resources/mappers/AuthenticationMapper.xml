@@ -3,11 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.homeward.webstore.mapper.AuthenticationMapper">
-    <select id="isSingleCart" resultType="Integer">
+    <cache/>
+    <select id="itemIdList" resultType="Integer" useCache="false">
         SELECT item_id
         FROM minecraft_webstore.order
         <where>
             uuid = #{uuid}
+            AND item_id = #{itemId}
         </where>
     </select>
 </mapper>
