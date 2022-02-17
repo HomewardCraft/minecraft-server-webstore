@@ -37,13 +37,14 @@ export default {
 
 <style scoped>
 div {
-  background-image: url(../assets/orbit.png);
-  background-position-x: 30px;
+  background-image: url(../assets/ghost.png);
+  background-position-x: 40px;
+  background-position-y: -50px;
   display: block;
   background-repeat: no-repeat;
-  background-size: 18%;
-  width: 10%;
-  height: 90%;
+  background-size: 20%;
+  width: 20%;
+  height: 80%;
   /*缺少一个颜色渐变*/
 }
 
@@ -86,8 +87,8 @@ div {
   height: 200px;
   display: block;
   text-align: center;
-  border: 3px solid #56a2a7;
-  background-color: #1e8188;
+  border: 3px solid #5685a7;
+  background-color: #1e5c88;
 
 }
 </style>
