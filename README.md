@@ -23,14 +23,16 @@ Vue 框架 2.0 开发版本
 ## 模块
 
 ### aop
-> advice
-> > CustomExceptionCatch - 捕获特定的运行时异常, 返回给前端数据
-> > PlayerInformationLog - 玩家在首次登录, 其uuid与name被记录到数据库时记录到日志
-> annotations
-> > JoinPointSymbol - 自定义注解, 用于辅助构建切入点表达式
-> pointcuts
-> > CustomExceptionCatch - advice中CustomExceptionCatch的命名切入点
-> > PlayerInformationLog - advice中PlayerInformationLog的命名切入点
++ advice
+    > CustomExceptionCatch - 捕获特定的运行时异常, 返回给前端数据
+  > 
+    > PlayerInformationLog - 玩家在首次登录, 其uuid与name被记录到数据库时记录到日志
++ annotations
+    > JoinPointSymbol - 自定义注解, 用于辅助构建切入点表达式
++ pointcuts
+    > CustomExceptionCatch - advice中CustomExceptionCatch的命名切入点
+  > 
+    > PlayerInformationLog - advice中PlayerInformationLog的命名切入点
 
 
 
