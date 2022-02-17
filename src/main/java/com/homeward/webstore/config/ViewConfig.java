@@ -24,6 +24,7 @@ public class ViewConfig implements WebMvcConfigurer {
                 "/**"
         );
         loginInterceptor.excludePathPatterns(
+                "/category/*",
                 "/name/*"
         );
     }
