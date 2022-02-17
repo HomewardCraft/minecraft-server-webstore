@@ -1,6 +1,6 @@
 package com.homeward.webstore.service.store;
 
-import com.homeward.webstore.pojo.packages.ItemsList;
+import com.homeward.webstore.pojo.merchandise.ItemsList;
 
 import java.util.List;
 

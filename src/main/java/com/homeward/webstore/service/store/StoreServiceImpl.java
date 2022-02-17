@@ -1,7 +1,7 @@
 package com.homeward.webstore.service.store;
 
 import com.homeward.webstore.mapper.StoreMapper;
-import com.homeward.webstore.pojo.packages.ItemsList;
+import com.homeward.webstore.pojo.merchandise.ItemsList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.homeward.webstore.pojo.packages;
+package com.homeward.webstore.pojo.merchandise;
 
 import com.homeward.webstore.pojo.BasePojo;
 import lombok.Data;

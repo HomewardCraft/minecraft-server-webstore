@@ -1,9 +1,9 @@
-package com.homeward.webstore.service.order;
+package com.homeward.webstore.service.cart;
 
 import com.homeward.webstore.common.utils.CartUtil;
 import com.homeward.webstore.common.utils.JwtUtil;
 import com.homeward.webstore.mapper.AuthenticationMapper;
-import com.homeward.webstore.mapper.OrderMapper;
+import com.homeward.webstore.mapper.CartMapper;
 import com.homeward.webstore.mapper.StoreMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -15,16 +15,16 @@ import java.util.*;
 
 @Slf4j
 @Service
-public class OrderServiceImpl implements OrderService {
+public class CartServiceImpl implements CartService {
     private final AuthenticationMapper authenticationMapper;
     private final StoreMapper storeMapper;
-    private final OrderMapper orderMapper;
+    private final CartMapper cartMapper;
 
 
-    public OrderServiceImpl(AuthenticationMapper authenticationMapper, StoreMapper storeMapper, OrderMapper orderMapper) {
+    public CartServiceImpl(AuthenticationMapper authenticationMapper, StoreMapper storeMapper, CartMapper cartMapper) {
         this.authenticationMapper = authenticationMapper;
         this.storeMapper = storeMapper;
-        this.orderMapper = orderMapper;
+        this.cartMapper = cartMapper;
     }
 
     /**
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Float commit() {
         String uuid = JwtUtil.getUserId();
-        return orderMapper.getTotalPrice(uuid);
+        return cartMapper.getTotalPrice(uuid);
     }
 
 
@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
 
         Integer itemAmount = 1;
 
-        orderMapper.insertCart(uuid, itemId, itemAmount);
+        cartMapper.insertCart(uuid, itemId, itemAmount);
     }
 
     /**
@@ -101,7 +101,7 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("no such cart to update");
         }
 
-        orderMapper.updateCart(uuid, itemId, itemAmount);
+        cartMapper.updateCart(uuid, itemId, itemAmount);
     }
 
 
@@ -122,6 +122,6 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("no such cart to delete");
         }
 
-        orderMapper.deleteCart(uuid, itemId);
+        cartMapper.deleteCart(uuid, itemId);
     }
 }

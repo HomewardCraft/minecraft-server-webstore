@@ -6,8 +6,8 @@ public class CustomExceptionCatch {
 
     @Pointcut("execution(" +
             "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
-            "com.homeward.webstore.VO.R " +
-            "com.homeward.webstore.controller.OrderController.*(..))")
+            "com.homeward.webstore.vo.R " +
+            "com.homeward.webstore.controller.CartController.*(..))")
     public void orderControllerMethod() {}
 
     @Pointcut("execution(" +

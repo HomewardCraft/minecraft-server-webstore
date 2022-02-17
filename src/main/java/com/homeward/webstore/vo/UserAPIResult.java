@@ -1,4 +1,4 @@
-package com.homeward.webstore.VO;
+package com.homeward.webstore.vo;
 
 import com.homeward.webstore.pojo.userapi.cart.Cart;
 import com.homeward.webstore.pojo.userapi.currency.Currency;

@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.common.utils.JwtUtil;
 import com.homeward.webstore.mapper.AuthenticationMapper;
-import com.homeward.webstore.mapper.OrderMapper;
+import com.homeward.webstore.mapper.CartMapper;
 import com.homeward.webstore.mapper.StoreMapper;
 import com.homeward.webstore.common.utils.RedisUtil;
-import com.homeward.webstore.pojo.packages.ItemsList;
+import com.homeward.webstore.pojo.merchandise.ItemsList;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -16,16 +16,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @SpringBootTest
@@ -41,7 +37,7 @@ public class TestSpring {
     private RestTemplate restTemplate;
 
     @Autowired
-    private OrderMapper orderMapper;
+    private CartMapper cartMapper;
 
     @Autowired
     private AuthenticationMapper authenticationMapper;
@@ -154,7 +150,7 @@ public class TestSpring {
     @Test
     @Disabled
     void testOrderMapper() {
-        Float totalPrice = orderMapper.getTotalPrice("619377de9ada41388ef93dbf9fe56320");
+        Float totalPrice = cartMapper.getTotalPrice("619377de9ada41388ef93dbf9fe56320");
         System.out.println(totalPrice);
     }
 
@@ -172,13 +168,13 @@ public class TestSpring {
     @Test
     @Disabled
     void testOrderUpdateCart() {
-        orderMapper.updateCart("619377de9ada41388ef93dbf9fe56320", 1000, 1);
+        cartMapper.updateCart("619377de9ada41388ef93dbf9fe56320", 1000, 1);
     }
 
     @Test
     @Disabled
     void testOrderDeleteCart() {
-        long l = orderMapper.deleteCart("619377de9ada41388ef93dbf9fe56320", 1001);
+        long l = cartMapper.deleteCart("619377de9ada41388ef93dbf9fe56320", 1001);
         System.out.println(l);
     }
 

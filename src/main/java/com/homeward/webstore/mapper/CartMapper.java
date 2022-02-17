@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 
 @Mapper
-public interface OrderMapper{
+public interface CartMapper {
     long insertCart(
             @Param("uuid") String uuid,
             @Param("itemId") Integer itemId,

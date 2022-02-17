@@ -1,4 +1,4 @@
-package com.homeward.webstore.VO;
+package com.homeward.webstore.vo;
 
 import com.homeward.webstore.common.enums.BaseEnum;
 import com.homeward.webstore.common.enums.StatusEnum;

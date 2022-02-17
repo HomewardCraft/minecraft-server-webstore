@@ -1,4 +1,4 @@
-package com.homeward.webstore.VO;
+package com.homeward.webstore.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
