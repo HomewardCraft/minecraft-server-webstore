@@ -47,6 +47,15 @@ Vue 框架 2.0 开发版本
     > RedisUtil - redis工具类  
     > SpringContextUtil - spring上下文工具类
 
+### config
+    > AspectConfig - 切面配置  
+    > BootStartConfig - 启动容器时一些初始化的配置  
+    > CustomWebMvcConfig - 拦截器的配置
+    > DefaultFastjsonConfig - fastjson配置  
+    > LogDirConfig - logback路径配置  
+    > MybatisPlusConfig - mybatisplus配置  
+    > RedisConfig - redis配置  
+    > SimpleBeanConfig - 一些简单bean的配置  
 
 
 
