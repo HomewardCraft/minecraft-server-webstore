@@ -50,6 +50,7 @@ Vue 框架 2.0 开发版本
     > SpringContextUtil - spring上下文工具类
 
 ### config
++ 
     > AspectConfig - 切面配置  
     > BootStartConfig - 启动容器时一些初始化的配置  
     > CustomWebMvcConfig - 拦截器的配置  
@@ -60,6 +61,7 @@ Vue 框架 2.0 开发版本
     > SimpleBeanConfig - 一些简单bean的配置
 
 ### controller
++  
     > CartController - 购物车的controller  
     > PlayerInfoController - 玩家信息的controller  
     > StoreController - 商品的controller
@@ -72,6 +74,7 @@ Vue 框架 2.0 开发版本
     > RedisExpirationListener - redis数据过期通知
 
 ### mapper
++ 
     > AuthenticationMapper - 用于校验数据的mapper  
     > CartMapper - 对购物车进行操作的mapper  
     > PlayerInfoMapper - 玩家信息操作的mapper  
@@ -98,6 +101,7 @@ Vue 框架 2.0 开发版本
     > StoreServiceImpl - 商品service的实现类
 
 ### vo
++ 
     > items - useless  
     > R - 目前在用的, 用于封装给前端的返回值  
     > UserAPIResult - useless
@@ -107,6 +111,7 @@ Vue 框架 2.0 开发版本
 ## classpath
 
 ### mappers
++ 
     > AuthenticationMapper.xml - 用作对数据校验操作  
     > CartMapper.xml - 用作对购物车的操作  
     > PlayerInfoMapper.xml - 用作对玩家信息的操作  
