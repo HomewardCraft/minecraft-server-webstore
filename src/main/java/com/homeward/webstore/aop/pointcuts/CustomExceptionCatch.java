@@ -9,4 +9,10 @@ public class CustomExceptionCatch {
             "com.homeward.webstore.VO.R " +
             "com.homeward.webstore.controller.OrderController.*(..))")
     public void orderControllerMethod() {}
+
+    @Pointcut("execution(" +
+            "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
+            "boolean " +
+            "com.homeward.webstore.handler.interceptor.LoginInterceptor.preHandle(..))")
+    public void jsonWebTokenMethod() {}
 }

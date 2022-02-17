@@ -98,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
         CartUtil.isSingleColumn(itemIdList);
 
         if (!itemIdList.contains(itemId)) {
-            throw new RuntimeException("no such cart found");
+            throw new RuntimeException("no such cart to update");
         }
 
         orderMapper.updateCart(uuid, itemId, itemAmount);
@@ -119,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
         CartUtil.isSingleColumn(itemIdList);
 
         if (!itemIdList.contains(itemId)) {
-            throw new RuntimeException("no such cart found");
+            throw new RuntimeException("no such cart to delete");
         }
 
         orderMapper.deleteCart(uuid, itemId);

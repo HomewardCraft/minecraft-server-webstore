@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum StatusEnum implements BaseEnum {
     //default
-    SUCCESS(200, "succeeded"),
-    FAILURE(500, "failed"),
+    SUCCESS(200, "success"),
+    FAILURE(500, "failure"),
 
     //cart
     FORM_DATA_INVALID(400, "form data key not found"),

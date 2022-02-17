@@ -50,18 +50,6 @@ public class CustomExceptionCatch {
                     log.error("database has an error");
                     return R.no(StatusEnum.DATABASE_ERROR);
                 }
-                case "token not found" -> {
-                    log.warn("token not found from {}", uuid);
-                    return R.no(StatusEnum.JWT_HAS_EXPIRED);
-                }
-                case "wrong prefix" -> {
-                    log.warn("{} has a token with wrong prefix", uuid);
-                    return R.no(StatusEnum.WRONG_PREFIX);
-                }
-                case "jwt has expired" -> {
-                    log.warn("{} has an expired token", uuid);
-                    return R.no(StatusEnum.JWT_HAS_EXPIRED);
-                }
                 default -> {
                     log.error("unexpected exception");
                     throwable.printStackTrace();
@@ -72,16 +60,22 @@ public class CustomExceptionCatch {
         return res;
     }
 
-//    @Around("execution(* com.homeward.webstore.common.utils.JwtUtil.*(*))")
-//    public R JWTException(ProceedingJoinPoint point) {
-//        Object res;
-//        try {
-//            res = point.proceed();
-//        } catch (Throwable e) {
-//            switch () {
-//
-//            }
-//        }
-//        return res;
-//    }
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionCatch.jsonWebTokenMethod()")
+    public boolean JWTException(ProceedingJoinPoint point) {
+        try {
+            point.proceed();
+        } catch (Throwable throwable) {
+            String errorMessage = throwable.getMessage();
+            switch (errorMessage) {
+                case "user not verified", "jwt has expired", "wrong prefix", "token not found" -> {
+                    return false;
+                }
+                default -> {
+                    throwable.printStackTrace();
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

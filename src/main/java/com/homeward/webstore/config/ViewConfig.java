@@ -24,10 +24,6 @@ public class ViewConfig implements WebMvcConfigurer {
                 "/**"
         );
         loginInterceptor.excludePathPatterns(
-                "/RedirectPage.html",
-                "/home",
-                "/emituofo.txt",
-                "/category/**",
                 "/name/*"
         );
     }
