@@ -8,7 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class JsonResult<T> {
+public class JsonResultUtil<T> {
     /** 成功 */
     public static final int SUCCESS = 200;
 
@@ -42,49 +42,49 @@ public class JsonResult<T> {
 
 
 
-    public static JsonResult build() {
-        return new JsonResult();
+    public static JsonResultUtil build() {
+        return new JsonResultUtil();
     }
-    public static JsonResult build(int code) {
-        return new JsonResult().code(code);
+    public static JsonResultUtil build(int code) {
+        return new JsonResultUtil().code(code);
     }
-    public static JsonResult build(int code, String msg) {
-        return new JsonResult<String>().code(code).msg(msg);
+    public static JsonResultUtil build(int code, String msg) {
+        return new JsonResultUtil<String>().code(code).msg(msg);
     }
-    public static <T> JsonResult<T> build(int code, T data) {
-        return new JsonResult<T>().code(code).data(data);
+    public static <T> JsonResultUtil<T> build(int code, T data) {
+        return new JsonResultUtil<T>().code(code).data(data);
     }
-    public static <T> JsonResult<T> build(int code, String msg, T data) {
-        return new JsonResult<T>().code(code).msg(msg).data(data);
+    public static <T> JsonResultUtil<T> build(int code, String msg, T data) {
+        return new JsonResultUtil<T>().code(code).msg(msg).data(data);
     }
 
-    public JsonResult<T> code(int code) {
+    public JsonResultUtil<T> code(int code) {
         this.code = code;
         return this;
     }
-    public JsonResult<T> msg(String msg) {
+    public JsonResultUtil<T> msg(String msg) {
         this.msg = msg;
         return this;
     }
-    public JsonResult<T> data(T data) {
+    public JsonResultUtil<T> data(T data) {
         this.data = data;
         return this;
     }
 
 
-    public static JsonResult ok() {
+    public static JsonResultUtil ok() {
         return build(SUCCESS);
     }
-    public static JsonResult ok(String msg) {
+    public static JsonResultUtil ok(String msg) {
         return build(SUCCESS, msg);
     }
-    public static <T> JsonResult<T> ok(T data) {
+    public static <T> JsonResultUtil<T> ok(T data) {
         return build(SUCCESS, data);
     }
-    public static JsonResult err() {
+    public static JsonResultUtil err() {
         return build(EXCEPTION);
     }
-    public static JsonResult err(String msg) {
+    public static JsonResultUtil err(String msg) {
         return build(EXCEPTION, msg);
     }
 
