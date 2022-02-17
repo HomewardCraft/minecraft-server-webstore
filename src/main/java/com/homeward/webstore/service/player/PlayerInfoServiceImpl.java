@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -83,6 +84,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      */
     @Override
     @JoinPointSymbol
+    @Transactional
     public void insertPlayer(String uuid, String name) {
         this.playerInfoMapper.insertPlayer(uuid, name);
     }
