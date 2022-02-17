@@ -44,4 +44,4 @@ mybatis-plus:
 #开启sql语句显示
 logging:
   level:
-    com.homeward.webstore.mapper: debug
+    com.homeward.webstore.mapper: info

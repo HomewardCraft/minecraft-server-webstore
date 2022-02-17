@@ -2,7 +2,7 @@ package com.homeward.webstore.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.VO.R;
-import com.homeward.webstore.common.enums.SystemConst;
+import com.homeward.webstore.common.consts.SystemConst;
 import com.homeward.webstore.common.utils.JwtUtil;
 import com.homeward.webstore.service.player.PlayerInfoService;
 import jakarta.servlet.http.HttpServletRequest;

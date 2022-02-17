@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<configuration>-->
-    <!--<statusListener class="com.homeward.webstore.config.LogBackListenerConfig"/>-->
+    <!--<statusListener class=""/>-->
 
     <!--<contextName>SpringBootLogbacK</contextName>-->
     <!--<property name="LOG_PATH" value="./" />-->

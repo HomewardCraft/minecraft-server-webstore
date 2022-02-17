@@ -1,4 +1,4 @@
-package com.homeward.webstore.common.enums;
+package com.homeward.webstore.common.consts;
 
 import lombok.AllArgsConstructor;
 

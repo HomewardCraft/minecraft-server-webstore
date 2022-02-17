@@ -1,7 +1,7 @@
 package com.homeward.webstore.VO;
 
-import com.homeward.webstore.common.enums.BaseEnums;
-import com.homeward.webstore.common.enums.StatusCode;
+import com.homeward.webstore.common.enums.BaseEnum;
+import com.homeward.webstore.common.enums.StatusEnum;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -29,42 +29,42 @@ public class R implements Serializable {
     }
 
     public static R ok() {
-        return resultSet(StatusCode.SUCCESS.getCode(), StatusCode.SUCCESS.getMessage(), null);
+        return resultSet(StatusEnum.SUCCESS.getStatusCode(), StatusEnum.SUCCESS.getStatusMessage(), null);
     }
 
     public static R ok(String message) {
-        return resultSet(StatusCode.SUCCESS.getCode(), message, null);
+        return resultSet(StatusEnum.SUCCESS.getStatusCode(), message, null);
     }
 
     public static R ok(Object data) {
-        return resultSet(StatusCode.SUCCESS.getCode(), StatusCode.SUCCESS.getMessage(), data);
+        return resultSet(StatusEnum.SUCCESS.getStatusCode(), StatusEnum.SUCCESS.getStatusMessage(), data);
     }
 
     public static R ok(String message, Object data) {
-        return resultSet(StatusCode.SUCCESS.getCode(), message, data);
+        return resultSet(StatusEnum.SUCCESS.getStatusCode(), message, data);
     }
 
     public static R no() {
-        return resultSet(StatusCode.FAIL.getCode(), StatusCode.FAIL.getMessage(), null);
+        return resultSet(StatusEnum.FAILURE.getStatusCode(), StatusEnum.FAILURE.getStatusMessage(), null);
     }
 
     public static R no(String message) {
-        return resultSet(StatusCode.FAIL.getCode(), message, null);
+        return resultSet(StatusEnum.FAILURE.getStatusCode(), message, null);
     }
 
     public static R no(Object data) {
-        return resultSet(StatusCode.FAIL.getCode(), StatusCode.FAIL.getMessage(), data);
+        return resultSet(StatusEnum.FAILURE.getStatusCode(), StatusEnum.FAILURE.getStatusMessage(), data);
     }
 
     public static R no(String message, Object data) {
-        return resultSet(StatusCode.FAIL.getCode(), message, data);
+        return resultSet(StatusEnum.FAILURE.getStatusCode(), message, data);
     }
 
     public static R no(Integer code, String message, Object data) {
         return resultSet(code, message, data);
     }
 
-    public static R no(BaseEnums baseEnums) {
-        return resultSet(baseEnums.getCode(), baseEnums.getMessage(), null);
+    public static R no(BaseEnum baseEnum) {
+        return resultSet(baseEnum.getStatusCode(), baseEnum.getStatusMessage(), null);
     }
 }

@@ -2,9 +2,8 @@ package com.homeward.webstore;
 
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.VO.R;
-import com.homeward.webstore.common.enums.StatusCode;
-import com.homeward.webstore.common.enums.SystemConst;
-import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.common.enums.StatusEnum;
+import com.homeward.webstore.common.consts.SystemConst;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -80,8 +79,8 @@ public class TestNormal {
 
     @Test
     void testEnumsStatus() {
-        Integer successStatusCode = StatusCode.SUCCESS.getCode();
-        String successStatusMessage = StatusCode.SUCCESS.getMessage();
+        Integer successStatusCode = StatusEnum.SUCCESS.getStatusCode();
+        String successStatusMessage = StatusEnum.SUCCESS.getStatusMessage();
         System.out.println(successStatusCode + successStatusMessage);
     }
 
@@ -119,6 +118,12 @@ public class TestNormal {
         System.out.println(Arrays.stream(strings).count());
         Integer integer = Integer.valueOf(strings[0]);
         System.out.println(integer);
+    }
+
+    @Test
+    void testException() {
+        String s = null;
+        s.hashCode();
     }
 }
 

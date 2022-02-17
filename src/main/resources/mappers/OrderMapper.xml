@@ -41,4 +41,8 @@
             AND item_id = #{itemId}
         </where>
     </delete>
+
+    <delete id="initializeCart" flushCache="true">
+        DELETE FROM minecraft_webstore.order
+    </delete>
 </mapper>

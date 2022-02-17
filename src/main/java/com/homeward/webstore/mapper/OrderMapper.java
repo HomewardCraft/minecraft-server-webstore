@@ -24,4 +24,6 @@ public interface OrderMapper{
     );
 
     Float getTotalPrice(String uuid);
+
+    long initializeCart();
 }

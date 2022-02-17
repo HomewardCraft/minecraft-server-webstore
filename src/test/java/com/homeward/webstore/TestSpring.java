@@ -14,9 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -180,6 +183,7 @@ public class TestSpring {
     }
 
     @Test
+    @Disabled
     void testAuthMapperIsSingleCart() {
         List<Integer> integerList = authenticationMapper.itemIdList("619377de9ada41388ef93dbf9fe56320", 1000);
         if (integerList.contains(1000)) {
@@ -187,6 +191,16 @@ public class TestSpring {
             return;
         }
         System.out.println("0");
+    }
+
+    @Test
+    @Disabled
+    void testApplicationContext() {
+//        String applicationName = applicationContext.getApplicationName();
+//        System.out.println(applicationName);
+        ApplicationHome applicationHome = new ApplicationHome();
+        File dir = applicationHome.getDir();
+        System.out.println(dir.getPath());
     }
 }
 

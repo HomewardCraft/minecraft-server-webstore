@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Aspect
 @Component
-public class DatabaseLog {
+public class PlayerInformationLog {
 
     @AfterReturning(
-            pointcut = "com.homeward.webstore.aop.namedpointcuts.DatabaseLogPoint.OnUserInfoAddedInDataBase(uuid, name, legacy)",
+            pointcut = "com.homeward.webstore.aop.pointcuts.PlayerInformationLog.OnUserInfoAddedInDataBase(uuid, name, legacy)",
             argNames = "uuid, name, legacy"
     )
     public void userAddedInDataBaseLog(String uuid, String name, Boolean legacy) {

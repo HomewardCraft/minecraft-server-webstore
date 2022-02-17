@@ -10,7 +10,7 @@ target/
 *.iml
 *.ipr
 
-/log
+/logs
 
 ### web
 /src/main/resources/static/webstore/node_modules/

@@ -1,7 +1,9 @@
 package com.homeward.webstore.controller;
 
 import com.homeward.webstore.VO.R;
+import com.homeward.webstore.aop.annotations.JoinPointSymbol;
 import com.homeward.webstore.service.order.OrderService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -16,20 +18,23 @@ public class OrderController {
     }
 
     @PostMapping("/insert/{itemId}")
-    public R insert(@PathVariable("itemId") Integer id) {
-        orderService.insertCart(id);
+    @JoinPointSymbol
+    public R insert(@PathVariable("itemId") Integer id, HttpServletRequest request) {
+        orderService.insertCart(id, request);
         return R.ok();
     }
 
     @PostMapping("/update")
-    public R update(@RequestParam Map<String, String> map) {
-        orderService.updateCart(map);
+    @JoinPointSymbol
+    public R update(@RequestParam Map<String, String> map, HttpServletRequest request) {
+        orderService.updateCart(map, request);
         return R.ok();
     }
 
     @PostMapping("/delete/{itemId}")
-    public R delete(@PathVariable("itemId") Integer id) {
-        orderService.deleteCart(id);
+    @JoinPointSymbol
+    public R delete(@PathVariable("itemId") Integer id, HttpServletRequest request) {
+        orderService.deleteCart(id, request);
         return R.ok();
     }
 

@@ -1,7 +1,6 @@
 package com.homeward.webstore.common.utils;
 
-import com.homeward.webstore.common.enums.SystemConst;
-import com.homeward.webstore.common.exceptions.UnLoginException;
+import com.homeward.webstore.common.consts.SystemConst;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -30,7 +29,7 @@ public class JwtUtil {
     /**
      * 刷新时间（单位：秒）
      */
-    private static final long REFRESH_TIME = 1 * 24 * 60 * 60;
+    private static final long REFRESH_TIME = 7 * 24 * 60 * 60;
 
     /**
      * 存入请求头的key
@@ -50,8 +49,8 @@ public class JwtUtil {
     /**
      * 生成用户token,设置token超时时间
      *
-     * @param userId
-     * @return
+     * @param userId user id
+     * @return jwt
      */
     public static String createToken(String userId) {
         Map<String, Object> map = new HashMap<>();
@@ -65,7 +64,7 @@ public class JwtUtil {
                 // 可以将基本信息放到claims中
                 .withClaim(USERID, userId)
                 // 超时设置,设置过期的日期
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE_TIME * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE_TIME))
                 // 签发时间
                 .withIssuedAt(new Date())
                 // SECRET加密
@@ -75,43 +74,37 @@ public class JwtUtil {
 
     /**
      * 获取用户userId
-     *
-     * @return
+     * @return user id
      */
     public static String getUserId() {
         HttpServletRequest request = SpringContextUtil.getHttpServletRequest();
-        // 从请求头部中获取token信息
+
         String token = request.getHeader(HEADER_KEY);
         if (StringUtils.isBlank(token)) {
-            return null;
+            throw new RuntimeException("token not found");
         }
         if (!token.startsWith(PREFIX)) {
-//            throw new UnLoginException("错误的令牌信息，请重新登录！");
-            return "redirect:/RedirectPage.html";
+            throw new RuntimeException("wrong prefix");
         }
         token = token.replace(PREFIX, "");
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
-            if (null == jwt) {
-//                throw new UnLoginException("登录信息已过期，请重新登录！");
-                return "redirect:/RedirectPage.html";
+            if (jwt == null) {
+                throw new RuntimeException("jwt has expired");
             }
-            // 用户id
             return jwt.getClaim(USERID).asString();
         } catch (Exception e) {
-            log.error("token验证异常，{}", e.getMessage());
+            log.error("token verified error, {}", e.getMessage());
         }
-//        throw new UnLoginException("登录信息已过期，请重新登录！");
-        return "redirect:/RedirectPage.html";
+        throw new RuntimeException("jwt has expired");
     }
 
 
     /**
-     * 检验token
-     *
-     * @return
+     * 校验token
+     * @return boolean
      */
     public static boolean verity() {
         HttpServletRequest request = SpringContextUtil.getHttpServletRequest();
@@ -121,7 +114,7 @@ public class JwtUtil {
             return false;
         }
         if (!token.startsWith(PREFIX)) {
-            throw new UnLoginException("错误的令牌信息，请重新登录！");
+            throw new RuntimeException("wrong prefix");
         }
         token = token.replace(PREFIX, "");
         try {
@@ -133,15 +126,15 @@ public class JwtUtil {
             }
             // 判断过期时间
             long time = (jwt.getExpiresAt().getTime() - System.currentTimeMillis());
-            // 有效期只有10分钟，需要刷新token了
-            if ((REFRESH_TIME * 1000) > time) {
+            // 有效期只有不到60分钟，需要刷新token了
+            if ((REFRESH_TIME - ((7 * 24 * 60 * 60) - (60 * 60))) > time) {
                 String newToken = createToken(jwt.getClaim(USERID).asString());
                 // 将新的token放入响应请求头中
                 SpringContextUtil.getHttpServletResponse().setHeader(HEADER_KEY, newToken);
             }
             return true;
         } catch (Exception e) {
-            log.error("token验证异常，{}", e.getMessage());
+            log.error("token verified error, {}", e.getMessage());
         }
         return false;
     }
