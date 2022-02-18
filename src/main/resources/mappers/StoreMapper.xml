@@ -4,30 +4,42 @@
 
 <mapper namespace="com.homeward.webstore.mapper.StoreMapper">
     <cache/>
-    <resultMap id="store" type="ItemsList" autoMapping="true">
-        <id column="i_id" property="id"/>
-        <collection property="onSale" ofType="OnSale">
-            <result column="s_is_onsale" property="isOnsale"/>
-            <result column="s_surplus_time" property="surplusTime"/>
-            <result column="s_onsale_percent" property="onsalePercent"/>
+    <resultMap id="itemInfoBO" type="ItemInfoBO" autoMapping="true">
+        <collection property="itemBasicInfo" ofType="ItemBasicInfo">
+            <id column="i1_id" property="id"/>
+            <result column="i1_name" property="name"/>
+            <result column="i1_image_address" property="imageAddress"/>
+            <result column="i1_price" property="price"/>
+        </collection>
+        <collection property="itemSaleInfo" ofType="ItemSaleInfo">
+            <result column="i1_is_onsale" property="onsaleCondition"/>
+            <result column="i1_surplus_time" property="surplusTime"/>
+            <result column="i1_onsale_percent" property="onsalePercent"/>
         </collection>
     </resultMap>
-    <select id="getStoreItems" resultMap="store" useCache="true">
+    <select id="getStoreItemsList" resultMap="itemInfoBO" useCache="true">
         SELECT
-        i.id i_id, i.name, i.image, i.price,
-        s.is_onsale s_is_onsale, s.surplus_time s_surplus_time, s.onsale_percent s_onsale_percent
-        FROM items i
-        LEFT JOIN items s
-        ON i.id = s.id
-        <where>
-            i.type = #{items}
-        </where>
+            i1.id i1_id,
+            i1.name i1_name,
+            i1.image_address i1_image_address,
+            i1.is_onsale i1_is_onsale,
+            i1.surplus_time i1_surplus_time,
+            i1.onsale_percent i1_onsale_percent,
+            i1.price i1_price
+        FROM
+            item_info AS i1,
+            (SELECT
+                id
+            FROM
+                item_info
+            WHERE type = #{items}) AS i2
+        WHERE i1.id = i2.id
     </select>
 
 
     <select id="getItemName" resultType="String" useCache="true">
         SELECT name
-        FROM items
+        FROM item_info
         <where>
             id = #{itemId}
         </where>

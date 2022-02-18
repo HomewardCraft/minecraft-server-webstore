@@ -4,26 +4,23 @@
 
 <mapper namespace="com.homeward.webstore.mapper.PlayerInfoMapper">
     <cache/>
-    <resultMap id="information" type="PlayerInfo" autoMapping="true">
-        <id column="a_uuid" property="uuid"/>
-        <result column="a_name" property="name"/>
+    <resultMap id="playerInfoBO" type="PlayerInfoBO" autoMapping="true">
+        <collection property="playerBasicInfo" ofType="PlayerBasicInfo">
+            <id column="a_uuid" property="uuid"/>
+            <result column="a_name" property="name"/>
+        </collection>
     </resultMap>
-    <select id="selectPlayer" resultMap="information" useCache="true">
+    <select id="selectPlayer" resultMap="playerInfoBO" useCache="true">
         SELECT
-        a.uuid a_uuid, a.name a_name
+            a.uuid a_uuid,
+            a.name a_name
         FROM player_info a
-        <where>
-            <if test="uuid != null and uuid != ''">
-                a.uuid = #{uuid}
-            </if>
-        </where>
+        WHERE a.uuid = #{uuid}
     </select>
 
     <insert id="insertPlayer" flushCache="true">
         INSERT INTO
-        player_info(uuid, name)
-        <if test="uuid != null and uuid !='' and name != null and name != ''">
-            VALUES(#{uuid}, #{name})
-        </if>
+            player_info(uuid, name, create_time)
+            VALUES(#{uuid}, #{name}, #{createTime})
     </insert>
 </mapper>

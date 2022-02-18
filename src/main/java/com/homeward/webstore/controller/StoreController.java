@@ -1,11 +1,12 @@
 package com.homeward.webstore.controller;
 
-import com.homeward.webstore.vo.R;
-import com.homeward.webstore.pojo.merchandise.ItemsList;
+import com.homeward.webstore.java.bean.BO.ItemInfoBO;
+import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.service.store.StoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 //宝箱列表的Controller
@@ -29,7 +30,7 @@ public class StoreController {
      */
     @GetMapping("/{items}")
     public R getSpecificItems(@PathVariable("items") String type) {
-        List<ItemsList> itemsLists = storeService.getSpecificItems(type);
+        List<ItemInfoBO> itemsLists = storeService.getSpecificItems(type);
         return R.ok(itemsLists);
     }
 

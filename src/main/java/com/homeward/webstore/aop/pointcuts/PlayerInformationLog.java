@@ -9,9 +9,9 @@ public class PlayerInformationLog {
             value = "execution(" +
                     "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
                     "void " +
-                    "com.homeward.webstore.mapper.PlayerInfoMapper.insertPlayer(String, String)) && " +
-                    "args(uuid, name))",
-            argNames = "uuid, name"
+                    "com.homeward.webstore.mapper.PlayerInfoMapper.insertPlayer(..)) && " +
+                    "args(uuid, name, createTime))",
+            argNames = "uuid, name, createTime"
     )
-    public void OnUserInfoAddedInDataBase(String uuid, String name) {}
+    public void OnUserInfoAddedInDataBase(String uuid, String name, String createTime) {}
 }

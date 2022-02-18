@@ -1,7 +1,7 @@
 package com.homeward.webstore.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.homeward.webstore.vo.R;
+import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.common.consts.SystemConst;
 import com.homeward.webstore.common.utils.JwtUtil;
 import com.homeward.webstore.service.player.PlayerInfoService;

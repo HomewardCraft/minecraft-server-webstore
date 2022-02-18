@@ -1,7 +1,7 @@
 package com.homeward.webstore.service.store;
 
+import com.homeward.webstore.java.bean.BO.ItemInfoBO;
 import com.homeward.webstore.mapper.StoreMapper;
-import com.homeward.webstore.pojo.merchandise.ItemsList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<ItemsList> getSpecificItems(String type) {
-        return storeMapper.getStoreItems(type);
+    public List<ItemInfoBO> getSpecificItems(String type) {
+        return storeMapper.getStoreItemsList(type);
     }
 }

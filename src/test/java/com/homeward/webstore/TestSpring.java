@@ -3,11 +3,11 @@ package com.homeward.webstore;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.java.bean.BO.ItemInfoBO;
 import com.homeward.webstore.mapper.AuthenticationMapper;
 import com.homeward.webstore.mapper.CartMapper;
 import com.homeward.webstore.mapper.StoreMapper;
 import com.homeward.webstore.common.utils.RedisUtil;
-import com.homeward.webstore.pojo.merchandise.ItemsList;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -143,7 +143,7 @@ public class TestSpring {
     @Test
     @Disabled
     void testStoreMapper() {
-        List<ItemsList> itemsLists = storeMapper.getStoreItems("crates");
+        List<ItemInfoBO> itemsLists = storeMapper.getStoreItemsList("crates");
         itemsLists.forEach(System.out::println);
     }
 

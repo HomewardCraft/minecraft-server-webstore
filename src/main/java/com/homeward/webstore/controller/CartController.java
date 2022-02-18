@@ -1,6 +1,6 @@
 package com.homeward.webstore.controller;
 
-import com.homeward.webstore.vo.R;
+import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
 import com.homeward.webstore.service.cart.CartService;
 import jakarta.servlet.http.HttpServletRequest;

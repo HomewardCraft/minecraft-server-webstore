@@ -1,6 +1,6 @@
 package com.homeward.webstore.aop.advice;
 
-import com.homeward.webstore.vo.R;
+import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.common.enums.StatusEnum;
 import com.homeward.webstore.common.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;

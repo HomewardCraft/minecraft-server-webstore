@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
 import com.homeward.webstore.common.enums.StatusEnum;
 import com.homeward.webstore.common.utils.CommonUtil;
+import com.homeward.webstore.java.bean.BO.PlayerInfoBO;
 import com.homeward.webstore.mapper.PlayerInfoMapper;
-import com.homeward.webstore.pojo.playerinfo.PlayerInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -13,6 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 @Service
@@ -55,8 +58,8 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
         JSONObject playerProfile = JSONObject.parseObject(ProfileString);
 
         // 查询数据库是否有数据, 没有则录入
-        PlayerInfo playerInfo = this.selectPlayer(uuid);
-        if (playerInfo == null) {
+        PlayerInfoBO playerInfoBO = this.selectPlayer(uuid);
+        if (playerInfoBO == null) {
             this.insertPlayer(uuid, name);
         }
 
@@ -70,7 +73,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * */
     @Override
     // @Cacheable(value = "SelectItemsInformation")
-    public PlayerInfo selectPlayer(String uuid){
+    public PlayerInfoBO selectPlayer(String uuid){
         return this.playerInfoMapper.selectPlayer(uuid);
     }
 
@@ -82,7 +85,9 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     @Override
     @Transactional
     public void insertPlayer(String uuid, String name) {
-        this.playerInfoMapper.insertPlayer(uuid, name);
+        String createTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                .format(Calendar.getInstance().getTime());
+        this.playerInfoMapper.insertPlayer(uuid, name, createTime);
     }
 
 

@@ -1,4 +1,4 @@
-package com.homeward.webstore.vo;
+package com.homeward.webstore.java.bean.VO;
 
 import com.homeward.webstore.common.enums.BaseEnum;
 import com.homeward.webstore.common.enums.StatusEnum;

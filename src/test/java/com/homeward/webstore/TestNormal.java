@@ -1,7 +1,7 @@
 package com.homeward.webstore;
 
 import com.alibaba.fastjson.JSONObject;
-import com.homeward.webstore.vo.R;
+import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.common.enums.StatusEnum;
 import com.homeward.webstore.common.consts.SystemConst;
 import org.junit.jupiter.api.Disabled;

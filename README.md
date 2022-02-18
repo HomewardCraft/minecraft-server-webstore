@@ -19,6 +19,10 @@ Vue 框架 2.0 开发版本
 
 `<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>`
 
+PO 从数据库表中查出来的最原始的数据, 封装到BO中  
+BO 封装了PO, 由业务层传输到控制器  
+VO 将BO传输到view
+
 # 模块
 
 ## com.homeward.webstore

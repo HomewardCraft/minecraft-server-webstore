@@ -15,10 +15,10 @@ import java.util.Calendar;
 public class PlayerInformationLog {
 
     @AfterReturning(
-            pointcut = "com.homeward.webstore.aop.pointcuts.PlayerInformationLog.OnUserInfoAddedInDataBase(uuid, name)",
-            argNames = "uuid, name"
+            pointcut = "com.homeward.webstore.aop.pointcuts.PlayerInformationLog.OnUserInfoAddedInDataBase(uuid, name, createTime)",
+            argNames = "uuid, name, createTime"
     )
-    public void userAddedInDataBaseLog(String uuid, String name) {
+    public void userAddedInDataBaseLog(String uuid, String name, String createTime) {
         String tableName = "player_info";
         String date = new SimpleDateFormat("yyyy年MM月dd日HH点mm分ss.SSS秒")
                 .format(Calendar.getInstance().getTime());
