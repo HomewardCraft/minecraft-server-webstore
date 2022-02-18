@@ -28,10 +28,9 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
 
 
     /**
-     * add player to database (if player haven't signed up)
-     * and return player json formatted profile
-     * @param playerId player string name
-     * @return player profile information
+     * 返回玩家的详细信息, 如果玩家不存在于表中, 将添加
+     * @param playerId
+     * @return 玩家的profile
      */
     @Override
     @JoinPointSymbol
@@ -67,7 +66,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
 
     /**
      * @param uuid
-     * @return 玩家的基础信息
+     * @return 玩家的uuid与name
      * */
     @Override
     // @Cacheable(value = "SelectItemsInformation")
@@ -89,7 +88,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
 
     /**
      * @param playerId
-     * @return 玩家uuid与name(基础信息)
+     * @return 玩家uuid与name(从mojang)
      */
     private String getPlayerNameAndUUID(String playerId) {
         String getInfo = String.format("https://api.mojang.com/users/profiles/minecraft/%s", playerId);
@@ -99,7 +98,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
 
     /**
      * @param playerUUID
-     * @return 玩家的详细信息
+     * @return 玩家的profile
      */
     private String getPlayerProfile(String playerUUID) {
         String getProfile = String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", playerUUID);
