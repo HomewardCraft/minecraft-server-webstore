@@ -2,6 +2,9 @@ package com.homeward.webstore.common.enums;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * 返回给前端的状态的枚举类
+ */
 @AllArgsConstructor
 public enum StatusEnum implements BaseEnum {
     // default
@@ -10,7 +13,7 @@ public enum StatusEnum implements BaseEnum {
     ILLEGAL_CHAR(403, "illegal char found"),
 
     // player
-    PLAYER_NOT_FOUND(500, "player cannot be found from mojang"),
+    PLAYER_NOT_FOUND(500, "player cannot be found"),
 
     // cart
     FORM_DATA_INVALID(400, "form data key not found"),
@@ -37,12 +40,12 @@ public enum StatusEnum implements BaseEnum {
     private final String statusMessage;
 
     @Override
-    public Integer getStatusCode() {
-        return statusCode;
+    public Integer getCode() {
+        return this.statusCode;
     }
 
     @Override
-    public String getStatusMessage() {
-        return statusMessage;
+    public String getMessage() {
+        return this.statusMessage;
     }
 }

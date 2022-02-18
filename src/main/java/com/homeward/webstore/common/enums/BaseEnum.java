@@ -1,6 +1,9 @@
 package com.homeward.webstore.common.enums;
 
 public interface BaseEnum {
-    Integer getStatusCode();
-    String getStatusMessage();
+    default Integer getCode() {
+        return null;
+    }
+
+    String getMessage();
 }
