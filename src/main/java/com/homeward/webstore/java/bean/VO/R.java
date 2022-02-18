@@ -29,35 +29,35 @@ public class R implements Serializable {
     }
 
     public static R ok() {
-        return resultSet(StatusEnum.SUCCESS.getStatusCode(), StatusEnum.SUCCESS.getStatusMessage(), null);
+        return resultSet(StatusEnum.SUCCESS.getCode(), StatusEnum.SUCCESS.getMessage(), null);
     }
 
     public static R ok(String message) {
-        return resultSet(StatusEnum.SUCCESS.getStatusCode(), message, null);
+        return resultSet(StatusEnum.SUCCESS.getCode(), message, null);
     }
 
     public static R ok(Object data) {
-        return resultSet(StatusEnum.SUCCESS.getStatusCode(), StatusEnum.SUCCESS.getStatusMessage(), data);
+        return resultSet(StatusEnum.SUCCESS.getCode(), StatusEnum.SUCCESS.getMessage(), data);
     }
 
     public static R ok(String message, Object data) {
-        return resultSet(StatusEnum.SUCCESS.getStatusCode(), message, data);
+        return resultSet(StatusEnum.SUCCESS.getCode(), message, data);
     }
 
     public static R no() {
-        return resultSet(StatusEnum.FAILURE.getStatusCode(), StatusEnum.FAILURE.getStatusMessage(), null);
+        return resultSet(StatusEnum.FAILURE.getCode(), StatusEnum.FAILURE.getMessage(), null);
     }
 
     public static R no(String message) {
-        return resultSet(StatusEnum.FAILURE.getStatusCode(), message, null);
+        return resultSet(StatusEnum.FAILURE.getCode(), message, null);
     }
 
     public static R no(Object data) {
-        return resultSet(StatusEnum.FAILURE.getStatusCode(), StatusEnum.FAILURE.getStatusMessage(), data);
+        return resultSet(StatusEnum.FAILURE.getCode(), StatusEnum.FAILURE.getMessage(), data);
     }
 
     public static R no(String message, Object data) {
-        return resultSet(StatusEnum.FAILURE.getStatusCode(), message, data);
+        return resultSet(StatusEnum.FAILURE.getCode(), message, data);
     }
 
     public static R no(Integer code, String message, Object data) {
@@ -65,6 +65,6 @@ public class R implements Serializable {
     }
 
     public static R no(BaseEnum baseEnum) {
-        return resultSet(baseEnum.getStatusCode(), baseEnum.getStatusMessage(), null);
+        return resultSet(baseEnum.getCode(), baseEnum.getMessage(), null);
     }
 }

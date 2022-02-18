@@ -15,4 +15,10 @@ public class CustomExceptionCatch {
             "boolean " +
             "com.homeward.webstore.handler.interceptor.LoginInterceptor.preHandle(..))")
     public void jsonWebTokenMethod() {}
+
+    @Pointcut("execution(" +
+            "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
+            "com.homeward.webstore.java.bean.VO.R " +
+            "com.homeward.webstore.controller.PlayerInfoController.getPlayerInfo(..))")
+    public void playerControllerMethod() {}
 }

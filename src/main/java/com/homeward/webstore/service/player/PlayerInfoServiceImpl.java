@@ -2,20 +2,15 @@ package com.homeward.webstore.service.player;
 
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
+import com.homeward.webstore.common.enums.DateEnum;
 import com.homeward.webstore.common.enums.StatusEnum;
 import com.homeward.webstore.common.utils.CommonUtil;
 import com.homeward.webstore.java.bean.BO.PlayerInfoBO;
 import com.homeward.webstore.mapper.PlayerInfoMapper;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 
 @Service
@@ -37,12 +32,12 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      */
     @Override
     @JoinPointSymbol
-    public JSONObject getPlayerProfile(String playerId, HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
+    public JSONObject getPlayerProfile(String playerId) {
         if (StringUtils.isBlank(playerId)) {
             CommonUtil.throwRuntimeException(StatusEnum.ILLEGAL_CHAR);
         }
 
-        String originMessage = this.getPlayerNameAndUUID(playerId);
+        String originMessage = this.getPlayerBasicInfo(playerId);
 
         //名称是否可用
         if (StringUtils.isBlank(originMessage) || originMessage.contains("error")) {
@@ -53,7 +48,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
 
         String uuid = ObjectedMessage.getString("id");
         String name = ObjectedMessage.getString("name");
-        String ProfileString = this.getPlayerProfile(uuid);
+        String ProfileString = this.getPlayerDetails(uuid);
 
         JSONObject playerProfile = JSONObject.parseObject(ProfileString);
 
@@ -72,7 +67,6 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * @return 玩家的uuid与name
      * */
     @Override
-    // @Cacheable(value = "SelectItemsInformation")
     public PlayerInfoBO selectPlayer(String uuid){
         return this.playerInfoMapper.selectPlayer(uuid);
     }
@@ -85,8 +79,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     @Override
     @Transactional
     public void insertPlayer(String uuid, String name) {
-        String createTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                .format(Calendar.getInstance().getTime());
+        String createTime = CommonUtil.currentFormattedDate(DateEnum.yyyyMMddHHmmss);
         this.playerInfoMapper.insertPlayer(uuid, name, createTime);
     }
 
@@ -95,7 +88,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * @param playerId
      * @return 玩家uuid与name(从mojang)
      */
-    private String getPlayerNameAndUUID(String playerId) {
+    private String getPlayerBasicInfo(String playerId) {
         String getInfo = String.format("https://api.mojang.com/users/profiles/minecraft/%s", playerId);
         return this.restTemplate.getForObject(getInfo, String.class);
     }
@@ -105,7 +98,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * @param playerUUID
      * @return 玩家的profile
      */
-    private String getPlayerProfile(String playerUUID) {
+    private String getPlayerDetails(String playerUUID) {
         String getProfile = String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", playerUUID);
         return this.restTemplate.getForObject(getProfile, String.class);
     }

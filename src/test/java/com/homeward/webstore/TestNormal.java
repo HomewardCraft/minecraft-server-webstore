@@ -80,8 +80,8 @@ public class TestNormal {
 
     @Test
     void testEnumsStatus() {
-        Integer successStatusCode = StatusEnum.SUCCESS.getStatusCode();
-        String successStatusMessage = StatusEnum.SUCCESS.getStatusMessage();
+        Integer successStatusCode = StatusEnum.SUCCESS.getCode();
+        String successStatusMessage = StatusEnum.SUCCESS.getMessage();
         System.out.println(successStatusCode + successStatusMessage);
     }
 

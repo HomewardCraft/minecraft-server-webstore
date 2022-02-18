@@ -1,5 +1,6 @@
 package com.homeward.webstore.aop.advice;
 
+import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.common.enums.StatusEnum;
 import com.homeward.webstore.common.utils.JwtUtil;
@@ -9,6 +10,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+/**
+ * 异常的切面处理
+ */
 @Slf4j
 @Component
 @Aspect
@@ -77,5 +81,29 @@ public class CustomExceptionCatch {
             }
         }
         return true;
+    }
+
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionCatch.playerControllerMethod()")
+    public R PlayerInfoException(ProceedingJoinPoint point) {
+        R res;
+        try {
+            res = (R) point.proceed();
+        } catch (Throwable throwable) {
+            String errorMessage = throwable.getMessage();
+            switch (errorMessage) {
+                case "illegal char found" -> {
+                    return R.no(StatusEnum.ILLEGAL_CHAR);
+                }
+                case "player cannot be found" -> {
+                    return R.no(StatusEnum.PLAYER_NOT_FOUND);
+                }
+                default -> {
+                    log.error("unexpected exception");
+                    throwable.printStackTrace();
+                    return R.no(StatusEnum.UNEXPECTED_EXCEPTION);
+                }
+            }
+        }
+        return R.ok(res);
     }
 }
