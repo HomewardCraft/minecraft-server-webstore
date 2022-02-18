@@ -1,11 +1,11 @@
 package com.homeward.webstore.common.utils;
 
-import com.homeward.webstore.aop.annotations.JoinPointSymbol;
 import com.homeward.webstore.common.consts.SystemConst;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.homeward.webstore.common.enums.StatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -82,10 +82,10 @@ public class JwtUtil {
 
         String token = request.getHeader(HEADER_KEY);
         if (StringUtils.isBlank(token)) {
-            throw new RuntimeException("token not found");
+            CommonUtil.throwRuntimeException(StatusEnum.JWT_NOT_FOUND);
         }
         if (!token.startsWith(PREFIX)) {
-            throw new RuntimeException("wrong prefix");
+            CommonUtil.throwRuntimeException(StatusEnum.WRONG_PREFIX);
         }
         token = token.replace(PREFIX, "");
         try {
@@ -93,13 +93,14 @@ public class JwtUtil {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
             if (jwt == null) {
-                throw new RuntimeException("jwt has expired");
+                CommonUtil.throwRuntimeException(StatusEnum.JWT_HAS_EXPIRED);
             }
             return jwt.getClaim(USERID).asString();
         } catch (Exception e) {
             log.error("token verified error, {}", e.getMessage());
         }
-        throw new RuntimeException("jwt has expired");
+        CommonUtil.throwRuntimeException(StatusEnum.JWT_HAS_EXPIRED);
+        return null;
     }
 
 
@@ -115,7 +116,7 @@ public class JwtUtil {
             return false;
         }
         if (!token.startsWith(PREFIX)) {
-            throw new RuntimeException("wrong prefix");
+            CommonUtil.throwRuntimeException(StatusEnum.WRONG_PREFIX);
         }
         token = token.replace(PREFIX, "");
         try {
