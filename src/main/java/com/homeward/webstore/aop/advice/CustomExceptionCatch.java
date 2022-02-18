@@ -28,7 +28,7 @@ public class CustomExceptionCatch {
                 }
                 case "duplicated cart found" -> {
                     log.warn("{} have duplicated cart", uuid);
-                    return R.no(StatusEnum.COLUMN_DUPLICATE);
+                    return R.no(StatusEnum.DUPLICATE_CART_FOUND);
                 }
                 case "no such cart to delete" -> {
                     log.warn("{} need a cart to delete", uuid);
@@ -36,7 +36,7 @@ public class CustomExceptionCatch {
                 }
                 case "item not found" -> {
                     log.warn("{} query a void item", uuid);
-                    return R.no(StatusEnum.ITEM_NOT_EXIST);
+                    return R.no(StatusEnum.ITEM_NOT_FOUND);
                 }
                 case "form data key not found" -> {
                     log.warn("{} give an invalid form data", uuid);
@@ -44,7 +44,7 @@ public class CustomExceptionCatch {
                 }
                 case "item amount out of bounds" -> {
                     log.warn("{} give a invalid amount", uuid);
-                    return R.no(StatusEnum.VALUE_AMOUNT_INVALID);
+                    return R.no(StatusEnum.ITEM_AMOUNT_INVALID);
                 }
                 case "database error" -> {
                     log.error("database has an error");

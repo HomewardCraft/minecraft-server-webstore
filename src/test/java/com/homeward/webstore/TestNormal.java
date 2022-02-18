@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TestNormal {
@@ -124,6 +125,14 @@ public class TestNormal {
     void testException() {
         String s = null;
         s.hashCode();
+    }
+
+    @Test
+    void testDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日HH点mm分ss.SSS秒");
+        Calendar calendar = Calendar.getInstance();
+        String format = dateFormat.format(calendar.getTime());
+        System.out.println(format);
     }
 }
 

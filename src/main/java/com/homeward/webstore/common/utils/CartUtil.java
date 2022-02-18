@@ -13,13 +13,13 @@ import java.util.Set;
 public class CartUtil {
 
     /**
-     * 判断cart的数据库是不是烂掉了
-     *
-     * @param list list
-     * @param <T>  Class
+     * 判断cart的表是不是烂掉了
+     * @param list
+     * @param <T>
      */
     public static <T> void isSingleColumn(List<T> list) {
         Set<T> set = new HashSet<>(list);
+        // 数据库寄啦
         if (set.size() != list.size()) {
             throw new RuntimeException("database error");
         }
