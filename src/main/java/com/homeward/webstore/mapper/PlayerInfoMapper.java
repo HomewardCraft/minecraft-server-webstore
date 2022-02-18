@@ -10,7 +10,7 @@ public interface PlayerInfoMapper {
     PlayerInfoBO selectPlayer(String uuid);
 
     @JoinPointSymbol
-    void insertPlayer(
+    Long insertPlayer(
             @Param("uuid") String uuid,
             @Param("name") String name,
             @Param("createTime") String createTime

@@ -80,7 +80,10 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     @Transactional
     public void insertPlayer(String uuid, String name) {
         String createTime = CommonUtil.currentFormattedDate(DateEnum.yyyyMMddHHmmss);
-        this.playerInfoMapper.insertPlayer(uuid, name, createTime);
+        Long rowAffected = this.playerInfoMapper.insertPlayer(uuid, name, createTime);
+        if (rowAffected == 0) {
+            CommonUtil.throwRuntimeException(StatusEnum.DATABASE_ERROR);
+        }
     }
 
 

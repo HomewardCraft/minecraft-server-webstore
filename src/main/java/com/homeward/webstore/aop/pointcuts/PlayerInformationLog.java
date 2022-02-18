@@ -8,9 +8,9 @@ public class PlayerInformationLog {
     @Pointcut(
             value = "execution(" +
                     "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
-                    "void " +
+                    "Long " +
                     "com.homeward.webstore.mapper.PlayerInfoMapper.insertPlayer(..)) && " +
-                    "args(uuid, name, createTime))",
+                    "args(uuid, name, createTime)",
             argNames = "uuid, name, createTime"
     )
     public void OnUserInfoAddedInDataBase(String uuid, String name, String createTime) {}
