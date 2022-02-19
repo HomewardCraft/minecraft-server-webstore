@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PlayerController {
-    private final PlayerService playerInfo;
+    private final PlayerService playerService;
 
-    public PlayerController(PlayerService playerInfo) {
-        this.playerInfo = playerInfo;
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @GetMapping("/name/{id}")
     @JoinPointSymbol
-    public R getPlayerProfile(@PathVariable("id") String playerId, HttpServletResponse response) {
-        JSONObject playerProfile = playerInfo.getPlayerProfile(playerId);
+    public R getPlayerProfile(@PathVariable("id") String playerName, HttpServletResponse response) {
+        JSONObject playerProfile = playerService.getPlayerProfile(playerName);
         String uuid = playerProfile.getString("id");
 
-        String playerUUIdEncrypted = JwtUtils.createToken(uuid);
+        String playerEncryptedUUId = JwtUtils.createToken(uuid);
         response.setHeader(SystemConst.AUTHORIZATION_NAME.getInformation(),
-                SystemConst.AUTHORIZATION_PREFIX.getInformation() + playerUUIdEncrypted
+                SystemConst.AUTHORIZATION_PREFIX.getInformation() + playerEncryptedUUId
         );
 
         return R.ok(playerProfile.toJavaObject(Object.class));
