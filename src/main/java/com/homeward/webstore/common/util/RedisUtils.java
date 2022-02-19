@@ -1,4 +1,4 @@
-package com.homeward.webstore.common.utils;
+package com.homeward.webstore.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -10,11 +10,11 @@ import java.util.concurrent.TimeUnit;
  * redis的工具类
  */
 @Component
-public class RedisUtil {
+public class RedisUtils {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
+    public RedisUtils(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

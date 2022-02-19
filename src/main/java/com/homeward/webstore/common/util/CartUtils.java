@@ -1,4 +1,4 @@
-package com.homeward.webstore.common.utils;
+package com.homeward.webstore.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +10,7 @@ import java.util.Set;
  * cart service的工具类
  */
 @Slf4j
-public class CartUtil {
+public class CartUtils {
 
     /**
      * 判断cart的表是不是烂掉了

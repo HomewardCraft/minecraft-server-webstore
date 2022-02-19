@@ -1,4 +1,4 @@
-package com.homeward.webstore.common.utils;
+package com.homeward.webstore.common.util;
 
 import com.homeward.webstore.common.consts.SystemConst;
 import com.auth0.jwt.JWT;
@@ -16,11 +16,11 @@ import java.util.Map;
 
 
 @Slf4j
-public class JwtUtil {
+public class JwtUtils {
     /**
      * 密钥
      */
-    private static final String SECRET = SystemConst.SYSTEM_PROJECT_NAME.getName() + "_SunjiamuCaishangqi";
+    private static final String SECRET = SystemConst.PROJECT_NAME.getInformation() + "_xxBAIORETTOxx";
 
     /**
      * 过期时间（单位：秒）
@@ -45,15 +45,15 @@ public class JwtUtil {
     /**
      * userId
      */
-    private static final String USERID = "userId";
+    private static final String UUID = "uuid";
 
     /**
-     * 生成用户token,设置token超时时间
+     * 生成token,设置token超时时间
      *
-     * @param userId user id
-     * @return jwt
+     * @param uuid uuid
+     * @return json web token
      */
-    public static String createToken(String userId) {
+    public static String createToken(String uuid) {
         Map<String, Object> map = new HashMap<>();
         map.put("alg", "HS256");
         map.put("typ", "JWT");
@@ -61,9 +61,9 @@ public class JwtUtil {
                 // 添加头部
                 .withHeader(map)
                 // 放入用户的id
-                .withAudience(String.valueOf(userId))
+                .withAudience(String.valueOf(uuid))
                 // 可以将基本信息放到claims中
-                .withClaim(USERID, userId)
+                .withClaim(UUID, uuid)
                 // 超时设置,设置过期的日期
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRE_TIME))
                 // 签发时间
@@ -75,17 +75,17 @@ public class JwtUtil {
 
     /**
      * 获取用户userId
-     * @return user id
+     * @return uuid
      */
-    public static String getUserId() {
-        HttpServletRequest request = SpringContextUtil.getHttpServletRequest();
+    public static String getUUID() {
+        HttpServletRequest request = SpringContextUtils.getHttpServletRequest();
 
         String token = request.getHeader(HEADER_KEY);
         if (StringUtils.isBlank(token)) {
-            CommonUtil.throwRuntimeException(StatusEnum.JWT_NOT_FOUND);
+            CommonUtils.throwRuntimeException(StatusEnum.JWT_NOT_FOUND);
         }
         if (!token.startsWith(PREFIX)) {
-            CommonUtil.throwRuntimeException(StatusEnum.WRONG_PREFIX);
+            CommonUtils.throwRuntimeException(StatusEnum.WRONG_PREFIX);
         }
         token = token.replace(PREFIX, "");
         try {
@@ -93,13 +93,13 @@ public class JwtUtil {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT jwt = verifier.verify(token);
             if (jwt == null) {
-                CommonUtil.throwRuntimeException(StatusEnum.JWT_HAS_EXPIRED);
+                CommonUtils.throwRuntimeException(StatusEnum.JWT_HAS_EXPIRED);
             }
-            return jwt.getClaim(USERID).asString();
+            return jwt.getClaim(UUID).asString();
         } catch (Exception e) {
             log.error("token verified error, {}", e.getMessage());
         }
-        CommonUtil.throwRuntimeException(StatusEnum.JWT_HAS_EXPIRED);
+        CommonUtils.throwRuntimeException(StatusEnum.JWT_HAS_EXPIRED);
         return null;
     }
 
@@ -109,14 +109,14 @@ public class JwtUtil {
      * @return boolean
      */
     public static boolean verity() {
-        HttpServletRequest request = SpringContextUtil.getHttpServletRequest();
+        HttpServletRequest request = SpringContextUtils.getHttpServletRequest();
         // 从请求头部中获取token信息
         String token = request.getHeader(HEADER_KEY);
         if (StringUtils.isBlank(token)) {
             return false;
         }
         if (!token.startsWith(PREFIX)) {
-            CommonUtil.throwRuntimeException(StatusEnum.WRONG_PREFIX);
+            CommonUtils.throwRuntimeException(StatusEnum.WRONG_PREFIX);
         }
         token = token.replace(PREFIX, "");
         try {
@@ -130,9 +130,9 @@ public class JwtUtil {
             long time = (jwt.getExpiresAt().getTime() - System.currentTimeMillis());
             // 有效期只有不到60分钟，需要刷新token了
             if ((REFRESH_TIME - ((7 * 24 * 60 * 60) - (60 * 60))) > time) {
-                String newToken = createToken(jwt.getClaim(USERID).asString());
+                String newToken = createToken(jwt.getClaim(UUID).asString());
                 // 将新的token放入响应请求头中
-                SpringContextUtil.getHttpServletResponse().setHeader(HEADER_KEY, newToken);
+                SpringContextUtils.getHttpServletResponse().setHeader(HEADER_KEY, newToken);
             }
             return true;
         } catch (Exception e) {

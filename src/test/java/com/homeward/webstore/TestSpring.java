@@ -2,12 +2,12 @@ package com.homeward.webstore;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.common.util.JwtUtils;
 import com.homeward.webstore.java.bean.BO.ItemInfoBO;
 import com.homeward.webstore.mapper.AuthenticationMapper;
 import com.homeward.webstore.mapper.CartMapper;
-import com.homeward.webstore.mapper.StoreMapper;
-import com.homeward.webstore.common.utils.RedisUtil;
+import com.homeward.webstore.mapper.ItemMapper;
+import com.homeward.webstore.common.util.RedisUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +28,10 @@ import java.util.List;
 public class TestSpring {
 
     @Autowired
-    private StoreMapper storeMapper;
+    private ItemMapper itemMapper;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisUtils redisUtils;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -84,31 +84,31 @@ public class TestSpring {
     @Test
     @Disabled
     void testRedisUtil() {
-        boolean set = redisUtil.set("Ba1oretto", "{\"114514\":1}");
+        boolean set = redisUtils.set("Ba1oretto", "{\"114514\":1}");
         System.out.println("set: " + set);
 
-        Object get = redisUtil.get("Ba1oretto");
+        Object get = redisUtils.get("Ba1oretto");
         System.out.println(get);
 
-        boolean update = redisUtil.update("Ba1oretto", "{\"114514\":1919810}");
+        boolean update = redisUtils.update("Ba1oretto", "{\"114514\":1919810}");
         System.out.println("update: " + update);
 
-        boolean expire = redisUtil.setExpire("Ba1oretto", 10);
+        boolean expire = redisUtils.setExpire("Ba1oretto", 10);
         System.out.println("expire: " + expire);
 
-        long time1 = redisUtil.getExpire("Ba1oretto");
+        long time1 = redisUtils.getExpire("Ba1oretto");
         System.out.println("time1: " + time1);
 
-        boolean persist = redisUtil.persist("Ba1oretto");
+        boolean persist = redisUtils.persist("Ba1oretto");
         System.out.println("persist: " + persist);
 
-        long time2 = redisUtil.getExpire("Ba1oretto");
+        long time2 = redisUtils.getExpire("Ba1oretto");
         System.out.println("time2: " + time2);
 
-        boolean delete = redisUtil.del("Ba1oretto");
+        boolean delete = redisUtils.del("Ba1oretto");
         System.out.println("delete: " + delete);
 
-        boolean hasKey = redisUtil.hasKey("Ba1oretto");
+        boolean hasKey = redisUtils.hasKey("Ba1oretto");
         System.out.println("hasKey: " + hasKey);
     }
 
@@ -120,30 +120,30 @@ public class TestSpring {
         userInfo.setName("jack");
         userInfo.setCreateTime(new Date());
         // 放入redis
-        redisUtil.set("user", userInfo, 5);
+        redisUtils.set("user", userInfo, 5);
         // 从redis中获取
-        System.out.println("获取到数据：" + redisUtil.get("user") +
-        "过期时间: " + redisUtil.getExpire("user"));
+        System.out.println("获取到数据：" + redisUtils.get("user") +
+        "过期时间: " + redisUtils.getExpire("user"));
     }
 
     @Test
     @Disabled
     void testRedisValue() {
-        System.out.println(redisUtil.get("Ba1oretto"));
+        System.out.println(redisUtils.get("Ba1oretto"));
     }
 
     @Test
     @Disabled
     void testJWT() {
-        String token = JwtUtil.createToken("Ba1oretto");
+        String token = JwtUtils.createToken("Ba1oretto");
         System.out.println(token);
-        System.out.println(JwtUtil.verity());
+        System.out.println(JwtUtils.verity());
     }
 
     @Test
     @Disabled
     void testStoreMapper() {
-        List<ItemInfoBO> itemsLists = storeMapper.getStoreItemsList("crates");
+        List<ItemInfoBO> itemsLists = itemMapper.getStoreItemsList("crates");
         itemsLists.forEach(System.out::println);
     }
 
@@ -157,7 +157,7 @@ public class TestSpring {
     @Test
     @Disabled
     void testStoreMapperGetItemId() {
-        String itemId = storeMapper.getItemName(1);
+        String itemId = itemMapper.getItemName(1);
         if (itemId == null) {
             System.out.println("0");
             return;

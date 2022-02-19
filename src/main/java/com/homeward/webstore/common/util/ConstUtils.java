@@ -1,6 +1,6 @@
-package com.homeward.webstore.common.utils;
+package com.homeward.webstore.common.util;
 
-public class ConstUtil {
+public class ConstUtils {
 
     /**
      * 项目名称

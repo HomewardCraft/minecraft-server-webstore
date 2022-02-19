@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface PlayerInfoMapper {
+public interface PlayerMapper {
     PlayerInfoBO selectPlayer(String uuid);
 
     @JoinPointSymbol

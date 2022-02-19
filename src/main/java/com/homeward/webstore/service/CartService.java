@@ -1,4 +1,4 @@
-package com.homeward.webstore.service.cart;
+package com.homeward.webstore.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 

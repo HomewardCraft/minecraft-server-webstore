@@ -1,9 +1,8 @@
 package com.homeward.webstore.aop.advice;
 
-import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.common.enums.StatusEnum;
-import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.common.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -16,10 +15,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @Aspect
-public class CustomExceptionCatch {
-    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionCatch.orderControllerMethod()")
+public class CustomExceptionAdvice {
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.orderControllerMethod()")
     public R CartException(ProceedingJoinPoint point) {
-        String uuid = JwtUtil.getUserId();
+        String uuid = JwtUtils.getUUID();
         R res;
         try {
             res = (R) point.proceed();
@@ -64,7 +63,7 @@ public class CustomExceptionCatch {
         return res;
     }
 
-    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionCatch.jsonWebTokenMethod()")
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.jsonWebTokenMethod()")
     public boolean JWTException(ProceedingJoinPoint point) {
         try {
             point.proceed();
@@ -83,7 +82,7 @@ public class CustomExceptionCatch {
         return true;
     }
 
-    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionCatch.playerControllerMethod()")
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.playerControllerMethod()")
     public R PlayerInfoException(ProceedingJoinPoint point) {
         R res;
         try {

@@ -1,12 +1,12 @@
-package com.homeward.webstore.service.player;
+package com.homeward.webstore.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
 import com.homeward.webstore.common.enums.DateEnum;
 import com.homeward.webstore.common.enums.StatusEnum;
-import com.homeward.webstore.common.utils.CommonUtil;
+import com.homeward.webstore.common.util.CommonUtils;
 import com.homeward.webstore.java.bean.BO.PlayerInfoBO;
-import com.homeward.webstore.mapper.PlayerInfoMapper;
+import com.homeward.webstore.mapper.PlayerMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +14,14 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-public class PlayerInfoServiceImpl implements PlayerInfoService {
+public class PlayerServiceImpl implements PlayerService {
 
     private final RestTemplate restTemplate;
-    private final PlayerInfoMapper playerInfoMapper;
+    private final PlayerMapper playerMapper;
 
-    public PlayerInfoServiceImpl(RestTemplate restTemplate, PlayerInfoMapper playerInfoMapper) {
+    public PlayerServiceImpl(RestTemplate restTemplate, PlayerMapper playerMapper) {
         this.restTemplate = restTemplate;
-        this.playerInfoMapper = playerInfoMapper;
+        this.playerMapper = playerMapper;
     }
 
 
@@ -34,14 +34,14 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     @JoinPointSymbol
     public JSONObject getPlayerProfile(String playerId) {
         if (StringUtils.isBlank(playerId)) {
-            CommonUtil.throwRuntimeException(StatusEnum.ILLEGAL_CHAR);
+            CommonUtils.throwRuntimeException(StatusEnum.ILLEGAL_CHAR);
         }
 
         String originMessage = this.getPlayerBasicInfo(playerId);
 
         //名称是否可用
         if (StringUtils.isBlank(originMessage) || originMessage.contains("error")) {
-            CommonUtil.throwRuntimeException(StatusEnum.PLAYER_NOT_FOUND);
+            CommonUtils.throwRuntimeException(StatusEnum.PLAYER_NOT_FOUND);
         }
 
         JSONObject ObjectedMessage = JSONObject.parseObject(originMessage);
@@ -68,7 +68,7 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
      * */
     @Override
     public PlayerInfoBO selectPlayer(String uuid){
-        return this.playerInfoMapper.selectPlayer(uuid);
+        return this.playerMapper.selectPlayer(uuid);
     }
 
 
@@ -79,10 +79,10 @@ public class PlayerInfoServiceImpl implements PlayerInfoService {
     @Override
     @Transactional
     public void insertPlayer(String uuid, String name) {
-        String createTime = CommonUtil.currentFormattedDate(DateEnum.yyyyMMddHHmmss);
-        Long rowAffected = this.playerInfoMapper.insertPlayer(uuid, name, createTime);
+        String createTime = CommonUtils.currentFormattedDate(DateEnum.yyyyMMddHHmmss);
+        Long rowAffected = this.playerMapper.insertPlayer(uuid, name, createTime);
         if (rowAffected == 0) {
-            CommonUtil.throwRuntimeException(StatusEnum.DATABASE_ERROR);
+            CommonUtils.throwRuntimeException(StatusEnum.DATABASE_ERROR);
         }
     }
 

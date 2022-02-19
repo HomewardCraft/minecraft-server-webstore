@@ -1,4 +1,4 @@
-package com.homeward.webstore.common.utils;
+package com.homeward.webstore.common.util;
 
 import com.homeward.webstore.common.enums.BaseEnum;
 
@@ -8,7 +8,7 @@ import java.util.Calendar;
 /**
  * 一些其他的工具整合的类
  */
-public class CommonUtil {
+public class CommonUtils {
     /**
      * 返回当前的被格式化后的时间
      *

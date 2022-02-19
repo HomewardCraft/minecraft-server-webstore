@@ -2,11 +2,10 @@ package com.homeward.webstore.controller;
 
 import com.homeward.webstore.java.bean.BO.ItemInfoBO;
 import com.homeward.webstore.java.bean.VO.R;
-import com.homeward.webstore.service.store.StoreService;
+import com.homeward.webstore.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 //宝箱列表的Controller
@@ -15,11 +14,11 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/category")
 @ResponseBody
-public class StoreController {
-    private final StoreService storeService;
+public class ItemController {
+    private final ItemService itemService;
 
-    public StoreController(StoreService storeService) {
-        this.storeService = storeService;
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
     }
 
 
@@ -30,7 +29,7 @@ public class StoreController {
      */
     @GetMapping("/{items}")
     public R getSpecificItems(@PathVariable("items") String type) {
-        List<ItemInfoBO> itemsLists = storeService.getSpecificItems(type);
+        List<ItemInfoBO> itemsLists = itemService.getSpecificItems(type);
         return R.ok(itemsLists);
     }
 

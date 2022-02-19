@@ -1,4 +1,4 @@
-package com.homeward.webstore.common.utils;
+package com.homeward.webstore.common.util;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * cookie的工具类
  */
-public class CookieUtil {
+public class CookieUtils {
 
     /**
      * @param response

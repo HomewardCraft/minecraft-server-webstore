@@ -2,7 +2,7 @@ package com.homeward.webstore.aop.pointcuts;
 
 import org.aspectj.lang.annotation.Pointcut;
 
-public class CustomExceptionCatch {
+public class CustomExceptionAdvice {
 
     @Pointcut("execution(" +
             "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
@@ -19,6 +19,6 @@ public class CustomExceptionCatch {
     @Pointcut("execution(" +
             "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
             "com.homeward.webstore.java.bean.VO.R " +
-            "com.homeward.webstore.controller.PlayerInfoController.getPlayerInfo(..))")
+            "com.homeward.webstore.controller.PlayerController.getPlayerInfo(..))")
     public void playerControllerMethod() {}
 }

@@ -3,35 +3,36 @@ package com.homeward.webstore.common.consts;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum SystemConst{
+public enum SystemConst implements BaseConst{
     /**
      * 项目名称
      */
-    SYSTEM_PROJECT_NAME("homeward_webstore"),
+    PROJECT_NAME("webstore"),
 
     /**
-     * 用户订单
+     * 玩家购物车
      */
-    SYSTEM_USER_ORDER("homeward_order"),
+    PLAYER_CART("_cart"),
 
     /**
-     * 登录用户session
+     * 玩家session
      */
-    SYSTEM_USER_SESSION("systemUserSession"),
+    PLAYER_SESSION("_session"),
 
     /**
      * 请求头中令牌的key
      */
-    SYSTEM_AUTHORIZATION_KEY("Authorization"),
+    AUTHORIZATION_NAME("Authorization"),
 
     /**
      * 请求头中令牌的value开头
      */
-    SYSTEM_AUTHORIZATION_HEAD("Bearer ");
+    AUTHORIZATION_PREFIX("Bearer ");
 
     private final String name;
 
-    public String getName() {
+    @Override
+    public String getInformation() {
         return name;
     }
 }

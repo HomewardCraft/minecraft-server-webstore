@@ -1,12 +1,12 @@
-package com.homeward.webstore.service.cart;
+package com.homeward.webstore.service;
 
 import com.homeward.webstore.common.enums.StatusEnum;
-import com.homeward.webstore.common.utils.CartUtil;
-import com.homeward.webstore.common.utils.CommonUtil;
-import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.common.util.CartUtils;
+import com.homeward.webstore.common.util.CommonUtils;
+import com.homeward.webstore.common.util.JwtUtils;
 import com.homeward.webstore.mapper.AuthenticationMapper;
 import com.homeward.webstore.mapper.CartMapper;
-import com.homeward.webstore.mapper.StoreMapper;
+import com.homeward.webstore.mapper.ItemMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -19,13 +19,13 @@ import java.util.*;
 @Service
 public class CartServiceImpl implements CartService {
     private final AuthenticationMapper authenticationMapper;
-    private final StoreMapper storeMapper;
+    private final ItemMapper itemMapper;
     private final CartMapper cartMapper;
 
 
-    public CartServiceImpl(AuthenticationMapper authenticationMapper, StoreMapper storeMapper, CartMapper cartMapper) {
+    public CartServiceImpl(AuthenticationMapper authenticationMapper, ItemMapper itemMapper, CartMapper cartMapper) {
         this.authenticationMapper = authenticationMapper;
-        this.storeMapper = storeMapper;
+        this.itemMapper = itemMapper;
         this.cartMapper = cartMapper;
     }
 
@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService {
      */
     @Override
     public Float commit() {
-        String uuid = JwtUtil.getUserId();
+        String uuid = JwtUtils.getUUID();
         return cartMapper.getTotalPrice(uuid);
     }
 
@@ -49,22 +49,22 @@ public class CartServiceImpl implements CartService {
     @Override
     @Transactional
     public void insertCart(Integer itemId, HttpServletRequest request) {
-        String uuid = JwtUtil.getUserId();
+        String uuid = JwtUtils.getUUID();
 
         // 传入的商品id是否为空
-        if (storeMapper.getItemName(itemId) == null) {
-            CommonUtil.throwRuntimeException(StatusEnum.ITEM_NOT_FOUND);
+        if (itemMapper.getItemName(itemId) == null) {
+            CommonUtils.throwRuntimeException(StatusEnum.ITEM_NOT_FOUND);
         }
 
         // 从cart表查找玩家购物车信息
         List<Integer> itemIdList = authenticationMapper.itemIdList(uuid, itemId);
 
         // 是否有重复的购物车
-        CartUtil.isSingleColumn(itemIdList);
+        CartUtils.isSingleColumn(itemIdList);
 
         // 玩家是否已经有购物车了
         if (itemIdList.contains(itemId)) {
-            CommonUtil.throwRuntimeException(StatusEnum.DUPLICATE_CART_FOUND);
+            CommonUtils.throwRuntimeException(StatusEnum.DUPLICATE_CART_FOUND);
         }
 
         Integer itemAmount = 1;
@@ -80,7 +80,7 @@ public class CartServiceImpl implements CartService {
     @Override
     @Transactional
     public void updateCart(Map<String, String> map, HttpServletRequest request) {
-        String uuid = JwtUtil.getUserId();
+        String uuid = JwtUtils.getUUID();
 
         Set<String> keySet =map.keySet();
         String idString = null;
@@ -97,13 +97,13 @@ public class CartServiceImpl implements CartService {
 
         // 如果没获取到表示传入的key格式不合法或者为空
         if (StringUtils.isBlank(idString)) {
-            CommonUtil.throwRuntimeException(StatusEnum.FORM_DATA_INVALID);
+            CommonUtils.throwRuntimeException(StatusEnum.FORM_DATA_INVALID);
         }
 
         // 商品id是否合法
         if (value == null || value.equals("") ||
                 Integer.parseInt(value) < 1 || Integer.parseInt(value) > 99) {
-            CommonUtil.throwRuntimeException(StatusEnum.ITEM_AMOUNT_INVALID);
+            CommonUtils.throwRuntimeException(StatusEnum.ITEM_AMOUNT_INVALID);
         }
 
         Integer itemAmount = Integer.parseInt(value);
@@ -112,11 +112,11 @@ public class CartServiceImpl implements CartService {
 
         List<Integer> itemIdList = authenticationMapper.itemIdList(uuid, itemId);
 
-        CartUtil.isSingleColumn(itemIdList);
+        CartUtils.isSingleColumn(itemIdList);
 
         // 玩家是否拥有购物车
         if (!itemIdList.contains(itemId)) {
-            CommonUtil.throwRuntimeException(StatusEnum.CART_CANNOT_UPDATE);
+            CommonUtils.throwRuntimeException(StatusEnum.CART_CANNOT_UPDATE);
         }
 
         cartMapper.updateCart(uuid, itemId, itemAmount);
@@ -130,14 +130,14 @@ public class CartServiceImpl implements CartService {
     @Override
     @Transactional
     public void deleteCart(Integer itemId, HttpServletRequest request) {
-        String uuid = JwtUtil.getUserId();
+        String uuid = JwtUtils.getUUID();
 
         List<Integer> itemIdList = authenticationMapper.itemIdList(uuid, itemId);
 
-        CartUtil.isSingleColumn(itemIdList);
+        CartUtils.isSingleColumn(itemIdList);
 
         if (!itemIdList.contains(itemId)) {
-            CommonUtil.throwRuntimeException(StatusEnum.CART_CANNOT_DELETE);
+            CommonUtils.throwRuntimeException(StatusEnum.CART_CANNOT_DELETE);
         }
 
         cartMapper.deleteCart(uuid, itemId);

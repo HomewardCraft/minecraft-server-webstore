@@ -2,8 +2,8 @@ package com.homeward.webstore.handler.interceptor;
 
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
 import com.homeward.webstore.common.enums.StatusEnum;
-import com.homeward.webstore.common.utils.CommonUtil;
-import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.common.util.CommonUtils;
+import com.homeward.webstore.common.util.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -16,10 +16,10 @@ public class LoginInterceptor implements HandlerInterceptor {
     @JoinPointSymbol
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if ((request.getHeader("Authorization") == null)) {
-            CommonUtil.throwRuntimeException(StatusEnum.JWT_NOT_FOUND);
+            CommonUtils.throwRuntimeException(StatusEnum.JWT_NOT_FOUND);
         }
-        if (!JwtUtil.verity()) {
-            CommonUtil.throwRuntimeException(StatusEnum.USER_UNVERIFIED);
+        if (!JwtUtils.verity()) {
+            CommonUtils.throwRuntimeException(StatusEnum.USER_UNVERIFIED);
         }
         return true;
     }

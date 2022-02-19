@@ -66,15 +66,17 @@ public class TestNormal {
     void testGetCause() {
         try {
             File file = new File("");
-            file.getAbsolutePath();
+            System.out.println(file.getAbsolutePath());
         } catch (Exception e) {
-            System.out.println(e.getCause());
+            e.getCause();
         }
     }
 
     @Test
     void testArrayLength() {
         int[] ints = {1, 2, 3, 4};
+        OptionalInt any = Arrays.stream(ints).findAny();
+        System.out.println(any);
         System.out.println(ints.length);
     }
 
@@ -94,17 +96,17 @@ public class TestNormal {
 
     @Test
     void testEnums() {
-        System.out.println(SystemConst.SYSTEM_PROJECT_NAME.getName());
+        System.out.println(SystemConst.PROJECT_NAME.getInformation());
     }
 
     @Test
     void testDuplicatedArray() {
         ArrayList<Integer> integers = new ArrayList<>();
-//        integers.add(1);
-//        integers.add(2);
-//        integers.add(3);
-//        integers.add(4);
-//        integers.add(5);
+       integers.add(1);
+       integers.add(2);
+       integers.add(3);
+       integers.add(4);
+       integers.add(5);
         Set<Integer> set = new HashSet<>(integers);
         if(set.size() != integers.size()){
             System.out.println(0);
@@ -124,7 +126,8 @@ public class TestNormal {
     @Test
     void testException() {
         String s = null;
-        s.hashCode();
+        assert false;
+        System.out.println(s.hashCode());
     }
 
     @Test
