@@ -7,8 +7,8 @@
     <select id="getTotalPrice" resultType="Float" useCache="true">
         SELECT
         SUM((i.price / 100) * (i.onsale_percent / 100) * o.amount) price
-        FROM minecraft_webstore.order o
-        LEFT JOIN items i
+        FROM player_cart o
+        LEFT JOIN item_info i
         ON o.item_id = i.id
         <where>
             o.uuid = #{uuid}
@@ -17,16 +17,14 @@
 
     <insert id="insertCart" flushCache="true">
         INSERT INTO
-        minecraft_webstore.order(UUID, item_id, amount)
+        player_cart(UUID, item_id, amount)
         VALUES(#{uuid}, #{itemId}, #{amount})
     </insert>
 
     <update id="updateCart" flushCache="true">
-        UPDATE minecraft_webstore.order
+        UPDATE player_cart
         <set>
-            <if test="amount != null and amount != ''">
-                amount = #{amount}
-            </if>
+            amount = #{amount}
         </set>
         <where>
             uuid = #{uuid}
@@ -35,7 +33,7 @@
     </update>
 
     <delete id="deleteCart" flushCache="true">
-        DELETE FROM minecraft_webstore.order
+        DELETE FROM player_cart
         <where>
             UUID = #{uuid}
             AND item_id = #{itemId}
@@ -43,6 +41,6 @@
     </delete>
 
     <delete id="initializeCart" flushCache="true">
-        DELETE FROM minecraft_webstore.order
+        DELETE FROM player_cart
     </delete>
 </mapper>

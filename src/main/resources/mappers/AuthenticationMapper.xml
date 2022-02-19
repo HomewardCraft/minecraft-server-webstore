@@ -6,7 +6,7 @@
     <cache/>
     <select id="itemIdList" resultType="Integer" useCache="false">
         SELECT item_id
-        FROM minecraft_webstore.order
+        FROM player_cart
         <where>
             uuid = #{uuid}
             AND item_id = #{itemId}
