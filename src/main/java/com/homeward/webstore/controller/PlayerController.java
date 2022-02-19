@@ -22,18 +22,15 @@ public class PlayerController {
 
     @GetMapping("/name/{id}")
     @JoinPointSymbol
-    public JSONObject getPlayerProfile(@PathVariable("id") String playerId, HttpServletResponse response) {
+    public R getPlayerProfile(@PathVariable("id") String playerId, HttpServletResponse response) {
         JSONObject playerProfile = playerInfo.getPlayerProfile(playerId);
         String uuid = playerProfile.getString("id");
-
-        playerProfile.put("status", 200);
-        playerProfile.put("message", "success");
 
         String playerUUIdEncrypted = JwtUtils.createToken(uuid);
         response.setHeader(SystemConst.AUTHORIZATION_NAME.getInformation(),
                 SystemConst.AUTHORIZATION_PREFIX.getInformation() + playerUUIdEncrypted
         );
 
-        return playerProfile;
+        return R.ok(playerProfile.toJavaObject(Object.class));
     }
 }
