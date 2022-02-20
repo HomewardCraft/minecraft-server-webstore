@@ -26,10 +26,12 @@ public class PlayerController {
         JSONObject playerProfile = playerService.getPlayerProfile(playerName);
         String uuid = playerProfile.getString("id");
 
-        String playerEncryptedUUId = JwtUtils.createToken(uuid);
-        response.setHeader(SystemConst.AUTHORIZATION_NAME.getInformation(),
-                SystemConst.AUTHORIZATION_PREFIX.getInformation() + playerEncryptedUUId
-        );
+        if (!JwtUtils.verity()) {
+            String playerEncryptedUUId = JwtUtils.createToken(uuid);
+            response.setHeader(SystemConst.AUTHORIZATION_NAME.getInformation(),
+                    SystemConst.AUTHORIZATION_PREFIX.getInformation() + playerEncryptedUUId
+            );
+        }
 
         return R.ok(playerProfile.toJavaObject(Object.class));
     }

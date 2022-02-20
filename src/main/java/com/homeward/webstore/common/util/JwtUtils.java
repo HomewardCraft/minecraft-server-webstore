@@ -23,14 +23,14 @@ public class JwtUtils {
     private static final String SECRET = SystemConst.PROJECT_NAME.getInformation() + "_xxBAIORETTOxx";
 
     /**
-     * 过期时间（单位：秒）
+     * 过期时间(单位: 毫秒)
      **/
-    private static final long EXPIRE_TIME = 7 * 24 * 60 * 60;
+    private static final long EXPIRE_TIME = 7 * 24 * 60 * 60 * 1000;
 
     /**
-     * 刷新时间（单位：秒）
+     * 刷新时间(单位: 毫秒)
      */
-    private static final long REFRESH_TIME = 7 * 24 * 60 * 60;
+    private static final long REFRESH_TIME = 1 * 24 * 60 * 60 * 1000;
 
     /**
      * 存入请求头的key
@@ -99,8 +99,7 @@ public class JwtUtils {
         } catch (Exception e) {
             log.error("token verified error, {}", e.getMessage());
         }
-        CommonUtils.throwRuntimeException(StatusEnum.JWT_HAS_EXPIRED);
-        return null;
+        throw new RuntimeException(StatusEnum.JWT_HAS_EXPIRED.getMessage());
     }
 
 
@@ -129,7 +128,7 @@ public class JwtUtils {
             // 判断过期时间
             long time = (jwt.getExpiresAt().getTime() - System.currentTimeMillis());
             // 有效期只有不到60分钟，需要刷新token了
-            if ((REFRESH_TIME - ((7 * 24 * 60 * 60) - (60 * 60))) > time) {
+            if (REFRESH_TIME > time) {
                 String newToken = createToken(jwt.getClaim(UUID).asString());
                 // 将新的token放入响应请求头中
                 SpringContextUtils.getHttpServletResponse().setHeader(HEADER_KEY, newToken);
