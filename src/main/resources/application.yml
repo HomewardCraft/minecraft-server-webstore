@@ -32,7 +32,7 @@ spring:
 #SpringBoot整合Mybatis
 mybatis-plus:
   #指定别名包
-  type-aliases-package: com.homeward.webstore.pojo
+  type-aliases-package: com.homeward.webstore.java.bean
   #扫描指定路径下的映射文件
   mapper-locations: classpath:/mappers/*.xml
   #开启驼峰映射

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.homeward.webstore.mapper.CartMapper">
+    <cache/>
+    <select id="getTotalPrice" resultType="Float" useCache="true">
+        SELECT
+        SUM((i.price / 100) * (i.onsale_percent / 100) * o.amount) price
+        FROM player_cart o
+        LEFT JOIN item_info i
+        ON o.item_id = i.id
+        <where>
+            o.uuid = #{uuid}
+        </where>
+    </select>
+
+    <insert id="insertCart" flushCache="true">
+        INSERT INTO
+        player_cart(UUID, item_id, amount)
+        VALUES(#{uuid}, #{itemId}, #{amount})
+    </insert>
+
+    <update id="updateCart" flushCache="true">
+        UPDATE player_cart
+        <set>
+            amount = #{amount}
+        </set>
+        <where>
+            uuid = #{uuid}
+            AND item_id = #{itemId}
+        </where>
+    </update>
+
+    <delete id="deleteCart" flushCache="true">
+        DELETE FROM player_cart
+        <where>
+            UUID = #{uuid}
+            AND item_id = #{itemId}
+        </where>
+    </delete>
+
+    <delete id="initializeCart" flushCache="true">
+        DELETE FROM player_cart
+    </delete>
+</mapper>

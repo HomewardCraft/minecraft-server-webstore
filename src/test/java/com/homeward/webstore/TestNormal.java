@@ -1,14 +1,14 @@
 package com.homeward.webstore;
 
 import com.alibaba.fastjson.JSONObject;
-import com.homeward.webstore.VO.R;
-import com.homeward.webstore.common.enums.StatusCode;
-import com.homeward.webstore.common.enums.SystemConst;
-import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.java.bean.VO.R;
+import com.homeward.webstore.common.enums.StatusEnum;
+import com.homeward.webstore.common.consts.SystemConst;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TestNormal {
@@ -66,22 +66,24 @@ public class TestNormal {
     void testGetCause() {
         try {
             File file = new File("");
-            file.getAbsolutePath();
+            System.out.println(file.getAbsolutePath());
         } catch (Exception e) {
-            System.out.println(e.getCause());
+            e.getCause();
         }
     }
 
     @Test
     void testArrayLength() {
         int[] ints = {1, 2, 3, 4};
+        OptionalInt any = Arrays.stream(ints).findAny();
+        System.out.println(any);
         System.out.println(ints.length);
     }
 
     @Test
     void testEnumsStatus() {
-        Integer successStatusCode = StatusCode.SUCCESS.getCode();
-        String successStatusMessage = StatusCode.SUCCESS.getMessage();
+        Integer successStatusCode = StatusEnum.SUCCESS.getCode();
+        String successStatusMessage = StatusEnum.SUCCESS.getMessage();
         System.out.println(successStatusCode + successStatusMessage);
     }
 
@@ -94,17 +96,17 @@ public class TestNormal {
 
     @Test
     void testEnums() {
-        System.out.println(SystemConst.SYSTEM_PROJECT_NAME.getName());
+        System.out.println(SystemConst.PROJECT_NAME.getInformation());
     }
 
     @Test
     void testDuplicatedArray() {
         ArrayList<Integer> integers = new ArrayList<>();
-//        integers.add(1);
-//        integers.add(2);
-//        integers.add(3);
-//        integers.add(4);
-//        integers.add(5);
+       integers.add(1);
+       integers.add(2);
+       integers.add(3);
+       integers.add(4);
+       integers.add(5);
         Set<Integer> set = new HashSet<>(integers);
         if(set.size() != integers.size()){
             System.out.println(0);
@@ -119,6 +121,21 @@ public class TestNormal {
         System.out.println(Arrays.stream(strings).count());
         Integer integer = Integer.valueOf(strings[0]);
         System.out.println(integer);
+    }
+
+    @Test
+    void testException() {
+        String s = null;
+        assert false;
+        System.out.println(s.hashCode());
+    }
+
+    @Test
+    void testDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日HH点mm分ss.SSS秒");
+        Calendar calendar = Calendar.getInstance();
+        String format = dateFormat.format(calendar.getTime());
+        System.out.println(format);
     }
 }
 

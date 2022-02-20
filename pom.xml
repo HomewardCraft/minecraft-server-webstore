@@ -33,11 +33,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        &lt;!&ndash; spring html工具 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-<!--        </dependency>-->
         <!-- Redis的依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -47,19 +42,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.10</version>
-        </dependency>
-        <!-- log日志工具的组件 -->
-        <dependency>
-            <groupId>org.logback-extensions</groupId>
-            <artifactId>logback-ext-spring</artifactId>
-            <version>0.1.5</version>
-        </dependency>
-        <!-- log日志工具的组件 -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.35</version>
         </dependency>
         <!-- lombok -->
         <dependency>
@@ -118,7 +100,7 @@
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.8.2</version>
+            <version>3.18.3</version>
         </dependency>
     </dependencies>
 

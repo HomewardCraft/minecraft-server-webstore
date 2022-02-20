@@ -2,43 +2,42 @@ package com.homeward.webstore;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.homeward.webstore.common.utils.JwtUtil;
+import com.homeward.webstore.common.util.JwtUtils;
+import com.homeward.webstore.java.bean.BO.ItemInfoBO;
 import com.homeward.webstore.mapper.AuthenticationMapper;
-import com.homeward.webstore.mapper.OrderMapper;
-import com.homeward.webstore.mapper.StoreMapper;
-import com.homeward.webstore.common.utils.RedisUtil;
-import com.homeward.webstore.pojo.packages.ItemsList;
+import com.homeward.webstore.mapper.CartMapper;
+import com.homeward.webstore.mapper.ItemMapper;
+import com.homeward.webstore.common.util.RedisUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @SpringBootTest
 public class TestSpring {
 
     @Autowired
-    private StoreMapper storeMapper;
+    private ItemMapper itemMapper;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisUtils redisUtils;
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    private OrderMapper orderMapper;
+    private CartMapper cartMapper;
 
     @Autowired
     private AuthenticationMapper authenticationMapper;
@@ -85,31 +84,31 @@ public class TestSpring {
     @Test
     @Disabled
     void testRedisUtil() {
-        boolean set = redisUtil.set("Ba1oretto", "{\"114514\":1}");
+        boolean set = redisUtils.set("Ba1oretto", "{\"114514\":1}");
         System.out.println("set: " + set);
 
-        Object get = redisUtil.get("Ba1oretto");
+        Object get = redisUtils.get("Ba1oretto");
         System.out.println(get);
 
-        boolean update = redisUtil.update("Ba1oretto", "{\"114514\":1919810}");
+        boolean update = redisUtils.update("Ba1oretto", "{\"114514\":1919810}");
         System.out.println("update: " + update);
 
-        boolean expire = redisUtil.setExpire("Ba1oretto", 10);
+        boolean expire = redisUtils.setExpire("Ba1oretto", 10);
         System.out.println("expire: " + expire);
 
-        long time1 = redisUtil.getExpire("Ba1oretto");
+        long time1 = redisUtils.getExpire("Ba1oretto");
         System.out.println("time1: " + time1);
 
-        boolean persist = redisUtil.persist("Ba1oretto");
+        boolean persist = redisUtils.persist("Ba1oretto");
         System.out.println("persist: " + persist);
 
-        long time2 = redisUtil.getExpire("Ba1oretto");
+        long time2 = redisUtils.getExpire("Ba1oretto");
         System.out.println("time2: " + time2);
 
-        boolean delete = redisUtil.del("Ba1oretto");
+        boolean delete = redisUtils.del("Ba1oretto");
         System.out.println("delete: " + delete);
 
-        boolean hasKey = redisUtil.hasKey("Ba1oretto");
+        boolean hasKey = redisUtils.hasKey("Ba1oretto");
         System.out.println("hasKey: " + hasKey);
     }
 
@@ -121,44 +120,44 @@ public class TestSpring {
         userInfo.setName("jack");
         userInfo.setCreateTime(new Date());
         // 放入redis
-        redisUtil.set("user", userInfo, 5);
+        redisUtils.set("user", userInfo, 5);
         // 从redis中获取
-        System.out.println("获取到数据：" + redisUtil.get("user") +
-        "过期时间: " + redisUtil.getExpire("user"));
+        System.out.println("获取到数据：" + redisUtils.get("user") +
+        "过期时间: " + redisUtils.getExpire("user"));
     }
 
     @Test
     @Disabled
     void testRedisValue() {
-        System.out.println(redisUtil.get("Ba1oretto"));
+        System.out.println(redisUtils.get("Ba1oretto"));
     }
 
     @Test
     @Disabled
     void testJWT() {
-        String token = JwtUtil.createToken("Ba1oretto");
+        String token = JwtUtils.createToken("Ba1oretto");
         System.out.println(token);
-        System.out.println(JwtUtil.verity());
+        System.out.println(JwtUtils.verity());
     }
 
     @Test
     @Disabled
     void testStoreMapper() {
-        List<ItemsList> itemsLists = storeMapper.getStoreItems("crates");
+        List<ItemInfoBO> itemsLists = itemMapper.getStoreItemsList("crates");
         itemsLists.forEach(System.out::println);
     }
 
     @Test
     @Disabled
     void testOrderMapper() {
-        Float totalPrice = orderMapper.getTotalPrice("619377de9ada41388ef93dbf9fe56320");
+        Float totalPrice = cartMapper.getTotalPrice("619377de9ada41388ef93dbf9fe56320");
         System.out.println(totalPrice);
     }
 
     @Test
     @Disabled
     void testStoreMapperGetItemId() {
-        String itemId = storeMapper.getItemName(1);
+        String itemId = itemMapper.getItemName(1);
         if (itemId == null) {
             System.out.println("0");
             return;
@@ -169,17 +168,18 @@ public class TestSpring {
     @Test
     @Disabled
     void testOrderUpdateCart() {
-        orderMapper.updateCart("619377de9ada41388ef93dbf9fe56320", 1000, 1);
+        cartMapper.updateCart("619377de9ada41388ef93dbf9fe56320", 1000, 1);
     }
 
     @Test
     @Disabled
     void testOrderDeleteCart() {
-        long l = orderMapper.deleteCart("619377de9ada41388ef93dbf9fe56320", 1001);
+        long l = cartMapper.deleteCart("619377de9ada41388ef93dbf9fe56320", 1001);
         System.out.println(l);
     }
 
     @Test
+    @Disabled
     void testAuthMapperIsSingleCart() {
         List<Integer> integerList = authenticationMapper.itemIdList("619377de9ada41388ef93dbf9fe56320", 1000);
         if (integerList.contains(1000)) {
@@ -187,6 +187,16 @@ public class TestSpring {
             return;
         }
         System.out.println("0");
+    }
+
+    @Test
+    @Disabled
+    void testApplicationContext() {
+//        String applicationName = applicationContext.getApplicationName();
+//        System.out.println(applicationName);
+        ApplicationHome applicationHome = new ApplicationHome();
+        File dir = applicationHome.getDir();
+        System.out.println(dir.getPath());
     }
 }
 

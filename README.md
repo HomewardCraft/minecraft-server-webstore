@@ -19,38 +19,115 @@ Vue 框架 2.0 开发版本
 
 `<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>`
 
+PO 从数据库表中查出来的最原始的数据, 封装到BO中  
+BO 封装了PO, 由业务层传输到控制器  
+VO 将BO传输到view
 
-## 模块(service中的结构)
-### Order模块, 通过redis实现, 只有登陆了才可以访问(拦截器)
-#### 创建购物车
-+ 以post请求显式的传入值 `http://127.0.0.1:50012/checkout/packages/add/{id}/single`
-+ 首先通过拦截器判断用户是否有名为`HOMEWARD_ORDER_INFO`的cookie, 有则不放行, 没有则放行.
-+ 用户首次添加物品时先通过名为`HOMEWARD_USER_INFO`的cookie获取值user的id, 再创建一个名为`HOMEWARD_ORDER_INFO`的cookie值为user的id, 这是接下来更新和删除操作判断用户是否拥有购物车的关键, 具体实现在拦截器里.
-+ 接着向redis创建有时效的键值对, key为user的id(游戏内的id, 如果是正版用户则可以当成唯一标识), value为json形式的字符串(`{itemsId:amount}`), 里面存放了商品的id(唯一标识)与数量
-#### 修改购物车中商品的数量
-+ 以post请求隐式的传入值 `http://127.0.0.1:50012/checkout/update`. form-data: key: `quantity[itemsId]`, value: `amount`
-+ 以修改键值对中json格式的值的数量的形式进行, 利用map接收form data的键值, 遍历获取键与值, 格式化后存储为json格式的字符串.
-+ 从名`HOMEWARD_ORDER_INFO`的cookie中获取值user的id, 通过user的id来更新redis中这个user存储在redis中的value的值为先前的json字符串 
-#### 删除购物车
-+ 以post请求显式的传入值`http://127.0.0.1:50012/checkout/packages/remove/{id}`
-+ 从名`HOMEWARD_ORDER_INFO`的cookie中获取值user的id, 在redis中以user的id删除键值对, 将cookie清除
+# 模块
 
+## com.homeward.webstore
 
-### Player模块, 数据库与mojangAPI结合
-#### 登录请求
-+ 判断用户是否有过成功的登录为查数据库
-+ 判断用户是否已经登陆为查cookie
-+ 实现用户的伪登录(给个游戏内名字, 在mojang有记录就让你登录), 只有用户登陆了, 才可以使用购物车的功能, 具体实现为拦截器获取cookie
+### aop
++ advice
+    > CustomExceptionCatch - 捕获特定的运行时异常, 返回给前端数据  
+    > PlayerInformationLog - 玩家在首次登录, 其uuid与name被记录到数据库时记录到日志
++ annotations
+    > JoinPointSymbol - 自定义注解, 用于辅助构建切入点表达式
++ pointcuts
+    > CustomExceptionCatch - advice中CustomExceptionCatch的命名切入点  
+    > PlayerInformationLog - advice中PlayerInformationLog的命名切入点
 
+### common
++ consts
+    > SystemConst - 核心常量
++ enums
+    > BaseEnum - 枚举类接口, 用于在返回给前端的对象中直接使用枚举  
+    > StatusEnum - 状态枚举
++ utils
+    > CartUtil - 购物车的工具类  
+    > ConstUtil - 常量工具类  
+    > CookieUtil - cookie工具类(目前没用)  
+    > JsonResult - jsonResult工具类(目前没用)  
+    > JsonUtil - json工具类(目前没用)  
+    > JwtUtil - JWT工具类  
+    > RedisUtil - redis工具类(目前没用)  
+    > SpringContextUtil - spring上下文工具类
 
-### Store模块
-#### 商品信息
-+ 返回商品信息, 没什么好说的
+### config
++ 
+    > AspectConfig - 切面配置  
+    > BootStartConfig - 启动容器时一些初始化的配置  
+    > CustomWebMvcConfig - 拦截器的配置  
+    > DefaultFastjsonConfig - fastjson配置  
+    > LogDirConfig - logback路径配置  
+    > MybatisPlusConfig - mybatisplus配置(目前没用)  
+    > RedisConfig - redis配置(目前没用)  
+    > SimpleBeanConfig - 一些简单bean的配置
 
+### controller
++  
+    > CartController - 购物车的controller  
+    > PlayerInfoController - 玩家信息的controller  
+    > StoreController - 商品的controller
 
+### handler
++ interceptor
+    > LoginInterceptor - 验证登陆状态的拦截器
++ listener(目前没用)
+    > MetaObjectHandler - 数据库元数据自动插入  
+    > RedisExpirationListener - redis数据过期通知
 
+### mapper
++ 
+    > AuthenticationMapper - 用于校验数据的mapper  
+    > CartMapper - 对购物车进行操作的mapper  
+    > PlayerInfoMapper - 玩家信息操作的mapper  
+    > StoreMapper - 对商品操作的mapper
 
-### 特别鸣谢
+### pojo(结构混乱, 摆大烂)
++ merchandise 商品pojo
+    > ItemsList - 商品的属性, 内部封装OnSale
+    > OnSale - 记录折扣信息
++ playerinfo
+    > 玩家的属性
++ userapi 屁用没有
++ BasePojo 基础pojo
+
+### service
++ order
+    > CartService - 购物车的service  
+    > CartServiceImpl - 购物车的service实现类
++ player
+    > PlayerInfoService - 玩家信息的service  
+    > PlayerInfoServiceImpl - 玩家信息的service实现类
++ store
+    > StoreService - 商品的service  
+    > StoreServiceImpl - 商品service的实现类
+
+### vo
++ 
+    > items - useless  
+    > R - 目前在用的, 用于封装给前端的返回值  
+    > UserAPIResult - useless
+
+### WebstoreApplication 主启动类
+
+## classpath
+
+### mappers
++ 
+    > AuthenticationMapper.xml - 用作对数据校验操作  
+    > CartMapper.xml - 用作对购物车的操作  
+    > PlayerInfoMapper.xml - 用作对玩家信息的操作  
+    > StoreMapper.xml - 用作对商店的操作
+
+### static 烂的
+
+### application.yml 主配置文件
+
+### logback-spring.xml logback配置文件
+
+## 特别鸣谢
 
 为什么我的不算呢？
 
