@@ -8,9 +8,13 @@ import developerplugin from "./components/plugins/developer";
 import Vuex from 'vuex'
 //引入store
 import store from './store/index.js'
+//引入
+import VueRouter from 'vue-router'
+
 
 //使用插件
 Vue.use(developerplugin)
+Vue.use(VueRouter)
 
 //关闭vue生产提示
 Vue.config.productionTip = false
