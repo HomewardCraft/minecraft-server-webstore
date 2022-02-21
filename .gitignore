@@ -13,4 +13,4 @@ target/
 /logs
 
 ### web
-/src/main/resources/static/webstore/node_modules/
+/webstore/node_modules/
