@@ -3,20 +3,17 @@
   <div>
     <div class="title">Crates</div>
     <div class="container">
-      <div class="background">
-        <div class="crate" :class="state" @mouseover="open()" @mouseout="origin()"/>
-        <transition name="fade">
-          <div class="crate"></div>
-        </transition>
+      <div class="left-background">
+        <div v-if="show" class="crate" @mouseover="show = false"/>
+        <div v-else class="crate-open" @mouseout="show = true"></div>
+        <div class="right-background">
+          <div class="right-main-title">Cosmetic Crates</div>
+          <div class="right-info">
+            <div class=""></div>
+          </div>
+        </div>
       </div>
     </div>
-
-<!--    <button v-on:click="show = !show">-->
-<!--      Toggle-->
-<!--    </button>-->
-<!--    <transition name="fade">-->
-<!--      <p v-if="show">hello</p>-->
-<!--    </transition>-->
   </div>
 </template>
 
@@ -31,9 +28,11 @@ export default {
   },
   methods: {
     open() {
-      this.show = !this.show
+      // this.state = 'crate-open'
+      this.show = false
     },
     origin() {
+      // this.state = 'crate'
       this.show = true
     }
   }
@@ -41,18 +40,6 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
-}
-
 
 body {
   background: #000;
@@ -60,7 +47,31 @@ body {
   font-family: proxima-nova, sans-serif;
 }
 
-.background {
+.right-info {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  border-style: solid;
+  box-sizing: border-box;
+  border-width: 0;
+  border-color: rgba(229, 231, 235, 1);
+}
+
+.right-background {
+  grid-column: span 3;
+  padding: 2.5rem
+}
+
+.right-main-title {
+  text-align: left;
+  font-weight: 700;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.left-background {
   margin-top: 4rem;
   margin-bottom: 3rem;
   background-color: rgba(13, 14, 15, 1);
@@ -71,12 +82,12 @@ body {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.crate {
+.crate, .crate-open {
   max-width: 100%;
   margin-left: 1.5rem;
 }
 
-.crate {
+.crate, .crate-open {
   min-height: 282px;
   max-width: 320px;
   width: 100%;
