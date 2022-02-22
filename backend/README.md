@@ -4,19 +4,13 @@ VO 将BO传输到view
 
 # 模块
 
-java
-├──com.homeward.webstore
-|
-|
-
-## com.homeward.webstore
-
-### aop
-+ advice
-    > CustomExceptionCatch - 捕获特定的运行时异常, 返回给前端数据  
-    > PlayerInformationLog - 玩家在首次登录, 其uuid与name被记录到数据库时记录到日志
-+ annotations
-    > JoinPointSymbol - 自定义注解, 用于辅助构建切入点表达式
+com.homeward.webstore
+  - aop
+    - advice
+    - > CustomExceptionCatch - 捕获特定的运行时异常, 返回给前端数据  
+    - > PlayerInformationLog - 玩家在首次登录, 其uuid与name被记录到数据库时记录到日志
+    + annotations
+        > JoinPointSymbol - 自定义注解, 用于辅助构建切入点表达式
 + pointcuts
     > CustomExceptionCatch - advice中CustomExceptionCatch的命名切入点  
     > PlayerInformationLog - advice中PlayerInformationLog的命名切入点
@@ -114,114 +108,3 @@ java
 ## 特别鸣谢
 
 为什么我的不算呢？
-src
-├───main
-│   ├───java
-│   │   └───com
-│   │       └───homeward
-│   │           └───webstore
-│   │               │   WebstoreApplication.java
-│   │               │   
-│   │               ├───aop
-│   │               │   ├───advice
-│   │               │   │       CustomExceptionAdvice.java
-│   │               │   │       PlayerInformationAdvice.java
-│   │               │   │       
-│   │               │   ├───annotations
-│   │               │   │       JoinPointSymbol.java
-│   │               │   │       
-│   │               │   └───pointcuts
-│   │               │           CustomExceptionAdvice.java
-│   │               │           PlayerInformationAdvice.java
-│   │               │           
-│   │               ├───common
-│   │               │   ├───consts
-│   │               │   │       BaseConst.java
-│   │               │   │       SystemConst.java
-│   │               │   │       
-│   │               │   ├───enums
-│   │               │   │       BaseEnum.java
-│   │               │   │       DateEnum.java
-│   │               │   │       StatusEnum.java
-│   │               │   │       
-│   │               │   └───util
-│   │               │           CartUtils.java
-│   │               │           CommonUtils.java
-│   │               │           ConstUtils.java
-│   │               │           CookieUtils.java
-│   │               │           JwtUtils.java
-│   │               │           RedisUtils.java
-│   │               │           SpringContextUtils.java
-│   │               │           
-│   │               ├───config
-│   │               │       AspectConfig.java
-│   │               │       BootStartConfig.java
-│   │               │       CustomWebMvcConfig.java
-│   │               │       DefaultFastjsonConfig.java
-│   │               │       LogDirConfig.java
-│   │               │       MybatisPlusConfig.java
-│   │               │       RedisConfig.java
-│   │               │       SimpleBeanConfig.java
-│   │               │       
-│   │               ├───controller
-│   │               │       CartController.java
-│   │               │       ItemController.java
-│   │               │       PlayerController.java
-│   │               │       
-│   │               ├───handler
-│   │               │   ├───interceptor
-│   │               │   │       LoginInterceptor.java
-│   │               │   │       
-│   │               │   └───listener
-│   │               │           MetaObjectHandler.java
-│   │               │           RedisExpirationListener.java
-│   │               │           
-│   │               ├───java
-│   │               │   └───bean
-│   │               │       ├───BO
-│   │               │       │       ItemInfoBO.java
-│   │               │       │       PlayerInfoBO.java
-│   │               │       │       
-│   │               │       ├───PO
-│   │               │       │       BasicPersistentObject.java
-│   │               │       │       ItemBasicInfo.java
-│   │               │       │       ItemSaleInfo.java
-│   │               │       │       PlayerBasicInfo.java
-│   │               │       │       
-│   │               │       └───VO
-│   │               │               R.java
-│   │               │               
-│   │               ├───mapper
-│   │               │       AuthenticationMapper.java
-│   │               │       CartMapper.java
-│   │               │       ItemMapper.java
-│   │               │       PlayerMapper.java
-│   │               │       
-│   │               └───service
-│   │                       CartService.java
-│   │                       CartServiceImpl.java
-│   │                       ItemService.java
-│   │                       ItemServiceImpl.java
-│   │                       PlayerService.java
-│   │                       PlayerServiceImpl.java
-│   │                       
-│   └───resources
-│       │   application.yml
-│       │   logback-spring.xml
-│       │   
-│       ├───mappers
-│       │       AuthenticationMapper.xml
-│       │       CartMapper.xml
-│       │       ItemMapper.xml
-│       │       PlayerMapper.xml
-│       │       
-│       └───static
-└───test
-    └───java
-        └───com
-            └───homeward
-                └───webstore
-                        TestFinalize.java
-                        TestNormal.java
-                        TestSpring.java
-                        WebstoreApplicationTests.java
