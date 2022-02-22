@@ -14,6 +14,7 @@
 </template>
 
 
+
 <script>
 //导入组件
 import homewardHeader from "@/components/HomewardHeader";
@@ -39,10 +40,10 @@ export default {
 }
 
 #app {
-  width:100%;
+  width: 100%;
   background-color: black;
   margin: 0 auto;
-  overflow:hidden;
-  position:relative;
+  overflow: hidden;
+  position: relative;
 }
 </style>

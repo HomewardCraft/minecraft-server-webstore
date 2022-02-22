@@ -12,10 +12,15 @@ import VueRouter from 'vue-router'
 
 import router from "@/router";
 
+//引入爱了门特
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 
 //使用插件
 Vue.use(developerplugin)
 Vue.use(VueRouter)
+Vue.use(ElementUI)
 
 //关闭vue生产提示
 Vue.config.productionTip = false

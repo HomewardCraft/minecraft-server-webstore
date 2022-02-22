@@ -1,5 +1,7 @@
 <!-- extras的商品的页面 -->
 <template>
+
+
   <div class="container">
     <div class="title">
       Extras
@@ -8,9 +10,11 @@
            :placeholder="placeholder"
            @focus="focus"
            @blur="unfocus"
-           ref="inputtext"
+           ref= "inputtext"
     >
+
   </div>
+
 
 </template>
 
