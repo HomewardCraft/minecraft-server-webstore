@@ -7,31 +7,29 @@ VO 将BO传输到view
 com.homeward.webstore
   - aop
     - advice
-    > CustomExceptionCatch - 捕获特定的运行时异常, 返回给前端数据  
-    > PlayerInformationLog - 玩家在首次登录, 其uuid与name被记录到数据库时记录到日志
+        > CustomExceptionCatch - 捕获特定的运行时异常, 返回给前端数据  
+        > PlayerInformationLog - 玩家在首次登录, 其uuid与name被记录到数据库时记录到日志
     - annotations
-      > JoinPointSymbol - 自定义注解, 用于辅助构建切入点表达式
+        > JoinPointSymbol - 自定义注解, 用于辅助构建切入点表达式
     - pointcuts
         > CustomExceptionCatch - advice中CustomExceptionCatch的命名切入点  
         > PlayerInformationLog - advice中PlayerInformationLog的命名切入点
-
-### common
-+ consts
-    > SystemConst - 核心常量
-+ enums
-    > BaseEnum - 枚举类接口, 用于在返回给前端的对象中直接使用枚举  
-    > StatusEnum - 状态枚举
-+ utils
-    > CartUtil - 购物车的工具类  
-    > ConstUtil - 常量工具类  
-    > CookieUtil - cookie工具类(目前没用)  
-    > JsonResult - jsonResult工具类(目前没用)  
-    > JsonUtil - json工具类(目前没用)  
-    > JwtUtil - JWT工具类  
-    > RedisUtil - redis工具类(目前没用)  
-    > SpringContextUtil - spring上下文工具类
-
-### config
+  - common
+    - consts
+        > SystemConst - 核心常量
+    - enums
+        > BaseEnum - 枚举类接口, 用于在返回给前端的对象中直接使用枚举  
+        > StatusEnum - 状态枚举
+    - utils
+        > CartUtil - 购物车的工具类  
+        > ConstUtil - 常量工具类  
+        > CookieUtil - cookie工具类(目前没用)  
+        > JsonResult - jsonResult工具类(目前没用)  
+        > JsonUtil - json工具类(目前没用)  
+        > JwtUtil - JWT工具类  
+        > RedisUtil - redis工具类(目前没用)  
+        > SpringContextUtil - spring上下文工具类
+  - config
 + 
     > AspectConfig - 切面配置  
     > BootStartConfig - 启动容器时一些初始化的配置  
