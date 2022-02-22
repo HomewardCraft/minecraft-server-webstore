@@ -8,7 +8,7 @@
           <homepageCrates @click.native="toCratesPage"/>
         </div>
         <homepageRanks/>
-        <homepageExtras/>
+        <homepageExtras @click.native="toExtrasPage"/>
       </div>
     </div>
   </div>
@@ -30,6 +30,10 @@ export default {
   methods: {
     toCratesPage() {
       this.$router.push('crates')
+    },
+    toExtrasPage() {
+      this.$router.push('extras')
+
     }
   }
 }
@@ -39,7 +43,7 @@ export default {
 <style scoped>
 .cat {
   padding: 20px 0;
-  margin:auto;
+  margin: auto;
   font-weight: bold;
   font-size: 28px;
   color: #FFFFFF;
