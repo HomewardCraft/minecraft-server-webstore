@@ -55,7 +55,7 @@ export default {
 
 .grid {
   margin: auto;
-  width: 1130px;
+  width: 1100px;
   height: 500px;
   display: grid;
   grid-template-columns: repeat(2, 0fr);

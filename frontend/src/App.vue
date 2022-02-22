@@ -34,6 +34,16 @@ export default {
 
 
 <style>
+div {
+  display: block;
+}
+
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .sale {
   alignment: center;
 }
