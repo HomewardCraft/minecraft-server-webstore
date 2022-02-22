@@ -1,6 +1,6 @@
+<!-- 头部的信息, 不会变 -->
 <template>
   <div class = "rinfo">
-
     <tr>
       <th class = "a">
         <div class="info">kkk.fantang.cc</div>
@@ -8,38 +8,30 @@
       <th class = "a">
         <div class="number">217</div>
       </th>
-
-      <th class = "b" >
+      <th class = "b">
         <div class="infodc">JOIN DISCORD</div>
       </th>
       <th  class = "b">
         <div class="numberdc">7887+</div>
       </th>
     </tr>
-
-
   </div>
-
 </template>
 
 <script>
 export default {
-  name: "wheaderinfo"
+  name: "HomewardInfo"
 }
 </script>
 
 <style scoped>
-
-
 .rinfo{
   position:relative;
   margin-left: 30px;
 }
 
 th:hover {
-
   opacity: 0.8;
-
 }
 
 .number {
@@ -48,7 +40,7 @@ th:hover {
   border-style: solid;
   border-color: #d09572;
   border-width: 1px;
-  border-left-width: 0px;
+  border-left-width: 0;
   padding-left: 8px;
   padding-right: 8px;
 }
@@ -59,17 +51,17 @@ th:hover {
   border-style: solid;
   border-color: #8991d6;
   border-width: 1px;
-  border-left-width: 0px;
+  border-left-width: 0;
   padding-left: 8px;
   padding-right: 8px;
 }
+
 .infodc {
   padding-left: 15px;
   padding-right: 15px;
   width: auto;
   /*控制两个展示框之间的距离*/
   margin-left: 20px;
-
 
   font-weight: bold;
   color: #fdfdfd;
@@ -97,7 +89,6 @@ div {
   /*控制两个展示框之间的距离*/
   margin-left: 20px;
 
-
   font-weight: bold;
   color: #FFFFFF;
   text-transform: uppercase;
@@ -107,5 +98,4 @@ div {
   border-color: #c28968;
   border-width: 1px;
 }
-
 </style>

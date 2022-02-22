@@ -1,40 +1,35 @@
+<!-- 底部的信息 -->
 <template>
-
   <div class = "main">
-
     <div class="firstline">
       <span id="grid">
-        <wshowplayer></wshowplayer>
-        <span class = "mmm"></span>
+        <homewardShowPlayer/>
+        <span class = "mmm"/>
       </span>
     </div>
-
     <div class = "divsec">
       <span class = "secondline">
-      Arcane Homeward, A Untitle network product.
-      <br>
-      We are in no way affiliated with or endorsed by Mojang, AB.
-    </span>
-
+        Arcane Homeward, A Untitle network product.<br>
+        We are in no way affiliated with or endorsed by Mojang, AB.
+      </span>
     </div>
-
-
   </div>
-
-
 </template>
 
+
 <script>
-import wshowplayer from "./wshowplayer"
+import homewardShowPlayer from "@/components/HomewardShowPlayer";
 
 export default {
-  name: "wfooter",
-  components: {wshowplayer}
+  name: "HomewardFooter",
+  components: {
+    homewardShowPlayer
+  }
 }
 </script>
 
-<style scoped>
 
+<style scoped>
 .divsec {
   background-color: #f6bc21;
 }
@@ -60,9 +55,7 @@ export default {
 }
 
 .secondline{
-
   color: #4a390a;
-
 
   margin:auto;
   padding: 20px 0;
@@ -80,6 +73,4 @@ export default {
   background-color: #e8a11a;
 
 }
-
-
 </style>

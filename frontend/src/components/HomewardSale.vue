@@ -1,34 +1,23 @@
+<!-- 网站的信息, 不会变 -->
 <template>
   <div>
-
       <span class="uni">
-
-
-        <span>
-          Happy
-        </span>
-
+        <span>Happy</span>
         <br>
-        <span>
-          Arcane Year !
-        </span>
-
+        <span>Arcane Year !</span>
         <br>
-        <span class="discount">
-          25% OFF STORE SALE
-        </span>
-
+        <span class="discount">25% OFF STORE SALE</span>
       </span>
-
-
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "wsale"
+  name: "HomewardSale"
 }
 </script>
+
 
 <style scoped>
 div{
@@ -39,9 +28,7 @@ div{
 }
 
 .uni {
-
   padding: 60px;
-
 }
 
 .discount {
@@ -69,6 +56,5 @@ div {
   text-align: center;
   border: 3px solid #9d66ac;
   background-color: #833f96;
-
 }
 </style>

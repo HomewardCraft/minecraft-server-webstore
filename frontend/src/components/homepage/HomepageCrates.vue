@@ -1,7 +1,8 @@
+<!-- 主页的crate的商品界面 -->
 <template>
   <div class="bg" :class="bgvue" @mouseover="dark()" @mouseout="origin()">
     <span>
-      Ranks
+      Crates
     </span>
     <div class="img" :class="hover">
     </div>
@@ -11,7 +12,7 @@
 
 <script>
 export default {
-  name: "wranks",
+  name: "HomepageCrates",
   data() {
     return {
       hover: '',
@@ -32,10 +33,10 @@ export default {
 }
 </script>
 
-<style scoped>
 
+<style scoped>
 div{
-  margin:10px;
+  margin-left: -20px;
 }
 
 .turndark{
@@ -53,26 +54,24 @@ span {
 }
 
 .img {
-  margin-left: 20px;
-  margin-top:15px;
-  background-image: url(../assets/ranks.png);
+  background-image: url(../../assets/crates.png);
+  background-position: bottom;
   background-repeat: no-repeat;
-  background-size: 35%;
-  width: 100%;
-  height: 94%;
+  width: 430px;
+  height: 440px;
   display: block;
 }
 
 .bg {
-  border: 2px solid #9d66ac;
-  background-color: #650f7e;
+  background: linear-gradient(45deg, #da1728, #e8602e);
   background-size: 100%;
-  width: 580px;
-  height: 240px;
+  width: 500px;
+  height: 500px;
   display: block;
   text-align: center;
-  margin-right: 15px;
+  margin-right: 10px;
   margin-left: 15px;
+  border: 1px solid transparent;
 }
 
 /*过期
@@ -81,10 +80,7 @@ span {
 /*}*/
 
 .hover {
-  background-image: url(../assets/ranks_hover.png);
+  background-image: url(../../assets/crates_hover.png);
 
 }
-
-
-
 </style>

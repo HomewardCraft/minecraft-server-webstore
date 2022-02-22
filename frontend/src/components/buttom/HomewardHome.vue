@@ -1,14 +1,16 @@
 <template>
   <div class="bt">
-    STORE
+    HOME
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "bstore"
+  name: "HomewardHome"
 }
 </script>
+
 
 <style scoped>
 div{
@@ -19,13 +21,12 @@ div{
   margin-right: 15px;
   margin-left: 15px;
   border: 1px solid transparent;
-
 }
-.bt{
 
-  background-color: #a60d0d;
+.bt:hover{
+  background-color: #d7af11;
   border-style:solid;
-  border-color: #e07171;
-  border-width:1px;
+  border-color: rgb(225, 212, 161);
+  border-width:1px
 }
 </style>

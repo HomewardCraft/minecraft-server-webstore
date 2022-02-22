@@ -1,14 +1,17 @@
+<!-- 这个固定信息没必要编程组件 -->
 <template>
   <div class="bt">
-    RULES
+    BLOG
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "brules"
+  name: "HomewardBlog"
 }
 </script>
+
 
 <style scoped>
 div{
@@ -19,12 +22,13 @@ div{
   margin-right: 15px;
   margin-left: 15px;
   border: 1px solid transparent;
-}
-.bt:hover{
 
-  background-color: #06a90d;
+}
+
+.bt:hover{
+  background-color: #1185d7;
   border-style:solid;
-  border-color: #94e199;
+  border-color: #a5cde0;
   border-width:1px;
 }
 </style>

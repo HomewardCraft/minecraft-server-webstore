@@ -1,49 +1,51 @@
+<!-- 页面顶部的导航 -->
 <template>
-
   <div class = "router">
-
     <ul class="rt">
       <li class="il">
         <a>
-          <bhome></bhome>
+          <homewardHome/>
         </a>
       </li>
       <li>
         <a>
-          <bblog></bblog>
+          <homewardBlog/>
         </a>
       </li>
       <li>
         <a>
-          <brules></brules>
+          <homewardRules/>
         </a>
       </li>
       <li>
         <a>
-          <bstore></bstore>
+          <homewardStore/>
         </a>
       </li>
     </ul>
-
   </div>
-
 </template>
 
-<script>
 
-import bhome from "./buttom/bhome";
-import bblog from "./buttom/bblog";
-import brules from "./buttom/brules";
-import bstore from "./buttom/bstore";
+<script>
+import homewardHome from "@/components/buttom/HomewardHome";
+import homewardBlog from "@/components/buttom/HomewardBlog";
+import homewardRules from "@/components/buttom/HomewardRules";
+import homewardStore from "@/components/buttom/HomewardStore";
 
 export default {
-  name: "wrouter",
-  components: {bhome, bblog, brules, bstore}
+  name: "HomewardRouter",
+  components: {
+    homewardHome,
+    homewardBlog,
+    homewardRules,
+    homewardStore
+  }
 }
 </script>
 
-<style scoped>
 
+<style scoped>
 .rt {
   list-style-type: none;
   margin: auto 0;
@@ -66,5 +68,4 @@ a {
 .router {
   position:relative;
 }
-
 </style>

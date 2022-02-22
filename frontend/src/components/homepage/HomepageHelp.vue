@@ -1,43 +1,29 @@
+<!-- 主页下方的帮助栏 -->
 <template>
   <div>
-
       <span class="uni">
-
-
-        <span class="nh">
-          Need help?
-        </span>
-
+        <span class="nh">Need help?</span>
         <br>
-        <span>
-          Not sure where to start, or need some friendly
-        </span>
+        <span>Not sure where to start, or need some friendly</span>
         <br>
-        <span>
-          assistance? Our team is here for you from start to finish!
-
-        </span>
-
-<br>
-        <span class="help">
-          Click for more info  →
-        </span>
-
+        <span>assistance? Our team is here for you from start to finish!</span>
+        <br>
+        <span class="help">Click for more info  →</span>
       </span>
-
-
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "whelp"
+  name: "HomepageHelp"
 }
 </script>
 
+
 <style scoped>
 div {
-  background-image: url(../assets/ghost.png);
+  background-image: url(../../assets/ghost.png);
   background-position-x: 40px;
   background-position-y: -50px;
   display: block;
@@ -83,13 +69,11 @@ span {
 
 div {
   margin: auto;
-  width: 1100px;
+  width: 1107px;
   height: 200px;
   display: block;
   text-align: center;
   border: 3px solid #5685a7;
   background-color: #1e5c88;
-
 }
-
 </style>

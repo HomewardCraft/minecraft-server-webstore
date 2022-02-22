@@ -1,14 +1,17 @@
+<!-- 这个其实没必要变成组件 -->
 <template>
   <div class="bt">
-    BLOG
+    RULES
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "bblog"
+  name: "HomewardRules"
 }
 </script>
+
 
 <style scoped>
 div{
@@ -19,13 +22,12 @@ div{
   margin-right: 15px;
   margin-left: 15px;
   border: 1px solid transparent;
-
 }
-.bt:hover{
 
-  background-color: #1185d7;
+.bt:hover{
+  background-color: #06a90d;
   border-style:solid;
-  border-color: #a5cde0;
+  border-color: #94e199;
   border-width:1px;
 }
 </style>

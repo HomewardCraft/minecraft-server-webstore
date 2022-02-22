@@ -1,73 +1,40 @@
+<!-- 管理所有组件的组件 -->
 <template>
   <div id="app">
     <br>
-    <wheader></wheader>
-    <wsale class="wsale"></wsale>
+    <homewardHeader/>
+    <homewardSale class="sale"/>
     <br>
-    <wcount></wcount>
-    <span class="cat">
-      Categories
-    </span>
-    <wcategories></wcategories>
-    <whelp></whelp>
-    <wfooter></wfooter>
+    <homepageCount/>
+    <span class="cat"/>
+    <!-- 引入路由 -->
+    <router-view/>
+    <homewardFooter/>
   </div>
 </template>
 
+
 <script>
 //导入组件
-import HelloWorld from './components/HelloWorld.vue'
-import wheader from "./components/wheader";
-import wsale from "./components/wsale";
-import wcount from "./components/wcount";
-import wcategories from "./components/wcategories";
-import whelp from "./components/whelp";
-import wfooter from "./components/wfooter";
-import Wrouter from "./components/wrouter";
-import Wcrates from "./components/wcrates";
-
-
+import homewardHeader from "@/components/HomewardHeader";
+import homewardSale from "@/components/HomewardSale";
+import homepageCount from "@/components/homepage/HomepageCount";
+import homewardFooter from "@/components/HomewardFooter";
 
 export default {
   name: 'App',
   components: {
-    Wcrates,
-    Wrouter,
-    HelloWorld,
-    wheader,
-    wsale,
-    wcount,
-    wcategories,
-    whelp,
-    wfooter
+    homewardHeader,
+    homewardSale,
+    homepageCount,
+    homewardFooter
   }
 }
 </script>
 
+
 <style>
-
-wcategories{
-
-}
-
-div{
-
-}
-
-.cat {
-  padding: 20px 0;
-  margin:auto;
-  font-weight: bold;
-  font-size: 28px;
-  color: #FFFFFF;
-  width: 1100px;
-  height: 30px;
-  display: block;
-  text-align: left;
-}
-
-
-.wsale {
+.sale {
   alignment: center;
 }
 

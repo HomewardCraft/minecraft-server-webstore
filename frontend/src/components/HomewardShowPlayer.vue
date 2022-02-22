@@ -1,46 +1,34 @@
+<!-- 域名的展示 -->
 <template>
-
   <div class="grid">
     <div>
-
       <span class = "blockone">
       KKK.FANTANG.CC
       </span>
-
     </div>
     <div>
-
       <span class = "blocktwo">
       297
       </span>
-
     </div>
   </div>
-
-
 </template>
 
+
 <script>
-
-
-
 export default {
-  name: "wshowplayer",
+  name: "HomewardShowPlayer",
 }
 </script>
 
+
 <style scoped>
-
-
-
 .grid {
-
   /*此行暂时摆烂，不应该从组件中调整位置*/
   padding-top: 10px;
   padding-bottom: 10px;
   display: grid;
   grid-template-columns: repeat(3, 0fr);
-
 }
 
 .grid:hover{
@@ -61,7 +49,6 @@ export default {
   text-transform: uppercase;
 
   background-color: #d88913;
-
 }
 
 .blockone {
@@ -73,13 +60,10 @@ export default {
   display: block;
   width: 150px;
 
-
-
   font-weight: bold;
   color: #814810;
   text-transform: uppercase;
 
   background-color: #d48412;
-
 }
 </style>

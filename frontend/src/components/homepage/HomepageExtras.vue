@@ -1,3 +1,4 @@
+<!-- 主页的extra的商品界面 -->
 <template>
   <div class="bg" :class="bgvue" @mouseover="dark()" @mouseout="origin()">
     <span>
@@ -8,15 +9,15 @@
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "wextras",
+  name: "HomepageExtras",
   data() {
     return {
       hover: '',
       bgvue: ''
     }
-
   },
   methods: {
     dark() {
@@ -31,8 +32,8 @@ export default {
 }
 </script>
 
-<style scoped>
 
+<style scoped>
 div{
   margin:10px;
 }
@@ -54,7 +55,7 @@ span {
 .img {
   margin-left: 20px;
   margin-top:50px;
-  background-image: url(../assets/extras.png);
+  background-image: url(../../assets/extras.png);
   background-repeat: no-repeat;
   background-size: 35%;
   width: 100%;
@@ -80,7 +81,7 @@ span {
 /*}*/
 
 .hover {
-  background-image: url(../assets/extras_hover.png);
+  background-image: url(../../assets/extras_hover.png);
 
 }
 </style>

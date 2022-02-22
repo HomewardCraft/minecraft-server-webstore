@@ -1,24 +1,22 @@
+<!-- 主页的奖励进度 -->
 <template>
-
   <div>
-
     <span>
       Spend $20+ USD for 1x Heart Wings & Heart Crown Cosmetics!
     </span>
-
     <span class = "cart">
       Your Cart: 30%
     </span>
-
   </div>
-
 </template>
+
 
 <script>
 export default {
-  name: "wcount"
+  name: "HomepageCount"
 }
 </script>
+
 
 <style scoped>
 
@@ -45,6 +43,5 @@ div {
   text-align: center;
   border: 2px solid #b670c8;
   background-color: #ae60c2;
-
 }
 </style>

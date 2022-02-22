@@ -10,6 +10,8 @@ import store from './store/index.js'
 //引入
 import VueRouter from 'vue-router'
 
+import router from "@/router";
+
 
 //使用插件
 Vue.use(developerplugin)
@@ -24,6 +26,7 @@ new Vue({
   //模板渲染器
   render: h => h(App),
   store,
+  router,
   beforeCreate() {
     Vue.prototype.$bus = this //全局事件总线
   }

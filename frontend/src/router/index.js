@@ -1,23 +1,21 @@
-// 该文件专门用于创建整个应用的路由器
 import VueRouter from 'vue-router'
-console.log("(+) 加载Vue路由中")
 
-//引入组件
+import homepageRouter from "@/pages/HomepageRoute";
+import cratesPage from "@/pages/CratesRoute";
 
-//创建一个路由
-
-// const router = new VueRouter (
-//     {
-//         routes: [
-//
-//             {
-//                 path:'/about',
-//                 component: About
-//             }
-//
-//
-//             ]
-//     }
-// )
-
-console.log("(+) 加载Vue路由成功")
+export default new VueRouter(
+    {
+        routes: [
+            {
+                name: 'homepageRouter',
+                path: '/',
+                component: homepageRouter
+            },
+            {
+                name: 'crates',
+                path: '/crates',
+                component: cratesPage
+            }
+        ]
+    }
+)

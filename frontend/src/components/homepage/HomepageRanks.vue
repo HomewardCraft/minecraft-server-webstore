@@ -1,22 +1,23 @@
+<!-- 主页的玩家rank栏位 -->
 <template>
   <div class="bg" :class="bgvue" @mouseover="dark()" @mouseout="origin()">
     <span>
-      Crates
+      Ranks
     </span>
     <div class="img" :class="hover">
     </div>
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "wcrates",
+  name: "HomepageRanks",
   data() {
     return {
       hover: '',
       bgvue: ''
     }
-
   },
   methods: {
     dark() {
@@ -28,14 +29,13 @@ export default {
       this.bgvue = ''
     }
   }
-
 }
 </script>
 
-<style scoped>
 
+<style scoped>
 div{
-  margin-left: -20px;
+  margin:10px;
 }
 
 .turndark{
@@ -53,24 +53,26 @@ span {
 }
 
 .img {
-  background-image: url(../assets/crates.png);
-  background-position: bottom;
+  margin-left: 20px;
+  margin-top:15px;
+  background-image: url(../../assets/ranks.png);
   background-repeat: no-repeat;
-  width: 430px;
-  height: 440px;
+  background-size: 35%;
+  width: 100%;
+  height: 94%;
   display: block;
 }
 
 .bg {
-  background: linear-gradient(45deg, #da1728, #e8602e);
+  border: 2px solid #9d66ac;
+  background-color: #650f7e;
   background-size: 100%;
-  width: 500px;
-  height: 500px;
+  width: 580px;
+  height: 240px;
   display: block;
   text-align: center;
-  margin-right: 10px;
+  margin-right: 15px;
   margin-left: 15px;
-  border: 1px solid transparent;
 }
 
 /*过期
@@ -79,9 +81,7 @@ span {
 /*}*/
 
 .hover {
-  background-image: url(../assets/crates_hover.png);
+  background-image: url(../../assets/ranks_hover.png);
 
 }
-
-
 </style>
