@@ -1,18 +1,1 @@
-HELP.md
-target/
-.mvn/*
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-/logs
-
-### web
-/webstore/node_modules/
-/node_modules/
-/lib/
+frontend
