@@ -1,5 +1,4 @@
 //该文件用于创建Vuex中最为核心的store
-
 import Vue from 'vue'
 //引入Vuex
 import Vuex from 'vuex'
@@ -16,11 +15,9 @@ const state = {}
 
 //创建并暴露store
 const store = new Vuex.Store({
-
     actions: actions,
     mutations: mutations,
     state: state
-
 })
 
 export default store
