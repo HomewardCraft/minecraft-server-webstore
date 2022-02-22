@@ -1,6 +1,6 @@
 <!-- 页面顶部的导航 -->
 <template>
-  <div class = "router">
+  <div class="router">
     <ul class="rt">
       <li class="il">
         <a>
@@ -19,7 +19,10 @@
       </li>
       <li>
         <a>
-          <homewardStore/>
+          <router-link to="/">
+            <homewardStore/>
+          </router-link>
+
         </a>
       </li>
     </ul>
@@ -40,6 +43,13 @@ export default {
     homewardBlog,
     homewardRules,
     homewardStore
+  },
+  methods: {
+    /* Deprecated
+     returnStorePage() {
+     this.$router.push('homepageRouter')
+     }
+     */
   }
 }
 </script>
@@ -58,6 +68,7 @@ li {
 }
 
 a {
+  text-decoration: none;
   font-size: 18px;
   font-weight: bold;
   color: #FFFFFF;
@@ -66,6 +77,6 @@ a {
 }
 
 .router {
-  position:relative;
+  position: relative;
 }
 </style>
