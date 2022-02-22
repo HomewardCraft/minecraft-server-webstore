@@ -1,10 +1,6 @@
-PO 从数据库表中查出来的最原始的数据, 封装到BO中  
-BO 封装了PO, 由业务层传输到控制器  
-VO 将BO传输到view
+# 结构
 
-# 模块
-
-- java
+java
   - com.homeward.webstore
     - aop
       - advice
@@ -26,11 +22,11 @@ VO 将BO传输到view
       - utils
           > CartUtil - 购物车的工具类  
           > ConstUtil - 常量工具类  
-          > CookieUtil - cookie工具类(目前没用)  
-          > JsonResult - jsonResult工具类(目前没用)  
-          > JsonUtil - json工具类(目前没用)  
+          > CookieUtil - cookie工具类  
+          > JsonResult - jsonResult工具类  
+          > JsonUtil - json工具类  
           > JwtUtil - JWT工具类  
-          > RedisUtil - redis工具类(目前没用)  
+          > RedisUtil - redis工具类  
           > SpringContextUtil - spring上下文工具类
     - config
         > AspectConfig - 切面配置  
@@ -38,8 +34,8 @@ VO 将BO传输到view
         > CustomWebMvcConfig - 拦截器的配置  
         > DefaultFastjsonConfig - fastjson配置  
         > LogDirConfig - logback路径配置  
-        > MybatisPlusConfig - mybatisplus配置(目前没用)  
-        > RedisConfig - redis配置(目前没用)  
+        > MybatisPlusConfig - mybatisplus配置  
+        > RedisConfig - redis配置  
         > SimpleBeanConfig - 一些简单bean的配置
     - controller
         > CartController - 购物车的controller  
@@ -48,7 +44,7 @@ VO 将BO传输到view
     - handler
       - interceptor
           > LoginInterceptor - 验证登陆状态的拦截器
-      - listener(目前没用)
+      - listener
           > MetaObjectHandler - 数据库元数据自动插入  
           > RedisExpirationListener - redis数据过期通知
     - java.bean
@@ -68,29 +64,20 @@ VO 将BO传输到view
         > ItemMapper - 对商品操作的mapper  
         > PlayerMapper - 对玩家操作的mapper
     - service
-        > CartService - 购物车service的接口
-        > CartServiceImpl - 购物车service的实现类
-        > ItemService - 商品service的接口
-        > ItemServiceImpl - 商品service的实现类
-        > PlayerService - 玩家service的接口
+        > CartService - 购物车service的接口  
+        > CartServiceImpl - 购物车service的实现类  
+        > ItemService - 商品service的接口  
+        > ItemServiceImpl - 商品service的实现类  
+        > PlayerService - 玩家service的接口  
         > PlayerServiceImpl - 玩家service的实现类
     - WebstoreApplication 主启动类
 
-## classpath
-
-### mappers
-+ 
-    > AuthenticationMapper.xml - 用作对数据校验操作  
-    > CartMapper.xml - 用作对购物车的操作  
-    > PlayerInfoMapper.xml - 用作对玩家信息的操作  
-    > StoreMapper.xml - 用作对商店的操作
-
-### static 烂的
-
-### application.yml 主配置文件
-
-### logback-spring.xml logback配置文件
-
-## 特别鸣谢
-
-为什么我的不算呢？
+resources
+  - mappers
+      > AuthenticationMapper.xml - 用作对数据校验操作  
+      > CartMapper.xml - 用作对购物车的操作  
+      > ItemMapper.xml - 用作对商品的操作  
+      > PlayerMapper.xml - 用作对玩家的操作
+  - static - 前端文件位置
+  - application.yml 主配置文件
+  - logback-spring.xml logback配置文件
