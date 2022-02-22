@@ -1,4 +1,4 @@
-<!-- crates的商品的页面 -->
+<!-- 与CrateShowcase关联, 以下为摆烂代码, 马上清掉 -->
 <template>
   <div>
     <div class="title">Crates</div>

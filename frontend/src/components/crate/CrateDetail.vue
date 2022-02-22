@@ -1,4 +1,4 @@
-<!-- 左侧图片 -->
+<!-- 详细信息 -->
 <template>
 <div>
 
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "CrateImage"
+  name: "CrateDetails"
 }
 </script>
 

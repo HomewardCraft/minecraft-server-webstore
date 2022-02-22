@@ -1,4 +1,4 @@
-<!-- 左侧图片 -->
+<!-- 包含CrateDetail -->
 <template>
 <div>
 
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "CrateImage"
+  name: "RightShowcase"
 }
 </script>
 
