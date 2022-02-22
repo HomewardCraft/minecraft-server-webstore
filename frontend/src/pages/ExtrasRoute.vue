@@ -12,6 +12,21 @@
            @blur="unfocus"
            ref= "inputtext"
     >
+    <br>
+    <el-row>
+      <el-col :span="6" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
+        <el-card :body-style="{ padding: '0px' }">
+          <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+          <div style="padding: 14px;">
+            <span>好吃的汉堡</span>
+            <div class="bottom clearfix">
+              <time class="time">{{ currentDate }}</time>
+              <el-button type="text" class="button">操作按钮</el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
 
   </div>
 
@@ -25,6 +40,7 @@ export default {
   data() {
     return {
       placeholder: "按 Enter 来聚焦搜索",
+      currentDate: new Date()
     }
   },
   methods: {
@@ -40,8 +56,8 @@ export default {
       var _self = this;
       document.onkeydown = function () {
         var key = window.event.keyCode;
-        if (key == 13) {
-          _self.$refs.inputtext.focus();
+        if (key == 13) { //如果是空格
+          _self.$refs.inputtext.focus(); //转移焦点
         }
       }
 
@@ -56,6 +72,9 @@ export default {
 </script>
 
 <style scoped>
+/*导入外部数据*/
+@import "~@/assets/css/extraroute.css";
+
 
 input:focus {
   border-style: solid;
