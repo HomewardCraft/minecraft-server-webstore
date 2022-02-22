@@ -5,7 +5,6 @@ import App from './App.vue'
 //引入插件
 import developerplugin from "./components/plugins/developer";
 //引入vuex
-import Vuex from 'vuex'
 //引入store
 import store from './store/index.js'
 //引入
@@ -14,7 +13,6 @@ import VueRouter from 'vue-router'
 
 //使用插件
 Vue.use(developerplugin)
-// Vue.use(Vuex)
 Vue.use(VueRouter)
 
 //关闭vue生产提示

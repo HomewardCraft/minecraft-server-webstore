@@ -15,7 +15,7 @@ const mutations = {}
 const state = {}
 
 //创建并暴露store
-const store = new Vuex.store({
+const store = new Vuex.Store({
 
     actions: actions,
     mutations: mutations,
