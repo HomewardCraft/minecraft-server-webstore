@@ -1,0 +1,10 @@
+.idea
+node_modules
+
+package-lock.json
+
+docs/_book
+
+test/
+
+
