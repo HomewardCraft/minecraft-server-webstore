@@ -17,4 +17,4 @@
 ## 概述
 Vue 框架 2.0 开发版本
 
-`<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>`
+SpringBoot 框架 3.0 开发版本
