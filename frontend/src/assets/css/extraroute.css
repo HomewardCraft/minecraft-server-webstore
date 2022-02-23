@@ -2,10 +2,20 @@
     margin-top: 40px;
 }
 
+/*字体框的位移高度*/
+
+.textbody {
+    margin-top: -50px;
+}
+
 .cardbody {
 
 
 }
+.itembg {
+    background-color: violet;
+}
+
 .name {
     font-size: 18px;
 }
@@ -24,7 +34,6 @@
 
 
 .col {
-
 
     margin-left: 30px;
     margin-bottom: 40px
@@ -58,9 +67,23 @@
 
 }
 
+/*在物品底层的相对背景格子位置*/
+
+.itemsbg {
+    /*必须是relative否则会出现叠加问题*/
+    position: relative;
+    /*相对格子数轴偏移*/
+    top:100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: block;
+    height: 100px;
+    background-color: #181a1b;
+}
 
 .image {
-
+    position: relative;
+    top: -60px;
     margin: auto;
     width: 50%;
     display: block;

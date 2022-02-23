@@ -1,7 +1,6 @@
 <!-- extras的商品的页面 -->
 <template>
 
-
   <div class="container">
     <div class="title">
       Extras
@@ -26,9 +25,11 @@
           borderBottom: '10px solid #E94AE3FF',
         }">
 
+          <div class="itemsbg"></div>
           <img src="../assets/extras/extras1.png" class="image">
 
-          <div style="padding: 14px;">
+
+          <div style="padding: 14px;" class="textbody">
             <span class="name">符文槽</span>
             <div class="bottom clearfix">
               <div class="origin">￥45.5</div>
@@ -95,21 +96,30 @@ export default {
 /*导入外部数据*/
 @import "~@/assets/css/extraroute.css";
 
+/*
+ *因为特殊原因,请勿讲以下两个el和elcard移动至extraroute.css,否则样式不会生效
+ *更多疑问请直接访问css import语法规则和 elementui语法规则
+ */
+
+
+/*配置卡身 这里是设置了卡的背景颜色和border样式*/
 .el-card {
   border-radius: 0px;
   border: 1px solid #555656;
-  background-color: #FFF;
+  background-color: #0d0e0f;
   color: #303133;
   transition: .3s;
 }
 
+/*卡身动画*/
+/*TODO: 缺少关键帧*/
 .el-card:hover {
   position: relative;
   top: -10px;
   opacity: 0.8;
 }
 
-
+/*非外部样式内容*/
 
 input:focus {
   border-style: solid;
@@ -118,7 +128,7 @@ input:focus {
   border-color: yellow;
 }
 
-
+/*输入框*/
 input {
 
   padding: 12px 24px;
