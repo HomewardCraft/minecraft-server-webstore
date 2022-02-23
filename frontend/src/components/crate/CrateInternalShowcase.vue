@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style scoped>
+/* 普通的样式 */
 .simple {
   box-sizing: border-box;
   color: #fff;
@@ -28,25 +29,30 @@ export default {
   display: block;
 }
 
+/* 网格坐标 */
 .grid {
   display: grid;
   grid-template-columns: repeat(4,minmax(0,1fr));
 }
 
+/* 边框 */
 .border-tiny {
   border-style: solid;
   border-width: 0;
   border-color: rgba(229, 231, 235, 1);
 }
 
+/* 坐标内位置 */
 .position-1 {
   grid-column: span 3;
 }
 
+/* 边距 */
 .padding-2\.5 {
   padding: 2.5rem
 }
 
+/* 商品名称样式 */
 .title {
   text-align: left;
   font-weight: 700;
