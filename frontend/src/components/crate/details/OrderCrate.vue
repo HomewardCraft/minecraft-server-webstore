@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="simple el-icon-wallet wallet-style wallet-image"/>
-    <span>Buy Now</span>
+  <div class="font-test">
+    <div class="wallet-style wallet-image el-icon-wallet "/>
+    <span class="text-style">Buy Now</span>
   </div>
 </template>
 
@@ -12,23 +12,20 @@ export default {
 </script>
 
 <style scoped>
-/* 普通样式 */
-.simple {
-  display: flex;
+.text-style {
+  padding-right: 0.2rem;
 }
 
 /* 钱包位置的样式*/
 .wallet-style {
   width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 0.75rem;
+  height: 1.05rem;
+  margin-right: 0.5rem;
 }
 
 /*钱包图片样式*/
 .wallet-image {
-  display: block;
   vertical-align: middle;
+  fill-rule: evenodd;
 }
-
-
 </style>

@@ -34,6 +34,7 @@ export default {
   padding-top: 0.75rem;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 /* 基础样式 */

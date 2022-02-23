@@ -14,7 +14,6 @@
 </template>
 
 
-
 <script>
 //导入组件
 import homewardHeader from "@/components/HomewardHeader";
@@ -35,6 +34,15 @@ export default {
 
 
 <style>
+@font-face {
+  font-family: proxima-nova;
+  src: url("/src/assets/fonts/proximanova.ttf");
+}
+
+body {
+  font-family: proxima-nova, sans-serif;
+}
+
 div {
   display: block;
 }
