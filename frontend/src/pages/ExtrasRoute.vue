@@ -10,18 +10,38 @@
            :placeholder="placeholder"
            @focus="focus"
            @blur="unfocus"
-           ref= "inputtext"
+           ref="inputtext"
     >
     <br>
-    <el-row>
-      <el-col :span="6" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
-        <el-card :body-style="{ padding: '0px' }">
-          <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+
+
+    <el-row class='rol'>
+      <el-col class='col' :span="11" v-for="(o, index) in 3" :key="o">
+        <el-card class='cardbody' :body-style="{
+          padding: '0px',
+          background: '#0D0E0FFF',
+          color: '#fff',
+          fontWeight: 'bold',
+          // border: '0px solid gray',
+          borderBottom: '10px solid #E94AE3FF',
+        }">
+
+          <img src="../assets/extras/extras1.png" class="image">
+
           <div style="padding: 14px;">
-            <span>好吃的汉堡</span>
+            <span class="name">符文槽</span>
             <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
-              <el-button type="text" class="button">操作按钮</el-button>
+              <div class="origin">￥45.5</div>
+              <br>
+              <div class="now">￥25.5</div>
+              <br>
+              <!-- <time class="time">{{ currentDate }}</time>-->
+              <el-button type="text" class="button">
+                <span class="viewitems">查看物品信息
+                  <i class="el-icon-right"></i>
+                </span>
+
+              </el-button>
             </div>
           </div>
         </el-card>
@@ -74,6 +94,21 @@ export default {
 <style scoped>
 /*导入外部数据*/
 @import "~@/assets/css/extraroute.css";
+
+.el-card {
+  border-radius: 0px;
+  border: 1px solid #555656;
+  background-color: #FFF;
+  color: #303133;
+  transition: .3s;
+}
+
+.el-card:hover {
+  position: relative;
+  top: -10px;
+  opacity: 0.8;
+}
+
 
 
 input:focus {
