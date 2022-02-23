@@ -3,7 +3,7 @@
 <div class="padding-2.5 position-1">
 <div class="title">Cosmetic Crates</div>
   <div class="simple grid border-tiny">
-    <crate-detail/>
+    <crate-detail v-for="crate in crates" :key="crate.name"/>
   </div>
 </div>
 </template>
@@ -15,6 +15,24 @@ export default {
   name: "RightShowcase",
   components: {
     crateDetail
+  },
+  data() {
+    return {
+      crates: {
+        a: {
+          name: "20x Cosmetic Crate Key"
+        },
+        b: {
+          name: "15x Cosmetic Crate Key"
+        },
+        c: {
+          name: "10x Cosmetic Crate Key"
+        },
+        d: {
+          name: "5x Cosmetic Crate Key"
+        }
+      }
+    }
   }
 }
 </script>
