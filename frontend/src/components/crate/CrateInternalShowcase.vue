@@ -1,11 +1,11 @@
 <!-- 包含CrateDetail -->
 <template>
-<div class="padding-2.5 position-1">
-<div class="title">Cosmetic Crates</div>
-  <div class="simple grid border-tiny">
-    <crate-detail v-for="crate in crates" :key="crate.name"/>
+  <div class="padding-2.5 position-1">
+    <div class="title">Cosmetic Crates</div>
+    <div class="simple grid border-tiny">
+      <crate-detail v-for="crate in crates" :key="crate.name"/>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -50,7 +50,7 @@ export default {
 /* 网格坐标 */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 /* 边框 */
