@@ -95,6 +95,22 @@ export default {
 /*导入外部数据*/
 @import "~@/assets/css/extraroute.css";
 
+.el-card {
+  border-radius: 0px;
+  border: 1px solid #555656;
+  background-color: #FFF;
+  color: #303133;
+  transition: .3s;
+}
+
+.el-card:hover {
+  position: relative;
+  top: -10px;
+  opacity: 0.8;
+}
+
+
+
 input:focus {
   border-style: solid;
   border-width: 1px;

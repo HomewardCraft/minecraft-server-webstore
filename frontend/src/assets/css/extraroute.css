@@ -1,11 +1,9 @@
 .rol {
     margin-top: 40px;
-    /*outline-style: solid;*/
-    /*outline-width: 10px;*/
-    /*outline-color: gray;*/
 }
 
 .cardbody {
+
 
 }
 .name {
@@ -24,7 +22,9 @@
 
 }
 
+
 .col {
+
 
     margin-left: 30px;
     margin-bottom: 40px
