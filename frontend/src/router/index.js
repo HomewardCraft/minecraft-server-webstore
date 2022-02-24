@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import homepageRouter from "@/pages/HomepageRoute";
 import cratesPage from "@/pages/CratesRoute";
 import extrasPage from "@/pages/ExtrasRoute";
+import productionPage from "@/pages/ProductionPageRoute";
 
 export default new VueRouter(
     {
@@ -21,6 +22,11 @@ export default new VueRouter(
                 name: 'extras',
                 path: '/extras',
                 component: extrasPage
+            },
+            {
+                name: 'product',
+                path: '/p/:id',
+                component: productionPage
             }
         ]
     }
