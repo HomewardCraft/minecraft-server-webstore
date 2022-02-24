@@ -28,18 +28,25 @@
           <div class="itemsbg"></div>
           <img src="../assets/extras/extras1.png" class="image">
 
-<!--          {{o.itemBasicInfo.name}}}-->
+          <!--{{o.itemBasicInfo.name}}}-->
           <div style="padding: 14px;" class="textbody">
-            <span class="name" ref="itemname" :data-id = "data[index].itemBasicInfo.id" data-name="符文槽">
-              {{data[index].itemBasicInfo.name}}
+            <span class="name"
+                  ref="itemname"
+                  :data-id="data[index].itemBasicInfo.id"
+                  :data-name="data[index].itemBasicInfo.name">
+
+              <!--依照data列表的数组index来获取数组中对应的元素-->
+              {{ data[index].itemBasicInfo.name }}
+
             </span>
             <div class="bottom clearfix">
               <div class="origin" ref="originprice" :data-price="data[index].itemBasicInfo.price">
-                ￥{{data[index].itemBasicInfo.price}}
-                  </div>
+                ￥{{ data[index].itemBasicInfo.price }}
+              </div>
               <br>
-              <div class="now" ref="currentprice" :data-cprice="data[index].itemBasicInfo.price * data[index].itemSaleInfo.onsalePercent * 0.01">
-                ￥{{data[index].itemBasicInfo.price * data[index].itemSaleInfo.onsalePercent * 0.01}}
+              <div class="now" ref="currentprice"
+                   :data-cprice="data[index].itemBasicInfo.price * data[index].itemSaleInfo.onsalePercent * 0.01">
+                ￥{{ data[index].itemBasicInfo.price * data[index].itemSaleInfo.onsalePercent * 0.01 }}
               </div>
               <br>
               <!-- <time class="time">{{ currentDate }}</time>-->
@@ -68,6 +75,7 @@ export default {
     return {
       placeholder: "按 Enter 来聚焦搜索",
       currentDate: new Date(),
+      // 测试数据-要与后端保持一致
       "data": [
         {
           "itemBasicInfo": {
@@ -91,7 +99,7 @@ export default {
     detail() {
 
       this.$router.push({
-
+        // 目标路由
         name: 'product',
         params: {
           //示例数据
