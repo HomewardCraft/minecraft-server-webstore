@@ -1,6 +1,7 @@
 <!-- 详细信息, 包含details下的所有组件 -->
 <template>
-<div class="simple padding-y font-general">
+<div class="simple padding-y font-general detail-background" :class="animation"
+     @mouseover="enable()" @mouseout="disable()">
   <div class="amount-font amount-style">20x</div>
   <discount-price/>
   <div class="order-text order-general">
@@ -10,19 +11,57 @@
 </template>
 
 <script>
-import discountPrice from "@/components/crate/details/DiscountPrice";
-import orderCrate from "@/components/crate/details/OrderCrate";
+import discountPrice from "@/components/crate/detail/DiscountPrice";
+import orderCrate from "@/components/crate/detail/OrderCrate";
 
 export default {
   name: "CrateDetails",
   components: {
     discountPrice,
     orderCrate
+  },
+  methods: {
+    enable() {
+      // if (id === )
+      this.animation = 'shadow-drop-2-bottom'
+    },
+    disable() {
+      this.animation = ''
+    }
+  },
+  data() {
+    return {
+      animation: '',
+    }
   }
 }
 </script>
 
 <style scoped>
+.shadow-drop-2-bottom {
+  animation: shadow-drop-2-bottom 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+@keyframes shadow-drop-2-bottom {
+  0% {
+    -webkit-transform: translateZ(0) translateY(0);
+    transform: translateZ(0) translateY(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(50px) translateY(-12px);
+    transform: translateZ(50px) translateY(-12px);
+    -webkit-box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* 详情的背景 */
+.detail-background {
+  background-color: rgba(24, 26, 27, 1);
+}
+
 /* 购买按钮的颜色 */
 .order-text {
   color: rgba(250, 192, 33, 1);
@@ -40,10 +79,9 @@ export default {
 /* 基础样式 */
 .simple {
   border-width: 1px;
-  border-right-width: 0;
+  /*border-right-width: 0;*/
   border-color: #ffffff1a;
   border-style: solid;
-  /*background-color: rgba(24, 26, 27, 1);*/
 }
 
 /* 数量的字体样式 */
