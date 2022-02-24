@@ -19,9 +19,6 @@ export default {
   components: {
     crateDetail
   },
-  beforeMount() {
-
-  },
   data() {
     return {
       crates: [

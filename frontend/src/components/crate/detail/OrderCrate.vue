@@ -1,5 +1,5 @@
 <template>
-  <div class="font-test">
+  <div class="position group-hover:text-yellow">
     <div class="wallet-style wallet-image el-icon-wallet "/>
     <span class="text-style">Buy Now</span>
   </div>
@@ -12,6 +12,14 @@ export default {
 </script>
 
 <style scoped>
+.position {
+  padding-top: 0.5rem;
+}
+
+.group:hover .group-hover\:text-yellow{
+  color: rgba(146, 64, 14, 1);
+}
+
 .text-style {
   padding-right: 0.2rem;
 }
