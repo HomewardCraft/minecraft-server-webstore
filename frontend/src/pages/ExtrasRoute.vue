@@ -23,18 +23,18 @@
           fontWeight: 'bold',
           // border: '0px solid gray',
           borderBottom: '10px solid #E94AE3FF',
-        }">
+        }" @click.native="detail()">
 
           <div class="itemsbg"></div>
           <img src="../assets/extras/extras1.png" class="image">
 
 
           <div style="padding: 14px;" class="textbody">
-            <span class="name">符文槽</span>
+            <span class="name" ref="itemname" data-id = "99999" data-name="符文槽">符文槽</span>
             <div class="bottom clearfix">
-              <div class="origin">￥45.5</div>
+              <div class="origin" ref="originprice" data-price="45.5">￥45.5</div>
               <br>
-              <div class="now">￥25.5</div>
+              <div class="now" ref="currentprice" data-cprice="25.5">￥25.5</div>
               <br>
               <!-- <time class="time">{{ currentDate }}</time>-->
               <el-button type="text" class="button">
@@ -62,9 +62,24 @@ export default {
     return {
       placeholder: "按 Enter 来聚焦搜索",
       currentDate: new Date()
+
     }
   },
   methods: {
+    detail() {
+
+      this.$router.push({
+
+        name: 'product',
+        params: {
+          //示例数据
+          id: this.$refs.itemname[0].dataset.id,
+          name: this.$refs.itemname[0].dataset.name,
+          originPrice: this.$refs.originprice[0].dataset.price,
+          currentPrice: this.$refs.currentprice[0].dataset.cprice
+        }
+      })
+    },
     focus() {
       this.placeholder = " "
     },
@@ -85,8 +100,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$refs.itemname[0].dataset.name)
     this.created()
-
   }
 
 }
