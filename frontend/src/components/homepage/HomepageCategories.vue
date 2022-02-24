@@ -1,7 +1,6 @@
 <!-- 主页中部的商品汇总 -->
 <template>
-  <div>
-    <div>
+  <div class="container">
       <span class="cat"> Categories </span>
       <div class="grid">
         <div class="span-row-2">
@@ -10,7 +9,6 @@
         <homepageRanks/>
         <homepageExtras @click.native="toExtrasPage"/>
       </div>
-    </div>
   </div>
 </template>
 
@@ -42,10 +40,10 @@ export default {
 
 <style scoped>
 .cat {
+  margin-top: 2rem;
   padding: 20px 0;
-  margin: auto;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 2.5rem;
   color: #FFFFFF;
   width: 1100px;
   height: 30px;
@@ -54,15 +52,13 @@ export default {
 }
 
 .grid {
-  margin: auto;
-  width: 1100px;
-  height: 500px;
+  margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(2, 0fr);
 }
 
 .span-row-2 {
   align-self: center;
-  grid-row: span 2 / auto;
+  grid-row: span 2;
 }
 </style>
