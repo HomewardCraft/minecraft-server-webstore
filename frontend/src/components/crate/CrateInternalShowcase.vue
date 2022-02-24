@@ -3,10 +3,11 @@
   <div class="padding-2.5 position-1">
     <div class="title">Cosmetic Crates</div>
     <div class="simple grid border-tiny">
-      <crate-detail
-          v-for="crate in crates"
-          :key="crate.id"
-      />
+      <crate-detail/>
+      <!--    v-for="crate in crates"-->
+      <!--    :key="crate.id"-->
+      <!--/>-->
+      <button @click="getCrates">112233</button>
     </div>
   </div>
 </template>
@@ -19,34 +20,23 @@ export default {
   components: {
     crateDetail
   },
+  methods: {
+    async getCrates() {
+      const {
+        data: result
+      } = await this.$http.get(`http://127.0.0.1:50012/category/crates`).then(
+          crates => {
+            console.log(result);
+            console.log(crates)
+            console.log(this.$router);
+            console.log(this.$route.path);
+          }
+      )
+    }
+  },
   data() {
     return {
-      crates: [
-        {
-          a: {
-            name: "20x Cosmetic Crate Key",
-            id: 'aa'
-          }
-        },
-        {
-          b: {
-            name: "20x Cosmetic Crate Key",
-            id: 'bb'
-          }
-        },
-        {
-          c: {
-            name: "20x Cosmetic Crate Key",
-            id: 'cc'
-          }
-        },
-        {
-          d: {
-            name: "20x Cosmetic Crate Key",
-            id: 'dd'
-          }
-        },
-      ]
+
     }
   }
 }
