@@ -1,7 +1,6 @@
 <!-- 包含CrateImage与CrateInternalShowcase -->
 <template>
 <div>
-  <div class="title">Crates</div>
   <div class="container simple grid-4 border-tiny">
     <crate-image/>
     <crate-internal-showcase/>
@@ -25,8 +24,7 @@ export default {
 <style scoped>
 /* 不知道该怎么分类 */
 .simple {
-  margin-top: 4rem;
-  margin-bottom: 3rem;
+  margin-top: 3rem;
   background-color: rgba(13, 14, 15, 1);
 }
 
@@ -41,15 +39,5 @@ export default {
   border-width: 1px;
   border-style: solid;
   border-color: #ffffff1a;
-}
-
-/* 标题 */
-.title {
-  color: rgba(255, 255, 255, 1);
-  font-weight: 700;
-  text-align: center;
-  padding-top: 4rem;
-  font-size: 3rem;
-  line-height: 1;
 }
 </style>
