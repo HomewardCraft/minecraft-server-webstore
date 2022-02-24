@@ -19,36 +19,13 @@ export default {
   components: {
     crateDetail
   },
-  beforeMount() {
-
-  },
   data() {
     return {
       crates: [
-        {
-          a: {
-            name: "20x Cosmetic Crate Key",
-            id: 'aa'
-          }
-        },
-        {
-          b: {
-            name: "20x Cosmetic Crate Key",
-            id: 'bb'
-          }
-        },
-        {
-          c: {
-            name: "20x Cosmetic Crate Key",
-            id: 'cc'
-          }
-        },
-        {
-          d: {
-            name: "20x Cosmetic Crate Key",
-            id: 'dd'
-          }
-        },
+        {id:1},
+        {id:2},
+        {id:3},
+        {id:4}
       ]
     }
   }

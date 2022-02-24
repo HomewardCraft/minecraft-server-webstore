@@ -16,6 +16,15 @@ import router from "@/router";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+// 引入axios并将其添加到全局对象
+import axios from "axios";
+axios.defaults.baseURL = 'http://127.0.0.1:50012/'
+Vue.prototype.$http = axios
+
+// 定义价格的过滤器
+Vue.filter("priceFormat",function(price){
+  return (price / 100).toFixed(2)
+})
 
 //使用插件
 Vue.use(developerplugin)
@@ -25,14 +34,14 @@ Vue.use(ElementUI)
 //关闭vue生产提示
 Vue.config.productionTip = false
 
+
+
 //创建vm
 new Vue({
-  el: '#app',
-  //模板渲染器
-  render: h => h(App),
   store,
   router,
   beforeCreate() {
     Vue.prototype.$bus = this //全局事件总线
-  }
-})
+  },
+  render: h => h(App)
+}).$mount('#app')

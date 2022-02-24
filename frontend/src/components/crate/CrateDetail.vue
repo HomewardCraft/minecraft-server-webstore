@@ -1,7 +1,7 @@
 <!-- 详细信息, 包含details下的所有组件 -->
 <template>
-  <div class="simple padding-y font-general detail-background" :class="animation"
-       @mouseover="enable()" @mouseout="disable()">
+  <div :class="animation" class="simple padding-y font-general detail-background"
+       @mouseenter="enable()" @mouseleave="disable()">
     <div class="amount-font amount-style">20x</div>
     <discount-price/>
     <div class="order-text order-general">
@@ -22,8 +22,7 @@ export default {
   },
   methods: {
     enable() {
-      // if (id === )
-      this.animation = 'shadow-drop-start'
+      this.animation = 'shadow-drop-start group'
     },
     disable() {
       this.animation = ''
@@ -40,10 +39,12 @@ export default {
 <style scoped>
 .shadow-drop-start {
   animation: shadow-drop 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+
 }
 
-.shadow-drop-end {
-  animation: shadow-drop 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both reverse;
+.group:hover {
+  color: rgba(146, 64, 14, 1);
+  background-color: rgba(250, 192, 33, 1);
 }
 
 @keyframes shadow-drop {
@@ -83,7 +84,6 @@ export default {
 /* 基础样式 */
 .simple {
   border-width: 1px;
-  /*border-right-width: 0;*/
   border-color: #ffffff1a;
   border-style: solid;
 }
