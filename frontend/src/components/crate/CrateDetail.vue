@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import discountPrice from "@/components/crate/details/DiscountPrice";
-import orderCrate from "@/components/crate/details/OrderCrate";
+import discountPrice from "@/components/crate/detail/DiscountPrice";
+import orderCrate from "@/components/crate/detail/OrderCrate";
 
 export default {
   name: "CrateDetails",
