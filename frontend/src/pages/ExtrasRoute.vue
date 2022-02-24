@@ -109,7 +109,7 @@ export default {
 
 <style scoped>
 /*导入外部数据*/
-@import "~@/assets/css/extraroute.css";
+@import "./../assets/css/extraroute.css";
 
 /*
  *因为特殊原因,请勿讲以下两个el和elcard移动至extraroute.css,否则样式不会生效
