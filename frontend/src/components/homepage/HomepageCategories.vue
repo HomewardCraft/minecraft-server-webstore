@@ -42,6 +42,7 @@ export default {
 
 <style scoped>
 .cat {
+
   padding: 20px 0;
   margin: auto;
   font-weight: bold;
@@ -55,6 +56,7 @@ export default {
 
 .grid {
   margin: auto;
+  margin-left: 40px;
   width: 1100px;
   height: 500px;
   display: grid;
