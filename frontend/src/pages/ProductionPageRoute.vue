@@ -46,7 +46,16 @@
 
 <script>
 export default {
-  name: "ProductionPageRoute"
+  name: "ProductionPageRoute",
+  methods: {
+
+  },
+  mounted()  {
+    console.log(this.$route.params.id) //打印当前物品id
+
+    //TODO 使用这个ID查询数据库的物品，返回价格，打折以及图片和介绍
+
+  }
 }
 </script>
 

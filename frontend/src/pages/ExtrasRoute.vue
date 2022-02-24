@@ -13,7 +13,6 @@
     >
     <br>
 
-
     <el-row class='rol'>
       <el-col class='col' :span="11" v-for="(o, index) in data.length" :key="o">
         <el-card class='cardbody' :body-style="{
