@@ -15,7 +15,7 @@
 
 
     <el-row class='rol'>
-      <el-col class='col' :span="11" v-for="(o, index) in 3" :key="o">
+      <el-col class='col' :span="11" v-for="(o, index) in data.length" :key="o">
         <el-card class='cardbody' :body-style="{
           padding: '0px',
           background: '#0D0E0FFF',
@@ -28,13 +28,19 @@
           <div class="itemsbg"></div>
           <img src="../assets/extras/extras1.png" class="image">
 
-
+<!--          {{o.itemBasicInfo.name}}}-->
           <div style="padding: 14px;" class="textbody">
-            <span class="name" ref="itemname" data-id = "99999" data-name="符文槽">符文槽</span>
+            <span class="name" ref="itemname" :data-id = "data[index].itemBasicInfo.id" data-name="符文槽">
+              {{data[index].itemBasicInfo.name}}
+            </span>
             <div class="bottom clearfix">
-              <div class="origin" ref="originprice" data-price="45.5">￥45.5</div>
+              <div class="origin" ref="originprice" :data-price="data[index].itemBasicInfo.price">
+                ￥{{data[index].itemBasicInfo.price}}
+                  </div>
               <br>
-              <div class="now" ref="currentprice" data-cprice="25.5">￥25.5</div>
+              <div class="now" ref="currentprice" :data-cprice="data[index].itemBasicInfo.price * data[index].itemSaleInfo.onsalePercent * 0.01">
+                ￥{{data[index].itemBasicInfo.price * data[index].itemSaleInfo.onsalePercent * 0.01}}
+              </div>
               <br>
               <!-- <time class="time">{{ currentDate }}</time>-->
               <el-button type="text" class="button">
@@ -61,8 +67,24 @@ export default {
   data() {
     return {
       placeholder: "按 Enter 来聚焦搜索",
-      currentDate: new Date()
-
+      currentDate: new Date(),
+      "data": [
+        {
+          "itemBasicInfo": {
+            "id": 1003,
+            "imageAddress": "/awdsad/waeawdasdasdw/asdaszsxsdwas.jpg",
+            "name": "栏位符文",
+            "price": 10
+          },
+          "itemSaleInfo": {
+            "onsaleCondition": true,
+            "onsalePercent": 50,
+            "surplusTime": 1919810
+          }
+        }
+      ],
+      "message": "success",
+      "status": 200
     }
   },
   methods: {
