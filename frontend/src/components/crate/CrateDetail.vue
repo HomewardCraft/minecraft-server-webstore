@@ -1,13 +1,13 @@
 <!-- 详细信息, 包含details下的所有组件 -->
 <template>
-<div class="simple padding-y font-general detail-background" :class="animation"
-     @mouseover="enable()" @mouseout="disable()">
-  <div class="amount-font amount-style">20x</div>
-  <discount-price/>
-  <div class="order-text order-general">
-    <order-crate/>
+  <div class="simple padding-y font-general detail-background" :class="animation"
+       @mouseover="enable()" @mouseout="disable()">
+    <div class="amount-font amount-style">20x</div>
+    <discount-price/>
+    <div class="order-text order-general">
+      <order-crate/>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
   methods: {
     enable() {
       // if (id === )
-      this.animation = 'shadow-drop-2-bottom'
+      this.animation = 'shadow-drop-start'
     },
     disable() {
       this.animation = ''
@@ -38,11 +38,15 @@ export default {
 </script>
 
 <style scoped>
-.shadow-drop-2-bottom {
-  animation: shadow-drop-2-bottom 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+.shadow-drop-start {
+  animation: shadow-drop 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
-@keyframes shadow-drop-2-bottom {
+.shadow-drop-end {
+  animation: shadow-drop 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both reverse;
+}
+
+@keyframes shadow-drop {
   0% {
     -webkit-transform: translateZ(0) translateY(0);
     transform: translateZ(0) translateY(0);

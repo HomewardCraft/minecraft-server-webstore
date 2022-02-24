@@ -34,10 +34,6 @@ export default {
 
 
 <style scoped>
-div{
-  margin:10px;
-}
-
 .turndark{
   filter:brightness(0.8);
 }
@@ -64,6 +60,7 @@ span {
 }
 
 .bg {
+  margin-top: 0.8rem;
   border: 2px solid rgba(255, 255, 255, 0.5);
   background: linear-gradient(45deg, #bd5124, #db9f37);
   background-size: 100%;
@@ -71,8 +68,6 @@ span {
   height: 240px;
   display: block;
   text-align: center;
-  margin-right: 15px;
-  margin-left: 15px;
 }
 
 /*过期

@@ -34,10 +34,6 @@ export default {
 
 
 <style scoped>
-div{
-  margin:10px;
-}
-
 .turndark{
   filter:brightness(0.8);
 }
@@ -71,17 +67,9 @@ span {
   height: 240px;
   display: block;
   text-align: center;
-  margin-right: 15px;
-  margin-left: 15px;
 }
-
-/*过期
-/*.img:hover {*/
-/*  background-image: url(../assets/crates_hover.png);*/
-/*}*/
 
 .hover {
   background-image: url(../../assets/ranks_hover.png);
-
 }
 </style>
