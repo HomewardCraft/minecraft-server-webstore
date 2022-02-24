@@ -5,19 +5,11 @@ import Vuex from 'vuex'
 //应用Vuex插件
 Vue.use(Vuex)
 
-//用于响应组件中的动作
-const actions = {}
-
-//准备mutations——用于操作数据(state)
-const mutations = {}
-//准备state——用于存储数据
-const state = {}
+import crate from "@/store/crate";
 
 //创建并暴露store
-const store = new Vuex.Store({
-    actions: actions,
-    mutations: mutations,
-    state: state
+export default new Vuex.Store({
+    modules: {
+        crate:crate
+    }
 })
-
-export default store

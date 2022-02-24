@@ -2,7 +2,7 @@
 <template>
 <div>
   <div class="container simple grid-4 border-tiny">
-    <crate-image/>
+    <crate-image :uri="this.crate.itemBasicInfo.imageAddress"/>
     <crate-internal-showcase/>
   </div>
 </div>
@@ -17,7 +17,8 @@ export default {
   components: {
     crateInternalShowcase,
     crateImage
-  }
+  },
+  props: ['crate']
 }
 </script>
 

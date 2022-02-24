@@ -2,7 +2,7 @@
 <template>
   <div>
     <div class="title">Crates</div>
-    <crate-showcase v-for="item in data" :key="item.id"/>
+    <crate-showcase v-for="item in data" :key="item.id" :crate="item"/>
   </div>
 </template>
 
@@ -14,29 +14,16 @@ export default {
   components: {
     crateShowcase
   },
-  methods: {
-    async getCrates() {
-      const {
-        data: result
-      } = await this.$http.get(`/category/${this.category}`)
-      result.data
-    }
+  created() {
+    this.$store.dispatch('crate/getCrates', this.category)
+  },
+  beforeMount() {
+    this.data = this.$store.state.crate.itemList.reverse()
   },
   data() {
     return {
       category: this.$route.path.slice(1),
-      itemList: [],
-      data: [
-        {
-          id: 1
-        },
-        {
-          id: 2
-        },
-        {
-          id: 3
-        }
-      ]
+      data: null,
     }
   }
 }

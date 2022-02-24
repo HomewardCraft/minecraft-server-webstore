@@ -1,27 +1,53 @@
 <!-- 左侧图片 -->
 <template>
 <div class="crate-row">
-  <div class="image-regular crate-image transition"/>
+  <div class="image-regular crate-image"
+       :style="crate"
+       @mouseenter="enable"
+       @mouseleave="disable"
+  />
+  <!--<div class="image-regular crate-image"-->
+  />
 </div>
 </template>
 
 <script>
 export default {
   name: "CrateImage",
+  props: ['uri'],
+  data() {
+    return {
+      imageAddress: this.uri,
+      crate: {
+        'backgroundImage': 'url(' + this.imageAddress + ')'
+      }
+    }
+  },
+  computed: {
+    hoverAddress() {
+      return this.imageAddress.slice(0, this.imageAddress.length-13) + '_open' + this.imageAddress.slice(this.imageAddress.length-13)
+    }
+  },
+  methods: {
+    enable() {
+      this.crate = {
+        // 'transition': 'all .35s',
+        'background-image': 'url(' + this.hoverAddress + ')',
+        'transition-timing-function': 'cubic-bezier(.4,0,.2,1)'
+      }
+    },
+    disable() {
+      this.crate = {
+        'transition': 'all .35s',
+        'transition-timing-function': 'cubic-bezier(.4,0,.2,1)',
+        'backgroundImage': 'url(' + this.imageAddress + ')'
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
-/* 神奇代码, 我也不知道原理 */
-.transition {
-  transition: all .35s;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
-}
-.transition:hover {
-  background-image: url("/src/assets/crates/cosmetic_crate_open.png");
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
-}
-
 /* 宝箱图片列*/
 .crate-row{
   max-width: 100%;
@@ -39,7 +65,7 @@ export default {
 
 /* 闭合的宝箱的图片 */
 .image-regular {
-  background-image: url("/src/assets/crates/cosmetic_crate.png");
+  /*background-image: url("/src/assets/crates/cosmetic_crate.png");*/
 }
 
 /* 闭合的宝箱的样式 */
