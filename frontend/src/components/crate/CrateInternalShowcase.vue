@@ -3,7 +3,10 @@
   <div class="padding-2.5 position-1">
     <div class="title">Cosmetic Crates</div>
     <div class="simple grid border-tiny">
-      <crate-detail v-for="crate in crates" :key="crate.name"/>
+      <crate-detail
+          v-for="crate in crates"
+          :key="crate.id"
+      />
     </div>
   </div>
 </template>
@@ -16,22 +19,37 @@ export default {
   components: {
     crateDetail
   },
+  beforeMount() {
+
+  },
   data() {
     return {
-      crates: {
-        a: {
-          name: "20x Cosmetic Crate Key"
+      crates: [
+        {
+          a: {
+            name: "20x Cosmetic Crate Key",
+            id: 'aa'
+          }
         },
-        b: {
-          name: "15x Cosmetic Crate Key"
+        {
+          b: {
+            name: "20x Cosmetic Crate Key",
+            id: 'bb'
+          }
         },
-        c: {
-          name: "10x Cosmetic Crate Key"
+        {
+          c: {
+            name: "20x Cosmetic Crate Key",
+            id: 'cc'
+          }
         },
-        d: {
-          name: "5x Cosmetic Crate Key"
-        }
-      }
+        {
+          d: {
+            name: "20x Cosmetic Crate Key",
+            id: 'dd'
+          }
+        },
+      ]
     }
   }
 }
@@ -42,7 +60,6 @@ export default {
 .simple {
   box-sizing: border-box;
   color: #fff;
-  background-color: rgba(24, 26, 27, 1);
   height: 158px;
   display: block;
 }
@@ -57,7 +74,7 @@ export default {
 .border-tiny {
   border-style: solid;
   border-width: 0;
-  border-color: rgba(229, 231, 235, 1);
+  border-color: #ffffff1a;
 }
 
 /* 坐标内位置 */
