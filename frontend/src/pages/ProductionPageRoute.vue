@@ -1,4 +1,6 @@
 <template>
+  <div>
+
   <div class = "main mt-8">
     <div class="grid lg:grid-cols-3 gap-12">
       <!--    这是一个呼呼 {{ $route.params.id }} {{ $route.params.originPrice }} {{ $route.params.currentPrice }}-->
@@ -29,7 +31,7 @@
             <div class="lg text-lg leading-tight pb-3">Enter username to purchase</div>
             <div class="sm opacity-75">You need to enter your Minecraft username before you can purchase this item!</div>
           </div>
-          <button
+          <button  @click = "openloginpannel"
               class="flex justify-center w-full text-gray-500 items-center bg-btn text-btn-text border border-lighten py-4 uppercase font-extrabold tracking-wide transition-all transform duration-150 ease-in-out opacity-75 focus:outline-none focus:scale-90': cooldown }">
             <svg class="w-6 h-6 opacity-75 mr-2" viewBox="0 0 640 512" fill="#b05da3">
               <path
@@ -41,13 +43,36 @@
       </div>
     </div>
   </div>
+  <transition name="transition-transform">
+    <login-util v-show="isloginshow"></login-util>
+  </transition>
+
+
+  </div>
+
+
+
+
+
 
 </template>
 
 <script>
+import LoginUtil from "@/components/util/LoginUtil";
+
 export default {
   name: "ProductionPageRoute",
+  components: {LoginUtil},
+  data() {
+    return {
+      isloginshow: false
+    }
+  },
+
   methods: {
+    openloginpannel() {
+      this.isloginshow = true
+    }
 
   },
   mounted()  {
@@ -55,6 +80,9 @@ export default {
 
     //TODO 使用这个ID查询数据库的物品，返回价格，打折以及图片和介绍
 
+    this.$bus.$on('closeloginpannel',(manipulate) => {
+      this.isloginshow = manipulate
+    })
   }
 }
 </script>
