@@ -1,5 +1,5 @@
 <template>
-  <div @click = "closebt()"
+  <div @click.self = "closebt()"
       class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto"
       data-v-00ffbf09="">
     <div class="transition-transform duration-200 ease-in-out transform" data-v-00ffbf09="">
