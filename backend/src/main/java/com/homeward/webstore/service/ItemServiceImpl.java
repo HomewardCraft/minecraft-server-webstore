@@ -14,7 +14,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemInfoBO> getSpecificItems(String type) {
-        return itemMapper.getStoreItemsList(type);
+    public List<ItemInfoBO> getItemList(String category) {
+        return itemMapper.getItemList(category);
+    }
+
+    @Override
+    public ItemInfoBO getSpecificItem(String itemCategory, Integer itemId) {
+        return itemMapper.getSpecificItem(itemCategory, itemId);
     }
 }

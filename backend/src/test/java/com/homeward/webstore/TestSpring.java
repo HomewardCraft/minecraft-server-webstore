@@ -143,7 +143,7 @@ public class TestSpring {
     @Test
     @Disabled
     void testStoreMapper() {
-        List<ItemInfoBO> itemsLists = itemMapper.getStoreItemsList("crates");
+        List<ItemInfoBO> itemsLists = itemMapper.getItemList("crates");
         itemsLists.forEach(System.out::println);
     }
 

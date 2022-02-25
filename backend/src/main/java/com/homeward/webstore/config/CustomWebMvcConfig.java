@@ -24,7 +24,7 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
                 "/**"
         );
         loginInterceptor.excludePathPatterns(
-                "/category/*",
+                "/category/**",
                 "/name/*"
         );
     }

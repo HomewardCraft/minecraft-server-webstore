@@ -17,7 +17,7 @@
             <result column="i1_onsale_percent" property="onsalePercent"/>
         </collection>
     </resultMap>
-    <select id="getStoreItemsList" resultMap="itemInfoBO" useCache="true">
+    <select id="getItemList" resultMap="itemInfoBO" useCache="true">
         SELECT
             i1.id i1_id,
             i1.name i1_name,
@@ -36,6 +36,28 @@
         WHERE i1.id = i2.id
     </select>
 
+    <select id="getSpecificItem" resultMap="itemInfoBO" useCache="true">
+        SELECT
+            i1.id i1_id,
+            i1.name i1_name,
+            i1.image_address i1_image_address,
+            i1.is_onsale i1_is_onsale,
+            i1.surplus_time i1_surplus_time,
+            i1.onsale_percent i1_onsale_percent,
+            i1.price i1_price
+        FROM
+            item_info AS i1,
+            (SELECT
+                id
+            FROM
+                item_info
+            WHERE
+                type = #{category}
+            and
+                id = #{id}
+            ) AS i2
+        WHERE i1.id = i2.id
+    </select>
 
     <select id="getItemName" resultType="String" useCache="true">
         SELECT name
