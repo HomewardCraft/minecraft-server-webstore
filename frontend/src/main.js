@@ -22,7 +22,7 @@ axios.defaults.baseURL = 'http://127.0.0.1:50012/'
 Vue.prototype.$http = axios
 
 // 定义价格的过滤器
-Vue.filter("priceFormat",function(price){
+Vue.filter("priceFormat",(price) => {
   return (price / 100).toFixed(2)
 })
 

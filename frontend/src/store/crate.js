@@ -14,7 +14,7 @@ export default {
         setCrates(state, crates) {
             if (state.itemList.length === 0) {
                 crates.forEach((crate) => {
-                    state.itemList.unshift(crate)
+                    state.itemList.push(crate)
                 })
             }
         }

@@ -7,7 +7,7 @@
        @mouseleave="disable"
   />
   <!--<div class="image-regular crate-image"-->
-  />
+  <!--/>-->
 </div>
 </template>
 
@@ -31,7 +31,6 @@ export default {
   methods: {
     enable() {
       this.crate = {
-        // 'transition': 'all .35s',
         'background-image': 'url(' + this.hoverAddress + ')',
         'transition-timing-function': 'cubic-bezier(.4,0,.2,1)'
       }
@@ -65,7 +64,7 @@ export default {
 
 /* 闭合的宝箱的图片 */
 .image-regular {
-  /*background-image: url("/src/assets/crates/cosmetic_crate.png");*/
+  background-image: url("/src/assets/crates/cosmetic_crate.png");
 }
 
 /* 闭合的宝箱的样式 */

@@ -3,7 +3,7 @@
 <div>
   <div class="container simple grid-4 border-tiny">
     <crate-image :uri="this.crate.itemBasicInfo.imageAddress"/>
-    <crate-internal-showcase/>
+    <crate-internal-showcase :crate="crate"/>
   </div>
 </div>
 </template>

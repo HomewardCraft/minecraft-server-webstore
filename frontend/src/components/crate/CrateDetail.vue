@@ -2,8 +2,18 @@
 <template>
   <div :class="animation" class="simple padding-y font-general detail-background"
        @mouseenter="enable()" @mouseleave="disable()">
-    <div class="amount-font amount-style">20x</div>
-    <discount-price/>
+    <div class="amount-font amount-style">{{ detail.amount }}x</div>
+    <originalPrice
+        v-if="!detail.discount.onSaleCondition"
+        :amount="detail.amount"
+        :unhandledPrice="detail.price"
+    />
+    <discount-price
+        v-if="detail.discount.onSaleCondition"
+        :amount="detail.amount"
+        :unhandledPrice="detail.price"
+        :onSalePercent="detail.discount.onSalePercent"
+    />
     <div class="order-text order-general">
       <order-crate/>
     </div>
@@ -13,13 +23,16 @@
 <script>
 import discountPrice from "@/components/crate/detail/DiscountPrice";
 import orderCrate from "@/components/crate/detail/OrderCrate";
+import originalPrice from "@/components/crate/detail/OriginalPrice";
 
 export default {
   name: "CrateDetails",
   components: {
     discountPrice,
-    orderCrate
+    orderCrate,
+    originalPrice
   },
+  props: ['detail'],
   methods: {
     enable() {
       this.animation = 'shadow-drop-start group'

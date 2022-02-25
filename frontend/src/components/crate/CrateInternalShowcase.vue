@@ -1,11 +1,12 @@
 <!-- 包含CrateDetail -->
 <template>
   <div class="padding-2.5 position-1">
-    <div class="title">Cosmetic Crates</div>
+    <div class="title" v-text="crate.itemBasicInfo.name"/>
     <div class="simple grid border-tiny">
       <crate-detail
           v-for="crate in crates"
           :key="crate.id"
+          :detail="crate"
       />
     </div>
   </div>
@@ -21,14 +22,55 @@ export default {
   },
   data() {
     return {
-      crates: [
-        {id:1},
-        {id:2},
-        {id:3},
-        {id:4}
-      ]
+      price: this.crate.itemBasicInfo.price,
+      onSaleCondition: this.crate.itemSaleInfo.onsaleCondition,
+      onSalePercent: this.crate.itemSaleInfo.onsalePercent,
+      surplusTime: this.crate.itemSaleInfo.surplusTime
     }
-  }
+  },
+  computed: {
+    crates() {
+      return {
+        x20: {
+          amount: 20,
+          price: this.price,
+          discount: {
+            onSaleCondition: this.onSaleCondition,
+            onSalePercent: this.onSalePercent,
+            surplusTime: this.surplusTime,
+          }
+        },
+        x10: {
+          amount: 10,
+          price: this.price,
+          discount: {
+            onSaleCondition: this.onSaleCondition,
+            onSalePercent: this.onSalePercent,
+            surplusTime: this.surplusTime,
+          }
+        },
+        x5: {
+          amount: 5,
+          price: this.price,
+          discount: {
+            onSaleCondition: this.onSaleCondition,
+            onSalePercent: this.onSalePercent,
+            surplusTime: this.surplusTime,
+          }
+        },
+        x1: {
+          amount: 1,
+          price: this.price,
+          discount: {
+            onSaleCondition: this.onSaleCondition,
+            onSalePercent: this.onSalePercent,
+            surplusTime: this.surplusTime,
+          }
+        }
+      }
+    }
+  },
+  props: ['crate'],
 }
 </script>
 

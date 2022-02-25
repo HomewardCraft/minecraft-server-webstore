@@ -18,7 +18,8 @@ export default {
     this.$store.dispatch('crate/getCrates', this.category)
   },
   beforeMount() {
-    this.data = this.$store.state.crate.itemList.reverse()
+    this.data = this.$store.state.crate.itemList
+    console.log(this.data);
   },
   data() {
     return {

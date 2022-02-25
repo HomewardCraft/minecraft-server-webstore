@@ -1,13 +1,22 @@
 <template>
 <div>
-  <div class="price-regular price-regular-font">$49.99 USD</div>
-  <div class="price-discount">$44.99 USD</div>
+  <div class="price-regular price-regular-font">${{ originalPrice | priceFormat }} USD</div>
+  <div class="price-discount">${{ discountPrice | priceFormat }} USD</div>
 </div>
 </template>
 
 <script>
 export default {
-  name: "DiscountPrice"
+  name: "DiscountPrice",
+  props:['amount', 'unhandledPrice', 'onSalePercent'],
+  computed: {
+    originalPrice() {
+      return this.unhandledPrice * this.amount
+    },
+    discountPrice() {
+      return (this.unhandledPrice * (this.onSalePercent / 100)) * this.amount
+    }
+  }
 }
 </script>
 
