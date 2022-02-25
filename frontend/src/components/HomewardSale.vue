@@ -1,5 +1,6 @@
 <!-- 网站的信息, 不会变 -->
 <template>
+
   <div>
       <span class="uni">
         <span>Happy</span>
@@ -13,6 +14,9 @@
 
 
 <script>
+
+
+
 export default {
   name: "HomewardSale"
 }
