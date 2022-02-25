@@ -1,3 +1,4 @@
+<!--是这样的-->
 <template>
   <div class="breadcrumbs mb-12 flex items-center mainfix">
     <a href="#/"
@@ -21,6 +22,9 @@
 export default {
   name: "Breadcrumb"
 }
+
+//TODO 实现基于路由或者后端查询分配指定子链接
+
 </script>
 
 <style scoped>
