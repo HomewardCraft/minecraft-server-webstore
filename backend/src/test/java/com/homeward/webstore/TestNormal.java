@@ -137,6 +137,14 @@ public class TestNormal {
         String format = dateFormat.format(calendar.getTime());
         System.out.println(format);
     }
+
+    @Test
+    void testUUID() {
+        long mostSigBits = Long.parseLong(UUID.randomUUID().toString().replaceAll("[^0-9]", ""));
+        String uuid = new UUID(mostSigBits, mostSigBits).toString();
+        String substring = uuid.substring(0, 15).replace("-", "");
+        System.out.println(substring);
+    }
 }
 
 
