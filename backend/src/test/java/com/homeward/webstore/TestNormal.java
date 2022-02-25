@@ -125,9 +125,9 @@ public class TestNormal {
 
     @Test
     void testException() {
-        String s = null;
-        assert false;
-        System.out.println(s.hashCode());
+        // String s = null;
+        // assert false;
+        // System.out.println(s.hashCode());
     }
 
     @Test
@@ -140,10 +140,10 @@ public class TestNormal {
 
     @Test
     void testUUID() {
-        long mostSigBits = Long.parseLong(UUID.randomUUID().toString().replaceAll("[^0-9]", ""));
-        String uuid = new UUID(mostSigBits, mostSigBits).toString();
-        String substring = uuid.substring(0, 15).replace("-", "");
-        System.out.println(substring);
+        // long mostSigBits = Long.parseLong(UUID.randomUUID().toString().replaceAll("[^0-9]", ""));
+        // String uuid = new UUID(mostSigBits, mostSigBits).toString();
+        // String substring = uuid.substring(0, 15).replace("-", "");
+        // System.out.println(substring);
     }
 }
 
