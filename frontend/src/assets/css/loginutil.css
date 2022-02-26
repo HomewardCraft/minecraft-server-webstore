@@ -82,7 +82,7 @@
     box-sizing: content-box;
 }
 
-.modal .body[data-v-00ffbf09] {
+.modal .body {
     max-width: 700px;
     margin-bottom: 40px;
 }
@@ -270,7 +270,7 @@ button, [type=button], [type=submit] {
     margin-bottom: 0.75rem;
 }
 
-.modal[data-v-00ffbf09] {
+.modal {
     padding: 40px 0 0;
     overflow: auto;
 }

@@ -1,7 +1,6 @@
 <template>
   <div @click.self="closebt()"
-       class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto"
-       data-v-00ffbf09="">
+       class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto">
     <div class="transition-transform duration-200 ease-in-out transform">
       <div class="title flex items-center justify-between mb-6">
         <div class="font-bold text-2xl text-white">Please enter your username to continue</div>
@@ -16,7 +15,7 @@
         </svg>
       </div>
       <!--不要删除此行data-v 删了就失去样式-->
-      <div class="body bg-gray-900 grid lg:grid-cols-3 items-center" data-v-00ffbf09="">
+      <div class="body bg-gray-900 grid lg:grid-cols-3 items-center">
         <div class="render bg-yellow-400 p-6 pb-0">
           <img src="https://assets.originrealms.com/static/store/user.png" class="max-w-full mx-auto">
         </div>
