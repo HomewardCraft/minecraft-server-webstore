@@ -3,6 +3,7 @@
   <div id="app">
     <br>
     <homewardHeader/>
+    <Breadcrumb></Breadcrumb>
     <homewardSale class="sale"/>
     <br>
     <homepageCount/>
@@ -20,6 +21,7 @@ import homewardHeader from "@/components/HomewardHeader";
 import homewardSale from "@/components/HomewardSale";
 import homepageCount from "@/components/homepage/HomepageCount";
 import homewardFooter from "@/components/HomewardFooter";
+import Breadcrumb from "@/components/util/Breadcrumb";
 
 export default {
   name: 'App',
@@ -27,7 +29,8 @@ export default {
     homewardHeader,
     homewardSale,
     homepageCount,
-    homewardFooter
+    homewardFooter,
+    Breadcrumb
   }
 }
 </script>
