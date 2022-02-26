@@ -39,7 +39,9 @@
 
             </span>
             <div class="bottom clearfix">
-              <div class="origin" ref="originprice" :data-price="data[index].itemBasicInfo.price">
+              <div class="origin"
+                   ref="originprice"
+                   :data-price="data[index].itemBasicInfo.price">
                 ￥{{ data[index].itemBasicInfo.price }}
               </div>
               <br>
@@ -74,25 +76,16 @@ export default {
     return {
       placeholder: "按 Enter 来聚焦搜索",
       currentDate: new Date(),
+      category: null,
       // 测试数据-要与后端保持一致
-      "data": [
-        {
-          "itemBasicInfo": {
-            "id": 1003,
-            "imageAddress": "/awdsad/waeawdasdasdw/asdaszsxsdwas.jpg",
-            "name": "栏位符文",
-            "price": 10
-          },
-          "itemSaleInfo": {
-            "onsaleCondition": true,
-            "onsalePercent": 50,
-            "surplusTime": 1919810
-          }
-        }
-      ],
-      "message": "success",
-      "status": 200
+      "data": this.$store.state.itemList.itemArray
     }
+  },
+  computed: {
+    // 失效方法，使用传统解决方案
+    // price(index)  {
+    //   return this.data[index].itemBasicInfo.price
+    // }
   },
   methods: {
     detail() {
@@ -126,10 +119,10 @@ export default {
         }
       }
 
-    }
+    },
   },
   mounted() {
-    console.log(this.$refs.itemname[0].dataset.name)
+    this.$store.dispatch('itemList/getItemList', 'extras')
     this.created()
   }
 
