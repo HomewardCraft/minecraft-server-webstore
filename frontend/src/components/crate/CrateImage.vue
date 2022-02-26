@@ -6,8 +6,7 @@
        @mouseenter="enable"
        @mouseleave="disable"
   />
-  <!--<div class="image-regular crate-image"-->
-  <!--/>-->
+  <!--<div class="image-regular crate-image"/>-->
 </div>
 </template>
 

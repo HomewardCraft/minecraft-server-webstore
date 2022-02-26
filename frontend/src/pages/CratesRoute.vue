@@ -15,11 +15,10 @@ export default {
     crateShowcase
   },
   created() {
-    this.$store.dispatch('crate/getCrates', this.category)
+    this.$store.dispatch('itemList/getItemList', this.category)
   },
   beforeMount() {
-    this.data = this.$store.state.crate.itemList
-    console.log(this.data);
+    this.data = this.$store.state.itemList.itemArray
   },
   data() {
     return {
