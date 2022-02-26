@@ -18,7 +18,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 // 引入axios并将其添加到全局对象
 import axios from "axios";
-axios.defaults.baseURL = 'http://127.0.0.1:50012/'
+axios.defaults.baseURL = 'http://web.fantang.cc:50012/'
 Vue.prototype.$http = axios
 
 // 定义价格的过滤器
