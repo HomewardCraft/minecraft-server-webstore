@@ -25,7 +25,7 @@ export default new VueRouter(
             },
             {
                 name: 'product',
-                path: '/detail/:id',
+                path: '/:category/:amount/:id',
                 component: productionPage
             }
         ]

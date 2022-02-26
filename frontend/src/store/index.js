@@ -6,10 +6,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import itemList from "@/store/itemList";
+import item from "@/store/item";
 
 //创建并暴露store
 export default new Vuex.Store({
     modules: {
-        itemList
+        itemList,
+        item
     }
 })
