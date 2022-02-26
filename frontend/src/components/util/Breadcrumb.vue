@@ -19,8 +19,32 @@
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
-  name: "Breadcrumb"
+  name: "Breadcrumb",
+  data(){
+    return {
+      beforeUrl: ''
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      //获取上级路由
+      console.log(this.beforeUrl)
+    })
+    router.afterEach((to,from)=>{
+      console.log('AfterEach',to,from)
+    })
+    console.log(this.$route)
+  },
+  watch: {
+    $route(val) {
+      console.log(this.$route)
+      console.log(this.$router)
+    },
+
+  }
 }
 
 //TODO 实现基于路由或者后端查询分配指定子链接
