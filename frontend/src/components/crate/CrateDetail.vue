@@ -2,15 +2,15 @@
 <template>
   <div :class="animation" class="simple padding-y font-general detail-background"
        @mouseenter="enable()" @mouseleave="disable()">
-    <div class="amount-font amount-style">{{ detail.amount }}x</div>
+    <div class="amount-font amount-style">{{ amount }}x</div>
     <originalPrice
         v-if="!detail.discount.onSaleCondition"
-        :amount="detail.amount"
+        :amount="amount"
         :unhandledPrice="detail.price"
     />
     <discount-price
         v-if="detail.discount.onSaleCondition"
-        :amount="detail.amount"
+        :amount="amount"
         :unhandledPrice="detail.price"
         :onSalePercent="detail.discount.onSalePercent"
     />
@@ -32,7 +32,7 @@ export default {
     orderCrate,
     originalPrice
   },
-  props: ['detail'],
+  props: ['detail', 'amount'],
   methods: {
     enable() {
       this.animation = 'shadow-drop-start group'

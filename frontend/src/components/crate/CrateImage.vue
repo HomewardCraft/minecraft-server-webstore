@@ -1,12 +1,12 @@
 <!-- 左侧图片 -->
 <template>
 <div class="crate-row">
-  <div class="image-regular crate-image"
-       :style="crate"
-       @mouseenter="enable"
-       @mouseleave="disable"
-  />
-  <!--<div class="image-regular crate-image"/>-->
+  <!--<div class="image-regular crate-image"-->
+  <!--     :style="crate"-->
+  <!--     @mouseenter="enable"-->
+  <!--     @mouseleave="disable"-->
+  <!--/>-->
+  <div class="image-regular crate-image"/>
 </div>
 </template>
 

@@ -118,4 +118,12 @@ div {
   overflow: hidden;
   position: relative;
 }
+
+.height-full {
+  height: 100%;
+}
+
+.grid-rows-auto {
+  grid-template-rows: auto 1fr auto;
+}
 </style>

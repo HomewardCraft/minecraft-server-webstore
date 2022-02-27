@@ -4,9 +4,11 @@
     <div class="title" v-text="crate.itemBasicInfo.name"/>
     <div class="simple grid border-tiny">
       <crate-detail
-          v-for="crate in crates"
-          :key="crate.id"
-          :detail="crate"
+          v-for="amount in amountList"
+          :key="amount"
+          :amount="amount"
+          :detail="crates"
+          @click.native="toDetailPage(amount)"
       />
     </div>
   </div>
@@ -20,57 +22,48 @@ export default {
   components: {
     crateDetail
   },
-  data() {
+  data: function () {
     return {
       price: this.crate.itemBasicInfo.price,
       onSaleCondition: this.crate.itemSaleInfo.onsaleCondition,
       onSalePercent: this.crate.itemSaleInfo.onsalePercent,
-      surplusTime: this.crate.itemSaleInfo.surplusTime
+      surplusTime: this.crate.itemSaleInfo.surplusTime,
+      category: this.$route.path.slice(1)
     }
   },
+  methods: {
+    toDetailPage(amount) {
+      this.$router.push({
+        name: 'product',
+        params: {
+          category: this.category,
+          amount: amount,
+          id: this.crate.itemBasicInfo.id
+        }
+      })
+    },
+  },
+  props: ['crate'],
   computed: {
     crates() {
       return {
-        x20: {
-          amount: 20,
-          price: this.price,
-          discount: {
-            onSaleCondition: this.onSaleCondition,
-            onSalePercent: this.onSalePercent,
-            surplusTime: this.surplusTime,
-          }
-        },
-        x10: {
-          amount: 10,
-          price: this.price,
-          discount: {
-            onSaleCondition: this.onSaleCondition,
-            onSalePercent: this.onSalePercent,
-            surplusTime: this.surplusTime,
-          }
-        },
-        x5: {
-          amount: 5,
-          price: this.price,
-          discount: {
-            onSaleCondition: this.onSaleCondition,
-            onSalePercent: this.onSalePercent,
-            surplusTime: this.surplusTime,
-          }
-        },
-        x1: {
-          amount: 1,
-          price: this.price,
-          discount: {
-            onSaleCondition: this.onSaleCondition,
-            onSalePercent: this.onSalePercent,
-            surplusTime: this.surplusTime,
-          }
+        price: this.price,
+        discount: {
+          onSaleCondition: this.onSaleCondition,
+          onSalePercent: this.onSalePercent,
+          surplusTime: this.surplusTime,
         }
       }
+    },
+    amountList() {
+      return {
+        x20: 20,
+        x10: 10,
+        x5: 5,
+        x1: 1,
+      }
     }
-  },
-  props: ['crate'],
+  }
 }
 </script>
 

@@ -31,17 +31,17 @@ export default {
   mounted() {
     this.$nextTick(() => {
       //获取上级路由
-      console.log(this.beforeUrl)
+      // console.log(this.beforeUrl)
     })
     router.afterEach((to,from)=>{
-      console.log('AfterEach',to,from)
+      // console.log('AfterEach',to,from)
     })
-    console.log(this.$route)
+    // console.log(this.$route)
   },
   watch: {
     $route(val) {
-      console.log(this.$route)
-      console.log(this.$router)
+      // console.log(this.$route)
+      // console.log(this.$router)
     },
 
   }
