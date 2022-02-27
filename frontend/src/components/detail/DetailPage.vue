@@ -27,11 +27,12 @@ export default {
   },
   data() {
     return {
+      name: null
     }
   },
   beforeDestroy() {
-    this.$bus.$off('setAmount')
-  },
+    this.$store.state.item.itemDetails.splice(0, this.$store.state.item.itemDetails.length)
+  }
 }
 </script>
 

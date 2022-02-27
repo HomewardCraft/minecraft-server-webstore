@@ -12,9 +12,6 @@ export default {
     },
     mutations: {
         setItem(state, item) {
-            if (state.itemDetails.length !== 0) {
-                state.itemDetails.splice(0, state.itemDetails.length)
-            }
             state.itemDetails.push(item)
         }
     },

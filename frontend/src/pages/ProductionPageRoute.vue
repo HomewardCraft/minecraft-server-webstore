@@ -1,6 +1,6 @@
 <template>
   <div class="module-general grid module-general">
-    <detailPage v-for="details in data" :key="details.index" :details="details" :amount="amount"/>
+    <detailPage v-for="detail in data" :key="detail.index" :details="detail" :amount="amount"/>
   </div>
 </template>
 
@@ -25,13 +25,7 @@ export default {
       itemInfo: {
         category: this.$route.params.category,
         id: this.$route.params.id
-      },
-      isloginshow: false
-    }
-  },
-  methods: {
-    openloginpannel() {
-      this.isloginshow = true
+      }
     }
   }
 }
