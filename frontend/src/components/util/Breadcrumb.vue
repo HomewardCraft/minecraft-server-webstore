@@ -11,10 +11,15 @@
         </path>
       </svg>
       <span>Home</span></a>
-    <template v-for = "(path) of pathTree">
+<!--    基于当前pathTree进行面包内部分配-->
+    <template v-for="(obj,i) in pathTree.length">
       <div class="separator">/</div>
-      <a :href=path.path class="breadcrumb">{{ path.name }}</a>
+<!--      如果不是最后一个path的话就有跳转链接-->
+      <a v-if="i<pathTree.length-1" :href=pathTree[i].path class="breadcrumb">{{ pathTree[i].name }}</a>
+<!--      反之，最后一个path无法进行跳转-->
+      <div v-else class="breadcrumb">{{ pathTree[i].name }}</div>
     </template>
+    <!--<div class="breadcrumb">20x Cosmetic Crate Key</div>-->
   </div>
 </template>
 
