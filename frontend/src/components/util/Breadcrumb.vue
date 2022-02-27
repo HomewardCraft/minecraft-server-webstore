@@ -11,10 +11,10 @@
         </path>
       </svg>
       <span>Home</span></a>
-    <div class="separator">/</div>
-    <a href="#/crates" class="breadcrumb">Crates</a>
-    <div class="separator">/</div>
-    <div class="breadcrumb">20x Cosmetic Crate Key</div>
+    <template v-for = "(path) of pathTree">
+      <div class="separator">/</div>
+      <a :href=path.path class="breadcrumb">{{ path.name }}</a>
+    </template>
   </div>
 </template>
 
@@ -23,11 +23,9 @@ import router from "@/router";
 
 export default {
   name: "Breadcrumb",
-  data(){
+  data() {
     return {
-      beforeUrl: '',
-      category: '',
-      id: ''
+      pathTree: []
     }
   },
   methods: {
@@ -35,7 +33,26 @@ export default {
       console.log("(!) getPath()")
       const path = this.$route.path.split('/')
 
+      for (let j = 0; j < path.length; j++) {
+        switch (path[j]) {
+          case '':
+            break;
+          case 'extras':
+            this.pathTree.push({name: "Extras", path: '#/extras'})
+            break;
+          case 'crates':
+            this.pathTree.push({name: "Crates", path: '#/crates'})
+            break;
+          case 'checkout':
+            this.pathTree.push({name: "Checkout", path: '/'})
+            break;
+          default:
+            this.pathTree.push({name: "Unknown", path: '/'})
+        }
+      }
+
       console.log(path)
+      console.log(this.pathTree)
 
       // this.$store.dispatch('items/getItem', this.category)
     }
@@ -53,6 +70,7 @@ export default {
   },
   watch: {
     $route(val) {
+      this.pathTree = []
       this.getPath();
     },
 
