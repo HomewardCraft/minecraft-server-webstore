@@ -3,7 +3,7 @@
   <div id="app">
     <br>
     <homewardHeader/>
-    <Breadcrumb></Breadcrumb>
+    <Breadcrumb v-show="this.$route.path !== '/'"></Breadcrumb>
     <homewardSale class="sale"/>
     <br>
     <homepage-special-bar/>

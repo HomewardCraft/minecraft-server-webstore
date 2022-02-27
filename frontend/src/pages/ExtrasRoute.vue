@@ -124,6 +124,7 @@ export default {
     },
   },
   mounted() {
+
     this.$store.dispatch('itemList/getItemList', 'extras')
     this.created()
   }
