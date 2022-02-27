@@ -12,11 +12,14 @@ export default {
     },
     mutations: {
         setItem(state, item) {
-            state.itemDetails = item
+            if (state.itemDetails.length !== 0) {
+                state.itemDetails.splice(0, state.itemDetails.length)
+            }
+            state.itemDetails.push(item)
         }
     },
     state: {
-        itemDetails: ''
+        itemDetails: []
     },
     getters: {}
 }

@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     getPath() {
-      console.log("(!) getPath()")
+      // console.log("(!) getPath()")
       const path = this.$route.path.split('/')
 
       for (let j = 0; j < path.length; j++) {
@@ -51,8 +51,8 @@ export default {
         }
       }
 
-      console.log(path)
-      console.log(this.pathTree)
+      // console.log(path)
+      // console.log(this.pathTree)
 
       // this.$store.dispatch('items/getItem', this.category)
     }
@@ -66,7 +66,7 @@ export default {
     //   console.log('AfterEach',to,from)
     // })
     this.getPath();
-    console.log(this.$route)
+    // console.log(this.$route)
   },
   watch: {
     $route(val) {

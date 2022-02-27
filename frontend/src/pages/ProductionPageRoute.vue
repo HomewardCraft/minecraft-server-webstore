@@ -1,6 +1,6 @@
 <template>
   <div class="module-general grid module-general">
-    <detailPage :details="details" :amount="amount"/>
+    <detailPage v-for="details in data" :key="details.index" :details="details" :amount="amount"/>
   </div>
 </template>
 
@@ -13,15 +13,14 @@ export default {
     detailPage
   },
   created() {
-    console.log(this.itemInfo)
     this.$store.dispatch('item/getItem', this.itemInfo)
   },
   beforeMount() {
-    this.details = this.$store.state.item.itemDetails
+    this.data = this.$store.state.item.itemDetails
   },
   data() {
     return {
-      details: '',
+      data: null,
       amount: this.$route.params.amount,
       itemInfo: {
         category: this.$route.params.category,
