@@ -25,23 +25,35 @@ export default {
   name: "Breadcrumb",
   data(){
     return {
-      beforeUrl: ''
+      beforeUrl: '',
+      category: '',
+      id: ''
+    }
+  },
+  methods: {
+    getPath() {
+      console.log("(!) getPath()")
+      const path = this.$route.path.split('/')
+
+      console.log(path)
+
+      // this.$store.dispatch('items/getItem', this.category)
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      //获取上级路由
-      console.log(this.beforeUrl)
-    })
-    router.afterEach((to,from)=>{
-      console.log('AfterEach',to,from)
-    })
+    // this.$nextTick(() => {
+    //   //获取上级路由
+    //   console.log(this.beforeUrl)
+    // })
+    // router.afterEach((to,from)=>{
+    //   console.log('AfterEach',to,from)
+    // })
+    this.getPath();
     console.log(this.$route)
   },
   watch: {
     $route(val) {
-      console.log(this.$route)
-      console.log(this.$router)
+      this.getPath();
     },
 
   }

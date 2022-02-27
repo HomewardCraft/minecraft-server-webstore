@@ -95,6 +95,8 @@ export default {
         name: 'product',
         params: {
           //示例数据
+          category: 'extras',
+          amount: 1,
           id: this.$refs.itemname[0].dataset.id,
           name: this.$refs.itemname[0].dataset.name,
           originPrice: this.$refs.originprice[0].dataset.price,
