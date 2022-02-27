@@ -56,7 +56,6 @@ export default {
         }
       }
 
-      console.log(path)
       console.log(this.pathTree)
 
       // this.$store.dispatch('items/getItem', this.category)
