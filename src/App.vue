@@ -15,6 +15,3 @@ import PageFooter from "./components/PageFooter.vue";
     <page-footer/>
   </div>
 </template>
-
-<style>
-</style>
