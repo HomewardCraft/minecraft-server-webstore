@@ -14,16 +14,14 @@ export default {
 
 <script setup>
 import {ref} from "vue";
-import ClipboardJS from "clipboard";
+import clickCopyHook from "../../../hooks/clickCopyHook.js";
 
 let timer
 let opacity = ref('opacity-0')
 
 function copyIpAddress() {
-  let clipboard = new ClipboardJS('.tooltips')
-  clipboard.on('success', () => {
-    clipboard.destroy();
-  })
+
+  clickCopyHook('.tooltips')
 
   clearTimeout(timer)
   opacity.value = 'opacity-1'
