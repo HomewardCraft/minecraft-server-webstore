@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: proxima-nova;
+        src: url("/src/assets/fonts/proximanova.ttf");
+    }
+
+    body {
+        background: #000;
+        color: #fff;
+    }
+
+    body {
+        font-family: proxima-nova, sans-serif;
+    }
+
+    html, body, #app {
+        height: 100%;
+    }
+
+    .container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px
+    }
+}

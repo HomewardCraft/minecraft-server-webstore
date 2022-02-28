@@ -1,0 +1,267 @@
+.main{
+    width: 1100px;
+    display: block;
+    margin: auto;
+}
+
+.opacity-75:hover {
+    opacity: .75;
+}
+
+
+
+.w-6 {
+    width: 1.5rem;
+}
+.h-6 {
+    height: 1.5rem;
+}
+
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
+.ease-in-out {
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.duration-150 {
+    transition-duration: .15s;
+}
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .15s;
+}
+.text-btn-text {
+    --tw-text-opacity: 1;
+    color: rgba(151,67,143,var(--tw-text-opacity));
+}
+
+.tracking-wide {
+    letter-spacing: .025em;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.font-extrabold {
+    font-weight: 800;
+}
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.bg-btn {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255,176,226,var(--tw-bg-opacity));
+}
+.border-lighten {
+    border-color: #ffffff4d;
+}
+
+.justify-center {
+    justify-content: center;
+}
+.items-center {
+    align-items: center;
+}
+.transform {
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    transform: translate(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.flex {
+    display: flex;
+}
+
+button, input, optgroup, select, textarea {
+    padding: 0;
+    line-height: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+button {
+    background-color: transparent;
+    background-image: none;
+}
+button, [type=button], [type=submit] {
+    -webkit-appearance: button;
+}
+button, select {
+    text-transform: none;
+}
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+
+.leading-tight {
+    line-height: 1.25;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+.pb-3 {
+    padding-bottom: 0.75rem;
+}
+
+.opacity-50 {
+    opacity: .5;
+}
+.w-12 {
+    width: 3rem;
+}
+.h-12 {
+    height: 3rem;
+}
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgba(179,183,188,var(--tw-text-opacity));
+}
+
+.font-bold {
+    font-weight: 700;
+}
+.text-center {
+    text-align: center;
+}
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+.bg-gray-900 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(13,14,15,var(--tw-bg-opacity));
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.mt-6 {
+    margin-top: 2rem;
+}
+
+.mt-8 {
+    margin-top: 3rem;
+}
+
+
+.max-w-full {
+    max-width: 100%;
+}
+
+
+.py-10 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.bg-gray-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(24,26,27,var(--tw-bg-opacity));
+}
+.border-light {
+    border-color: #ffffff1a;
+}
+.border {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.grid {
+    display: grid;
+}
+
+.gap-12 {
+    gap: 3rem;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.text-yellow-400 {
+    --tw-text-opacity: 1;
+    color: rgba(250, 192, 33, var(--tw-text-opacity));
+}
+
+.content-wrap {
+    --tw-text-opacity: 1;
+    color: rgba(179, 183, 188, var(--tw-text-opacity));
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.text-gray-700 {
+    --tw-text-opacity: 1;
+    color: rgba(86, 88, 93, var(--tw-text-opacity));
+}
+
+.italic {
+    font-style: italic;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.text-white {
+    --tw-text-opacity: 1;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+@media (min-width: 992px) {
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lg\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
