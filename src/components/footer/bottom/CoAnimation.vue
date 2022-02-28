@@ -1,5 +1,5 @@
 <template>
-  <a href="https://kkk.fantang.cc" class="hidden md:block piston mr-48">
+  <a href="https://kkk.fantang.cc" class="hidden md:block piston mr-52">
   </a>
 </template>
 
