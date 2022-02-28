@@ -21,6 +21,7 @@ module.exports = {
       // 拓展后缀
       spacing: {
         '128': '32rem',
+        '88': '22rem',
         '144': '36rem',
         '110': '27.5rem'
       },

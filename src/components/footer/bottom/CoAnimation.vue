@@ -1,5 +1,5 @@
 <template>
-  <a href="https://kkk.fantang.cc" class="hidden md:block piston mr-52">
+  <a href="https://kkk.fantang.cc" class="hidden md:block locality ml-88">
   </a>
 </template>
 
@@ -9,6 +9,12 @@ export default {
 }
 </script>
 
-<script setup>
-
-</script>
+<style scoped>
+.locality {
+  position: relative;
+  top: -10px;
+  z-index: 10;
+  cursor: pointer;
+  height: 0;
+}
+</style>
