@@ -1,19 +1,20 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import PageHeader from "./components/PageHeader.vue";
+import PageBody from "./components/PageBody.vue";
+import PageFooter from "./components/PageFooter.vue";
+</script>
+
+<script>
+
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div class="grid grid-rows-body h-full">
+    <page-header/>
+    <page-body/>
+    <page-footer/>
+  </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
