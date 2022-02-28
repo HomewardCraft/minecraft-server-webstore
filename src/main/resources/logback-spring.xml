@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <!-- 日志文件主目录 -->
+    <define name="LOG_HOME" class="com.homeward.webstore.config.LogDirConfig"/>
+    <!-- 默认配置 -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!-- 配置控制台(Console) -->
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!-- 配置日志文件(File) -->
+    <appender name="customWarn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 设置策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 日志文件路径：这里%d{yyyyMMdd}表示按天分类日志 -->
+            <FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/%i-warn.log</FileNamePattern>
+            <!-- 启用日志清理 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <!-- 日志保留天数 -->
+            <maxHistory>1</maxHistory>
+            <!-- 日志量最大10GB -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!--每个日志文件最大100MB-->
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <append>true</append>
+        <!-- 设置格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level表示级别从左显示5个字符宽度，%msg表示日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <appender name="customError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/%i-error.log</FileNamePattern>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <maxHistory>1</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!-- root节点 全局日志级别，用来指定最基础的日志输出级别 -->
+    <root level="info">
+        <appender-ref ref="customWarn"/>
+        <appender-ref ref="customError"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

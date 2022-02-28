@@ -1,0 +1,10 @@
+.idea
+.mvn
+
+mvnw
+mvnw.cmd
+
+target
+logs
+
+backend.iml
