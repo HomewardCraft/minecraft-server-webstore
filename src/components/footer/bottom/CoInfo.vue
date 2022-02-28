@@ -1,6 +1,6 @@
 <template>
-  <div >
-    <div class="text-black opacity-85 leading-tight text-center">
+  <div class="text-center">
+    <div class="text-black opacity-85 leading-tight">
       Arcane Homeward, A Untitled network product.
     </div>
     <div class="text-yellow-900 leading-tight">
