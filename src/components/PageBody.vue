@@ -9,7 +9,3 @@ export default {
   name: "PageBody"
 }
 </script>
-
-<style scoped>
-
-</style>

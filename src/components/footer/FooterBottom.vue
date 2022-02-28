@@ -13,7 +13,3 @@ export default {
   components: {CoAnimation, CoInfo},
 }
 </script>
-
-<style scoped>
-
-</style>

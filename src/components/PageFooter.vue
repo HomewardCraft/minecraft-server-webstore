@@ -13,7 +13,3 @@ export default {
   components: {FooterBottom, FooterTop}
 }
 </script>
-
-<style scoped>
-
-</style>
