@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "clipboard": "^2.0.10",
     "vue": "^3.2.25"
   },
   "devDependencies": {
