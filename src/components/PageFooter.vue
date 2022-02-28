@@ -1,15 +1,16 @@
 <template>
   <div class="bg-yellow-400 mt-20">
     <footer-top/>
-    <div class="container mx-auto flex flex-col md:flex-row md:items-center p-6"></div>
+    <footer-bottom/>
   </div>
 </template>
 
 <script>
 import FooterTop from "./footer/FooterTop.vue";
+import FooterBottom from "./footer/FooterBottom.vue";
 export default {
   name: "PageFooter",
-  components: {FooterTop}
+  components: {FooterBottom, FooterTop}
 }
 </script>
 
