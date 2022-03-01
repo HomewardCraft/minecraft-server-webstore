@@ -64,22 +64,3 @@
         pointer-events: none;
     }
 }
-
-/*.navigate .mobile-mode @screen(md) {*/
-/*    display: none;*/
-/*}*/
-
-/*.navigate .desktop-mode @screen(md) {*/
-/*  visibility: hidden;*/
-/*  opacity: 0;*/
-/*  transition: .24s all ease-in-out;*/
-/*  position: absolute;*/
-/*  top: 110px;*/
-/*  left: 0;*/
-/*  right: 0;*/
-/*  bottom: 0;*/
-/*  background: #000;*/
-/*  padding: 20px 10px;*/
-/*  z-index: 99999;*/
-/*  pointer-events: none;*/
-/*}*/
