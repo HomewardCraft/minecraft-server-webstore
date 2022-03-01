@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
 .background-image {
-  background-image: url("https://s4.ax1x.com/2022/03/01/b1wjBQ.jpg");
+  background-image: url(./src/assets/images/homepage/background.jpg);
 }
 
 .page-background {

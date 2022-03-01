@@ -1,12 +1,10 @@
 <template>
-  <section class="section-categories mb-6">
-    <h2 class="text-3xl font-bold mb-4">Categories</h2>
-    <div class="categories">
-      <crates-section/>
-      <extras-section/>
-      <ranks-section/>
-    </div>
-  </section>
+  <h2 class="text-3xl font-bold mb-4">Categories</h2>
+  <div class="categories">
+    <crates-section/>
+    <extras-section/>
+    <ranks-section/>
+  </div>
 </template>
 
 <script>

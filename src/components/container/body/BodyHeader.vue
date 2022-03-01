@@ -18,14 +18,14 @@ export default {
 
 <style scoped>
 .promotion {
-  background: linear-gradient(180deg,#87419a 30%,rgba(217, 141, 31, 0)),url(https://s4.ax1x.com/2022/03/01/b1YCLR.png) 100%/cover;
+  background: linear-gradient(180deg,#87419a 30%,rgba(217, 141, 31, 0)),url(./src/assets/images/homepage/valentines.png) 100%/cover;
   justify-content: center;
 }
 
 @screen lg {
   .promotion {
     justify-content: space-between;
-    background: linear-gradient(90deg, #87419a, rgba(217, 141, 31, 0) 70%), url(https://s4.ax1x.com/2022/03/01/b1YCLR.png) 100%/cover;
+    background: linear-gradient(90deg, #87419a, rgba(217, 141, 31, 0) 70%), url(./src/assets/images/homepage/valentines.png) 100%/cover;
   }
 
   .special-bar {
