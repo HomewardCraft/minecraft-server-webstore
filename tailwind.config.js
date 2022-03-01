@@ -9,12 +9,12 @@ module.exports = {
   // 主题配置
   theme: {
     // 响应式断点
-    // screens: {
-    //   sm: '480px',
-    //   md: '768px',
-    //   lg: '976px',
-    //   xl: '1440px',
-    // },
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '992px',
+      xl: '1100px',
+    },
 
     // 继承默认配置
     extend: {
@@ -23,7 +23,7 @@ module.exports = {
         '128': '32rem',
         '88': '22rem',
         '144': '36rem',
-        '110': '27.5rem'
+        '110': '110px'
       },
       gridTemplateRows: {
         'body': 'auto 1fr auto'

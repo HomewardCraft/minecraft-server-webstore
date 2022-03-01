@@ -21,6 +21,10 @@
         height: 100%;
     }
 
+    html, body {
+        display: block;
+    }
+
     .container {
         width: 100%;
         padding-left: 15px;
