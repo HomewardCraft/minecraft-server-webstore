@@ -8,7 +8,7 @@ module.exports = {
 
   // 主题配置
   theme: {
-    // 响应式断点
+    // 规定全局样式
     screens: {
       sm: '640px',
       md: '768px',
