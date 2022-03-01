@@ -40,6 +40,11 @@
     .text-shadow {
         text-shadow: rgb(0 0 0 / 30%) 0 2px 0;
     }
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
 }
 
 @screen md {

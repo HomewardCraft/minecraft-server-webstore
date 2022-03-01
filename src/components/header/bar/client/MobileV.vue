@@ -11,8 +11,23 @@ export default {
 </script>
 
 <style scoped>
-/*.navigate .mobile .bar {*/
-.bar {
+.navigate .mobile.active .bar:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+.navigate .mobile.active .bar:nth-of-type(2) {
+  transform: rotate(180deg);
+  opacity: 0;
+}
+
+.navigate .mobile.active .bar:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: -10px;
+}
+
+
+.navigate .mobile .bar {
   background: #fff;
   height: 4px;
   width: 30px;
@@ -21,8 +36,7 @@ export default {
   position: relative;
   top: 0;
 }
-/*.navigate .mobile .bar:nth-of-type(2) {*/
-.bar:nth-of-type(2) {
+.navigate .mobile .bar:nth-of-type(2) {
   margin: 6px 0;
 }
 </style>
