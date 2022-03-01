@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "BodyToasts"
+  name: "ContainerToasts"
 }
 </script>
 

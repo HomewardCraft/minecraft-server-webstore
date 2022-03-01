@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "ContainerHelp"
+  name: "HelpSection"
 }
 </script>
 

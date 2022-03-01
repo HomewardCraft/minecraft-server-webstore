@@ -1,19 +1,19 @@
 <template>
 <div class="page-container">
   <background-image/>
-  <body-frame/>
-  <body-toasts/>
-  <body-side-bar/>
+  <container-body/>
+  <container-toasts/>
+  <container-side-bar/>
 </div>
 </template>
 
 <script>
 import BackgroundImage from "./container/BackgroundImage.vue";
-import BodyFrame from "./container/BodyFrame.vue";
-import BodyToasts from "./container/BodyToasts.vue";
-import BodySideBar from "./container/BodySideBar.vue";
+import ContainerBody from "./container/ContainerBody.vue";
+import ContainerToasts from "./container/ContainerToasts.vue";
+import ContainerSideBar from "./container/ContainerSideBar.vue";
 export default {
   name: "PageContainer",
-  components: {BodySideBar, BodyToasts, BodyFrame, BackgroundImage}
+  components: {ContainerSideBar, ContainerToasts, ContainerBody, BackgroundImage}
 }
 </script>

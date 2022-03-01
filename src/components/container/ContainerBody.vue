@@ -1,5 +1,5 @@
 <template>
-  <div class="body-frame homepage">
+  <div class="container-body homepage">
     <div class="container mx-auto">
       <bread-crumb/>
       <body-header/>
@@ -13,7 +13,7 @@ import BreadCrumb from "./body/BreadCrumb.vue";
 import BodyHeader from "./body/BodyHeader.vue";
 
 export default {
-  name: "BodyFrame",
+  name: "ContainerBody",
   components: {BodyHeader, BreadCrumb}
 }
 </script>
