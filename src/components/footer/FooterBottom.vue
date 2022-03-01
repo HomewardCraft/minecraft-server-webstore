@@ -1,6 +1,7 @@
 <template>
-<div class="container mx-auto flex flex-col md:flex-row md:items-center p-6">
-  <co-animation/>
+<!--<div class="container mx-auto flex flex-col md:flex-row md:items-center p-6">-->
+<div class="container mx-auto md:items-center p-6">
+  <!--<co-animation/>-->
   <co-info/>
 </div>
 </template>

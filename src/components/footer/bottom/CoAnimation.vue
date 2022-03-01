@@ -1,5 +1,5 @@
 <template>
-  <a href="https://kkk.fantang.cc" class="hidden md:block locality ml-88">
+  <a href="https://kkk.fantang.cc" class="hidden md:block locality mr-6">
   </a>
 </template>
 
