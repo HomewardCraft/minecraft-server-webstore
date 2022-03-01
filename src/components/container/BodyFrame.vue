@@ -1,7 +1,11 @@
 <template>
-  <bread-crumb/>
-  <body-header/>
-  <body-container/>
+  <div class="body-frame homepage">
+    <div class="container mx-auto">
+      <bread-crumb/>
+      <body-header/>
+      <body-container/>
+    </div>
+  </div>
 </template>
 
 <script>
