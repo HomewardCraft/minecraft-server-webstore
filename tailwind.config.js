@@ -14,6 +14,7 @@ module.exports = {
       md: '768px',
       lg: '992px',
       xl: '1100px',
+      mdm: {'max': '768px'}
     },
 
     // 继承默认配置
@@ -34,7 +35,13 @@ module.exports = {
           900: '#dc8a16',
           1000: '#a35710',
           1100: '#AB5828'
-        }
+        },
+        navigator: {
+          home: '#22afdc',
+          blog: '#20b966',
+          help: '#f18725',
+        },
+        lighten: '#ffffff4d'
       }
     }
   }
