@@ -1,7 +1,6 @@
 <template>
 <div class="page-container">
   <background-image/>
-  <!--https://s4.ax1x.com/2022/03/01/b1YCLR.png-->
   <body-frame/>
   <body-toasts/>
   <body-side-bar/>

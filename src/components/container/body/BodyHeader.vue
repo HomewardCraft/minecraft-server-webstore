@@ -1,13 +1,53 @@
 <template>
-
+  <div class="promotion flex lg:items-center justify-between mb-10 py-12 lg:py-20 px-10 lg:px-16">
+    <item-promotion/>
+  </div>
+  <div class="special-bar mb-10 -mt-5" style="background-color: rgb(175, 97,  196)">
+    <special-bar/>
+  </div>
 </template>
 
 <script>
+import ItemPromotion from "./header/ItemPromotion.vue";
+import SpecialBar from "./header/SpecialBar.vue";
 export default {
-  name: "BodyHeader"
+  name: "BodyHeader",
+  components: {SpecialBar, ItemPromotion}
 }
 </script>
 
-<script setup>
+<style scoped>
+.promotion {
+  background: linear-gradient(180deg,#87419a 30%,rgba(217, 141, 31, 0)),url(https://s4.ax1x.com/2022/03/01/b1YCLR.png) 100%/cover;
+  justify-content: center;
+}
 
-</script>
+@screen lg {
+  .promotion {
+    justify-content: space-between;
+    background: linear-gradient(90deg, #87419a, rgba(217, 141, 31, 0) 70%), url(https://s4.ax1x.com/2022/03/01/b1YCLR.png) 100%/cover;
+  }
+
+  .special-bar {
+    padding: 10px 20px;
+  }
+}
+
+.promotion {
+  text-shadow: rgb(0 0 0 / 25%) 3px 3px 2px;
+  box-shadow: inset #fff3 0 0 0 3px;
+  position: relative;
+}
+
+.special-bar {
+  background: #452ea3;
+  font-weight: 700;
+  border: 2px solid rgba(255,255,255,.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+</style>

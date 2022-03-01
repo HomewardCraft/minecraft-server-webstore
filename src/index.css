@@ -25,46 +25,26 @@
         display: block;
     }
 
-    .container {
-        width: 100%;
-        padding-left: 15px;
-        padding-right: 15px
-    }
-
     ol, ul {
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    .text-shadow {
-        text-shadow: rgb(0 0 0 / 30%) 0 2px 0;
-    }
-
     a {
         color: inherit;
         text-decoration: inherit;
     }
-
-    .page-background {
-        min-height: 600px;
-        height: 70vh;
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: bottom center no-repeat;
-        background-size: cover;
-    }
 }
 
+/* 移动端的导航栏样式 */
 @screen md {
     .navigate .mobile {
         display: none;
     }
 }
 
+/* 固定端的导航栏样式 */
 @screen mdm {
     .navigate .desktop {
         visibility: hidden;
@@ -80,4 +60,72 @@
         z-index: 99999;
         pointer-events: none;
     }
+}
+
+/* 促销部分 */
+.promotion {
+    justify-content: space-between;
+    background: linear-gradient(to right,#2196f3,rgba(33,150,243,0) 70%),url(https://s4.ax1x.com/2022/03/01/b125Mn.jpg) right center/cover;
+}
+
+/* 首页促销部分 */
+@screen lg {
+    .promotion {
+        justify-content: space-between;
+        background: linear-gradient(to right,#2196f3,rgba(33,150,243,0) 70%),url(https://s4.ax1x.com/2022/03/01/b125Mn.jpg) right center/cover;
+    }
+
+    .promotion .image .layer.lv1 {
+        background: url(https://s4.ax1x.com/2022/03/01/b12xMR.png) bottom right no-repeat;
+        background-size: auto 230px;
+        right: 45px;
+    }
+
+    .promotion .image .layer.lv2 {
+        background: url(https://s4.ax1x.com/2022/03/01/b1RSqx.png) bottom left no-repeat;
+        background-size: auto 100%;
+        left: -180px;
+    }
+
+    .promotion .text {
+        max-width: 350px;
+    }
+}
+
+/* 首页背景图片 */
+.page-background {
+    min-height: 600px;
+    height: 70vh;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: bottom center no-repeat;
+    background-size: cover;
+}
+
+/* 每个容器 */
+/* 很重要 */
+.container {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+/* 背景阴影 */
+.text-shadow {
+    text-shadow: rgb(0 0 0 / 30%) 0 2px 0;
+}
+
+/* 促销部分的我也不知道是什么 */
+.promotion .image .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    bottom: 0;
+    background-size: auto 100%;
 }
