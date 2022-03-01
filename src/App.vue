@@ -1,17 +1,16 @@
-<script setup>
-import PageHeader from "./components/PageHeader.vue";
-import PageBody from "./components/PageBody.vue";
-import PageFooter from "./components/PageFooter.vue";
-</script>
-
 <script>
-
+import PageHeader from "./components/PageHeader.vue";
+import PageContainer from "./components/PageContainer.vue";
+import PageFooter from "./components/PageFooter.vue";
+export default {
+  components: {PageFooter, PageContainer, PageHeader}
+}
 </script>
 
 <template>
   <div class="grid grid-rows-body h-full">
     <page-header/>
-    <page-body/>
+    <page-container/>
     <page-footer/>
   </div>
 </template>

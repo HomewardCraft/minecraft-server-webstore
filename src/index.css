@@ -45,6 +45,18 @@
         color: inherit;
         text-decoration: inherit;
     }
+
+    .page-background {
+        min-height: 600px;
+        height: 70vh;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: bottom center no-repeat;
+        background-size: cover;
+    }
 }
 
 @screen md {

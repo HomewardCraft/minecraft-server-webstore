@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-yellow-400 mt-20">
+  <div class="page-footer bg-yellow-400 mt-20">
     <footer-top/>
     <footer-bottom/>
   </div>

@@ -1,11 +1,13 @@
 <template>
-<div>
 
-</div>
 </template>
 
 <script>
 export default {
-  name: "PageBody"
+  name: "BodyFrame"
 }
+</script>
+
+<script setup>
+
 </script>

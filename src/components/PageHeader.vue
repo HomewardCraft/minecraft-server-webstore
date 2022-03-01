@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-16">
+  <div class="page-header mb-16">
     <div class="container mx-auto sm:px-10 lg:px-20 flex items-center justify-between">
       <logo-image/>
       <information-bar/>
