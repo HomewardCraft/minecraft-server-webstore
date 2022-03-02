@@ -1,5 +1,7 @@
 <template>
-  <div class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out" :class="styles.outer">
+  <div @click.self = "close"
+      class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out"
+      :class="styles.outer">
     <div class="transition-transform duration-200 ease-in-out transform" :class="styles.inner">
       <div class="title flex items-center justify-between mb-6">
         <login-title/>
@@ -14,8 +16,13 @@
 </template>
 
 <script setup>
-
+import {getCurrentInstance} from "vue";
 import {reactive} from "vue";
+import {onMounted} from "vue";
+
+const {proxy, ctx} = getCurrentInstance()
+
+let ispannelopen = false
 
 let styles = reactive({
   outer: 'opacity-0 pointer-events-none',
@@ -32,6 +39,21 @@ function close() {
   styles.inner = 'scale-75'
 }
 
+
+onMounted(() => {
+  getCurrentInstance().appContext.config.globalProperties.$bus.on
+  //判断发送的指令，如果是open就开，close就关闭
+  ('loginpannelmanipulate', (command) => {
+    if (command === 'open') {
+      open()
+    } else {
+      close();
+    }
+
+  })
+})
+
+
 </script>
 
 <script>
@@ -39,6 +61,7 @@ import LoginAvatar from "./modal/LoginAvatar.vue";
 import LoginTitle from "./modal/LoginTitle.vue";
 import LoginInput from "./modal/LoginInput.vue";
 import LoginHelp from "./modal/LoginHelp.vue";
+
 export default {
   name: "BottomModal",
   components: {LoginHelp, LoginInput, LoginTitle, LoginAvatar}
