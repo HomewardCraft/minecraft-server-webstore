@@ -9,7 +9,9 @@
     <div class="popout" @click="openBar">
       <sidebar-popout/>
     </div>
-    <main-content/>
+    <div class="main-content pt-12 lg:pt-0">
+      <main-content/>
+    </div>
   </div>
 </template>
 
