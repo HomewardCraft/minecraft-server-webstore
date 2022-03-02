@@ -31,6 +31,15 @@ module.exports = {
         'body': 'auto 1fr auto'
       },
       colors: {
+        gray: {
+          '500': '#b3b7bc',
+          '750': '#1d2021',
+          '900': '#0d0e0f'
+        },
+        yellow: {
+          '400': '#fac021',
+          '800': '#92400e',
+        },
         custom: {
           '300': '#fac021',
           '400': '#ffe7c2',
@@ -40,13 +49,15 @@ module.exports = {
           '800': '#bf6936',
           '900': '#dc8a16',
           '1000': '#a35710',
-          '1100': '#ab5828'
+          '1100': '#ab5828',
+          '1200': '#181a1b'
         },
         navigator: {
           home: '#22afdc',
           blog: '#20b966',
           help: '#f18725',
         },
+        light: '#ffffff1a',
         lighten: '#ffffff4d'
       }
     }
