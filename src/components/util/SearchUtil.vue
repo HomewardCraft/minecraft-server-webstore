@@ -2,12 +2,12 @@
   <div class="category-heading pt-4 text-center">
     <div class="text-5xl text-white font-bold">Extras</div>
     <div class="input-wrap w-full lg:w-1/2 mx-auto relative mt-6">
-      <input
+      <input ref="inputtext"
         class="wi w-full bg-gray-900 rounded-md text-white border border-lighten text-lg py-3 px-6 transition-colors duration-200 ease-in-out focus:outline-none focus:border-yellow-400"
         id="searchTerm">
       <div
           class="placeholder pointer-events-none absolute top-0 left-0 text-lg text-gray-700 py-2 leading-loose px-6 transition-opacity duration-200 ease-in-out">
-        Press / to focus
+        按 Enter 进行聚焦搜索
       </div>
       <label for="searchTerm" class="icon absolute right-0 top-0 m-px p-4 rounded-md pointer-events-none">
         <svg class="w-5 h-5 text-gray-700" fill="#55575c" viewBox="0 0 20 20">
@@ -21,8 +21,35 @@
 </template>
 
 <script>
+
+import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
+
 export default {
-  name: "SearchUtil"
+  name: "SearchUtil",
+  setup() {
+
+    //获取当前实例对象 vue2中的this
+    const { proxy, ctx } = getCurrentInstance()
+
+    const inputtext = ref(null)
+
+    function saveKeys(event){
+      // point.x = event.pageX
+      // point.y = event.pageY
+
+      if (event.code == "Enter")
+        ctx.$refs.inputtext.focus()
+    }
+
+    //实现鼠标“打点”相关的生命周期钩子
+    onMounted(()=>{
+      window.addEventListener('keypress',saveKeys)
+    })
+
+    onBeforeUnmount(()=>{
+      window.removeEventListener('keypress',saveKeys)
+    })
+  }
 }
 </script>
 
