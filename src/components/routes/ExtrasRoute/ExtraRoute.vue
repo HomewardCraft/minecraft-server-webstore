@@ -61,7 +61,7 @@ export default {
   box-sizing: content-box;
 }
 
-img {
+.packages img {
   margin: auto;
   position: relative;
   width: 300px;

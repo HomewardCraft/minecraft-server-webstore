@@ -1,12 +1,12 @@
 <template>
-
+  <extra-route/>
 </template>
 
 <script>
-export default {
-  name: "ExtrasRoute"
-}
-</script>
+import extraRoute from "../components/routes/ExtrasRoute/ExtraRoute.vue";
 
-<script setup>
+export default {
+  name: "ExtrasRoute",
+  components: {extraRoute}
+}
 </script>
