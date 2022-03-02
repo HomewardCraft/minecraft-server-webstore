@@ -1,7 +1,7 @@
 <template>
-  <div @click.self = "close"
-      class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out"
-      :class="styles.outer">
+  <div @click.self="close"
+       class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out"
+       :class="styles.outer">
     <div class="transition-transform duration-200 ease-in-out transform" :class="styles.inner">
       <div class="title flex items-center justify-between mb-6">
         <login-title/>
@@ -42,15 +42,15 @@ function close() {
 
 onMounted(() => {
   getCurrentInstance().appContext.config.globalProperties.$bus.on
-  //判断发送的指令，如果是open就开，close就关闭
-  ('loginpannelmanipulate', (command) => {
-    if (command === 'open') {
-      open()
-    } else {
-      close();
-    }
+      //判断发送的指令，如果是open就开，close就关闭
+      ('loginpannelmanipulate', (command) => {
+        if (command === 'open') {
+          open()
+        } else {
+          close();
+        }
 
-  })
+      })
 })
 
 

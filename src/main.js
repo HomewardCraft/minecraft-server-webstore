@@ -14,6 +14,6 @@ app.use(router)
 app.use(vuex)
 
 app.config.globalProperties.$bus = new mitt()
-app.config.globalProperties.$http = axios()
+app.config.globalProperties.$http = axios
 
 app.mount('#app')
