@@ -7,6 +7,7 @@
       <span>Home</span>
     </router-link>
     <div class="separator">/</div>
+    <!--<router-link to=""-->
   </div>
 </template>
 
@@ -35,5 +36,12 @@ bus.on('sendRoutePath', setRoutePath)
 .bread-crumbs .separator {
   color: #4b5563;
   padding: 0 10px;
+}
+
+.breadcrumbs .breadcrumb {
+  color: #d1d5db;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .15s;
 }
 </style>
