@@ -3,9 +3,10 @@
 
   <div class="packages grid gap-6 md:grid-cols-2 pt-16">
     <a
+        @click = "goToDetail"
         class="package grid bg-gray-900 border border-lighten transform transition-all hover:opacity-75 hover:-translate-y-2"
         data-package-id="4248026"
-        href="#/p/4248026">
+        >
       <div class="image">
         <div class="bg-block bg-gray-800 mx-12 h-24"></div>
         <img alt="Slot Rune"
@@ -38,9 +39,32 @@
 
 <script>
 import SearchUtil from "../../util/SearchUtil.vue";
+import {getCurrentInstance} from "vue";
+import {useRouter} from "vue-router";
 
 export default {
   name: "ExtrasRoute",
+  setup() {
+
+    const router = useRouter()
+    const {proxy, ctx} = getCurrentInstance()
+
+    function goToDetail () {
+      router.push({
+        // 目标路由
+        name: 'detail',
+        params: {
+          //示例数据
+          id: '11114514'
+        }
+      })
+    }
+
+    return {
+      goToDetail,
+      useRouter
+    }
+  },
   components: {SearchUtil}
 }
 </script>
