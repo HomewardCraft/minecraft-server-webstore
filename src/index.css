@@ -72,15 +72,10 @@
         margin: 0;
     }
 
-    button, input, optgroup, select, textarea {
-        padding: 0;
-        line-height: inherit;
-        color: inherit;
-    }
-
     button, [type=button], [type=submit] {
         -webkit-appearance: button;
     }
+
     button {
         cursor: pointer;
     }
@@ -92,13 +87,6 @@
 
     button, select {
         text-transform: none;
-    }
-
-    button, input, optgroup, select, textarea {
-        font-family: inherit;
-        font-size: 100%;
-        line-height: 1.15;
-        margin: 0;
     }
 }
 
