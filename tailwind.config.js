@@ -64,6 +64,9 @@ module.exports = {
       },
       backgroundColor: {
         'btn': '#ffb0e2'
+      },
+      textColor: {
+        'black': '#000000'
       }
     }
   }
