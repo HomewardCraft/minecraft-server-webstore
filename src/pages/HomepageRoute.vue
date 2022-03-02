@@ -18,3 +18,9 @@ export default {
   components: {HelpSection, CategoriesSection}
 }
 </script>
+
+<script setup>
+import sendRoutePath from "../hooks/sendRoutePath.js";
+
+sendRoutePath()
+</script>

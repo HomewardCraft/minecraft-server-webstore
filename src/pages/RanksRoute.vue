@@ -9,5 +9,7 @@ export default {
 </script>
 
 <script setup>
+import sendRoutePath from "../hooks/sendRoutePath.js";
 
+sendRoutePath()
 </script>

@@ -21,15 +21,13 @@ import {getCurrentInstance, ref} from "vue";
 
 let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 
-let path
+let path = ref('/')
 
 function test(value) {
-  path = value
+  path.value = value
 }
 
 bus.on('test', test)
-
-console.log(path)
 </script>
 
 <style scoped>

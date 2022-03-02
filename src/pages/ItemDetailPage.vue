@@ -9,8 +9,6 @@
 </template>
 
 <script>
-
-
 import ItemDetailInfo from "../components/routes/ItemDetail/ItemDetailInfo.vue";
 import ItemPicture from "../components/routes/ItemDetail/ItemPicture.vue";
 import ItemAddCart from "../components/routes/ItemDetail/ItemAddCart.vue";
@@ -21,6 +19,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<script setup>
+import sendRoutePath from "../hooks/sendRoutePath.js";
 
-</style>
+sendRoutePath()
+</script>

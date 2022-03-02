@@ -12,11 +12,7 @@ export default {
 </script>
 
 <script setup>
-import {getCurrentInstance} from "vue";
-import {useRoute} from 'vue-router'
+import sendRoutePath from "../hooks/sendRoutePath.js";
 
-let bus = getCurrentInstance().appContext.config.globalProperties.$bus
-let fullPath = useRoute().fullPath
-
-bus.emit('test', fullPath)
+sendRoutePath()
 </script>
