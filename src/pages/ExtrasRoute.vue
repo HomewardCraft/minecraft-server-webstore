@@ -10,3 +10,13 @@ export default {
   components: {extraRoute}
 }
 </script>
+
+<script setup>
+import {getCurrentInstance} from "vue";
+import {useRoute} from 'vue-router'
+
+let bus = getCurrentInstance().appContext.config.globalProperties.$bus
+let fullPath = useRoute().fullPath
+
+bus.emit('test', fullPath)
+</script>

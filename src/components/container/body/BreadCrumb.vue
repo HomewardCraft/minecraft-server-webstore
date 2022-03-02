@@ -17,7 +17,17 @@ export default {
 </script>
 
 <script setup>
+import {getCurrentInstance, ref} from "vue";
 
+let bus = getCurrentInstance().appContext.config.globalProperties.$bus
+
+let path
+
+function test(value) {
+  path = value
+}
+
+bus.on('test', test)
 </script>
 
 <style scoped>
