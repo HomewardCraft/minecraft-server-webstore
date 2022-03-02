@@ -1,11 +1,22 @@
 <template>
-  <div class="flex items-center font-bold text-lg bg-custom-1200 pt-5 px-6">
+  <div
+      v-show="logged_in"
+      class="flex items-center font-bold text-lg bg-custom-1200 pt-5 px-6">
     <!-- TODO 图片和玩家名字 -->
     <img src="https://visage.surgeplay.com/bust/64/619377de9ada41388ef93dbf9fe56320"
          alt="Ba1oretto's Minecraft Skin"/>
     <div class="ml-5">
       <div class="label text-xs uppercase tracking-widest leading-none text-gray-500">Shopping As</div>
-      <div class="username">Ba1oretto</div>
+      <div class="username">{{ userName }}</div>
+    </div>
+  </div>
+  <div
+      v-show="!logged_in"
+      class="flex items-center font-bold text-lg bg-gray-800 pt-5 px-6"><img
+      src="https://visage.surgeplay.com/bust/64/c06f89064c8a49119c29ea1dbd1aab82" alt="Guest Minecraft Skin">
+    <div class="ml-5">
+      <div class="label text-xs uppercase tracking-widest leading-none text-gray-500">Guest</div>
+      <div class="username">Login to Purchase</div>
     </div>
   </div>
 </template>
@@ -15,7 +26,21 @@ export default {
   name: "UserContent"
 }
 </script>
-
 <script setup>
 
+import {onBeforeMount, ref, toRef, toRefs, watch} from "vue";
+import {getCurrentInstance} from "vue";
+
+
+let ctx = getCurrentInstance()
+let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
+let userName = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'ign')
+
+watch(logged_in, (newValue, oldValue) => {
+  console.log('logged_in的值变化了', newValue, oldValue)
+}, {deep: true})
+
+onBeforeMount(() => {
+  console.log(logged_in)
+})
 </script>
