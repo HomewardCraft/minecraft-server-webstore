@@ -7,7 +7,7 @@
       data-package-id="4248026"
       data-v-45761ad8="" href="#/p/4248026">
     <div class="image" data-v-45761ad8="">
-      <div class="bg-block bg-gray-800 mx-12 h-24" data-v-45761ad8=""></div>
+      <div class="bg-block bg-gray-800 mx-12 h-24"></div>
       <img alt="Slot Rune"
 
            src="//dunb17ur4ymx4.cloudfront.net/packages/images/31894a0afe0c182aa24e9dc47654a9107dc76fdc.png"></div>
@@ -45,5 +45,10 @@ export default {
 </script>
 
 <style scoped>
-
+.bg-block {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+}
 </style>
