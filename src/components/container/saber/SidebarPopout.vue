@@ -15,7 +15,6 @@
     <div class="lg text-2xl mb-1">$</div>
     <div class="sm text-base">USD</div>
   </div>
-  <!--TODO 此组件为父 给子组件ContainerSideBar传修改状态的函数 -->
 </template>
 
 <script>
@@ -25,4 +24,8 @@ export default {
 </script>
 
 <style scoped>
+.side-bar.active .popout .item {
+  opacity: 0;
+  transform: translate(25px);
+}
 </style>

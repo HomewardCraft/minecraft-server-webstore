@@ -1,12 +1,12 @@
 <template>
-  <div class="side-bar bg-gray-900 font-bold transition-all duration-500 ease-in-out z-40 outline-none" :class="active">
-    <div class="side-bar-close absolute left-0 right-0 lg:right-auto lg:-ml-12 bg-red-600 border border-lighten lg:w-12 h-12 box-content flex items-center justify-center cursor-pointer transition-opacity duration-300 ease-in-out" :class="opacity" @click="closeBar">
+  <div class="side-bar bg-gray-900 font-bold transition-all duration-500 ease-in-out z-40 outline-none" :class="barCondition.active">
+    <div class="side-bar-close absolute left-0 right-0 lg:right-auto lg:-ml-12 bg-red-600 border border-lighten lg:w-12 h-12 box-content flex items-center justify-center cursor-pointer transition-opacity duration-300 ease-in-out" :class="barCondition.opacity" @click="closeBar">
       <svg viewBox="0 0 36 36" class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M36.0002 5.00012L30.7462 -0.253906L17.8731 12.6191L5.00012 -0.253866L-0.253906 5.00016L12.6191 17.8732L-0.253784 30.7461L5.00024 36.0001L17.8731 23.1272L30.7461 36.0001L36.0001 30.7461L23.1272 17.8732L36.0002 5.00012Z"/>
       </svg>
       <span class="ml-3 lg:hidden">Close Sidebar</span>
     </div>
-    <div class="popout">
+    <div class="popout" @click="openBar">
       <sidebar-popout/>
     </div>
     <main-content/>
@@ -23,15 +23,21 @@ export default {
 </script>
 
 <script setup>
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 
-let opacity = ref('opacity-0')
-let active = ref('')
-// let isActive = false
+let barCondition = reactive({
+  opacity: 'opacity-0',
+  active: ''
+})
+
+function openBar() {
+  barCondition.opacity = 'opacity-1'
+  barCondition.active = 'active'
+}
 
 function closeBar() {
-  opacity.value = 'opacity-0'
-  active.value = ''
+  barCondition.opacity = 'opacity-0'
+  barCondition.active = ''
 }
 </script>
 
@@ -50,10 +56,6 @@ function closeBar() {
     right: -380px;
     width: 380px;
   }
-}
-
-.side-bar.active {
-  right: 0;
 }
 
 .side-bar .popout {
@@ -78,4 +80,21 @@ function closeBar() {
     flex-direction: column;
   }
 }
+
+.side-bar.active {
+  right: 0;
+}
+
+.side-bar.active .popout {
+  bottom: -20px;
+  pointer-events: none;
+}
+
+@screen lg {
+  .side-bar.active .popout {
+    bottom: auto;
+    right: 340px;
+  }
+}
+
 </style>
