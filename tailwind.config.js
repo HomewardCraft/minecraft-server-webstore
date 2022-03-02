@@ -3,12 +3,7 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
-  // 添加tailwind的选择器的字首
-  // prefix: 'tw-',
-
-  // 主题配置
   theme: {
-    // 规定全局样式
     screens: {
       sm: '640px',
       md: '768px',
@@ -16,10 +11,7 @@ module.exports = {
       xl: '1100px',
       mdm: {'max': '768px'}
     },
-
-    // 继承默认配置
     extend: {
-      // 拓展后缀
       spacing: {
         '88': '22rem',
         '100': '100px',
@@ -31,6 +23,12 @@ module.exports = {
         'body': 'auto 1fr auto'
       },
       colors: {
+        btn: {
+          text: '#97438f'
+        },
+        black: {
+          '80': '#000c'
+        },
         gray: {
           '500': '#b3b7bc',
           '750': '#1d2021',
@@ -60,6 +58,12 @@ module.exports = {
         },
         light: '#ffffff1a',
         lighten: '#ffffff4d'
+      },
+      boxShadow: {
+        'btn': '#d07fbe 0 5px 0'
+      },
+      backgroundColor: {
+        'btn': '#ffb0e2'
       }
     }
   }

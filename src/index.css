@@ -53,6 +53,53 @@
     blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
         margin: 0;
     }
+
+    img, svg, video, canvas, audio, iframe, embed, object {
+        display: block;
+        vertical-align: middle;
+    }
+
+    button, input, optgroup, select, textarea {
+        padding: 0;
+        line-height: inherit;
+        color: inherit;
+    }
+
+    button, input, optgroup, select, textarea {
+        font-family: inherit;
+        font-size: 100%;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    button, input, optgroup, select, textarea {
+        padding: 0;
+        line-height: inherit;
+        color: inherit;
+    }
+
+    button, [type=button], [type=submit] {
+        -webkit-appearance: button;
+    }
+    button {
+        cursor: pointer;
+    }
+
+    button {
+        background-color: transparent;
+        background-image: none;
+    }
+
+    button, select {
+        text-transform: none;
+    }
+
+    button, input, optgroup, select, textarea {
+        font-family: inherit;
+        font-size: 100%;
+        line-height: 1.15;
+        margin: 0;
+    }
 }
 
 /* 移动端的导航栏样式 */
@@ -209,4 +256,9 @@
     right: 0;
     bottom: 0;
     transition: .3s ease-in-out opacity;
+}
+
+/* 我不知道 */
+.modal {
+    z-index: 99999;
 }
