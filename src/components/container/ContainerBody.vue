@@ -17,3 +17,7 @@ export default {
   components: {BodyHeader, BreadCrumb}
 }
 </script>
+
+<script setup>
+
+</script>

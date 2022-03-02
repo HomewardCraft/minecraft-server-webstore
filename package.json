@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "clipboard": "^2.0.10",
+    "mitt": "^3.0.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",

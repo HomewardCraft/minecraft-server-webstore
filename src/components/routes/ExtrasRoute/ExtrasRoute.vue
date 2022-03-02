@@ -34,8 +34,6 @@
 </template>
 
 <script>
-
-
 import SearchUtil from "../../util/SearchUtil.vue";
 
 export default {
