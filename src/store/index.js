@@ -1,24 +1,24 @@
-import { createStore } from "vuex";
+import {createStore} from "vuex";
 import {getCurrentInstance} from "vue";
-import { useCookies } from "vue3-cookies";
+import {useCookies} from "vue3-cookies";
 
-const { cookies } = useCookies();
+const {cookies} = useCookies();
 let ctx = getCurrentInstance()
 
 const actions = {
     //响应组件中加的动作
-    login(context,value){
-        context.commit('login',value)
+    login(context, value) {
+        context.commit('login', value)
     },
 }
 
 const mutations = {
     //执行加
-    login(state,value){
+    login(state, value) {
         state.user.logged_in = true
         state.user.ign = value.name
         state.user.uuid = value.id
-        cookies.set("user_session", state.user,"7D")
+        cookies.set("user_session", state.user, "7D")
     }
 }
 
@@ -28,6 +28,11 @@ const state = {
         "logged_in": false,
         "ign": " ",
         "uuid": " "
+    },
+    "cart": {
+        "items": [],
+        "total": 0
+
     }
 }
 
