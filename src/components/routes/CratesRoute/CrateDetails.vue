@@ -30,4 +30,5 @@ let saleCondition = crate.itemSaleInfo.onsaleCondition;
 let originPrice = crate.itemBasicInfo.price / 100
 
 let price = (crate.itemBasicInfo.price / 100) * (crate.itemSaleInfo.onsalePercent / 100)
+
 </script>
