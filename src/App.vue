@@ -13,18 +13,16 @@ export default {
 
 <script setup>
 import {useCookies} from "vue3-cookies";
-import {getCurrentInstance, toRef, toRefs} from "vue";
+import {getCurrentInstance} from "vue";
 import {onBeforeMount} from "vue";
 
 const {cookies} = useCookies()
 let ctx = getCurrentInstance()
 
 onBeforeMount(()=>{
-  console.log('---onBeforeMount---')
   if (cookies.get("user_session")) {
     ctx.appContext.config.globalProperties.$store.state.user = cookies.get("user_session")
   }
-
 })
 
 </script>

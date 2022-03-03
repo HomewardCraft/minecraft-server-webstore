@@ -12,7 +12,7 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/mojang/, '')
       },
       '/fantang': {
-        target: 'http://web.fantang.cc/',
+        target: 'https://fantang.cc/',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/fantang/, '')
       }

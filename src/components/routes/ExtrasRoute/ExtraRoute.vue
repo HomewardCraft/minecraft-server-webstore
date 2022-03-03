@@ -42,7 +42,7 @@
 
 <script>
 import SearchUtil from "../../util/SearchUtil.vue";
-import {getCurrentInstance, onMounted, reactive, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
 
 export default {
@@ -52,13 +52,10 @@ export default {
 
 
     let list = ref('')
-    let state = ref(' ')
     let http = getCurrentInstance().appContext.config.globalProperties.$http;
     const router = useRouter()
-    let ctx = getCurrentInstance()
 
     function goToDetail(id) {
-      console.log(id)
       router.push({
         // 目标路由
         name: 'detail',
@@ -75,14 +72,12 @@ export default {
       } = await http.get(`fantang/webstore/api/category/extras`)
 
       list.value = result.data
-      console.log('(!) getCratesList()')
 
 
 
     }
 
     onMounted(() => {
-      console.log('(!) Extras列表加载中')
       getCratesList()
 
     })

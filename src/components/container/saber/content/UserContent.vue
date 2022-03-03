@@ -28,7 +28,7 @@ export default {
 </script>
 <script setup>
 
-import {onBeforeMount, ref, toRef, toRefs, watch} from "vue";
+import {toRef} from "vue";
 import {getCurrentInstance} from "vue";
 
 
@@ -37,11 +37,11 @@ let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 
 let userName = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'ign')
 let id = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'uuid')
 
-watch(logged_in, (newValue, oldValue) => {
-  console.log('logged_in的值变化了', newValue, oldValue)
-}, {deep: true})
+// watch(logged_in, (newValue, oldValue) => {
+//   console.log('logged_in的值变化了', newValue, oldValue)
+// }, {deep: true})
 
-onBeforeMount(() => {
-  console.log(logged_in)
-})
+// onBeforeMount(() => {
+//   console.log(logged_in)
+// })
 </script>

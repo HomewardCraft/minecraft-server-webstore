@@ -10,14 +10,17 @@ export default [
         component: homepageRoute
     },
     {
+        name: 'extras',
         path: '/extras',
         component: extrasRoute
     },
     {
+        name: 'ranks',
         path: '/ranks',
         component: ranksRoute
     },
     {
+        name: 'crates',
         path: '/crates',
         component: cratesRoute
     }

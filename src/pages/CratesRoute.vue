@@ -16,6 +16,7 @@ export default {
 
 <script setup>
 import {getCurrentInstance, ref} from "vue";
+import sendRoutePath from "../hooks/sendRoutePath.js";
 
 let http = getCurrentInstance().appContext.config.globalProperties.$http;
 let crates = ref('')
@@ -58,4 +59,6 @@ async function getCratesList() {
 }
 
 getCratesList()
+
+sendRoutePath()
 </script>
