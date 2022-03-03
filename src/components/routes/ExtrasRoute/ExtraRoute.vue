@@ -3,7 +3,7 @@
 
   <div class="packages grid gap-6 md:grid-cols-2 pt-16">
     <a v-for="items in list" :key="items.itemBasicInfo.id"
-       @click="goToDetail"
+       @click="goToDetail(items.itemBasicInfo.id)"
        ref ="item"
        :id="items.itemBasicInfo.id"
        class="package grid bg-gray-900 border border-lighten transform transition-all hover:opacity-75 hover:-translate-y-2"
@@ -57,13 +57,14 @@ export default {
     const router = useRouter()
     let ctx = getCurrentInstance()
 
-    function goToDetail() {
+    function goToDetail(id) {
+      console.log(id)
       router.push({
         // 目标路由
         name: 'detail',
         params: {
           //示例数据
-          id: '11114514'
+          id: id
         }
       })
     }
@@ -82,7 +83,6 @@ export default {
 
     onMounted(() => {
       console.log('(!) Extras列表加载中')
-      console.log(getCurrentInstance().ctx.$refs)
       getCratesList()
 
     })
