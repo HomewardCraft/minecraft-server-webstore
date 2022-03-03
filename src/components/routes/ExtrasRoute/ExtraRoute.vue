@@ -2,11 +2,12 @@
   <SearchUtil></SearchUtil>
 
   <div class="packages grid gap-6 md:grid-cols-2 pt-16">
-    <a
-        @click = "goToDetail"
-        class="package grid bg-gray-900 border border-lighten transform transition-all hover:opacity-75 hover:-translate-y-2"
-        data-package-id="4248026"
-        >
+    <a v-for="items in list" :key="items.itemBasicInfo.id"
+       @click="goToDetail"
+       ref ="item"
+       :id="items.itemBasicInfo.id"
+       class="package grid bg-gray-900 border border-lighten transform transition-all hover:opacity-75 hover:-translate-y-2"
+    >
       <div class="image">
         <div class="bg-block bg-gray-800 mx-12 h-24"></div>
         <img alt="Slot Rune"
@@ -15,10 +16,12 @@
       </div>
 
       <div class="text px-6 text-center font-bold">
-        <div class="name text-white text-lg">Slot Rune</div>
+        <div class="name text-white text-lg">{{ items.itemBasicInfo.name}}</div>
         <div class="price pt-2 text-yellow-400">
-          <div class="discounted text-gray-500 text-sm font-italic line-through">$3.99 USD</div>
-          <div class="final">$3.59 USD</div>
+          <div class="discounted text-gray-500 text-sm font-italic line-through">${{ items.itemBasicInfo.price / 100 }}
+            USD
+          </div>
+          <div class="final">${{ items.itemBasicInfo.price / 100 * (items.itemSaleInfo.onsalePercent / 100) }} USD</div>
         </div>
         <div class="button pt-10 pb-5 flex text-gray-500 items-center justify-center"><span
             data-v-45761ad8="">View Item Details</span>
@@ -39,17 +42,22 @@
 
 <script>
 import SearchUtil from "../../util/SearchUtil.vue";
-import {getCurrentInstance} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref} from "vue";
 import {useRouter} from "vue-router";
 
 export default {
   name: "ExtrasRoute",
   setup() {
 
-    const router = useRouter()
-    const {proxy, ctx} = getCurrentInstance()
 
-    function goToDetail () {
+
+    let list = ref('')
+    let state = ref(' ')
+    let http = getCurrentInstance().appContext.config.globalProperties.$http;
+    const router = useRouter()
+    let ctx = getCurrentInstance()
+
+    function goToDetail() {
       router.push({
         // 目标路由
         name: 'detail',
@@ -60,9 +68,32 @@ export default {
       })
     }
 
+    async function getCratesList() {
+      const {
+        data: result
+      } = await http.get(`fantang/webstore/api/category/extras`)
+
+      list.value = result.data
+      console.log('(!) getCratesList()')
+
+
+
+    }
+
+    onMounted(() => {
+      console.log('(!) Extras列表加载中')
+      console.log(getCurrentInstance().ctx.$refs)
+      getCratesList()
+
+    })
+
+
+
     return {
       goToDetail,
-      useRouter
+      useRouter,
+      getCratesList,
+      list
     }
   },
   components: {SearchUtil}
