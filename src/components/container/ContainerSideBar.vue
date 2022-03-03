@@ -25,7 +25,7 @@ export default {
 </script>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {reactive} from "vue";
 
 let barCondition = reactive({
   opacity: 'opacity-0',

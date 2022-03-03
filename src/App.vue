@@ -17,11 +17,12 @@ import {getCurrentInstance} from "vue";
 import {onBeforeMount} from "vue";
 
 const {cookies} = useCookies()
-let ctx = getCurrentInstance()
+let store = getCurrentInstance().appContext.config.globalProperties.$store
+let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 
 onBeforeMount(()=>{
   if (cookies.get("user_session")) {
-    ctx.appContext.config.globalProperties.$store.state.user = cookies.get("user_session")
+    store.state.user = cookies.get("user_session")
   }
 })
 
