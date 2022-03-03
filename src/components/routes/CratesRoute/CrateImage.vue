@@ -39,10 +39,6 @@ let hover = {
   position: relative;
 }
 
-/*.crate-row .image[crate-type="cosmetic"] .regular {*/
-/*  background-image: url(https://storage.googleapis.com/assets.originrealms.com/static/store/seasonal/cosmo/crate.png);*/
-/*}*/
-
 .crate-row .image .regular, .crate-row .image .hover {
   position: absolute;
   top: 0;
@@ -51,10 +47,6 @@ let hover = {
   bottom: 0;
   background: center/cover;
 }
-
-/*.crate-row .image[data-crate="cosmetic"] .hover {*/
-/*  background-image: url(https://storage.googleapis.com/assets.originrealms.com/static/store/seasonal/cosmo/crate_open.png);*/
-/*}*/
 
 .crate-row .image .regular, .crate-row .image .hover {
   position: absolute;
