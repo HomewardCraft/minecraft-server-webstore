@@ -1,7 +1,8 @@
 <template>
   <div v-show = "logged_in"
       class="item cursor-pointer bg-custom-300 border border-lighten lg:w-16 h-16 box-content flex items-center justify-center relative group lg:mb-3 transition-all ease-in-out duration-500" data-item="user">
-    <div class="tooltip right-0 mr-20 opacity-0 absolute transition-opacity duration-150 ease-in-out group-hover:opacity-100">Ba1oretto</div>
+    <div class="tooltip right-0 mr-20 opacity-0 absolute transition-opacity duration-150 ease-in-out group-hover:opacity-100">
+      {{username}}</div>
     <img src="https://cravatar.eu/helmavatar/Ba1oretto/40" alt="Ba1oretto's Minecraft Head" class="w-8 h-8 block">
   </div>
   <div v-show = "!logged_in"
