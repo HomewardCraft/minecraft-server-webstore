@@ -1,11 +1,14 @@
 <script>
+
 import PageHeader from "./components/PageHeader.vue";
 import PageContainer from "./components/PageContainer.vue";
 import PageFooter from "./components/PageFooter.vue";
 import BottomModal from "./components/BottomModal.vue";
+
 export default {
   components: {BottomModal, PageFooter, PageContainer, PageHeader}
 }
+
 </script>
 
 <template>

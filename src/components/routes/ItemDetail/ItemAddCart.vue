@@ -16,6 +16,7 @@
       </svg>
       <span class="username">Enter Username</span></button>
   </div>
+<!--  没有登录就显示上面的样式-->
   <button
       v-show="logged_in"
       class="flex justify-center items-center w-full px-6 bg-btn border border-lighten py-4 shadow-btn uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90"
