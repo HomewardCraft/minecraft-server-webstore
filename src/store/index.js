@@ -18,9 +18,7 @@ const mutations = {
         state.user.logged_in = true
         state.user.ign = value.name
         state.user.uuid = value.id
-
         cookies.set("user_session", state.user,"7D")
-
     }
 }
 

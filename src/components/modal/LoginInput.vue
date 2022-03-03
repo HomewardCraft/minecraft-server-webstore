@@ -57,6 +57,7 @@ async function login() {
   } else {
     ctx.appContext.config.globalProperties.$store.commit('login',result)
     console.log(cookies.get("user_session"))
+    console.log(ctx.appContext.config.globalProperties.$store.state.user)
     closepannel()
   }
 
