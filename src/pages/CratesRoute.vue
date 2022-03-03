@@ -23,7 +23,7 @@ let crates = ref('')
 async function getCratesList() {
   const {
     data: result
-  } = await http.get(`fantang/api/category/crates`)
+  } = await http.get(`fantang/webstore/api/category/crates`)
 
   let imageAddress = ''
   let cratesObject = {}
