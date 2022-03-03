@@ -1,8 +1,8 @@
 <template>
   <div
-      v-show="logged_in"
+      v-if="logged_in"
       class="flex items-center font-bold text-lg bg-custom-1200 pt-5 px-6">
-    <!-- TODO 图片和玩家名字 -->
+    <!-- 图片使用vue的:src来处理模板字符串-->
     <img :src="`https://visage.surgeplay.com/bust/64/${id}`"
          alt="Ba1oretto's Minecraft Skin"/>
     <div class="ml-5">
