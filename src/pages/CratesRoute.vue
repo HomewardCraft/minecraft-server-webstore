@@ -2,7 +2,7 @@
   <div class="category-heading pt-4 text-center">
     <div class="text-5xl text-white font-bold">Crates</div>
   </div>
-  <crate-showcase v-for="crate in crates" :key="crate.id" :crate="crate"/>
+  <crate-showcase v-for="crate in crates" :key="crate.id" :crates="crate"/>
 </template>
 
 <script>
@@ -18,7 +18,6 @@ export default {
 import {getCurrentInstance, ref} from "vue";
 
 let http = getCurrentInstance().appContext.config.globalProperties.$http;
-
 let crates = ref('')
 
 async function getCratesList() {
@@ -33,11 +32,9 @@ async function getCratesList() {
   for (let i = 0; i < result.data.length; i++) {
     let item = result.data[i];
 
-
     if (imageAddress === '') {
       imageAddress = item.itemBasicInfo.imageAddress
     }
-
 
     if (imageAddress === item.itemBasicInfo.imageAddress) {
       crateArray.push(item)
