@@ -26,7 +26,6 @@ let currentPath = ref('/')
 
 function setRoutePath(value) {
   currentPath.value = value
-  console.log(currentPath.value)
 }
 
 bus.on('sendRoutePath', setRoutePath)
