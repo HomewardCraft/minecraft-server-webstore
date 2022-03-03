@@ -26,7 +26,7 @@ function toDetailPage(id) {
   router.push({
     name: 'detail',
     params: {
-      id: 114514
+      id: id
     }
   })
 }

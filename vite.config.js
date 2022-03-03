@@ -10,6 +10,11 @@ export default defineConfig({
         target: 'https://api.mojang.com/',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/mojang/, '')
+      },
+      '/fantang': {
+        target: 'http://web.fantang.cc/',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/fantang/, '')
       }
     }
   }

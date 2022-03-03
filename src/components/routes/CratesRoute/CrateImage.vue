@@ -1,6 +1,6 @@
 <template>
 
-  <div class="image group" data-crate="cosmetic">
+  <div class="image group" crate-type="cosmetic">
     <div class="regular transition-opacity duration-300 ease-in-out group-hover:opacity-0"/>
     <div class="hover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"/>
   </div>
@@ -28,7 +28,7 @@ export default {
   position: relative;
 }
 
-.crate-row .image[data-crate="cosmetic"] .regular {
+.crate-row .image[crate-type="cosmetic"] .regular {
   background-image: url(https://storage.googleapis.com/assets.originrealms.com/static/store/seasonal/cosmo/crate.png);
 }
 
