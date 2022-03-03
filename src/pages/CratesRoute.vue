@@ -2,7 +2,7 @@
   <div class="category-heading pt-4 text-center">
     <div class="text-5xl text-white font-bold">Crates</div>
   </div>
-  <crate-showcase/>
+  <crate-showcase v-for="crate in crates" :key="crate.id" :crate="crate"/>
 </template>
 
 <script>
@@ -21,88 +21,44 @@ let http = getCurrentInstance().appContext.config.globalProperties.$http;
 
 let crates = ref('')
 
-function getItemList() {
-  http.get(`fantang/api/category/crates`).then(
-      res => {
-        let result = res.data
-        let imageAddress = ''
-        let crates = {}
-        let crateArray = []
+async function getCratesList() {
+  const {
+    data: result
+  } = await http.get(`fantang/api/category/crates`)
 
-        for (let i = 0; i < result.data.length; i++) {
-          let item = result.data[i];
+  let imageAddress = ''
+  let cratesObject = {}
+  let crateArray = []
 
-
-          if (imageAddress === '') {
-            imageAddress = item.itemBasicInfo.imageAddress
-          }
+  for (let i = 0; i < result.data.length; i++) {
+    let item = result.data[i];
 
 
-          if (imageAddress === item.itemBasicInfo.imageAddress) {
-            crateArray.push(item)
-          }
+    if (imageAddress === '') {
+      imageAddress = item.itemBasicInfo.imageAddress
+    }
 
-          if (imageAddress !== item.itemBasicInfo.imageAddress) {
-            let name = imageAddress.substring(45, imageAddress.length - 10);
-            crates[name] = crateArray
-            crateArray = []
-            imageAddress = item.itemBasicInfo.imageAddress
-            crateArray.push(item)
-          }
 
-          if (i === result.data.length - 1) {
-            let name = imageAddress.substring(45, imageAddress.length - 10);
-            crates[name] = crateArray
-          }
-        }
+    if (imageAddress === item.itemBasicInfo.imageAddress) {
+      crateArray.push(item)
+    }
 
-        console.log('final crateArray: ', crateArray)
-        console.log('final crates: ', crates)
+    if (imageAddress !== item.itemBasicInfo.imageAddress) {
+      let name = imageAddress.substring(45, imageAddress.length - 10);
+      cratesObject[name] = crateArray
+      crateArray = []
+      imageAddress = item.itemBasicInfo.imageAddress
+      crateArray.push(item)
+    }
 
-        console.log(result.data)
-        crates.value = crates
-      }
-  )
+    if (i === result.data.length - 1) {
+      let name = imageAddress.substring(45, imageAddress.length - 10);
+      cratesObject[name] = crateArray
+    }
+  }
 
-  // let imageAddress = ''
-  // let crates = {}
-  // let crateArray = []
-  //
-  // for (let i = 0; i < result.data.length; i++) {
-  //   let item = result.data[i];
-  //
-  //
-  //   if (imageAddress === '') {
-  //     imageAddress = item.itemBasicInfo.imageAddress
-  //   }
-  //
-  //
-  //   if (imageAddress === item.itemBasicInfo.imageAddress) {
-  //     crateArray.push(item)
-  //   }
-  //
-  //   if (imageAddress !== item.itemBasicInfo.imageAddress) {
-  //     let name = imageAddress.substring(45, imageAddress.length - 10);
-  //     crates[name] = crateArray
-  //     crateArray = []
-  //     imageAddress = item.itemBasicInfo.imageAddress
-  //     crateArray.push(item)
-  //   }
-  //
-  //   if (i === result.data.length - 1) {
-  //     let name = imageAddress.substring(45, imageAddress.length - 10);
-  //     crates[name] = crateArray
-  //   }
-  // }
-  //
-  // console.log('final crateArray: ', crateArray)
-  // console.log('final crates: ', crates)
-  //
-  // console.log(result.data)
-  // crates.value = crates
+  crates.value = cratesObject
 }
 
-getItemList()
-
-console.log(crates)
+getCratesList()
 </script>
