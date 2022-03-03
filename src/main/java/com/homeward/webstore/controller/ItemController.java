@@ -1,6 +1,7 @@
 package com.homeward.webstore.controller;
 
 import com.homeward.webstore.java.bean.BO.ItemInfoBO;
+import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
 import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,6 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin
-@RequestMapping("/category")
 @ResponseBody
 public class ItemController {
     private final ItemService itemService;
@@ -27,7 +27,7 @@ public class ItemController {
      *
      * @return CrateResult
      */
-    @GetMapping("/{itemCategory}")
+    @GetMapping("/category/{itemCategory}")
     public R getItemList(@PathVariable("itemCategory") String type) {
         List<ItemInfoBO> itemList = itemService.getItemList(type);
         return R.ok(itemList);
@@ -38,9 +38,9 @@ public class ItemController {
      *
      * @return CrateResult
      */
-    @GetMapping("/{itemCategory}/{itemId}")
-    public R getSpecificItem(@PathVariable("itemCategory") String category, @PathVariable("itemId") Integer id) {
-        ItemInfoBO itemsLists = itemService.getSpecificItem(category, id);
+    @GetMapping("/production/{itemId}")
+    public R getSpecificItem(@PathVariable("itemId") Integer id) {
+        ItemWholeInfo itemsLists = itemService.getSpecificItem(id);
         return R.ok(itemsLists);
     }
 }

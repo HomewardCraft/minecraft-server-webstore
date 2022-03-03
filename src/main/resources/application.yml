@@ -9,7 +9,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/minecraft_webstore?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     #设定用户名和密码
     username: root
-    password: baioretto
+    password: 1f8a5?7./d69`~9SjmCsq3568
   thymeleaf:
     prefix: classpath:/static/
   #视图层配置

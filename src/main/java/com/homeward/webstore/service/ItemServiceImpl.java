@@ -1,6 +1,7 @@
 package com.homeward.webstore.service;
 
 import com.homeward.webstore.java.bean.BO.ItemInfoBO;
+import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
 import com.homeward.webstore.mapper.ItemMapper;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemInfoBO getSpecificItem(String itemCategory, Integer itemId) {
-        return itemMapper.getSpecificItem(itemCategory, itemId);
+    public ItemWholeInfo getSpecificItem(Integer itemId) {
+        return itemMapper.getSpecificItem(itemId);
     }
 }
