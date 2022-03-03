@@ -14,16 +14,23 @@
 </template>
 
 <script>
+
 export default {
-  name: "LoginInput"
+  name: "LoginInput",
+  mounted() {
+
+  }
 }
 </script>
 
 <script setup>
 
-let username = ref('')
 
+import { useCookies } from "vue3-cookies";
 import {getCurrentInstance, ref} from "vue";
+
+let username = ref('')
+const { cookies } = useCookies();
 
 let ctx = getCurrentInstance()
 let web = getCurrentInstance().appContext.config.globalProperties.$http
@@ -33,6 +40,7 @@ function closepannel(){
 }
 
 async function login() {
+
 
 
 
@@ -48,9 +56,9 @@ async function login() {
     alert(result.errorMessage)
   } else {
     ctx.appContext.config.globalProperties.$store.commit('login',result)
+    console.log(cookies.get("user_session"))
     closepannel()
   }
-
 
 
 
