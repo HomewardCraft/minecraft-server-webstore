@@ -3,8 +3,8 @@
     <h3 class="package-title font-bold text-5xl text-white mb-4">{{ name }}</h3>
     <div class="price font-extrabold mb-6">
       <div class="discount line-through italic text-gray-700" v-if="saleCondition">${{ originPrice }} USD</div>
-      <div class="final text-2xl text-yellow-400" v-if="saleCondition">${{ price }} USD</div>
-      <div class="flex items-center h-14" v-if="!saleCondition">
+      <div class="final text-2xl text-yellow-400" v-if="!saleCondition">${{ price }} USD</div>
+      <div class="flex items-center h-14" v-if="saleCondition">
         <div class="text-3xl text-yellow-400 pt-5">${{ price }} USD</div>
       </div>
     </div>
@@ -22,6 +22,10 @@ export default {
 </script>
 
 <script setup>
+import {onMounted} from "vue";
+
+
+
 const props = defineProps(['item']);
 let item = props.item
 
@@ -29,4 +33,8 @@ let name = item.name;
 let originPrice = item.price / 100;
 let price = (item.price / 100) * (item.salePercent / 100);
 let saleCondition = item.saleCondition
+
+//二重校验
+if(originPrice !== price || item.salePercent !== 0) {saleCondition = true}
+
 </script>
