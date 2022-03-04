@@ -33,6 +33,7 @@ onBeforeMount(()=>{
   }
 })
 
+//不要删掉 这个真有用
 watch(() => store.state.cart, (newValue, oldValue) => {
     cookies.set("user_cart", store.state.cart, "7D")
 }, {deep: true})
