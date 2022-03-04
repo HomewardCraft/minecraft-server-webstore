@@ -11,16 +11,19 @@ const actions = {
         context.commit('login', value)
     },
     addItemToCart(context, value) {
-        context.commit('addItemToCart',value)
+        context.commit('addItemToCart', value)
     },
     removeItemFromCart(context, value) {
-        context.commit('removeItemFromCart',value)
+        context.commit('removeItemFromCart', value)
     },
     increaseItemByOne(context, value) {
-        context.commit('increaseItemByOne',value)
+        context.commit('increaseItemByOne', value)
     },
     decreaseItemByOne(context, value) {
-        context.commit('decreaseItemByOne',value)
+        context.commit('decreaseItemByOne', value)
+    },
+    removeThisItem(context, value) {
+        context.commit('removeThisItem', value)
     }
 }
 
@@ -38,8 +41,8 @@ const mutations = {
     },
     removeItemFromCart(state, value) {
         var index = {}
-        for(index in this.state.cart.items) {
-            if(this.state.cart.items[index].id == value.id) {
+        for (index in this.state.cart.items) {
+            if (this.state.cart.items[index].id == value.id) {
                 this.state.cart.items.splice(index, 1)
             }
         }
@@ -48,21 +51,28 @@ const mutations = {
         console.log("=====================")
     },
     increaseItemByOne(state, value) {
-        for(var index in this.state.cart.items) {
-            if(this.state.cart.items[index].id == value.id) {
-                this.state.cart.items[index].quantity ++
+        for (var index in this.state.cart.items) {
+            if (this.state.cart.items[index].id == value.id) {
+                this.state.cart.items[index].quantity++
                 console.log("(+) 添加成功 当前有" + this.state.cart.items[index].quantity + "个")
             }
         }
     },
     decreaseItemByOne(state, value) {
-        for(var index in this.state.cart.items) {
+        for (var index in this.state.cart.items) {
 
 
-            if(this.state.cart.items[index].id == value.id) {
+            if (this.state.cart.items[index].id == value.id) {
 
-                this.state.cart.items[index].quantity --
+                this.state.cart.items[index].quantity--
                 console.log("(-) 减少成功 当前有" + this.state.cart.items[index].quantity + "个")
+            }
+        }
+    },
+    removeThisItem(state, value) {
+        for (var index in this.state.cart.items) {
+            if (this.state.cart.items[index].id == value.id) {
+                this.state.cart.items.splice(index, 1)
             }
         }
     }

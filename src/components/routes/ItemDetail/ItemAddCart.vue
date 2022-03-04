@@ -83,6 +83,7 @@ let price = (data.item.price / 100) * (data.item.salePercent / 100);
 let IS_ITEM_IN_CART = ref(false)
 let HOW_MANY_IN_CART = ref(0)
 let GLOBAL_DATA = reactive(ctx.appContext.config.globalProperties.$store)
+let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 
 //当前准备放入购物车的物品
 let showItem = reactive({
@@ -92,7 +93,6 @@ let showItem = reactive({
   "quantity": 0
 })
 
-console.log(showItem)
 
 function showLoginPannel() {
 
@@ -110,12 +110,10 @@ function removeItem() {
 }
 
 function increaseItemByOne() {
-  console.log("(+) 添加一个物品")
   GLOBAL_DATA.commit('increaseItemByOne', showItem)
 }
 
 function decreaseItemByOne() {
-  console.log("(-) 减少一个物品")
   if (HOW_MANY_IN_CART.value <= 1) {
     removeItem()
   }
@@ -129,16 +127,14 @@ function addItemToCart() {
 
 
 function countItem() {
-
+  //这个很有可能时vue的问题，mount和watch都不会进入这个循环
+  console.log(GLOBAL_DATA.state.cart.items)
   GLOBAL_DATA.state.cart.items.forEach(function (value, index) {
     if (value.id == showItem.id) {
       HOW_MANY_IN_CART.value = value.quantity
-      console.log("你应该有" + HOW_MANY_IN_CART.value + "个当前页面上的物品")
-    } else {
-      console.log("设置成0")
-      HOW_MANY_IN_CART.value = 0
     }
-
+    console.log("+++++++++++++++")
+    console.log(HOW_MANY_IN_CART.value)
   })
 
 }
@@ -153,18 +149,21 @@ function isInCart() {
 }
 
 watch(() => GLOBAL_DATA.state.cart.items, (newValue, oldValue) => {
-  console.log('购物车内的items变化了', newValue, oldValue)
+  console.log("ItemAddCart 数据发生变化")
   countItem()
   isInCart()
-  console.log(HOW_MANY_IN_CART.value)
-  console.log(IS_ITEM_IN_CART.value)
 }, {deep: true})
 
 
-onMounted(()=>{
-  console.log('当前界面是detail的加入购物车模块')
+onMounted(() => {
   countItem()
+  //这个方法执行的很蠢，但是你第一次进入detail页需要她
   isInCart()
+  //如果你同时开启购物车和detail界面这里弥补了
+  //方法countItem的刷新问题，启用强制刷新
+  BUS.on('updateState', (manipulate) => {
+    HOW_MANY_IN_CART.value = 0
+  })
 })
 </script>
 
