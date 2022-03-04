@@ -104,7 +104,6 @@ function showLoginPannel() {
 let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
 
 function removeItem() {
-  console.log("(-) 成功将该物品从购物车中移除")
   GLOBAL_DATA.commit('removeItemFromCart', showItem)
   HOW_MANY_IN_CART.value = 0
 }
@@ -133,8 +132,6 @@ function countItem() {
     if (value.id == showItem.id) {
       HOW_MANY_IN_CART.value = value.quantity
     }
-    console.log("+++++++++++++++")
-    console.log(HOW_MANY_IN_CART.value)
   })
 
 }
