@@ -22,9 +22,6 @@ export default {
 </script>
 
 <script setup>
-import {onMounted} from "vue";
-
-
 
 const props = defineProps(['item']);
 let item = props.item
