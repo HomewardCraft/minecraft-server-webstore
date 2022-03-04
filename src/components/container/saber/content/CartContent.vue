@@ -63,6 +63,7 @@ let itemsInCart = reactive(GLOBAL_DATA.state.cart.items)
 let total = ref(0)
 
 onMounted(() => {
+  calculateTotal()
 })
 
 watch(() => GLOBAL_DATA.state.cart, (newValue, oldValue) => {
@@ -82,7 +83,6 @@ function removeThisItem(item) {
 function calculateTotal() {
   var totalCache = 0
   for (var item in itemsInCart) {
-    console.log("开始计算总价")
     totalCache = totalCache + itemsInCart[item].price * itemsInCart[item].quantity
   }
   total.value = totalCache

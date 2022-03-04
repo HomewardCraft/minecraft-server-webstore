@@ -16,7 +16,7 @@
         <path d="M8 8H0V12H4V28H8V32H16V28H24V32H32V28H36V12H32V24H8V8Z"/>
       </svg>
     </div>
-    <div class="count">0</div>
+    <div class="count">{{GLOBAL_DATA.state.cart.items.length}}</div>
   </div>
   <div class="item cursor-pointer bg-blue-500 border border-lighten lg:w-16 h-16 box-content flex flex-col items-center justify-center relative group text-white leading-none transition-all ease-in-out duration-500 delay-200" data-item="currency">
     <div class="lg text-2xl mb-1">$</div>
@@ -26,11 +26,17 @@
 
 <script setup>
 import {getCurrentInstance, ref, toRef} from "vue";
+import {reactive} from "vue";
 
 let ctx = getCurrentInstance()
+//全局数据响应式
+let GLOBAL_DATA = reactive(ctx.appContext.config.globalProperties.$store)
 
 let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
 let username = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'ign')
+
+
+
 </script>
 
 <script>
