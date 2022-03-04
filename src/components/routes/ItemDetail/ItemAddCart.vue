@@ -16,9 +16,45 @@
       </svg>
       <span class="username">Enter Username</span></button>
   </div>
-<!--  没有登录就显示上面的样式-->
+  <!--  没有登录就显示上面的样式-->
+  <!--当购物车有东西时就会显示这些-->
+  <div v-show="logged_in && IS_ITEM_IN_CART && !HOW_MANY_IN_CART==0">
+    <div class="quantity flex mb-4">
+      <button
+          @click="decreaseItemByOne"
+          class="flex p-4 bg-btn border border-lighten uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90 opacity-50 cursor-not-allowed">
+        <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+              d="M400 288h-352c-17.69 0-32-14.32-32-32.01s14.31-31.99 32-31.99h352c17.69 0 32 14.3 32 31.99S417.7 288 400 288z"></path>
+        </svg>
+      </button>
+      <div
+          class="quantity w-full text-center font-bold text-lg bg-gray-900 flex text-gray-500 items-center justify-center">
+        {{ HOW_MANY_IN_CART }}x Bundle
+      </div>
+      <button
+          @click="increaseItemByOne"
+          class="flex p-4 bg-btn border border-lighten uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90">
+        <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path
+              d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+        </svg>
+      </button>
+    </div>
+    <div
+        class="flex justify-center items-center w-full bg-gray-900 border border-light py-4 uppercase font-extrabold tracking-wide text-gray-500 transition-all transform duration-150 ease-in-out focus:outline-none cursor-not-allowed"
+        disabled="false">Added to cart
+    </div>
+    <button
+        @click="removeItem"
+        class="remove text-red-400 transition-colours ease-in-out duration-150 hover:text-red-200 p-5 font-bold text-sm text-center block w-full focus:outline-none">
+      Remove from cart
+    </button>
+  </div>
+  <!--当购物车没有东西时就会显示这些-->
   <button
-      v-show="logged_in"
+      @click="addItemToCart"
+      v-show="logged_in && !IS_ITEM_IN_CART"
       class="flex justify-center items-center w-full px-6 bg-btn border border-lighten py-4 shadow-btn uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90"
       data-exception="">
     <svg class="w-8 h-8 mr-2 opacity-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -30,32 +66,101 @@
 </template>
 
 <script>
-import {getCurrentInstance, ref, toRef} from "vue";
 
 export default {
-  name: "ItemAddCart",
-  setup() {
-
-
-    let ctx = getCurrentInstance()
-
-    function showLoginPannel() {
-
-      ctx.appContext.config.globalProperties.$bus.emit('loginpannelmanipulate', 'open')
-
-    }
-
-
-    let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
-
-    return {
-      showLoginPannel,
-      logged_in
-    }
-  }
+  name: "ItemAddCart"
 }
 </script>
 
+
+<script setup>
+import {getCurrentInstance, onMounted, reactive, ref, toRef, watch} from "vue";
+
+let ctx = getCurrentInstance()
+let data = defineProps(['item']);
+let price = (data.item.price / 100) * (data.item.salePercent / 100);
+
+let IS_ITEM_IN_CART = ref(false)
+let HOW_MANY_IN_CART = ref(0)
+let GLOBAL_DATA = reactive(ctx.appContext.config.globalProperties.$store)
+
+//当前准备放入购物车的物品
+let showItem = reactive({
+  "id": data.item.id,
+  "name": data.item.name,
+  "price": price,
+  "quantity": 0
+})
+
+console.log(showItem)
+
+function showLoginPannel() {
+
+  ctx.appContext.config.globalProperties.$bus.emit('loginpannelmanipulate', 'open')
+
+}
+
+
+let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
+
+function removeItem() {
+  console.log("(-) 成功将该物品从购物车中移除")
+  GLOBAL_DATA.commit('removeItemFromCart', showItem)
+  HOW_MANY_IN_CART.value = 0
+}
+
+function increaseItemByOne() {
+  console.log("(+) 添加一个物品")
+  GLOBAL_DATA.commit('increaseItemByOne', showItem)
+}
+
+function decreaseItemByOne() {
+  console.log("(-) 减少一个物品")
+  if (HOW_MANY_IN_CART.value <= 1) {
+    removeItem()
+  }
+  GLOBAL_DATA.commit('decreaseItemByOne', showItem)
+}
+
+function addItemToCart() {
+  showItem.quantity = 1
+  GLOBAL_DATA.commit('addItemToCart', showItem)
+}
+
+
+function countItem() {
+
+  GLOBAL_DATA.state.cart.items.forEach(function (value, index) {
+    if (value.id == showItem.id) {
+      HOW_MANY_IN_CART.value = value.quantity
+      console.log("你应该有" + HOW_MANY_IN_CART.value + "个当前页面上的物品")
+    } else {
+      console.log("设置成0")
+      HOW_MANY_IN_CART.value = 0
+    }
+
+  })
+
+}
+
+function isInCart() {
+  if (HOW_MANY_IN_CART.value !== 0) {
+    IS_ITEM_IN_CART.value = true
+  } else {
+    IS_ITEM_IN_CART.value = false
+  }
+
+}
+
+watch(() => GLOBAL_DATA.state.cart.items, (newValue, oldValue) => {
+  console.log('购物车内的items变化了', newValue, oldValue)
+  countItem()
+  isInCart()
+  console.log(HOW_MANY_IN_CART.value)
+  console.log(IS_ITEM_IN_CART.value)
+}, {deep: true})
+
+</script>
 
 <style scoped>
 

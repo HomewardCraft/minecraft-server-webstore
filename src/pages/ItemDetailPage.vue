@@ -4,7 +4,7 @@
     <item-detail-info :item="i"/>
     <div class="info">
       <item-picture :imageAddress="i.imageAddress" :name="i.name"/>
-      <ItemAddCart/>
+      <ItemAddCart :item="i"/>
     </div>
   </div>
 </template>
