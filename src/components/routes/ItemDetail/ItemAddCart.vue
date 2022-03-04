@@ -160,6 +160,12 @@ watch(() => GLOBAL_DATA.state.cart.items, (newValue, oldValue) => {
   console.log(IS_ITEM_IN_CART.value)
 }, {deep: true})
 
+
+onMounted(()=>{
+  console.log('当前界面是detail的加入购物车模块')
+  countItem()
+  isInCart()
+})
 </script>
 
 <style scoped>

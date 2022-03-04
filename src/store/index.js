@@ -79,7 +79,6 @@ const state = {
     "cart": {
         "items": [],
         "total": 0
-
     }
 }
 

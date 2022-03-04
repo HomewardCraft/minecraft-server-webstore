@@ -3,7 +3,7 @@
     <div class="title text-white font-bold text-2xl">
       Your Cart
       <!-- TODO 购物车一览 -->
-      <small class="text-gray-500">(0)</small>
+      <small class="text-gray-500">( {{DO_ITEM_IN_CART}} )</small>
     </div>
     <div class="currency-checkout">
       <currency-checkout/>
@@ -18,12 +18,13 @@
 
   <div v-if="DO_ITEM_IN_CART!==0">
     <ul class="items overflow-y-auto">
-      <li class="flex items-start p-6 m-4 bg-gray-800 rounded-lg">
+      <li v-for = "item in itemsInCart" :key="item.id"
+          class="flex items-start p-6 m-4 bg-gray-800 rounded-lg">
         <div class="text leading-none">
           <div class="flex items-center mb-2">
-            <div class="name text-lg">Slot Rune</div>
-            <span class="font-bold text-sm text-gray-500 ml-2">x1</span></div>
-          <span class="price text-gray-500">$3.59 USD</span></div>
+            <div class="name text-lg">{{item.name}}</div>
+            <span class="font-bold text-sm text-gray-500 ml-2">x {{item.quantity}}</span></div>
+          <span class="price text-gray-500">${{priceCount(item)}} USD</span></div>
         <button
             class="ml-auto text-gray-500 transition-colors duration-150 ease-in-out hover:text-red-500 focus:outline-none p-1">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -55,6 +56,7 @@ let GLOBAL_DATA = reactive(ctx.appContext.config.globalProperties.$store)
 let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
 
 let DO_ITEM_IN_CART = ref(GLOBAL_DATA.state.cart.items.length)
+let itemsInCart = reactive(GLOBAL_DATA.state.cart.items)
 
 onMounted(()=>{
   console.log('---onMounted---')
@@ -66,6 +68,12 @@ watch(() => GLOBAL_DATA.state.cart, (newValue, oldValue) => {
   console.log("这是在侧边栏的")
   DO_ITEM_IN_CART.value = GLOBAL_DATA.state.cart.items.length
 }, {deep: true})
+
+function priceCount(value) {
+  return parseInt((value.price / 100) * (value.salePercent / 100))
+
+}
+
 </script>
 
 <script>
