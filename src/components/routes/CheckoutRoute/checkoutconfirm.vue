@@ -4,7 +4,7 @@
       <div class="checkbox border border-light bg-gray-900 transition-opacity duration-200 ease-in-out">
         <div class="flex items-center justify-between p-5 pb-0 font-bold text-lg">
           <div class="cursor-pointer flex items-center"><span>Privacy Policy</span>
-            <svg @click="openprivacywindow"
+            <svg @click="openPrivacyWindow"
                 class="w-5 h-5 ml-2 opacity-50" fill="currentColor" viewBox="0 0 20 20"
                  xmlns="http://www.w3.org/2000/svg">
               <path
@@ -41,7 +41,7 @@
       <div class="checkbox border border-light bg-gray-900 transition-opacity duration-200 ease-in-out">
         <div class="flex items-center justify-between p-5 pb-0 font-bold text-lg">
           <div class="cursor-pointer flex items-center"><span>Terms &amp; Conditions</span>
-            <svg @click="opentermwindow"
+            <svg @click="openTermWindow"
                 class="w-5 h-5 ml-2 opacity-50" fill="currentColor" viewBox="0 0 20 20"
                  xmlns="http://www.w3.org/2000/svg">
               <path
@@ -83,13 +83,14 @@
 import {getCurrentInstance} from "vue";
 
 let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
- function openprivacywindow () {
-   BUS.emit('privacyManipulation', 'open')
- }
 
- function opentermwindow() {
-   BUS.emit('termManipulation', 'open')
- }
+function openTermWindow() {
+  BUS.emit('termManipulation')
+}
+
+function openPrivacyWindow() {
+  BUS.emit('privacyManipulation')
+}
 
 
 </script>

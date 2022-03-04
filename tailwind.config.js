@@ -57,7 +57,7 @@ module.exports = {
           help: '#f18725',
         },
         light: '#ffffff1a',
-        lighten: '#ffffff4d'
+        lighten: '#ffffff4d',
       },
       boxShadow: {
         'btn': '#d07fbe 0 5px 0'

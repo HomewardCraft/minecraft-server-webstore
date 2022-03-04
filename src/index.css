@@ -36,6 +36,10 @@
         text-decoration: inherit;
     }
 
+    p {
+        line-height: 140%;
+    }
+
     h2 {
         display: block;
         font-size: 1.5em;
@@ -87,6 +91,11 @@
 
     button, select {
         text-transform: none;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: inherit;
+        font-weight: inherit;
     }
 }
 
@@ -249,4 +258,26 @@
 /* 我不知道 */
 .modal {
     z-index: 99999;
+}
+
+/* 我不知道 */
+.pointer-events-auto, .group:hover .group-hover\:pointer-events-auto {
+    pointer-events: auto;
+}
+
+/* 我不知道 */
+.content-wrap h2 {
+    font-size: 28px;
+}
+
+.content-wrap h3 {
+    font-size: 24px;
+}
+
+/* 我不知道 */
+.content-wrap h1, .content-wrap h2, .content-wrap h3, .content-wrap h4, .content-wrap h5, .content-wrap h6 {
+    padding-bottom: 10px;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgba(255,255,255,var(--tw-text-opacity));
 }

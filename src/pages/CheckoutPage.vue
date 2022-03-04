@@ -5,36 +5,16 @@
     <Checkoutconfirm></Checkoutconfirm>
     <Checkoutbuttons></Checkoutbuttons>
   </div>
-  <Checkoutprivacy v-if = "isPrivacyOpen"></Checkoutprivacy>
-  <Checkoutterms v-if = "isTermOpen"></Checkoutterms>
+  <Checkoutprivacy/>
+  <Checkoutterms/>
 </template>
 
 <script setup>
 import {getCurrentInstance, onMounted, ref} from "vue";
 import Checkoutprivacy from "../components/routes/CheckoutRoute/checkoutprivacy.vue";
 import Checkoutterms from "../components/routes/CheckoutRoute/checkoutterms.vue";
-let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 
 let isPrivacyOpen = ref(false)
-let isTermOpen = ref(false)
-onMounted(() => {
-  BUS.on('privacyManipulation',(manipulation)=>{
-    if(manipulation === "close") {
-      isPrivacyOpen.value = false
-    } else {
-      isPrivacyOpen.value = true
-    }
-  })
-
-  BUS.on('termManipulation',(manipulation)=>{
-    if(manipulation === "close") {
-      isTermOpen.value = false
-    } else {
-      isTermOpen.value = true
-    }
-  })
-
-})
 
 </script>
 
