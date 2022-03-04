@@ -17,6 +17,7 @@ import {getCurrentInstance} from "vue";
 import {onBeforeMount} from "vue";
 import {watch} from "vue";
 import PageLoading from "./components/PageLoading.vue";
+import Checkoutterms from "./components/routes/CheckoutRoute/checkoutprivacy.vue";
 
 const {cookies} = useCookies()
 let store = getCurrentInstance().appContext.config.globalProperties.$store

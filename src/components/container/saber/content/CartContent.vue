@@ -39,7 +39,7 @@
     <div class="total flex items-center justify-between p-6">
       <div><p class="text-gray-500 text-xs uppercase tracking-wide">1 item</p>
         <p>${{ total }} USD</p></div>
-      <button
+      <button @click = "checkout"
           class="bg-btn border border-lighten py-2 px-4 shadow-btn uppercase font-extrabold tracking-widest text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 focus:outline-none">
         Checkout
       </button>
@@ -52,6 +52,7 @@
 import {getCurrentInstance, onMounted, ref, toRef} from "vue";
 import {reactive} from "vue";
 import {watch} from "vue";
+import {useRouter} from "vue-router";
 
 let ctx = getCurrentInstance()
 let GLOBAL_DATA = reactive(ctx.appContext.config.globalProperties.$store)
@@ -61,6 +62,8 @@ let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 let DO_ITEM_IN_CART = ref(GLOBAL_DATA.state.cart.items.length)
 let itemsInCart = reactive(GLOBAL_DATA.state.cart.items)
 let total = ref(0)
+
+const router = useRouter()
 
 onMounted(() => {
   calculateTotal()
@@ -86,6 +89,13 @@ function calculateTotal() {
     totalCache = totalCache + itemsInCart[item].price * itemsInCart[item].quantity
   }
   total.value = totalCache
+}
+
+function checkout() {
+  router.push({
+    // 目标路由
+    name: 'checkout'
+  })
 }
 
 </script>
