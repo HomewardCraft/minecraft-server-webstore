@@ -39,8 +39,8 @@
     <div class="total flex items-center justify-between p-6">
       <div><p class="text-gray-500 text-xs uppercase tracking-wide">1 item</p>
         <p>${{ total }} USD</p></div>
-      <button @click = "checkout"
-          class="bg-btn border border-lighten py-2 px-4 shadow-btn uppercase font-extrabold tracking-widest text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 focus:outline-none">
+      <button @click="checkout"
+              class="bg-btn border border-lighten py-2 px-4 shadow-btn uppercase font-extrabold tracking-widest text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 focus:outline-none">
         Checkout
       </button>
     </div>
