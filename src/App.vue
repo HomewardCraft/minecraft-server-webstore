@@ -16,6 +16,7 @@ import {useCookies} from "vue3-cookies";
 import {getCurrentInstance} from "vue";
 import {onBeforeMount} from "vue";
 import {watch} from "vue";
+import PageLoading from "./components/PageLoading.vue";
 
 const {cookies} = useCookies()
 let store = getCurrentInstance().appContext.config.globalProperties.$store
@@ -48,5 +49,6 @@ watch(() => store.state.cart, (newValue, oldValue) => {
       <page-footer/>
     </div>
     <BottomModal/>
+    <!--<page-loading/>-->
   </div>
 </template>

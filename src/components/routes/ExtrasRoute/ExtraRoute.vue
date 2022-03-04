@@ -42,15 +42,13 @@
 
 <script>
 import SearchUtil from "../../util/SearchUtil.vue";
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onBeforeMount, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import sendRoutePath from "../../../hooks/sendRoutePath.js";
 
 export default {
   name: "ExtrasRoute",
   setup() {
-
-
-
     let list = ref('')
     let http = getCurrentInstance().appContext.config.globalProperties.$http;
     const router = useRouter()
@@ -72,9 +70,6 @@ export default {
       } = await http.get(`fantang/webstore/api/category/extras`)
 
       list.value = result.data
-
-
-
     }
 
     onMounted(() => {
@@ -82,7 +77,9 @@ export default {
 
     })
 
-
+    onBeforeMount(() => {
+      sendRoutePath()
+    })
 
     return {
       goToDetail,

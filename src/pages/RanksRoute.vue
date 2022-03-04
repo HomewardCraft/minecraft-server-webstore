@@ -1,22 +1,22 @@
 <template>
-  <rank-title/>
-  <div class="rank-grid grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
-    <rank-level/>
-  </div>
+  <suspense>
+    <ranks-route/>
+    <template #fallback>
+      <page-loading/>
+    </template>
+  </suspense>
 </template>
 
 <script>
-import RankTitle from "../components/routes/RanksRoute/RankTitle.vue";
-import RankLevel from "../components/routes/RanksRoute/RankLevel.vue";
+import {defineAsyncComponent} from "vue";
+import PageLoading from "../components/PageLoading.vue";
+
+const RanksRoute = defineAsyncComponent({
+  loader: () => import('../components/routes/RanksRoute/RankHub.vue')
+})
 
 export default {
-  name: "RanksRoute",
-  components: {RankLevel, RankTitle}
+  name: "ExtrasRoute",
+  components: {PageLoading, RanksRoute},
 }
-</script>
-
-<script setup>
-import sendRoutePath from "../hooks/sendRoutePath.js";
-
-sendRoutePath()
 </script>
