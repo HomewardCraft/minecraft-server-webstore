@@ -13,15 +13,13 @@ export default {
 
 <script setup>
 import {useCookies} from "vue3-cookies";
-import {getCurrentInstance} from "vue";
+import {getCurrentInstance, onMounted} from "vue";
 import {onBeforeMount} from "vue";
 import {watch} from "vue";
-import PageLoading from "./components/PageLoading.vue";
-import Checkoutterms from "./components/routes/CheckoutRoute/checkoutprivacy.vue";
 
+let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 const {cookies} = useCookies()
 let store = getCurrentInstance().appContext.config.globalProperties.$store
-let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 
 
 onBeforeMount(()=>{
@@ -40,14 +38,27 @@ watch(() => store.state.cart, (newValue, oldValue) => {
     cookies.set("user_cart", store.state.cart, "7D")
 }, {deep: true})
 
+/**  启用，获取html对象实现过于复杂
+onMounted(()=>{
+  console.log('---onMounted---')
+  document.addEventListener('click', (event) =>{
+    let className = event.target.parentNode
+    console.log(className)
+  })
+})*/
+
+function closeAll() {
+  BUS.emit('updateSideBarState', 'manipulate')
+}
+
 </script>
 
 <template>
   <div class="h-full">
     <div class="grid grid-rows-body h-full">
-      <page-header/>
+      <page-header @click = "closeAll"/>
       <page-container/>
-      <page-footer/>
+      <page-footer @click = "closeAll"/>
     </div>
     <BottomModal/>
     <!--<page-loading/>-->

@@ -25,8 +25,12 @@ export default {
 </script>
 
 <script setup>
-import {reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
+import {getCurrentInstance} from "vue";
 
+let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
+
+let status =ref('close')
 let barCondition = reactive({
   opacity: 'opacity-0',
   active: ''
@@ -35,12 +39,24 @@ let barCondition = reactive({
 function openBar() {
   barCondition.opacity = 'opacity-1'
   barCondition.active = 'active'
+  status.value = 'opened'
 }
 
 function closeBar() {
   barCondition.opacity = 'opacity-0'
   barCondition.active = ''
+  status.value = 'closed'
 }
+
+onMounted(() => {
+  BUS.on('updateSideBarState', (manipulate) => {
+    if (status.value === 'opened') {
+      closeBar()
+    }
+  })
+})
+
+
 </script>
 
 <style scoped>

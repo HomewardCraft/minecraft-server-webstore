@@ -8,6 +8,11 @@
   </div>
 </template>
 
+<script setup>
+
+
+</script>
+
 <script>
 import UserContent from "./content/UserContent.vue";
 import ButtonContent from "./content/ButtonContent.vue";
