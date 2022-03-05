@@ -25,11 +25,8 @@ export default {
 </script>
 
 <script setup>
-import {onMounted, reactive, ref} from "vue";
-import {getCurrentInstance} from "vue";
+import {reactive} from "vue";
 import pubsub from "pubsub-js"
-
-let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 
 let barCondition = reactive({
   opacity: 'opacity-0',
