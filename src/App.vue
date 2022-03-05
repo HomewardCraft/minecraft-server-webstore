@@ -51,7 +51,7 @@ watch(() => store.state.cart, (newValue, oldValue) => {
 
 // 完善点击其他区域关闭侧边栏
 let saber = ref('')
-async function openSidebar() {
+function openSidebar() {
     saber.value = 'sidebar-open'
 }
 function closeSaber(event) {
