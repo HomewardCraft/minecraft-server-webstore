@@ -2,7 +2,9 @@
   <div class="grid lg:grid-cols-checkout gap-6 checkout">
     <Checkoutmain></Checkoutmain>
     <Checkoutdetails></Checkoutdetails>
-    <Checkoutconfirm></Checkoutconfirm>
+    <Checkoutconfirm :isPlayerAgreePrivacy = "{isPlayerAgreePrivacy}"
+                     :isPlayerAgreeTerms = "{isPlayerAgreeTerms}"
+    ></Checkoutconfirm>
     <Checkoutbuttons></Checkoutbuttons>
   </div>
   <Checkoutprivacy/>
@@ -13,15 +15,24 @@
 import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
 import Checkoutprivacy from "../components/routes/CheckoutRoute/checkoutprivacy.vue";
 import Checkoutterms from "../components/routes/CheckoutRoute/checkoutterms.vue";
+
 let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 let isPrivacyOpen = ref(false)
 
+let isPlayerAgreePrivacy = ref(false)
+let isPlayerAgreeTerms = ref(false)
+
 onMounted(() => {
-  BUS.emit('changePromotionState','hide')
+  BUS.emit('changePromotionState', 'hide')
+  BUS.on('giveConfirmDataToPage',(data)=>{
+    isPlayerAgreePrivacy.value = data.isPlayerAgreePrivacy
+    isPlayerAgreeTerms.value = data.isPlayerAgreeTerms
+  })
+
 })
 
 onBeforeUnmount(() => {
-  BUS.emit('changePromotionState','show')
+  BUS.emit('changePromotionState', 'show')
 })
 </script>
 
@@ -33,7 +44,7 @@ import Checkoutbuttons from "../components/routes/CheckoutRoute/checkoutbuttons.
 
 export default {
   name: "CheckoutPage",
-  components: { Checkoutbuttons, Checkoutconfirm, Checkoutdetails, Checkoutmain}
+  components: {Checkoutbuttons, Checkoutconfirm, Checkoutdetails, Checkoutmain}
 }
 </script>
 
