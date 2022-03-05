@@ -1,13 +1,13 @@
 <template>
-  <div class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out" :class="clazz.outer">
+  <div @click="changeCondition" class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out" :class="clazz.outer">
     <div class="transition-transform duration-200 ease-in-out transform" :class="clazz.inner">
       <div class="title flex items-center justify-between mb-6">
         <div class="font-bold text-2xl">Privacy Policy</div>
-        <svg @click="changeCondition" viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-800 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
+        <svg viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-800 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
           <path d="M36.0002 5.00012L30.7462 -0.253906L17.8731 12.6191L5.00012 -0.253866L-0.253906 5.00016L12.6191 17.8732L-0.253784 30.7461L5.00024 36.0001L17.8731 23.1272L30.7461 36.0001L36.0001 30.7461L23.1272 17.8732L36.0002 5.00012Z"/>
         </svg>
       </div>
-      <div class="body bg-gray-900 p-6 content-wrap">
+      <div id="privacy" class="body bg-gray-900 p-6 content-wrap">
           <p>Tebex Limited respects your privacy and is committed to protecting your personal data. This privacy notice will inform you as to how we look after your personal data when you visit our website (regardless of where you visit it from) and tell you about your privacy rights and how the law protects you. </p>
           <p>This privacy notice is provided in a layered format so you can click through to the specific areas set out below. Please also use the <a href="#glossary">Glossary</a> to understand the meaning of some of the terms used in this privacy notice.</p>
           <p><a href="#who-we-are">1. IMPORTANT INFORMATION AND WHO WE ARE</a></p>
@@ -277,12 +277,8 @@
           <p id="glossary-legal-rights-restriction">Request restriction of processing of your personal data. This enables you to ask us to suspend the processing of your personal data in the following scenarios: (a) if you want us to establish the data's accuracy; (b) where our use of the data is unlawful but you do not want us to erase it; (c) where you need us to hold the data even if we no longer require it as you need it to establish, exercise or defend legal claims; or (d) you have objected to our use of your data but we need to verify whether we have overriding legitimate grounds to use it. </p>
           <p id="glossary-legal-rights-transfer">Request the transfer of your personal data to you or to a third party. We will provide to you, or a third party you have chosen, your personal data in a structured, commonly used, machine-readable format. Note that this right only applies to automated information which you initially provided consent for us to use or where we used the information to perform a contract with you. </p>
           <p id="glossary-legal-rights-consent">Withdraw consent at any time where we are relying on consent to process your personal data. However, this will not affect the lawfulness of any processing carried out before you withdraw your consent. If you withdraw your consent, we may not be able to provide certain products or services to you. We will advise you if this is the case at the time you withdraw your consent.</p>
-
           <h3>Tebex Limited</h3>
           <p>VAT registered GB 167 189 962</p>
-          <p>
-
-          </p>
       </div>
     </div>
   </div>
@@ -299,15 +295,18 @@ let clazz = reactive({
 })
 let isClosed = true
 
-function changeCondition() {
+function changeCondition(event) {
+  let cancelClick = document.getElementById('privacy')
   if (isClosed) {
     clazz.outer = 'opacity-100 pointer-events-auto'
     clazz.inner = ''
     isClosed = false
-  } else {
-    clazz.outer = 'opacity-0 pointer-events-none'
-    clazz.inner = 'scale-75'
-    isClosed = true
+  } else if (cancelClick) {
+    if (!cancelClick.contains(event.target)) {
+      clazz.outer = 'opacity-0 pointer-events-none'
+      clazz.inner = 'scale-75'
+      isClosed = true
+    }
   }
 }
 

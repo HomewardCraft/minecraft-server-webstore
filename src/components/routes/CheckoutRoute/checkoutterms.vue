@@ -1,13 +1,13 @@
 <template>
-  <div class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out" :class="clazz">
+  <div @click="changeCondition" class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out" :class="clazz">
     <div class="transition-transform duration-200 ease-in-out transform">
       <div class="title flex items-center justify-between mb-6">
         <div class="font-bold text-2xl">Terms & Conditions</div>
-        <svg @click="changeCondition" viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-800 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
+        <svg viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-800 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
           <path d="M36.0002 5.00012L30.7462 -0.253906L17.8731 12.6191L5.00012 -0.253866L-0.253906 5.00016L12.6191 17.8732L-0.253784 30.7461L5.00024 36.0001L17.8731 23.1272L30.7461 36.0001L36.0001 30.7461L23.1272 17.8732L36.0002 5.00012Z"/>
         </svg>
       </div>
-      <div class="content-wrap body bg-gray-900 p-6">
+      <div id="term" class="content-wrap body bg-gray-900 p-6">
         <p>Payments to "Origin Realms" is a payment for the virtual items contained in the purchase. This transaction is final and there are no refunds.</p>
         <p><br></p>
         <p>If you are banned for breaking the rules of the server, you will not be refunded. Bans are subject to the full discretion of the server admins and rules can be changed at any time. There is no guarantee on being able to enter the server, and if the server and/or feature is no longer operated the virtual items are forfeit.</p>
@@ -28,13 +28,16 @@ let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 let clazz = ref('opacity-0 pointer-events-none')
 let isClosed = true
 
-function changeCondition() {
+function changeCondition(event) {
+  let currentClick = document.getElementById('term')
   if (isClosed) {
     clazz.value = 'opacity-100 pointer-events-auto'
     isClosed = false
-  } else {
-    clazz.value = 'opacity-0 pointer-events-none'
-    isClosed = true
+  } else if (currentClick) {
+    if (!currentClick.contains(event.target)) {
+      clazz.value = 'opacity-0 pointer-events-none'
+      isClosed = true
+    }
   }
 }
 
