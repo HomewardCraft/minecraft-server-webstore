@@ -3,10 +3,11 @@
     <section id="accounts" class="mb-10"><h4 class="font-bold text-white text-xl mb-6">Confirm Minecraft Account</h4>
       <div class="account lg:w-4/5 flex items-center">
         <div class="avatar h-32 w-32 relative bg-gray-800 border border-lighten bg-bottom bg-no-repeat"
-             style="background-size: 80%; background-image: url(&quot;https://visage.surgeplay.com/bust/128/1d0bc12c6f9a4f929e42231c9cad5c41&quot;);">
+             :style="{backgroundSize: '80%', backgroundImage: 'url(' + url + uuid + ')'}"
+        >
           <div
               class="button flex items-center justify-center absolute inset-0 top-auto text-center cursor-pointer pb-2 pt-8 text-orange-300 font-bold opacity-100 transition-colors duration-150 ease-in-out hover:text-white">
-            <span class = "text-white">Change</span>
+            <span class="text-white">Change</span>
             <svg class="w-5 h-5 ml-2" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
                     d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
@@ -14,9 +15,9 @@
             </svg>
           </div>
         </div>
-        <div class="text flex-1 ml-8"><h3 class="font-bold text-white text-xl mb-2">Caizii</h3>
+        <div class="text flex-1 ml-8"><h3 class="font-bold text-white text-xl mb-2">{{ username }}</h3>
           <p class="text-gray-500 text-sm"> The items you purchase today are non transferable, non-refundable, and
-            will be added to the account <b class="text-white">Caizii</b>. Please ensure you have space in your
+            will be added to the account <b class="text-white">{{ username }}</b>. Please ensure you have space in your
             inventory before purchasing.</p></div>
       </div>
     </section>
@@ -56,6 +57,23 @@
   </div>
 </template>
 
+<script setup>
+import {reactive, ref} from "vue";
+import {getCurrentInstance} from "vue";
+import {onMounted} from "vue";
+
+let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperties.$store)
+
+let username = ref(GLOBAL_DATA.state.user.ign)
+let uuid = ref(GLOBAL_DATA.state.user.uuid)
+let url = ref('https://visage.surgeplay.com/bust/128/')
+
+onMounted(() => {
+
+})
+
+</script>
+
 <script>
 export default {
   name: "checkoutmain"
@@ -64,6 +82,6 @@ export default {
 
 <style scoped>
 .checkout .avatar .button {
-  background: linear-gradient(to top,#181a1b,rgba(24,26,27,0));
+  background: linear-gradient(to top, #181a1b, rgba(24, 26, 27, 0));
 }
 </style>
