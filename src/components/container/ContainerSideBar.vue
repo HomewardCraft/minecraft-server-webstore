@@ -33,20 +33,19 @@ let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 
 let barCondition = reactive({
   opacity: 'opacity-0',
-  active: '',
-  isOpen: false
+  active: ''
 })
-
+let isOpen = false
 function changeCondition() {
   pubsub.publish('openSaber')
-  if (!barCondition.isOpen) {
+  if (!isOpen) {
     barCondition.opacity = 'opacity-1'
     barCondition.active = 'active'
-    barCondition.isOpen = true
+    isOpen = true
   } else {
     barCondition.opacity = 'opacity-0'
     barCondition.active = ''
-    barCondition.isOpen = false
+    isOpen = false
   }
 }
 pubsub.subscribe('closeSaber', changeCondition)
