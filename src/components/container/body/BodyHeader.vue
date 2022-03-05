@@ -1,5 +1,6 @@
 <template>
-  <div class="promotion flex lg:items-center justify-between mb-10 py-12 lg:py-20 px-10 lg:px-16">
+  <div v-show="isShow"
+       class="promotion flex lg:items-center justify-between mb-10 py-12 lg:py-20 px-10 lg:px-16">
     <item-promotion/>
   </div>
   <div class="special-bar mb-10 -mt-5" style="background-color: rgb(175, 97,  196)">
@@ -7,18 +8,47 @@
   </div>
 </template>
 
+<script setup>
+
+import {onMounted, ref} from "vue";
+import {getCurrentInstance} from "vue";
+
+let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
+let isShow = ref(true)
+
+onMounted(() => {
+
+  BUS.on('changePromotionState', (manipulation) => {
+    console.log("start")
+    if (manipulation === 'show') {
+      console.log("should show")
+
+      isShow.value = true
+    }
+    if (manipulation === 'hide') {
+      console.log("should hide")
+      isShow.value = false
+    }
+  })
+})
+
+</script>
+
 <script>
 import ItemPromotion from "./header/ItemPromotion.vue";
 import SpecialBar from "./header/SpecialBar.vue";
+
 export default {
   name: "BodyHeader",
   components: {SpecialBar, ItemPromotion}
 }
+
+
 </script>
 
 <style scoped>
 .promotion {
-  background: linear-gradient(180deg,#87419a 30%,rgba(217, 141, 31, 0)),url(./src/assets/images/homepage/valentines.png) 100%/cover;
+  background: linear-gradient(180deg, #87419a 30%, rgba(217, 141, 31, 0)), url(./src/assets/images/homepage/valentines.png) 100%/cover;
   justify-content: center;
 }
 
@@ -42,7 +72,7 @@ export default {
 .special-bar {
   background: #452ea3;
   font-weight: 700;
-  border: 2px solid rgba(255,255,255,.1);
+  border: 2px solid rgba(255, 255, 255, .1);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

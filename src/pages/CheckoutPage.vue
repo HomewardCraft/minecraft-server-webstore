@@ -10,12 +10,19 @@
 </template>
 
 <script setup>
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
 import Checkoutprivacy from "../components/routes/CheckoutRoute/checkoutprivacy.vue";
 import Checkoutterms from "../components/routes/CheckoutRoute/checkoutterms.vue";
-
+let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 let isPrivacyOpen = ref(false)
 
+onMounted(() => {
+  BUS.emit('changePromotionState','hide')
+})
+
+onBeforeUnmount(() => {
+  BUS.emit('changePromotionState','show')
+})
 </script>
 
 <script>
