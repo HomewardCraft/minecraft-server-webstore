@@ -6,7 +6,7 @@
       </svg>
       <span class="ml-3 lg:hidden">Close Sidebar</span>
     </div>
-    <div class="popout" @click="openBar">
+    <div class="popout" @click="changeCondition">
       <sidebar-popout/>
     </div>
     <div class="main-content pt-12 lg:pt-0">
@@ -27,36 +27,29 @@ export default {
 <script setup>
 import {onMounted, reactive, ref} from "vue";
 import {getCurrentInstance} from "vue";
+import pubsub from "pubsub-js"
 
-let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
+let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 
-let status =ref('close')
 let barCondition = reactive({
   opacity: 'opacity-0',
-  active: ''
+  active: '',
+  isOpen: false
 })
 
-function openBar() {
-  barCondition.opacity = 'opacity-1'
-  barCondition.active = 'active'
-  status.value = 'opened'
+function changeCondition() {
+  pubsub.publish('openSaber')
+  if (!barCondition.isOpen) {
+    barCondition.opacity = 'opacity-1'
+    barCondition.active = 'active'
+    barCondition.isOpen = true
+  } else {
+    barCondition.opacity = 'opacity-0'
+    barCondition.active = ''
+    barCondition.isOpen = false
+  }
 }
-
-function closeBar() {
-  barCondition.opacity = 'opacity-0'
-  barCondition.active = ''
-  status.value = 'closed'
-}
-
-onMounted(() => {
-  BUS.on('updateSideBarState', (manipulate) => {
-    if (status.value === 'opened') {
-      closeBar()
-    }
-  })
-})
-
-
+pubsub.subscribe('closeSaber', changeCondition)
 </script>
 
 <style scoped>

@@ -13,11 +13,12 @@ export default {
 
 <script setup>
 import {useCookies} from "vue3-cookies";
-import {getCurrentInstance, onMounted} from "vue";
+import {getCurrentInstance, nextTick, onMounted, reactive, ref} from "vue";
 import {onBeforeMount} from "vue";
 import {watch} from "vue";
+import pubsub from "pubsub-js";
 
-let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
+let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 const {cookies} = useCookies()
 let store = getCurrentInstance().appContext.config.globalProperties.$store
 
@@ -39,28 +40,39 @@ watch(() => store.state.cart, (newValue, oldValue) => {
 }, {deep: true})
 
 /**  启用，获取html对象实现过于复杂
-onMounted(()=>{
-  console.log('---onMounted---')
-  document.addEventListener('click', (event) =>{
-    let className = event.target.parentNode
-    console.log(className)
-  })
-})*/
+ * onMounted(()=>{
+ * console.log('---onMounted---')
+ * document.addEventListener('click', (event) =>{
+ * let className = event.target.parentNode
+ * console.log(className)
+ * })
+ * })
+ * */
 
-function closeAll() {
-  BUS.emit('updateSideBarState', 'manipulate')
+// 完善点击其他区域关闭侧边栏
+let saber = ref('')
+async function openSidebar() {
+    saber.value = 'sidebar-open'
 }
-
+function closeSaber(event) {
+  let cancelArea = document.getElementsByClassName('side-bar bg-gray-900 font-bold transition-all duration-500 ease-in-out z-40 outline-none active')
+  if (cancelArea.length !== 0) {
+    if (!cancelArea.item(0).contains(event.target)) {
+      pubsub.publish('closeSaber')
+      saber.value = ''
+    }
+  }
+}
+pubsub.subscribe('openSaber', openSidebar)
 </script>
 
 <template>
-  <div class="h-full">
+  <div class="h-full" :class="saber" @click="closeSaber">
     <div class="grid grid-rows-body h-full">
-      <page-header @click = "closeAll"/>
+      <page-header/>
       <page-container/>
-      <page-footer @click = "closeAll"/>
+      <page-footer/>
     </div>
     <BottomModal/>
-    <!--<page-loading/>-->
   </div>
 </template>
