@@ -285,16 +285,14 @@
 </template>
 
 <script setup>
-import {getCurrentInstance, reactive, ref} from "vue";
-
-let bus = getCurrentInstance().appContext.config.globalProperties.$bus
+import {reactive} from "vue";
+import pubsub from "pubsub-js";
 
 let clazz = reactive({
   outer: 'opacity-0 pointer-events-none',
   inner: 'scale-75'
 })
 let isClosed = true
-
 function changeCondition(event) {
   let cancelClick = document.getElementById('privacy')
   if (isClosed) {
@@ -309,8 +307,7 @@ function changeCondition(event) {
     }
   }
 }
-
-bus.on('privacyManipulation', changeCondition)
+pubsub.subscribe('privacyManipulation', changeCondition)
 </script>
 
 <script>

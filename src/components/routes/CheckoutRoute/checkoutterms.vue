@@ -21,13 +21,11 @@
 </template>
 
 <script setup>
-import {getCurrentInstance, ref} from "vue";
-
-let bus = getCurrentInstance().appContext.config.globalProperties.$bus
+import {ref} from "vue";
+import pubsub from "pubsub-js";
 
 let clazz = ref('opacity-0 pointer-events-none')
 let isClosed = true
-
 function changeCondition(event) {
   let currentClick = document.getElementById('term')
   if (isClosed) {
@@ -40,8 +38,7 @@ function changeCondition(event) {
     }
   }
 }
-
-bus.on('termManipulation', changeCondition)
+pubsub.subscribe('termManipulation', changeCondition)
 </script>
 
 <script>

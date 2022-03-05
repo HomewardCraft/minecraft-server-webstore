@@ -163,6 +163,7 @@
 <script setup>
 import {getCurrentInstance, onBeforeUpdate, onMounted, reactive} from "vue";
 import {ref} from "vue";
+import pubsub from "pubsub-js";
 
 let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 
@@ -172,11 +173,11 @@ let isPlayerAgreePrivacy = ref(false)
 let isPlayerAgreeTerms = ref(false)
 
 function openTermWindow() {
-  BUS.emit('termManipulation')
+  pubsub.publish('termManipulation')
 }
 
 function openPrivacyWindow() {
-  BUS.emit('privacyManipulation')
+  pubsub.publish('privacyManipulation')
 }
 
 function giveDataToPage() {
