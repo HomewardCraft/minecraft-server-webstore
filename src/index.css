@@ -97,6 +97,10 @@
         font-size: inherit;
         font-weight: inherit;
     }
+
+    b, strong {
+        font-weight: bolder;
+    }
 }
 
 /* 移动端的导航栏样式 */
@@ -280,4 +284,11 @@
     font-weight: 700;
     --tw-text-opacity: 1;
     color: rgba(255,255,255,var(--tw-text-opacity));
+}
+
+/* 正确应用样式 */
+.content-wrap p {
+    padding-bottom: 18px;
+    font-size: 18px;
+    line-height: 1.6;
 }
