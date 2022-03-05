@@ -5,17 +5,12 @@
     <rule-information/>
     <Checkoutbuttons></Checkoutbuttons>
   </div>
-  <!--<Checkoutprivacy/>-->
-  <!--<Checkoutterms/>-->
 </template>
 
 <script setup>
 import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
-// import Checkoutprivacy from "../components/routes/CheckoutRoute/rule/PrivacyDetail.vue";
-// import Checkoutterms from "../components/routes/CheckoutRoute/rule/checkoutterms.vue";
 
 let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
-let isPrivacyOpen = ref(false)
 
 let isPlayerAgreePrivacy = ref(false)
 let isPlayerAgreeTerms = ref(false)

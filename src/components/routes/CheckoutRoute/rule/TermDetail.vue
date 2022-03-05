@@ -43,7 +43,7 @@ pubsub.subscribe('termManipulation', changeCondition)
 
 <script>
 export default {
-  name: "checkoutterms"
+  name: "TermDetail"
 }
 </script>
 
