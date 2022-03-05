@@ -2,19 +2,17 @@
   <div class="grid lg:grid-cols-checkout gap-6 checkout">
     <Checkoutmain></Checkoutmain>
     <Checkoutdetails></Checkoutdetails>
-    <Checkoutconfirm :isPlayerAgreePrivacy = "{isPlayerAgreePrivacy}"
-                     :isPlayerAgreeTerms = "{isPlayerAgreeTerms}"
-    ></Checkoutconfirm>
+    <rule-information/>
     <Checkoutbuttons></Checkoutbuttons>
   </div>
-  <Checkoutprivacy/>
-  <Checkoutterms/>
+  <!--<Checkoutprivacy/>-->
+  <!--<Checkoutterms/>-->
 </template>
 
 <script setup>
 import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
-import Checkoutprivacy from "../components/routes/CheckoutRoute/checkoutprivacy.vue";
-import Checkoutterms from "../components/routes/CheckoutRoute/checkoutterms.vue";
+// import Checkoutprivacy from "../components/routes/CheckoutRoute/rule/PrivacyDetail.vue";
+// import Checkoutterms from "../components/routes/CheckoutRoute/rule/checkoutterms.vue";
 
 let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 let isPrivacyOpen = ref(false)
@@ -39,12 +37,12 @@ onBeforeUnmount(() => {
 <script>
 import Checkoutmain from "../components/routes/CheckoutRoute/checkoutmain.vue";
 import Checkoutdetails from "../components/routes/CheckoutRoute/checkoutdetails.vue";
-import Checkoutconfirm from "../components/routes/CheckoutRoute/checkoutconfirm.vue";
+import RuleInformation from "../components/routes/CheckoutRoute/RuleInformation.vue";
 import Checkoutbuttons from "../components/routes/CheckoutRoute/checkoutbuttons.vue";
 
 export default {
   name: "CheckoutPage",
-  components: {Checkoutbuttons, Checkoutconfirm, Checkoutdetails, Checkoutmain}
+  components: {Checkoutbuttons, RuleInformation, Checkoutdetails, Checkoutmain}
 }
 </script>
 

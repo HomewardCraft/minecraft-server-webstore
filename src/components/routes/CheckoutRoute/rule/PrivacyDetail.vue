@@ -312,7 +312,7 @@ pubsub.subscribe('privacyManipulation', changeCondition)
 
 <script>
 export default {
-  name: "checkoutprivacy"
+  name: "PrivacyDetail"
 }
 </script>
 
