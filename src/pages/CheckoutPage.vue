@@ -9,6 +9,7 @@
 
 <script setup>
 import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
+import sendRoutePath from "../hooks/sendRoutePath.js";
 
 let BUS = getCurrentInstance().appContext.config.globalProperties.$bus
 
@@ -27,6 +28,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   BUS.emit('changePromotionState', 'show')
 })
+
+sendRoutePath()
 </script>
 
 <script>
