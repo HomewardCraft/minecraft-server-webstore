@@ -292,6 +292,10 @@
     font-size: 18px;
     line-height: 1.6;
 }
+.toasts {
+    max-width: 400px;
+    width: 100%;
+}
 
 .toasts {
     z-index: 9999999;

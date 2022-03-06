@@ -11,14 +11,17 @@
 <script>
 import ToastIdle from "./toast/ToastIdle.vue";
 import AddCartMessage from "./toast/AddCartMessage.vue";
+import RemoveCartMessage from "./toast/RemoveCartMessage.vue";
+import IncreaseItemMessage from "./toast/IncreaseItemMessage.vue";
+import DecreaseItemMessage from "./toast/DecreaseItemMessage.vue";
 export default {
   name: "ContainerToasts",
-  components: {AddCartMessage}
+  components: {ToastIdle, AddCartMessage, RemoveCartMessage, IncreaseItemMessage, DecreaseItemMessage}
 }
 </script>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {reactive} from "vue";
 import pubsub from "pubsub-js";
 
 let currentComponent = reactive({
@@ -28,19 +31,17 @@ let currentComponent = reactive({
   }
 })
 
+let timer
+
 function setCurrentComponent(_, data) {
-  currentComponent.item.name = data.itemMeta.name
-  currentComponent.componentName = data.componentName
-  setTimeout(() => {
-    currentComponent.componentName = 'ToastIdle'
-  }, 5000)
+  clearTimeout(timer)
+  timer = setTimeout(() => {
+    currentComponent.item.name = data.itemMeta.name
+    currentComponent.componentName = data.componentName
+    setTimeout(() => {
+      currentComponent.componentName = 'ToastIdle'
+    }, 2000);
+  }, 300)
 }
 pubsub.subscribe('setCurrentToastComponent', setCurrentComponent)
 </script>
-
-<style scoped>
-.toasts {
-  max-width: 400px;
-  width: 100%;
-}
-</style>
