@@ -1,12 +1,10 @@
 <template>
-  <template v-if="logged_in && IS_ITEM_IN_CART && !HOW_MANY_IN_CART == 0">
+  <template v-if="logged_in && IS_ITEM_IN_CART && HOW_MANY_IN_CART !== 0">
     <cart-mutable :increaseItem="increaseItemByOne" :decreaseItem="decreaseItemByOne" :removeItem="removeItem" :itemAmount="HOW_MANY_IN_CART"/>
   </template>
-  <transition name="slide">
-    <template v-if="logged_in && !IS_ITEM_IN_CART">
-      <cart-empty :addItemToCart="addItemToCart"/>
-    </template>
-  </transition>
+  <template v-if="logged_in && !IS_ITEM_IN_CART">
+    <cart-empty :addItemToCart="addItemToCart"/>
+  </template>
   <template v-if="!logged_in">
     <un-login/>
   </template>
@@ -50,30 +48,37 @@ let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 
 function removeItem() {
   GLOBAL_DATA.commit('removeItemFromCart', showItem)
   HOW_MANY_IN_CART.value = 0
+  setCurrentToastComponent('RemoveCartMessage')
 }
 
 function increaseItemByOne() {
   GLOBAL_DATA.commit('increaseItemByOne', showItem)
+  setCurrentToastComponent('IncreaseItemMessage')
 }
 
 function decreaseItemByOne() {
   if (HOW_MANY_IN_CART.value <= 1) {
     removeItem()
+    setCurrentToastComponent('RemoveCartMessage')
   }
   GLOBAL_DATA.commit('decreaseItemByOne', showItem)
+  setCurrentToastComponent('DecreaseItemMessage')
 }
 
 function addItemToCart() {
   showItem.quantity = 1
   GLOBAL_DATA.commit('addItemToCart', showItem)
-  let currentComponent = {
-    itemName: showItem.name,
-    componentName: 'AddCartMessage'
-  }
   pubsub.publish('changeSaberCondition')
-  pubsub.publish('setCurrentToastComponent', currentComponent)
+  setCurrentToastComponent('AddCartMessage')
 }
 
+function setCurrentToastComponent(currentComponentName) {
+  let currentComponent = {
+    itemMeta: showItem,
+    componentName: currentComponentName
+  }
+  pubsub.publish('setCurrentToastComponent', currentComponent)
+}
 
 function countItem() {
   //这个很有可能时vue的问题，mount和watch都不会进入这个循环
