@@ -71,7 +71,7 @@ onMounted(() => {
 })
 
 watch(() => GLOBAL_DATA.state.cart, (newValue, oldValue) => {
-  console.log("CardContent 数据发生变化")
+  console.log("(!) 你的购物车车 数据发生变化")
   DO_ITEM_IN_CART.value = GLOBAL_DATA.state.cart.items.length
   calculateTotal()
 }, {deep: true})

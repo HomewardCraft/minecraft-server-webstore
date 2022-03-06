@@ -7,6 +7,7 @@ import checkoutPage from "../pages/CheckoutPage.vue";
 
 export default [
     {
+        name: 'home',
         path: '/',
         component: homepageRoute
     },
