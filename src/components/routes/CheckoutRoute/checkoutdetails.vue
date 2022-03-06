@@ -16,7 +16,7 @@
               <input
                 name="quantity[4248027]" id="quantity[4248027]" type="number" min="1" max="99"
                 :value = item.quantity
-                class="text-white w-8 mr-5 block text-center bg-gray-800 border border-lighten text-gray-500 font-bold text-sm py-1 transition-colors duration-150 ease-in-out focus:outline-none focus:border-piston appearance-none">
+                class="text-white w-8 mr-5 block text-center bg-gray-800 border border-lighten text-gray-500 font-bold text-sm py-1 transition-colors duration-150 ease-in-out focus:outline-none focus:border-piston appearance-none"/>
               <button
                   class="flex items-center absolute top-0 right-0 p-2 bg-red-500 transition-all ease-in-out duration-150 transform -translate-y-0 translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 rounded-full group-hover:pointer-events-auto cursor-pointer group-hover:-translate-y-1/2 hover:bg-red-400 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" class="h-4 w-4" fill="currentColor">
@@ -87,5 +87,15 @@ export default {
 </script>
 
 <style scoped>
-
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
 </style>

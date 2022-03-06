@@ -316,3 +316,13 @@
         opacity: 1;
     }
 }
+
+input[type=number].appearance-none {
+    -moz-appearance: textfield;
+}
+
+.appearance-none::-webkit-outer-spin-button,
+.appearance-none::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
