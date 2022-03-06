@@ -3,16 +3,20 @@
     <section id="basket" class="mb-10"><h4 class="font-bold text-white text-2xl mb-4">Your Basket <b
         class="text-gray-500 text-base">(1)</b></h4>
       <form>
-        <div class="packages">
+        <div v-for="item in itemsInCart" :key="item.id"
+             class="packages">
           <div class="package bg-gray-800 border border-lighten flex justify-between mb-5 relative group">
             <div class="info text-sm font-bold px-5 py-3">
-              <div class="title text-gray-500 text-lg mb-1">Protection Rune</div>
-              <div class="price">$3.59 USD</div>
+              <div class="title text-gray-500 text-lg mb-1">{{ item.name }}</div>
+              <div class="price">${{ item.price }} USD</div>
             </div>
-            <div class="details flex items-center"><label for="quantity[4248027]"
-                                                          class="sr-only">Quantity</label><input
-                name="quantity[4248027]" id="quantity[4248027]" type="number" min="1" max="999"
-                class="text-black w-8 mr-5 block text-center bg-gray-800 border border-lighten text-gray-500 font-bold text-sm py-1 transition-colors duration-150 ease-in-out focus:outline-none focus:border-piston appearance-none">
+            <div class="details flex items-center">
+              <label for="quantity[4248027]"
+                     class="sr-only">Quantity</label>
+              <input
+                name="quantity[4248027]" id="quantity[4248027]" type="number" min="1" max="99"
+                :value = item.quantity
+                class="text-white w-8 mr-5 block text-center bg-gray-800 border border-lighten text-gray-500 font-bold text-sm py-1 transition-colors duration-150 ease-in-out focus:outline-none focus:border-piston appearance-none">
               <button
                   class="flex items-center absolute top-0 right-0 p-2 bg-red-500 transition-all ease-in-out duration-150 transform -translate-y-0 translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 rounded-full group-hover:pointer-events-auto cursor-pointer group-hover:-translate-y-1/2 hover:bg-red-400 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" class="h-4 w-4" fill="currentColor">
@@ -23,6 +27,8 @@
             </div>
           </div>
         </div>
+
+
         <div class="updated text-right transition-opacity duration-150 ease-in-out">
           <button type="submit"
                   class="inline-flex items-center py-2 px-3 text-sm bg-btn border border-lighten shadow-btn uppercase font-extrabold tracking-widest text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 focus:outline-none">
@@ -62,6 +68,17 @@
     </section>
   </div>
 </template>
+
+<script setup>
+import {reactive} from "vue";
+import {getCurrentInstance} from "vue";
+
+let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperties.$store)
+let itemsInCart = reactive(GLOBAL_DATA.state.cart.items)
+
+
+</script>
+
 
 <script>
 export default {

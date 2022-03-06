@@ -15,7 +15,8 @@
             </svg>
           </div>
         </div>
-        <div class="text flex-1 ml-8"><h3 class="font-bold text-white text-xl mb-2">{{ username }}</h3>
+        <div class="text flex-1 ml-8">
+          <h3 class="font-bold text-white text-xl mb-2">{{ username }}</h3>
           <p class="text-gray-500 text-sm"> The items you purchase today are non transferable, non-refundable, and
             will be added to the account <b class="text-white">{{ username }}</b>. Please ensure you have space in your
             inventory before purchasing.</p></div>
