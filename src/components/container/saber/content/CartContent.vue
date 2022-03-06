@@ -53,6 +53,7 @@ import {getCurrentInstance, onMounted, ref, toRef} from "vue";
 import {reactive} from "vue";
 import {watch} from "vue";
 import {useRouter} from "vue-router";
+import pubsub from "pubsub-js";
 
 let ctx = getCurrentInstance()
 let GLOBAL_DATA = reactive(ctx.appContext.config.globalProperties.$store)
@@ -92,6 +93,7 @@ function calculateTotal() {
 }
 
 function checkout() {
+  pubsub.publish('changeSaberCondition')
   router.push({
     // 目标路由
     name: 'checkout'

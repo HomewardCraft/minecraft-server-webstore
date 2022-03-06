@@ -67,11 +67,6 @@ let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperti
 let username = ref(GLOBAL_DATA.state.user.ign)
 let uuid = ref(GLOBAL_DATA.state.user.uuid)
 let url = ref('https://visage.surgeplay.com/bust/128/')
-
-onMounted(() => {
-
-})
-
 </script>
 
 <script>

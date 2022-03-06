@@ -34,9 +34,6 @@ let GLOBAL_DATA = reactive(ctx.appContext.config.globalProperties.$store)
 
 let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
 let username = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'ign')
-
-
-
 </script>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-<div class="page-background background-image"/>
+  <div class="page-background background-image"/>
 </template>
 
 <script>
