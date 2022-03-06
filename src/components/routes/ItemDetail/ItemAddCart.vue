@@ -19,50 +19,43 @@
   <!--  没有登录就显示上面的样式-->
   <!--当购物车有东西时就会显示这些-->
   <div v-show="logged_in && IS_ITEM_IN_CART && !HOW_MANY_IN_CART==0">
-    <div class="quantity flex mb-4">
-      <button
-          @click="decreaseItemByOne"
-          class="flex p-4 bg-btn border border-lighten uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90 opacity-50">
-        <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-          <path
-              d="M400 288h-352c-17.69 0-32-14.32-32-32.01s14.31-31.99 32-31.99h352c17.69 0 32 14.3 32 31.99S417.7 288 400 288z"></path>
-        </svg>
-      </button>
-      <div
-          class="quantity w-full text-center font-bold text-lg bg-gray-900 flex text-gray-500 items-center justify-center">
-        {{ HOW_MANY_IN_CART }}x Bundle
+    <transition name="slide">
+      <div class="quantity flex mb-4">
+        <button @click="decreaseItemByOne" class="flex p-4 bg-btn border border-lighten uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90 opacity-50">
+          <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M400 288h-352c-17.69 0-32-14.32-32-32.01s14.31-31.99 32-31.99h352c17.69 0 32 14.3 32 31.99S417.7 288 400 288z"></path>
+          </svg>
+        </button>
+        <div class="quantity w-full text-center font-bold text-lg bg-gray-900 flex text-gray-500 items-center justify-center">
+          {{ HOW_MANY_IN_CART }}x Bundle
+        </div>
+        <button @click="increaseItemByOne" class="flex p-4 bg-btn border border-lighten uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90">
+          <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+          </svg>
+        </button>
       </div>
-      <button
-          @click="increaseItemByOne"
-          class="flex p-4 bg-btn border border-lighten uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90">
-        <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-          <path
-              d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
-        </svg>
+    </transition>
+    <transition name="slide">
+      <div class="flex justify-center items-center w-full bg-gray-900 border border-light py-4 uppercase font-extrabold tracking-wide text-gray-500 transition-all transform duration-150 ease-in-out focus:outline-none">
+        Added to cart
+      </div>
+    </transition>
+    <transition name="slide">
+      <button @click="removeItem" class="remove text-red-400 transition-colours ease-in-out duration-150 hover:text-red-200 p-5 font-bold text-sm text-center block w-full focus:outline-none">
+        Remove from cart
       </button>
-    </div>
-    <div
-        class="flex justify-center items-center w-full bg-gray-900 border border-light py-4 uppercase font-extrabold tracking-wide text-gray-500 transition-all transform duration-150 ease-in-out focus:outline-none"
-        disabled="false">Added to cart
-    </div>
-    <button
-        @click="removeItem"
-        class="remove text-red-400 transition-colours ease-in-out duration-150 hover:text-red-200 p-5 font-bold text-sm text-center block w-full focus:outline-none">
-      Remove from cart
-    </button>
+    </transition>
   </div>
   <!--当购物车没有东西时就会显示这些-->
-  <button
-      @click="addItemToCart"
-      v-show="logged_in && !IS_ITEM_IN_CART"
-      class="flex justify-center items-center w-full px-6 bg-btn border border-lighten py-4 shadow-btn uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90"
-      data-exception="">
-    <svg class="w-8 h-8 mr-2 opacity-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <path
-          d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-    </svg>
-    <span>添加到购物车!</span>
-  </button>
+  <transition name="slide">
+    <button @click="addItemToCart" v-show="logged_in && !IS_ITEM_IN_CART" class="flex justify-center items-center w-full px-6 bg-btn border border-lighten py-4 shadow-btn uppercase font-extrabold tracking-wide text-btn-text transition-all transform duration-150 ease-in-out hover:opacity-75 focus:outline-none focus:scale-90">
+      <svg class="w-8 h-8 mr-2 opacity-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+      </svg>
+      <span>添加到购物车!</span>
+    </button>
+  </transition>
 </template>
 
 <script>
@@ -165,6 +158,17 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition-property: all;
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-33%);
+}
 
 /*图标背景颜色*/
 .loginbn {
