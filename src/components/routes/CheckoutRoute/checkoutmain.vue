@@ -2,10 +2,12 @@
   <div class="main">
     <section id="accounts" class="mb-10"><h4 class="font-bold text-white text-xl mb-6">Confirm Minecraft Account</h4>
       <div class="account lg:w-4/5 flex items-center">
-        <div class="avatar h-32 w-32 relative bg-gray-800 border border-lighten bg-bottom bg-no-repeat"
+        <div @click="logOut"
+            class="avatar h-32 w-32 relative bg-gray-800 border border-lighten bg-bottom bg-no-repeat"
              :style="{backgroundSize: '80%', backgroundImage: 'url(' + url + uuid + ')'}"
         >
           <div
+              @click="logOut"
               class="button flex items-center justify-center absolute inset-0 top-auto text-center cursor-pointer pb-2 pt-8 text-orange-300 font-bold opacity-100 transition-colors duration-150 ease-in-out hover:text-white">
             <span class="text-white">Change</span>
             <svg class="w-5 h-5 ml-2" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -39,10 +41,10 @@
           </div>
         </div>
         <div class="form-row"><label for="email" class="sr-only">Email Address</label>
-          <input name="email" id="email" v-model="email" ref="email"
+          <input name="email" id="email" v-model="Email" ref="email"
                  type="email"
                  class="appearance-none bg-gray-800 border border-lighten font-bold text-lg block w-full py-3 px-5 transition-colors duration-150 ease-in-out focus:outline-none focus:border-piston"
-                 placeholder="example@originrealms.com">
+                 placeholder="example@arcanetravel.com">
         </div>
       </div>
     </section>
@@ -63,9 +65,10 @@
 import {customRef, reactive, ref} from "vue";
 import {getCurrentInstance} from "vue";
 import {watch} from "vue";
+import {useRouter} from "vue-router";
 
 let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperties.$store)
-
+let router = useRouter()
 let username = ref(GLOBAL_DATA.state.user.ign)
 let uuid = ref(GLOBAL_DATA.state.user.uuid)
 let url = ref('https://visage.surgeplay.com/bust/128/')
@@ -89,11 +92,39 @@ function delayRef(value, delay) {
   })
 }
 
-let email = delayRef('', 500)
+let Email = delayRef(GLOBAL_DATA.state.fields.email_add, 1000)
+
+function logOut() {
+  router.push('/')
+  GLOBAL_DATA.commit('logOut', 'logout')
+  }
+
+function check(value) {
+  var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+
+  if (value === "") { //输入不能为空
+    console.log("(!) 错误格式")
+    return false;
+  } else if (!reg.test(value)) { //正则验证不通过，格式不对
+    console.log("(!) 错误格式")
+    return false;
+  } else {
+    console.log("(+) 通过")
+    GLOBAL_DATA.state.fields.email = true
+    return true;
+  }
+}
 
 watch(() => GLOBAL_DATA.state.fields, (newValue, oldValue) => {
+  console.log("fields更新了")
 
 }, {deep: true})
+
+watch(Email, (newValue, oldValue) => {
+  console.log('Email', newValue, oldValue)
+  check(Email.value)
+}, {immediate: true})
+
 </script>
 
 <script>

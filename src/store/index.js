@@ -10,6 +10,9 @@ const actions = {
     login(context, value) {
         context.commit('login', value)
     },
+    logOut(context, value) {
+        context.commit('logOut', value)
+    },
     addItemToCart(context, value) {
         context.commit('addItemToCart', value)
     },
@@ -34,6 +37,17 @@ const mutations = {
         state.user.ign = value.name
         state.user.uuid = value.id
         cookies.set("user_session", state.user, "7D")
+    },
+    logOut(state, value) {
+        state.user.logged_in = false
+        state.user.ign = " "
+        state.user.uuid = " "
+        state.cart.items = []
+        state.cart.total = 0
+        state.fields.email = false
+        state.fields.email_add = ''
+        cookies.remove("user_session")
+        cookies.remove("user_cart")
     },
     addItemToCart(state, value) {
         this.state.cart.items.push(value)
@@ -88,8 +102,8 @@ const state = {
         "total": 0
     },
     "fields": {
-        "email": true,
-        "example": "arcanetravel.com"
+        "email": false,
+        "email_add": ''
     }
 }
 
