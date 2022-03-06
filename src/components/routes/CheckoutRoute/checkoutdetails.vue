@@ -109,6 +109,10 @@ function removeThisItem(item) {
 function shouldClosePage() {
   if(itemsInCart.length <=0) {
     router.push('/')
+    let data = {
+      name: ''
+    }
+    setCurrentToastComponent('CheckoutEmpty', data)
   }
 }
 

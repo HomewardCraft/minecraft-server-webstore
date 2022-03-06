@@ -14,9 +14,10 @@ import AddCartMessage from "./toast/AddCartMessage.vue";
 import RemoveCartMessage from "./toast/RemoveCartMessage.vue";
 import IncreaseItemMessage from "./toast/IncreaseItemMessage.vue";
 import DecreaseItemMessage from "./toast/DecreaseItemMessage.vue";
+import CheckoutEmpty from "./toast/CheckoutEmpty.vue";
 export default {
   name: "ContainerToasts",
-  components: {ToastIdle, AddCartMessage, RemoveCartMessage, IncreaseItemMessage, DecreaseItemMessage}
+  components: {ToastIdle, AddCartMessage, RemoveCartMessage, IncreaseItemMessage, DecreaseItemMessage, CheckoutEmpty}
 }
 </script>
 
