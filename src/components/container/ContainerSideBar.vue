@@ -34,18 +34,18 @@ let barCondition = reactive({
 })
 let isOpen = false
 function changeCondition() {
-  pubsub.publish('openSaber')
   if (!isOpen) {
     barCondition.opacity = 'opacity-1'
     barCondition.active = 'active'
     isOpen = true
+    pubsub.publish('openSaber')
   } else {
     barCondition.opacity = 'opacity-0'
     barCondition.active = ''
     isOpen = false
   }
 }
-pubsub.subscribe('closeSaber', changeCondition)
+pubsub.subscribe('changeSaberCondition', changeCondition)
 </script>
 
 <style scoped>

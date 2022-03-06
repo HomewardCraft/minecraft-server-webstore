@@ -27,7 +27,7 @@ let ctx = getCurrentInstance()
 let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 'logged_in')
 
 function showLoginPanel() {
-  pubsub.publish('closeSaber')
+  pubsub.publish('changeSaberCondition')
   pubsub.publish('changeLoginCondition')
 }
 </script>

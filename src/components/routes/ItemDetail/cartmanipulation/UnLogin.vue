@@ -21,10 +21,7 @@ export default {
 </script>
 
 <script setup>
-import {getCurrentInstance} from "vue";
 import pubsub from "pubsub-js";
-
-let bus = getCurrentInstance().appContext.config.globalProperties.$bus
 
 function showLoginPanel() {
   pubsub.publish('changeLoginCondition')

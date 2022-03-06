@@ -50,24 +50,18 @@ watch(() => store.state.cart, (newValue, oldValue) => {
  * */
 
 // 完善点击其他区域关闭侧边栏
-let saber = ref('')
-function openSidebar() {
-    saber.value = 'sidebar-open'
-}
 function closeSaber(event) {
   let cancelArea = document.getElementsByClassName('side-bar bg-gray-900 font-bold transition-all duration-500 ease-in-out z-40 outline-none active')
   if (cancelArea.length !== 0) {
     if (!cancelArea.item(0).contains(event.target)) {
-      pubsub.publish('closeSaber')
-      saber.value = ''
+      pubsub.publish('changeSaberCondition')
     }
   }
 }
-pubsub.subscribe('openSaber', openSidebar)
 </script>
 
 <template>
-  <div class="h-full" :class="saber" @click="closeSaber">
+  <div class="h-full" @click="closeSaber">
     <div class="grid grid-rows-body h-full">
       <page-header/>
       <page-container/>
