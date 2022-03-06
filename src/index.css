@@ -292,3 +292,20 @@
     font-size: 18px;
     line-height: 1.6;
 }
+
+.toasts {
+    z-index: 9999999;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+    transition-property: all;
+    transition-duration: 0.15s;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-enter,
+.slide-leave-to {
+    opacity: 0;
+    transform: translateY(-33%);
+}
