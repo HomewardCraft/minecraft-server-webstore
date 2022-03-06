@@ -65,7 +65,7 @@
     <section id="total">
       <div class="flex items-end justify-between font-bold leading-none">
         <div class="text-lg opacity-75">Total</div>
-        <div class="text-2xl text-white">$7.18 USD</div>
+        <div class="text-2xl text-white">${{total}} USD</div>
       </div>
     </section>
   </div>
@@ -78,11 +78,12 @@ import {watch} from "vue";
 import {useRouter} from "vue-router";
 import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
 import {onMounted} from "vue";
+import {ref} from "vue";
 
 let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperties.$store)
 let itemsInCart = reactive(GLOBAL_DATA.state.cart.items)
 let router = useRouter()
-
+let total = ref(0)
 //数据校验
 function checkValidNumber() {
 
@@ -97,6 +98,14 @@ function checkValidNumber() {
       item.quantity = 99
     }
   })
+}
+
+function calculateTotal() {
+  var totalCache = 0
+  for (var item in itemsInCart) {
+    totalCache = totalCache + itemsInCart[item].price * itemsInCart[item].quantity
+  }
+  total.value = totalCache
 }
 
 //删除该物品
@@ -120,10 +129,12 @@ watch(() => GLOBAL_DATA.state.cart, (newValue, oldValue) => {
   //数据校验
   checkValidNumber()
   shouldClosePage()
+  calculateTotal()
 }, {deep: true})
 
 onMounted(() => {
   shouldClosePage()
+  calculateTotal()
 })
 
 </script>

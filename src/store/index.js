@@ -86,6 +86,10 @@ const state = {
     "cart": {
         "items": [],
         "total": 0
+    },
+    "fields": {
+        "email": true,
+        "example": "arcanetravel.com"
     }
 }
 

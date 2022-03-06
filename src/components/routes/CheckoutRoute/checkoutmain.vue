@@ -38,10 +38,11 @@
             be spammed or sent junk mail by Origin Realms.
           </div>
         </div>
-        <div class="form-row"><label for="email" class="sr-only">Email Address</label><input name="email" id="email"
-                                                                                             type="email"
-                                                                                             class="appearance-none bg-gray-800 border border-lighten font-bold text-lg block w-full py-3 px-5 transition-colors duration-150 ease-in-out focus:outline-none focus:border-piston"
-                                                                                             placeholder="example@originrealms.com">
+        <div class="form-row"><label for="email" class="sr-only">Email Address</label>
+          <input name="email" id="email" v-model="email" ref="email"
+                 type="email"
+                 class="appearance-none bg-gray-800 border border-lighten font-bold text-lg block w-full py-3 px-5 transition-colors duration-150 ease-in-out focus:outline-none focus:border-piston"
+                 placeholder="example@originrealms.com">
         </div>
       </div>
     </section>
@@ -59,15 +60,40 @@
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {customRef, reactive, ref} from "vue";
 import {getCurrentInstance} from "vue";
-import {onMounted} from "vue";
+import {watch} from "vue";
 
 let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperties.$store)
 
 let username = ref(GLOBAL_DATA.state.user.ign)
 let uuid = ref(GLOBAL_DATA.state.user.uuid)
 let url = ref('https://visage.surgeplay.com/bust/128/')
+
+function delayRef(value, delay) {
+  let timer
+  return customRef((track, trigger) => {
+    return {
+      get() {
+        track()
+        return value
+      },
+      set(newValue) {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          value = newValue
+          trigger()
+        }, delay)
+      },
+    }
+  })
+}
+
+let email = delayRef('', 500)
+
+watch(() => GLOBAL_DATA.state.fields, (newValue, oldValue) => {
+
+}, {deep: true})
 </script>
 
 <script>
