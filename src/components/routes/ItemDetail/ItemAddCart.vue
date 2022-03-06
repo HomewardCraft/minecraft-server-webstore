@@ -25,6 +25,7 @@ export default {
 <script setup>
 import {getCurrentInstance, onMounted, reactive, ref, toRef, watch} from "vue";
 import pubsub from "pubsub-js";
+import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
 
 let ctx = getCurrentInstance()
 let data = defineProps(['item']);
@@ -48,36 +49,28 @@ let logged_in = toRef(ctx.appContext.config.globalProperties.$store.state.user, 
 function removeItem() {
   GLOBAL_DATA.commit('removeItemFromCart', showItem)
   HOW_MANY_IN_CART.value = 0
-  setCurrentToastComponent('RemoveCartMessage')
+  setCurrentToastComponent('RemoveCartMessage', showItem)
 }
 
 function increaseItemByOne() {
   GLOBAL_DATA.commit('increaseItemByOne', showItem)
-  setCurrentToastComponent('IncreaseItemMessage')
+  setCurrentToastComponent('IncreaseItemMessage', showItem)
 }
 
 function decreaseItemByOne() {
   if (HOW_MANY_IN_CART.value <= 1) {
     removeItem()
-    setCurrentToastComponent('RemoveCartMessage')
+    setCurrentToastComponent('RemoveCartMessage', showItem)
   }
   GLOBAL_DATA.commit('decreaseItemByOne', showItem)
-  setCurrentToastComponent('DecreaseItemMessage')
+  setCurrentToastComponent('DecreaseItemMessage', showItem)
 }
 
 function addItemToCart() {
   showItem.quantity = 1
   GLOBAL_DATA.commit('addItemToCart', showItem)
   pubsub.publish('changeSaberCondition')
-  setCurrentToastComponent('AddCartMessage')
-}
-
-function setCurrentToastComponent(currentComponentName) {
-  let currentComponent = {
-    itemMeta: showItem,
-    componentName: currentComponentName
-  }
-  pubsub.publish('setCurrentToastComponent', currentComponent)
+  setCurrentToastComponent('AddCartMessage', showItem)
 }
 
 function countItem() {
