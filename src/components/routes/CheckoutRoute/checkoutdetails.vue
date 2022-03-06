@@ -76,6 +76,7 @@ import {reactive} from "vue";
 import {getCurrentInstance} from "vue";
 import {watch} from "vue";
 import {useRouter} from "vue-router";
+import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
 
 let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperties.$store)
 let itemsInCart = reactive(GLOBAL_DATA.state.cart.items)
@@ -100,6 +101,7 @@ function checkValidNumber() {
 //删除该物品
 function removeThisItem(item) {
   GLOBAL_DATA.commit('removeThisItem', item)
+  setCurrentToastComponent('RemoveCartMessage', item)
 }
 
 //你全清空时应该关闭这个界面
