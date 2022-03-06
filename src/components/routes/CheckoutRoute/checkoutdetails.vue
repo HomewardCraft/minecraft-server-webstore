@@ -77,6 +77,7 @@ import {getCurrentInstance} from "vue";
 import {watch} from "vue";
 import {useRouter} from "vue-router";
 import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
+import {onMounted} from "vue";
 
 let GLOBAL_DATA = reactive(getCurrentInstance().appContext.config.globalProperties.$store)
 let itemsInCart = reactive(GLOBAL_DATA.state.cart.items)
@@ -116,6 +117,10 @@ watch(() => GLOBAL_DATA.state.cart, (newValue, oldValue) => {
   checkValidNumber()
   shouldClosePage()
 }, {deep: true})
+
+onMounted(() => {
+  shouldClosePage()
+})
 
 </script>
 
