@@ -1,8 +1,6 @@
 <template>
-  <div @click.self="close"
-       class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out"
-       :class="styles.outer">
-    <div class="transition-transform duration-200 ease-in-out transform" :class="styles.inner">
+  <div @click="changeCondition" :class="styles.outer" class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out">
+    <div :class="styles.inner" class="transition-transform duration-200 ease-in-out transform">
       <div class="title flex items-center justify-between mb-6">
         <login-title/>
       </div>
@@ -16,44 +14,31 @@
 </template>
 
 <script setup>
-import {getCurrentInstance} from "vue";
 import {reactive} from "vue";
-import {onMounted} from "vue";
+import pubsub from "pubsub-js";
 
-const {proxy, ctx} = getCurrentInstance()
-
-let ispannelopen = false
-
+let isOpen = false
 let styles = reactive({
   outer: 'opacity-0 pointer-events-none',
   inner: 'scale-75'
 })
-
-function open() {
-  styles.outer = 'opacity-100 pointer-events-auto'
-  styles.inner = ''
+function changeCondition(event) {
+  let cancelArea = document.getElementsByClassName('body bg-gray-900 grid lg:grid-cols-3 items-center')
+  if (!isOpen) {
+    styles.outer = 'opacity-100 pointer-events-auto'
+    styles.inner = ''
+    isOpen = true
+  } else {
+    if (cancelArea.length !== 0) {
+      if (!cancelArea.item(0).contains(event.target)) {
+        styles.outer = 'opacity-0 pointer-events-none'
+        styles.inner = 'scale-75'
+        isOpen = false
+      }
+    }
+  }
 }
-
-function close() {
-  styles.outer = 'opacity-0 pointer-events-none'
-  styles.inner = 'scale-75'
-}
-
-
-onMounted(() => {
-  getCurrentInstance().appContext.config.globalProperties.$bus.on
-      //判断发送的指令，如果是open就开，close就关闭
-      ('loginpannelmanipulate', (command) => {
-        if (command === 'open') {
-          open()
-        } else {
-          close();
-        }
-
-      })
-})
-
-
+pubsub.subscribe('changeLoginCondition', changeCondition)
 </script>
 
 <script>

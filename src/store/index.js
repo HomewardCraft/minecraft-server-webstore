@@ -37,7 +37,7 @@ const mutations = {
     },
     addItemToCart(state, value) {
         this.state.cart.items.push(value)
-        console.log(state.cart)
+        // console.log(state.cart)
     },
     removeItemFromCart(state, value) {
         var index = {}
@@ -46,26 +46,23 @@ const mutations = {
                 this.state.cart.items.splice(index, 1)
             }
         }
-        console.log("(!) 现在购物车有以下物品")
-        console.log(this.state.cart.items)
-        console.log("=====================")
+        // console.log("(!) 现在购物车有以下物品")
+        // console.log(this.state.cart.items)
+        // console.log("=====================")
     },
     increaseItemByOne(state, value) {
         for (var index in this.state.cart.items) {
             if (this.state.cart.items[index].id == value.id) {
                 this.state.cart.items[index].quantity++
-                console.log("(+) 添加成功 当前有" + this.state.cart.items[index].quantity + "个")
+                // console.log("(+) 添加成功 当前有" + this.state.cart.items[index].quantity + "个")
             }
         }
     },
     decreaseItemByOne(state, value) {
         for (var index in this.state.cart.items) {
-
-
             if (this.state.cart.items[index].id == value.id) {
-
                 this.state.cart.items[index].quantity--
-                console.log("(-) 减少成功 当前有" + this.state.cart.items[index].quantity + "个")
+                // console.log("(-) 减少成功 当前有" + this.state.cart.items[index].quantity + "个")
             }
         }
     },
