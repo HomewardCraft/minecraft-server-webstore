@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.homeward.webstore.mapper.CartMapper">
-    <cache/>
+<!--    <cache/>-->
     <select id="getTotalPrice" resultType="Float" useCache="true">
         SELECT
         SUM((i.price / 100) * (i.onsale_percent / 100) * o.amount) price

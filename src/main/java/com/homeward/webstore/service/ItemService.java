@@ -9,4 +9,6 @@ public interface ItemService {
     List<ItemInfoBO> getItemList(String type);
 
     ItemWholeInfo getSpecificItem(Integer itemId);
+
+    String getRuleDetails(Integer ruleId);
 }

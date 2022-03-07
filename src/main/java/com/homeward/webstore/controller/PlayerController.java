@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.aop.annotations.JoinPointSymbol;
 import com.homeward.webstore.common.consts.SystemConst;
 import com.homeward.webstore.common.util.JwtUtils;
-import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.service.PlayerService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,8 @@ public class PlayerController {
 
     @GetMapping("/name/{id}")
     @JoinPointSymbol
-    public R getPlayerProfile(@PathVariable("id") String playerName, HttpServletResponse response) {
+    // public R getPlayerProfile(@PathVariable("id") String playerName, HttpServletResponse response) {
+    public Object getPlayerProfile(@PathVariable("id") String playerName, HttpServletResponse response) {
         JSONObject playerProfile = playerService.getPlayerProfile(playerName);
         String uuid = playerProfile.getString("id");
 
@@ -33,6 +33,7 @@ public class PlayerController {
             );
         }
 
-        return R.ok(playerProfile.toJavaObject(Object.class));
+        // return R.ok(playerProfile.toJavaObject(Object.class));
+        return playerProfile.toJavaObject(Object.class);
     }
 }

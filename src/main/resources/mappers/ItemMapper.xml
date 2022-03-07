@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.homeward.webstore.mapper.ItemMapper">
-    <cache/>
+<!--    <cache/>-->
     <resultMap id="itemInfoBO" type="ItemInfoBO" autoMapping="true">
         <collection property="itemBasicInfo" ofType="ItemBasicInfo">
             <id column="i1_id" property="id"/>
@@ -70,5 +70,11 @@
         <where>
             id = #{itemId}
         </where>
+    </select>
+
+    <select id="getRuleDetails" resultType="String" useCache="true">
+        SELECT description
+        FROM item_desc
+        WHERE id = #{ruleId}
     </select>
 </mapper>

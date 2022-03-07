@@ -23,4 +23,9 @@ public class ItemServiceImpl implements ItemService {
     public ItemWholeInfo getSpecificItem(Integer itemId) {
         return itemMapper.getSpecificItem(itemId);
     }
+
+    @Override
+    public String getRuleDetails(Integer ruleId) {
+        return itemMapper.getRuleDetails(ruleId);
+    }
 }

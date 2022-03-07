@@ -6,14 +6,14 @@ import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-//宝箱列表的Controller
+
 @Slf4j
 @RestController
 @CrossOrigin
-@ResponseBody
 public class ItemController {
     private final ItemService itemService;
 
@@ -42,5 +42,15 @@ public class ItemController {
     public R getSpecificItem(@PathVariable("itemId") Integer id) {
         ItemWholeInfo itemsLists = itemService.getSpecificItem(id);
         return R.ok(itemsLists);
+    }
+
+    /**
+     * 返回特定id的rule的html格式的信息
+     *
+     * @return ruleInfo
+     */
+    @GetMapping("/rule/{ruleName}")
+    public ModelAndView getTermDetails(@PathVariable("ruleName") String ruleName) {
+        return new ModelAndView(ruleName);
     }
 }

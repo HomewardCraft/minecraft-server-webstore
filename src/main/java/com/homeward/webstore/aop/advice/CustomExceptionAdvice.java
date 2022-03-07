@@ -1,5 +1,6 @@
 package com.homeward.webstore.aop.advice;
 
+import com.homeward.webstore.common.enums.AdministratorStatusEnum;
 import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.common.enums.StatusEnum;
 import com.homeward.webstore.common.util.JwtUtils;
@@ -98,6 +99,31 @@ public class CustomExceptionAdvice {
                 }
                 default -> {
                     log.error("unexpected exception");
+                    throwable.printStackTrace();
+                    return R.no(StatusEnum.UNEXPECTED_EXCEPTION);
+                }
+            }
+        }
+        return R.ok(res);
+    }
+
+
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.AdministratorControllerMethod()")
+    public R AdministratorException(ProceedingJoinPoint point) {
+        R res;
+        try {
+            res = (R) point.proceed();
+        } catch (Throwable throwable) {
+            String errorMessage = throwable.getMessage();
+            switch (errorMessage) {
+                case "administrator information error" -> {
+                    return R.no(AdministratorStatusEnum.ADMINISTRATOR_INFORMATION_ERROR);
+                }
+                case "login information error" -> {
+                    return R.no(AdministratorStatusEnum.LOGIN_INFORMATION_ERROR);
+                }
+                default -> {
+                    log.error(errorMessage);
                     throwable.printStackTrace();
                     return R.no(StatusEnum.UNEXPECTED_EXCEPTION);
                 }

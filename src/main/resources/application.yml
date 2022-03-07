@@ -6,17 +6,12 @@ spring:
   datasource:
     #高版本驱动使用
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/minecraft_webstore?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    url: jdbc:mysql://fantang.cc:3306/minecraft_webstore?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     #设定用户名和密码
-    username: root
-    password: 1f8a5?7./d69`~9SjmCsq3568
+    username: remote
+    password: sd;lawmd;ls1=1]ro90-2Sjm20050406
   thymeleaf:
     prefix: classpath:/static/
-  #视图层配置
-  mvc:
-    view:
-      prefix: classpath:/static/
-      suffix: .html
   #spring整合redis
   redis:
     host: 127.0.0.1

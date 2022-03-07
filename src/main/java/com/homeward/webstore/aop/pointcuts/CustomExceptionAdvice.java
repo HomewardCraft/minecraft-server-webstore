@@ -21,4 +21,10 @@ public class CustomExceptionAdvice {
             "com.homeward.webstore.java.bean.VO.R " +
             "com.homeward.webstore.controller.PlayerController.getPlayerProfile(..))")
     public void playerControllerMethod() {}
+
+    @Pointcut("execution(" +
+            "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
+            "com.homeward.webstore.java.bean.VO.R " +
+            "com.homeward.webstore.controller.AdministratorController.administratorLogin(..))")
+    public void AdministratorControllerMethod() {}
 }

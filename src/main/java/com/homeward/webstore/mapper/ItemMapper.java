@@ -14,4 +14,6 @@ public interface ItemMapper {
     List<ItemInfoBO> getItemList(String category);
 
     ItemWholeInfo getSpecificItem(Integer itemId);
+
+    String getRuleDetails(Integer ruleId);
 }
