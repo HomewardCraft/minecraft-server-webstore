@@ -330,3 +330,11 @@ input[type=number].appearance-none {
     -webkit-appearance: none;
     margin: 0;
 }
+
+.gateways .gateway[data-gateway=WeChat] {
+    background: #01c358;
+}
+
+.gateways .gateway input:checked~.dot {
+    opacity: 1;
+}

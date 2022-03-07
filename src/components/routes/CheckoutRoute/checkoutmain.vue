@@ -47,28 +47,19 @@
         </div>
       </div>
     </section>
-    <section id="method" class="lg:w-4/5"><h4 class="font-bold text-white text-xl mb-6">支付方式</h4>
-      <div class="gateways">
-        <label
-            class="gateway flex items-center relative border border-lighten py-4 px-6 mb-4 transition-opacity duration-150 ease-in-out cursor-pointer opacity-75 opacity-100"
-            data-gateway="PayPal">
-          <input type="radio" id="gateway-600346" name="gateway" class="absolute opacity-0"
-                 value="600346">
-          <span
-              class="dot block rounded-full border-2 border-lighten mr-4 opacity-25 transition-opacity duration-150 ease-in-out">
-          <span
-              class="inner block m-1 h-2 w-2 bg-white rounded-full">
 
+    <section id="method" class="lg:w-4/5">
+      <h4 class="font-bold text-white text-xl mb-6">支付方式</h4>
+      <div class="gateways">
+        <label class="gateway flex items-center relative border border-lighten py-4 px-6 mb-4 transition-opacity duration-150 ease-in-out cursor-pointer opacity-100" data-gateway="WeChat">
+          <input type="radio" id="gateway-wechat" name="gateway" class="absolute opacity-0">
+          <span class="dot block rounded-full border-2 border-lighten mr-4 opacity-25 transition-opacity duration-150 ease-in-out">
+            <span class="inner block m-1 h-2 w-2 bg-white rounded-full"/>
           </span>
-        </span>
           <span class="logo block">
-        <img
-            src="src/assets/images/payment/wechat.png"
-            alt="Wechat">
+            <img src="src/assets/images/payment/wechat.png" alt="WeChat">
           </span>
-          <!--          <b class="text-white">微信支付</b>-->
-          <span class="cards block">
-          </span>
+          <span class="cards block"/>
         </label>
       </div>
     </section>
@@ -161,11 +152,4 @@ export default {
   --tw-bg-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
-
-.gateways {
-  /*#01c358*/
-  background: #01c358;
-}
-
-
 </style>
