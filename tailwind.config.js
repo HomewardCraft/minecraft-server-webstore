@@ -23,6 +23,10 @@ module.exports = {
         'body': 'auto 1fr auto'
       },
       colors: {
+        github: {
+          darkgray: '#0e1117',
+          black: '#020409'
+        },
         btn: {
           text: '#97438f'
         },

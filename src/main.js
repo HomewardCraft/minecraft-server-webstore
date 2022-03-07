@@ -4,17 +4,14 @@ import App from './App.vue'
 import router from "./router/index.js";
 import vuex from './store/index.js'
 import mitt from "mitt";
-import axios from "axios";
-import VueCookies from 'vue3-cookies'
+import axios from "./commonPlugins/axios.js";
 
 import './index.css'
 
-axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 const app = createApp(App)
 
 app.use(router)
 app.use(vuex)
-app.use(VueCookies)
 
 app.config.globalProperties.$bus = new mitt()
 app.config.globalProperties.$http = axios
