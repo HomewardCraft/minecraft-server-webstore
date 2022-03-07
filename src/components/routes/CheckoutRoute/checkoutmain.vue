@@ -55,7 +55,7 @@
           <input type="radio" id="gateway-600346" name="gateway" class="absolute opacity-0"
                  value="600346">
           <span
-            class="dot block rounded-full border-2 border-lighten mr-4 opacity-25 transition-opacity duration-150 ease-in-out">
+              class="dot block rounded-full border-2 border-lighten mr-4 opacity-25 transition-opacity duration-150 ease-in-out">
           <span
               class="inner block m-1 h-2 w-2 bg-white rounded-full">
 
@@ -66,7 +66,7 @@
             src="src/assets/images/payment/wechat.png"
             alt="Wechat">
           </span>
-<!--          <b class="text-white">微信支付</b>-->
+          <!--          <b class="text-white">微信支付</b>-->
           <span class="cards block">
           </span>
         </label>
@@ -166,7 +166,6 @@ export default {
   /*#01c358*/
   background: #01c358;
 }
-
 
 
 </style>
