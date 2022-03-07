@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/ranks" class="category category-ranks">
+  <router-link to="/" class="category category-ranks">
     <rank-animation/>
     <div class="label capitalize">ranks</div>
   </router-link>

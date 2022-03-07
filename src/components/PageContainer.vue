@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <background-image/>
+    <!--<background-image/>-->
     <container-body/>
     <container-toasts/>
     <container-side-bar/>
@@ -15,6 +15,6 @@ import ContainerSideBar from "./container/ContainerSideBar.vue";
 
 export default {
   name: "PageContainer",
-  components: {ContainerSideBar, ContainerToasts, ContainerBody, BackgroundImage}
+  components: {ContainerToasts, ContainerBody, BackgroundImage, ContainerSideBar}
 }
 </script>

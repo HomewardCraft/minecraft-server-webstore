@@ -1,12 +1,9 @@
 <script>
 
-import PageHeader from "./components/PageHeader.vue";
 import PageContainer from "./components/PageContainer.vue";
-import PageFooter from "./components/PageFooter.vue";
-import BottomModal from "./components/BottomModal.vue";
 
 export default {
-  components: {BottomModal, PageFooter, PageContainer, PageHeader}
+  components: {PageContainer}
 }
 
 </script>
@@ -39,16 +36,6 @@ watch(() => store.state.cart, (newValue, oldValue) => {
     cookies.set("user_cart", store.state.cart, "7D")
 }, {deep: true})
 
-/**  启用，获取html对象实现过于复杂
- * onMounted(()=>{
- * console.log('---onMounted---')
- * document.addEventListener('click', (event) =>{
- * let className = event.target.parentNode
- * console.log(className)
- * })
- * })
- * */
-
 // 完善点击其他区域关闭侧边栏
 function closeSaber(event) {
   let cancelArea = document.getElementsByClassName('side-bar bg-gray-900 font-bold transition-all duration-500 ease-in-out z-40 outline-none active')
@@ -63,10 +50,7 @@ function closeSaber(event) {
 <template>
   <div class="h-full" @click="closeSaber">
     <div class="grid grid-rows-body h-full">
-      <page-header/>
       <page-container/>
-      <page-footer/>
     </div>
-    <BottomModal/>
   </div>
 </template>
