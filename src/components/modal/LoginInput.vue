@@ -20,11 +20,13 @@ export default {
 <script setup>
 import {getCurrentInstance, ref} from "vue";
 import pubsub from "pubsub-js";
+import {useRouter} from "vue-router";
 
 let username = ref('')
 
 let store = getCurrentInstance().appContext.config.globalProperties.$store
 let http = getCurrentInstance().appContext.config.globalProperties.$http
+let router = useRouter();
 
 async function login() {
   if (username.value.length === 0) {
@@ -36,10 +38,15 @@ async function login() {
   if (result === '' || result.isEmpty) {
     alert('cnm')
   } else {
+    debugger
+    if (result.name === store.state.user.ign) {
+      pubsub.publish('changeLoginCondition')
+      return false
+    }
+    store.commit('logOut', '')
     store.commit('login',result)
+    router.push('/')
     pubsub.publish('changeLoginCondition')
   }
 }
 </script>
-<style scoped>
-</style>
