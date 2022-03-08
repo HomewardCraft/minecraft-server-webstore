@@ -24,15 +24,13 @@ public class AdministratorController {
     @PostMapping("/admin/login")
     @JoinPointSymbol
     public R administratorLogin(@RequestParam Map<String, String> adminInfo, HttpServletResponse response) {
-        String username = administratorService.administratorLogin(adminInfo);
-
         if (!JwtUtils.verity()) {
+            String username = administratorService.administratorLogin(adminInfo);
             String administratorEncryptedUsername = JwtUtils.createToken(username);
             response.setHeader(SystemConst.AUTHORIZATION_NAME.getInformation(),
                     SystemConst.AUTHORIZATION_PREFIX.getInformation() + administratorEncryptedUsername
             );
         }
-
-        return R.ok(true);
+        return R.ok();
     }
 }

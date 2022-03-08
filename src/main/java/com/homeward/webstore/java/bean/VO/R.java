@@ -29,7 +29,7 @@ public class R implements Serializable {
     }
 
     public static R ok() {
-        return resultSet(StatusEnum.SUCCESS.getCode(), StatusEnum.SUCCESS.getMessage(), null);
+        return null;
     }
 
     public static R ok(String message) {
