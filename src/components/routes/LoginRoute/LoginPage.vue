@@ -1,15 +1,30 @@
 <template>
-  <div class="flex items-center justify-center">
-    <div class="login text-gray-500 bg-github-darkgray font-extrabold p-10 select-none">
-      <section>
-        <span>账号: </span>
-        <input v-model="admin.username">
-      </section>
-      <section class="mt-10">
-        <span>密码: </span>
-        <input type="password" v-model="admin.password">
-      </section>
-      <button class="mt-10" @click="login">登录</button>
+
+  <div
+      class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto">
+    <div class="transition-transform duration-200 ease-in-out transform">
+      <div class="title flex items-center justify-between mb-6">
+        <login-title></login-title>
+      </div>
+      <div class="body bg-gray-900 grid lg:grid-cols-3 items-center">
+        <LoginAvatar></LoginAvatar>
+        <div class="form p-10 lg:col-span-2">
+          <div>
+            <input autocomplete="off" pattern="^[A-Za-z0-9_]{1,16}$" spellcheck="false" maxlength="16"
+                   v-model="admin.username"
+                   class="bg-gray-800 text-white block py-2 px-4 w-full mb-5 border border-light text-center transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none"/>
+            <input autocomplete="off" pattern="^[A-Za-z0-9_]{1,16}$" spellcheck="false" maxlength="16"
+                   v-model="admin.password"
+                   class="bg-gray-800 text-white block py-2 px-4 w-full mb-5 border border-light text-center transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none"/>
+            <button type="submit" @click="login"
+                    class="bg-btn border border-lighten py-2 px-4 shadow-btn uppercase font-extrabold tracking-widest text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 text-center w-full focus:outline-none">
+              继续登录校验
+            </button>
+          </div>
+
+        </div>
+        <LoginHelp></LoginHelp>
+      </div>
     </div>
   </div>
 </template>
@@ -26,6 +41,9 @@ import {getCurrentInstance} from "vue";
 import {useCookies} from "vue3-cookies";
 import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
 import {useRouter} from "vue-router";
+import LoginTitle from "../../ComponentsLogin/LoginTitle.vue";
+import LoginAvatar from "../../ComponentsLogin/LoginAvatar.vue";
+import LoginHelp from "../../ComponentsLogin/LoginHelp.vue";
 
 const {cookies} = useCookies()
 const http = getCurrentInstance().appContext.config.globalProperties.$http
@@ -66,5 +84,15 @@ function login() {
 
 .login button {
   @apply opacity-90 bg-btn border border-lighten py-2 px-4 shadow-btn uppercase font-extrabold tracking-widest text-btn-text transition-all duration-150 ease-in-out hover:opacity-60 text-center w-full focus:outline-none
+}
+
+.modal {
+  padding: 40px 0 0;
+  overflow: auto;
+}
+
+.modal .body {
+  max-width: 700px;
+  margin-bottom: 40px;
 }
 </style>
