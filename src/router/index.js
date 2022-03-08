@@ -10,6 +10,6 @@ const router = createRouter({
 })
 
 
-// router.beforeEach(authenticateLogin)
+router.beforeEach(authenticateLogin)
 
 export default router
