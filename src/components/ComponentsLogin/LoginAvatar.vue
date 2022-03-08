@@ -1,6 +1,6 @@
 <template>
-  <div class="render bg-yellow-400 p-6 pb-0">
-    <img src="https://assets.originrealms.com/static/store/user.png" alt="default" class="max-w-full mx-auto"/>
+  <div class="render bg-yellow-400/80 p-6 pb-0">
+    <img src="https://ba1oretto.com/webstore/images/login/user.png" alt="default" class="max-w-full mx-auto"/>
   </div>
 </template>
 
