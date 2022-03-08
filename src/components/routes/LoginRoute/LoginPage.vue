@@ -11,10 +11,10 @@
         <div class="form p-10 lg:col-span-2">
           <div>
             <input autocomplete="off" pattern="^[A-Za-z0-9_]{1,16}$" spellcheck="false" maxlength="16"
-                   v-model="admin.username"
+                   v-model="admin.username" placeholder="Administration Account"
                    class="bg-gray-800 text-white block py-2 px-4 w-full mb-5 border border-light text-center transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none"/>
             <input autocomplete="off" pattern="^[A-Za-z0-9_]{1,16}$" spellcheck="false" maxlength="16"
-                   v-model="admin.password"
+                   v-model="admin.password" placeholder="Administration Password"
                    class="bg-gray-800 text-white block py-2 px-4 w-full mb-5 border border-light text-center transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none"/>
             <button type="submit" @click="login"
                     class="bg-btn border border-lighten py-2 px-4 shadow-btn uppercase font-extrabold tracking-widest text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 text-center w-full focus:outline-none">

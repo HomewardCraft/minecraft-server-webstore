@@ -6,7 +6,7 @@
     <img :src="`https://visage.surgeplay.com/bust/64/${id}`"
          alt="Ba1oretto's Minecraft Skin"/>
     <div class="ml-5">
-      <div class="label text-xs uppercase tracking-widest leading-none text-gray-500">Shopping As</div>
+      <div class="label text-xs uppercase tracking-widest leading-none text-gray-500">管理员身份</div>
       <div class="username">{{ userName }}</div>
     </div>
   </div>
@@ -16,7 +16,7 @@
       src="https://visage.surgeplay.com/bust/64/c06f89064c8a49119c29ea1dbd1aab82" alt="Guest Minecraft Skin">
     <div class="ml-5">
       <div class="label text-xs uppercase tracking-widest leading-none text-gray-500">Guest</div>
-      <div class="username">Login to Purchase</div>
+      <div class="username">登录账号进行编辑</div>
     </div>
   </div>
 </template>
