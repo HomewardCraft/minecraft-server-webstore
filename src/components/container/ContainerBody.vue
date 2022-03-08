@@ -3,6 +3,7 @@
     <div class="container mx-auto">
       <bread-crumb/>
       <router-view/>
+
     </div>
   </div>
 </template>
