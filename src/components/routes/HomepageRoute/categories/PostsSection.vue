@@ -1,7 +1,7 @@
 <template>
   <router-link to="/" class="category category-ranks">
     <post-animation/>
-    <div class="label capitalize">Posts</div>
+    <div class="label capitalize">文章</div>
   </router-link>
 </template>
 
@@ -22,6 +22,6 @@ export default {
 }
 
 .categories .category.category-ranks {
-  background: linear-gradient(50deg,#5e127d,#700b82);
+  background: linear-gradient(50deg, #12547d, #0b1f82);
 }
 </style>
