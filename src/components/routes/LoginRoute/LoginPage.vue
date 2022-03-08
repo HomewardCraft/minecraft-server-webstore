@@ -55,7 +55,9 @@ function login() {
       await cookies.set('authorization', result.headers.authorization, '7d')
       await cookies.set('username', admin.username, '9999d')
       setCurrentToastComponent('success', 'successfully landing system!')
+      let username = cookies.get('username');
       pubsub.publish('changeClickable', '')
+      pubsub.publish('setUsername', username)
       router.push('/')
     } else {
       setCurrentToastComponent('fail', 'an error occurred: ' + result.data.message)
