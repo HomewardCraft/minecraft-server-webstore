@@ -25,9 +25,11 @@ import {reactive} from "vue";
 import {getCurrentInstance} from "vue";
 import {useCookies} from "vue3-cookies";
 import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
+import {useRouter} from "vue-router";
 
 const {cookies} = useCookies()
 const http = getCurrentInstance().appContext.config.globalProperties.$http
+const router = useRouter()
 
 let admin = reactive({
   username: '',
@@ -40,9 +42,10 @@ function login() {
       username: admin.username,
       password: admin.password
     })
-    if (result.data.data) {
-      cookies.set('authorization', result.headers.authorization, '7d')
+    if (result.data.message === 'success') {
+      await cookies.set('authorization', result.headers.authorization, '7d')
       setCurrentToastComponent('success', 'successfully landing system!')
+      router.push('/')
     } else {
       setCurrentToastComponent('fail', 'an error occurred: ' + result.data.message)
     }
