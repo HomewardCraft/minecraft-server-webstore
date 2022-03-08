@@ -1,6 +1,6 @@
 <template>
   <div class="content-user">
-    <user-content></user-content>
+    <user-content/>
     <button-content/>
   </div>
 </template>

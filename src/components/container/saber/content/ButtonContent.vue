@@ -16,6 +16,7 @@ export default {
 <script setup>
 import {useCookies} from "vue3-cookies";
 import {useRouter} from "vue-router";
+import pubsub from "pubsub-js";
 
 const router = useRouter();
 const {cookies} = useCookies();
@@ -23,6 +24,7 @@ const {cookies} = useCookies();
 function logout() {
   cookies.remove('username', '/')
   cookies.remove('authorization')
+  pubsub.publish('changeSaberCondition')
   router.replace('login')
 }
 </script>
