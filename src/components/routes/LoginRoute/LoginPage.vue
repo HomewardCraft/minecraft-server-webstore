@@ -53,6 +53,7 @@ function login() {
     })
     if (result.data.message === 'success') {
       await cookies.set('authorization', result.headers.authorization, '7d')
+      await cookies.set('username', admin.username, '9999d')
       setCurrentToastComponent('success', 'successfully landing system!')
       pubsub.publish('changeClickable', '')
       router.push('/')
