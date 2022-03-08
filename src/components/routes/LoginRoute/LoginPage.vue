@@ -38,7 +38,8 @@ let admin = reactive({
 
 function login() {
   const resultSet = async () => {
-    const result = await http.post('local/admin/login', {
+    // const result = await http.post('local/admin/login', {
+    const result = await http.post('fantang/admin/login', {
       username: admin.username,
       password: admin.password
     })
