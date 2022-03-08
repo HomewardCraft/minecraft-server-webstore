@@ -15,8 +15,8 @@ export default {
 
 <style scoped>
 @screen lg {
-  .categories .category.category-extras {
-    grid-column: 2;
+  .category-extras {
+    grid-column: 1;
     grid-row: 2;
   }
 }

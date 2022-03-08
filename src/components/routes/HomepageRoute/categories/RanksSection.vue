@@ -15,9 +15,9 @@ export default {
 
 <style scoped>
 @screen lg {
-  .categories .category.category-ranks {
-    grid-column: 2;
-    grid-row: 1;
+  .category-ranks {
+    grid-column: 1;
+    grid-row: 3;
   }
 }
 

@@ -12,28 +12,28 @@ export default {
 </script>
 
 <style scoped>
-.categories .category.category-extras .render div {
+.categories .category.category-article .render div {
   background-size: 240px auto;
   background-position: bottom 0 left 10px;
 }
 
-.categories .category.category-extras .render .layer-regular {
+.categories .category.category-article .render .layer-regular {
   background-image: url(./src/assets/images/homepage/extras.png);
 }
 
 @screen lg {
-  .categories .category.category-extras .render div {
+  .categories .category.category-article .render div {
     background-size: 240px auto;
     background-position: bottom 10px left 30px;
   }
 }
 
-.categories .category.category-extras .render .layer-hover {
+.categories .category.category-article .render .layer-hover {
   background-image: url(./src/assets/images/homepage/extras_hover.png);
 }
 
 @screen lg {
-  .categories .category.category-extras .render div {
+  .categories .category.category-article .render div {
     background-size: 240px auto;
     background-position: bottom 10px left 30px;
   }

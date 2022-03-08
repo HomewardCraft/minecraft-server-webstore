@@ -11,7 +11,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .categories .category.category-crates .render div {
   background-size: 240px auto;
   background-position: bottom 0 left 10px;

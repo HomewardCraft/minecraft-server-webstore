@@ -58,7 +58,7 @@ function login() {
       let username = cookies.get('username');
       pubsub.publish('changeClickable', '')
       pubsub.publish('setUsername', username)
-      router.push('/')
+      router.replace('/')
     } else {
       setCurrentToastComponent('fail', 'an error occurred: ' + result.data.message)
     }

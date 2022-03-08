@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/" class="category category-ranks">
+  <router-link to="/" class="category category-article">
     <post-animation/>
     <div class="label capitalize">文章</div>
   </router-link>
@@ -15,13 +15,13 @@ export default {
 
 <style scoped>
 @screen lg {
-  .categories .category.category-ranks {
+  .category-article {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 4;
   }
 }
 
-.categories .category.category-ranks {
+.categories .category.category-article {
   background: linear-gradient(50deg, #12547d, #0b1f82);
 }
 </style>
