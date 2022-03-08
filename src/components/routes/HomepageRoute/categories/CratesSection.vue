@@ -17,7 +17,7 @@ export default {
 @screen lg {
   .categories .category.category-crates {
     grid-column: 1;
-    grid-row: 1/span 2;
+    grid-row: 1;
   }
 }
 

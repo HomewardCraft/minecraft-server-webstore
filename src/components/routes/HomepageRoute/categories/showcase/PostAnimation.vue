@@ -7,33 +7,33 @@
 
 <script>
 export default {
-  name: "CrateAnimation"
+  name: "PostAnimation"
 }
 </script>
 
 <style scoped>
-.categories .category.category-crates .render div {
+.categories .category.category-extras .render div {
   background-size: 240px auto;
   background-position: bottom 0 left 10px;
 }
 
-.categories .category.category-crates .render .layer-regular {
-  background-image: url(./src/assets/images/homepage/crates.png);
+.categories .category.category-extras .render .layer-regular {
+  background-image: url(./src/assets/images/homepage/extras.png);
 }
 
 @screen lg {
-  .categories .category.category-crates .render div {
+  .categories .category.category-extras .render div {
     background-size: 240px auto;
     background-position: bottom 10px left 30px;
   }
 }
 
-.categories .category.category-crates .render .layer-hover {
-  background-image: url(./src/assets/images/homepage/crates_hover.png);
+.categories .category.category-extras .render .layer-hover {
+  background-image: url(./src/assets/images/homepage/extras_hover.png);
 }
 
 @screen lg {
-  .categories .category.category-crates .render div {
+  .categories .category.category-extras .render div {
     background-size: 240px auto;
     background-position: bottom 10px left 30px;
   }
