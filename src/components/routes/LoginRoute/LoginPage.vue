@@ -34,6 +34,7 @@ import {useRouter} from "vue-router";
 import LoginTitle from "../../ComponentsLogin/LoginTitle.vue";
 import LoginAvatar from "../../ComponentsLogin/LoginAvatar.vue";
 import LoginHelp from "../../ComponentsLogin/LoginHelp.vue";
+import pubsub from "pubsub-js";
 
 const {cookies} = useCookies()
 const http = getCurrentInstance().appContext.config.globalProperties.$http
@@ -53,6 +54,7 @@ function login() {
     if (result.data.message === 'success') {
       await cookies.set('authorization', result.headers.authorization, '7d')
       setCurrentToastComponent('success', 'successfully landing system!')
+      pubsub.publish('changeClickable', '')
       router.push('/')
     } else {
       setCurrentToastComponent('fail', 'an error occurred: ' + result.data.message)
@@ -60,6 +62,11 @@ function login() {
   }
   resultSet()
 }
+
+function setClickable() {
+  pubsub.publish('changeClickable', 'cursor-pointer pointer-events-none')
+}
+setClickable()
 </script>
 
 <style>

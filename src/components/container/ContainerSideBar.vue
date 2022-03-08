@@ -46,6 +46,11 @@ function changeCondition() {
   }
 }
 pubsub.subscribe('changeSaberCondition', changeCondition)
+
+function clickable(_, value) {
+  barCondition.active = value
+}
+pubsub.subscribe('changeClickable', clickable)
 </script>
 
 <style scoped>
