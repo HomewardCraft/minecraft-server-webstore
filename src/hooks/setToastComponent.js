@@ -1,9 +1,9 @@
 import pubsub from "pubsub-js";
 
-export default function setCurrentToastComponent(currentComponentName, itemMeta) {
-    let currentComponent = {
-        itemMeta: itemMeta,
-        componentName: currentComponentName
+export default function setCurrentToastComponent(currentSlotName, msg) {
+    let toastInformation = {
+        currentSlotName: currentSlotName,
+        msg: msg
     }
-    pubsub.publish('setCurrentToastComponent', currentComponent)
+    pubsub.publish('setCurrentToastComponent', toastInformation)
 }

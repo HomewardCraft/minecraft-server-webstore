@@ -24,6 +24,7 @@ export default {
 import {reactive} from "vue";
 import {getCurrentInstance} from "vue";
 import {useCookies} from "vue3-cookies";
+import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
 
 const {cookies} = useCookies()
 const http = getCurrentInstance().appContext.config.globalProperties.$http
@@ -39,11 +40,11 @@ function login() {
       username: admin.username,
       password: admin.password
     })
-    console.log(result)
     if (result.data.data) {
       cookies.set('authorization', result.headers.authorization, '7d')
+      setCurrentToastComponent('success', 'successfully landing system!')
     } else {
-      alert(result.data.message)
+      setCurrentToastComponent('fail', 'an error occurred: ' + result.data.message)
     }
   }
   resultSet()
