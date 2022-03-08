@@ -44,7 +44,7 @@ function setCurrentComponent(_, data) {
     setTimeout(() => {
       slot.currentSlotName = ''
     }, 3000);
-  }, 300)
+  }, 100)
 }
 pubsub.subscribe('setCurrentToastComponent', setCurrentComponent)
 </script>
