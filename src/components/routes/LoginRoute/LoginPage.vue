@@ -1,7 +1,7 @@
 <template>
   <div class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto select-none">
     <div class="transition-transform duration-200 ease-in-out transform">
-      <div class="title flex items-center justify-between mb-6 -mb-0.5">
+      <div class="title flex items-center justify-between mb-6">
         <login-title/>
       </div>
       <div class="body bg-gray-900 grid lg:grid-cols-3 items-center">
@@ -88,6 +88,6 @@ setClickable()
 }
 
 .modal .body {
-  @apply w-900 font-extrabold text-2xl
+  max-width: 700px;
 }
 </style>
