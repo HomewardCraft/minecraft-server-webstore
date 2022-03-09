@@ -1,15 +1,8 @@
 <template>
   <div class="codeShare bg-gray-800">
-    <div>
-      <!-- 只读模式 :previewOnly="true" -->
-      <!-- :sanitize="sanitize" 使用会导致代码不高亮 -->
-      <MdEditor class = "bg-gray-800"
-          toolbarsExclude="['link', 'mermaid', 'katex', 'github']"
-          v-model="text"
-          @onSave="codeSave"
-      >
-      </MdEditor>
-    </div>
+    <!-- 只读模式 :previewOnly="true" -->
+    <!-- :sanitize="sanitize" 使用会导致代码不高亮 -->
+    <MdEditor class = "bg-gray-800 border-lighten" toolbarsExclude="['link', 'mermaid', 'katex', 'github']" v-model="text" @onSave="codeSave"/>
   </div>
 </template>
 
@@ -70,11 +63,19 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-
-
-/deep/ .md {
-  height: 600px !important;
+<style>
+.md-toolbar-wrapper .md-toolbar {
+  @apply border-b-lighten
 }
 
+.codeShare .md {
+  height: 600px;
+  width: 850px;
+}
+
+.md-content .md-input-wrapper textarea{
+  overflow-y: auto;
+  border-right: solid;
+  @apply border-r-lighten border-r
+}
 </style>
