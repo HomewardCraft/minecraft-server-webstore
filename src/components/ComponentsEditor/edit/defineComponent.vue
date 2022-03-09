@@ -1,9 +1,9 @@
 <template>
-  <div class="codeShare">
+  <div class="codeShare bg-gray-800">
     <div>
       <!-- 只读模式 :previewOnly="true" -->
       <!-- :sanitize="sanitize" 使用会导致代码不高亮 -->
-      <MdEditor
+      <MdEditor class = "bg-gray-800"
           toolbarsExclude="['link', 'mermaid', 'katex', 'github']"
           v-model="text"
           @onSave="codeSave"
@@ -66,7 +66,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+
 /deep/ .md {
   height: 600px !important;
 }
+
 </style>
