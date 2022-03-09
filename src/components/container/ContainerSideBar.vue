@@ -6,8 +6,8 @@
       </svg>
       <span class="ml-3 lg:hidden">Close Sidebar</span>
     </div>
-    <div class="popout" @click="changeCondition">
-      <sidebar-popout/>
+    <div class="popout">
+      <sidebar-popout :changeCondition="changeCondition"/>
     </div>
     <div class="main-content pt-12 lg:pt-0">
       <main-content/>

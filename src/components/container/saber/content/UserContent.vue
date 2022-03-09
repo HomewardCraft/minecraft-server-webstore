@@ -15,13 +15,19 @@ export default {
 </script>
 
 <script setup>
-import {ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 import pubsub from "pubsub-js";
+import {useCookies} from "vue3-cookies";
+
+const {cookies} = useCookies();
 
 let username = ref('')
+let name = cookies.get('username');
 
 function setUsername(_, name) {
   username.value = name
 }
+setUsername('', name)
+
 pubsub.subscribe('setUsername', setUsername)
 </script>
