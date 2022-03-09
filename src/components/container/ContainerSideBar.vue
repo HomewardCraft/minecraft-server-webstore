@@ -1,13 +1,13 @@
 <template>
   <div :class="barCondition.active" class="side-bar bg-gray-900 font-bold transition-all duration-500 ease-in-out z-40 outline-none">
-    <div :class="barCondition.opacity" @click="changeCondition" class="side-bar-close absolute left-0 right-0 lg:right-auto lg:-ml-12 bg-red-600 border border-lighten lg:w-12 h-12 box-content flex items-center justify-center cursor-pointer transition-opacity duration-300 ease-in-out">
+    <div :class="barCondition.opacity" @click="changeSidebarCondition" class="side-bar-close absolute left-0 right-0 lg:right-auto lg:-ml-12 bg-red-600 border border-lighten lg:w-12 h-12 box-content flex items-center justify-center cursor-pointer transition-opacity duration-300 ease-in-out">
       <svg viewBox="0 0 36 36" class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M36.0002 5.00012L30.7462 -0.253906L17.8731 12.6191L5.00012 -0.253866L-0.253906 5.00016L12.6191 17.8732L-0.253784 30.7461L5.00024 36.0001L17.8731 23.1272L30.7461 36.0001L36.0001 30.7461L23.1272 17.8732L36.0002 5.00012Z"/>
       </svg>
       <span class="ml-3 lg:hidden">Close Sidebar</span>
     </div>
     <div class="popout">
-      <sidebar-popout :changeCondition="changeCondition" :openEditorPanel="openEditorPanel"/>
+      <sidebar-popout :changeSidebarCondition="changeSidebarCondition" :changeEditorPanelCondition="changeEditorPanelCondition"/>
     </div>
     <div class="main-content pt-12 lg:pt-0">
       <main-content/>
@@ -28,26 +28,29 @@ export default {
 import {reactive} from "vue";
 import pubsub from "pubsub-js"
 
+
 let barCondition = reactive({
   opacity: 'opacity-0',
   active: ''
 })
 let isOpen = false
-function changeCondition() {
+
+
+function changeSidebarCondition() {
   if (!isOpen) {
-    barCondition.opacity = 'opacity-1'
-    barCondition.active = 'active'
     isOpen = true
-    pubsub.publish('openSaber')
+    barCondition.opacity = 'opacity-100'
+    barCondition.active = 'active'
   } else {
+    isOpen = false
     barCondition.opacity = 'opacity-0'
     barCondition.active = ''
-    isOpen = false
   }
 }
-pubsub.subscribe('changeSaberCondition', changeCondition)
+pubsub.subscribe('changeSaberCondition', changeSidebarCondition)
 
-function openEditorPanel() {
+
+function changeEditorPanelCondition() {
   if (!isOpen) {
     barCondition.active = 'editor pointer-events-none'
     pubsub.publish('openEditorPanel')
@@ -57,8 +60,9 @@ function openEditorPanel() {
     isOpen = false
   }
 }
+pubsub.subscribe('closeEditorPanel', changeEditorPanelCondition)
 
-
+// 改变可点击的状态
 function clickable(_, value) {
   barCondition.active = value
 }
