@@ -1,13 +1,12 @@
 <template>
-  <div v-if="true"
-      class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out opacity-100 pointer-events-auto">
+  <div :class="currentStyle" class="modal fixed bg-black-80 inset-0 grid items-center justify-center transition-opacity duration-300 ease-in-out">
     <div class="transition-transform duration-200 ease-in-out transform">
       <div class="title flex items-center justify-between mb-6">
         <editor-title/>
       </div>
       <div class="body bg-gray-900 grid lg:grid-cols-checkout gap-6 checkout p-4">
-        <editormain/>
-        <editorvarious/>
+        <editor-main/>
+        <editor-various/>
         <editor-describe/>
         <editor-save/>
       </div>
@@ -16,20 +15,38 @@
 </template>
 
 <script setup>
-import EditorTitle from "../components/ComponentsEditor/EditorTitle.vue";
-import Editormain from "../components/ComponentsEditor/EditorMain.vue";
-import Editorvarious from "../components/ComponentsEditor/EditorVarious.vue";
-import EditorDescribe from "../components/ComponentsEditor/EditorDescribe.vue";
-import EditorSave from "../components/ComponentsEditor/EditorSave.vue";
+import {ref} from "vue";
+import pubsub from "pubsub-js";
+
+let currentStyle = ref('opacity-0 pointer-events-none')
+let isOpen = false
+
+function changeCondition() {
+  if (!isOpen) {
+    currentStyle.value = 'opacity-100 pointer-events-auto'
+    isOpen = true
+  } else {
+    currentStyle.value = ref('opacity-0 pointer-events-none')
+    isOpen = false
+  }
+}
+pubsub.subscribe('openEditorPanel', changeCondition)
 </script>
 
 <script>
+import EditorTitle from "../components/ComponentsEditor/EditorTitle.vue";
+import EditorMain from "../components/ComponentsEditor/EditorMain.vue";
+import EditorVarious from "../components/ComponentsEditor/EditorVarious.vue";
+import EditorDescribe from "../components/ComponentsEditor/EditorDescribe.vue";
+import EditorSave from "../components/ComponentsEditor/EditorSave.vue";
+
 export default {
-  name: "EditorPannel"
+  name: "EditorPanel",
+  components: {EditorTitle,EditorMain,EditorVarious,EditorDescribe,EditorSave}
 }
 </script>
 
-<style scoped>
+<style>
 .login section {
   @apply text-4xl
 }

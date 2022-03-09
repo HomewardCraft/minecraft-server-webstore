@@ -2,13 +2,8 @@
   <div class="main">
     <section id="accounts" class="mb-10">
       <div class="text flex-1 ml-8 mt-4">
-
-
         <div class="top relative flex items-center justify-between mb-2">
           <div class="title text-white font-bold">
-            物品类型
-            <!-- TODO 购物车一览 -->
-
           </div>
           <div class="currency-checkout">
             <button
@@ -44,9 +39,6 @@
         <h3 class="font-bold text-white">附带指令
           <input maxlength="256" placeholder="例如 /minecraft give @p items" class="bg-gray-800 ml-4 text-white py-2 px-4 w-64 border border-light transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none"/>
         </h3>
-
-
-
       </div>
     </section>
 
@@ -103,7 +95,7 @@ function switchVisible() {
 
 <script>
 export default {
-  name: "editorvarious"
+  name: "EditorVarious"
 }
 </script>
 

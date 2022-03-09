@@ -7,7 +7,7 @@
       <span class="ml-3 lg:hidden">Close Sidebar</span>
     </div>
     <div class="popout">
-      <sidebar-popout :changeCondition="changeCondition"/>
+      <sidebar-popout :changeCondition="changeCondition" :openEditorPanel="openEditorPanel"/>
     </div>
     <div class="main-content pt-12 lg:pt-0">
       <main-content/>
@@ -46,6 +46,18 @@ function changeCondition() {
   }
 }
 pubsub.subscribe('changeSaberCondition', changeCondition)
+
+function openEditorPanel() {
+  if (!isOpen) {
+    barCondition.active = 'editor pointer-events-none'
+    pubsub.publish('openEditorPanel')
+    isOpen = true
+  } else {
+    barCondition.active = ''
+    isOpen = false
+  }
+}
+
 
 function clickable(_, value) {
   barCondition.active = value

@@ -18,4 +18,5 @@ export default {
 
 <script setup>
 
+import EditorPanel from "../../pages/EditorPanel.vue";
 </script>
