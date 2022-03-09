@@ -1,6 +1,5 @@
 <template>
-  <div class="lg:col-span-3 p-8 bg-gray-800">
-    <div class="font-bold text-xl mb-4 text-gray-50/80">如何知道我的用户名?</div>
+  <div class="lg:col-span-3 w-full p-8 bg-gray-800">
     <editorrender/>
   </div>
 </template>

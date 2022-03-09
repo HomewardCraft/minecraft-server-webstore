@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, toRefs, onMounted} from 'vue'
+import {defineComponent, reactive, toRefs, onMounted, onUpdated} from 'vue'
 
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
@@ -51,9 +51,14 @@ export default defineComponent({
 
 
     onMounted(() => {
+
       if (localStorage.getItem('codeSave')) {
         data.text = localStorage.getItem('codeSave') || ''
       }
+    })
+
+    onUpdated(() => {
+      console.log(data.text)
     })
 
     return {
