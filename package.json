@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.26.0",
     "clipboard": "^2.0.10",
+    "md-editor-v3": "^1.11.0",
     "mitt": "^3.0.0",
     "pubsub-js": "^1.9.4",
     "vue": "^3.2.25",
