@@ -242,14 +242,14 @@
 
 /* 动画玩明白了 */
 .slide-leave-active {
-    animation: test ease-in-out 0.7s reverse;
+    animation: imba ease-in-out 0.7s reverse;
 }
 
 .slide-enter-active {
-    animation: test ease-in-out 0.7s;
+    animation: imba ease-in-out 0.7s;
 }
 
-@keyframes test {
+@keyframes imba {
     from {
         transform: translateY(-30px);
         opacity: 0;

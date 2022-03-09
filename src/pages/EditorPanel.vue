@@ -16,6 +16,7 @@
 <script setup>
 import {ref} from "vue";
 import pubsub from "pubsub-js";
+import axios from "axios";
 
 let currentStyle = ref('opacity-0 pointer-events-none')
 let isOpen = false
@@ -32,17 +33,25 @@ function changeEditorPanelCondition() {
   }
 }
 pubsub.subscribe('openEditorPanel', changeEditorPanelCondition)
+
+
+async function commit(value) {
+  await axios.post('', {
+        category: information.category,
+        name: information.name
+  })
+}
+pubsub.subscribe('commit', commit)
 </script>
 
 <script>
 import EditorTitle from "../components/ComponentsEditor/EditorTitle.vue";
 import EditorMain from "../components/ComponentsEditor/EditorMain.vue";
-import EditorVarious from "../components/ComponentsEditor/EditorVarious.vue";
 import EditorDescribe from "../components/ComponentsEditor/EditorDescribe.vue";
 import EditorButton from "../components/ComponentsEditor/EditorButton.vue";
 
 export default {
   name: "EditorPanel",
-  components: {EditorTitle,EditorMain,EditorVarious,EditorDescribe,EditorButton}
+  components: {EditorTitle,EditorMain,EditorDescribe,EditorButton}
 }
 </script>
