@@ -15,7 +15,7 @@ export default {
 </script>
 
 <script setup>
-import {onBeforeMount, ref} from "vue";
+import {ref} from "vue";
 import pubsub from "pubsub-js";
 import {useCookies} from "vue3-cookies";
 
