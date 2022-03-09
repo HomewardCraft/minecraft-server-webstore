@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:col-span-3 w-full p-8 bg-gray-800">
+  <div class="w-full p-8 bg-gray-800">
     <editorrender/>
   </div>
 </template>
