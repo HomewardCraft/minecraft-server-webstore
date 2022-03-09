@@ -73,9 +73,13 @@ export default defineComponent({
   width: 850px;
 }
 
-.md-content .md-input-wrapper textarea{
+.md-content .md-input-wrapper textarea {
   overflow-y: auto;
   border-right: solid;
   @apply border-r-lighten border-r
+}
+
+.md-content .md-input-wrapper textarea.textarea-only {
+  border: none;
 }
 </style>
