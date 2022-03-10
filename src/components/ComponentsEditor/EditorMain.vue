@@ -14,7 +14,7 @@
 
     <div class="item-info grid gap-3">
       <button @click="changeCategoryShowCaseCondition" class="item-category">
-        <span>{{categoryShowCase.category}}</span>
+        <span>{{information.category}}</span>
       </button>
 
       <transition name="item">
@@ -59,11 +59,10 @@
 
 <script setup>
 import {reactive} from "vue";
+import commit from "../../hooks/commit.js";
 import pubsub from "pubsub-js";
 
-
 let categoryShowCase = reactive({
-  category: '类型',
   isOpen: false
 })
 
@@ -73,7 +72,7 @@ let categories = reactive({
 })
 
 let discountShowCase = reactive({
-  isOpen: true
+  isOpen: false
 })
 
 function changeCategoryShowCaseCondition() {
@@ -82,7 +81,7 @@ function changeCategoryShowCaseCondition() {
 }
 function changeCategoryShowCase(type) {
   categoryShowCase.isOpen = false
-  categoryShowCase.category = type
+  information.category = type
   setTimeout(() => {
     if (type === 'Crate') {
       categories.crate = false
@@ -100,20 +99,17 @@ function changeDiscountShowCaseCondition() {
 }
 
 let information = reactive({
-  category: categoryShowCase.category,
+  category: '类型',
   name: null,
   price: null,
   discount: null,
   command: null
 })
 
-function commit() {
-  let cancelCommit = information.category === '类型' || information.name === null || information.price === null || information.discount === null || information.command === null || !Number.isInteger(information.price) || !Number.isInteger(information.discount) || !information.price.length <= 7 || !information.discount.length <= 2 || !information.price >= 100 || !information.discount > 0;
-  if (cancelCommit) {
-    return false
-  }
-  pubsub.publish('commit', information)
+function execCommit() {
+  commit(information)
 }
+pubsub.subscribe('commit', execCommit)
 </script>
 
 <script>

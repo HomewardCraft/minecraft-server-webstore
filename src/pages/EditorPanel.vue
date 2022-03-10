@@ -7,7 +7,7 @@
       <div id="editorPanel" class="body bg-gray-900 grid gap-6 p-4">
         <editor-main/>
         <editor-describe/>
-        <editor-button :changeEditorPanelCondition="changeEditorPanelCondition"/>
+        <editor-button :changeEditorPanelCondition="changeEditorPanelCondition" :commit="commit"/>
       </div>
     </div>
   </div>
@@ -16,7 +16,6 @@
 <script setup>
 import {ref} from "vue";
 import pubsub from "pubsub-js";
-import axios from "axios";
 
 let currentStyle = ref('opacity-0 pointer-events-none')
 let isOpen = false
@@ -35,13 +34,9 @@ function changeEditorPanelCondition() {
 pubsub.subscribe('openEditorPanel', changeEditorPanelCondition)
 
 
-async function commit(value) {
-  await axios.post('', {
-        category: information.category,
-        name: information.name
-  })
+async function commit() {
+  pubsub.publish('commit')
 }
-pubsub.subscribe('commit', commit)
 </script>
 
 <script>
