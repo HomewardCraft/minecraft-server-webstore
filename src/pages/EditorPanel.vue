@@ -29,6 +29,7 @@ function changeEditorPanelCondition() {
     isOpen = false
     currentStyle.value = 'opacity-0 pointer-events-none'
     pubsub.publish('closeEditorPanel')
+    pubsub.publish('saveLocalCache')
   }
 }
 pubsub.subscribe('openEditorPanel', changeEditorPanelCondition)

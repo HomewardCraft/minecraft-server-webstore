@@ -8,18 +8,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^0.26.0",
+    "@braintree/sanitize-url": "^6.0.0",
+    "axios": "^0.26.1",
     "clipboard": "^2.0.10",
+    "katex": "^0.15.2",
     "md-editor-v3": "^1.11.0",
+    "mermaid": "^8.14.0",
     "mitt": "^3.0.0",
     "pubsub-js": "^1.9.4",
     "sanitize-html": "^2.7.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.13",
+    "vue-router": "^4.0.14",
     "vue3-cookies": "^1.0.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/mermaid": "^8.2.8",
+    "@types/pubsub-js": "^1.8.3",
     "@types/sanitize-html": "^2.6.2",
     "@vitejs/plugin-vue": "^2.2.0",
     "autoprefixer": "^10.4.2",

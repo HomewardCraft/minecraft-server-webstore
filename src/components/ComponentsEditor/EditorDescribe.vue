@@ -1,76 +1,53 @@
 <template>
-  <div class="codeShare bg-gray-800 w-full p-8">
-    <!-- 只读模式 :previewOnly="true" -->
-    <!-- :sanitize="sanitize" 使用会导致代码不高亮 -->
-    <MdEditor class = "bg-gray-800 border-lighten" :toolbarsExclude="['link', 'mermaid', 'katex', 'github']" v-model="text" @onSave="codeSave"/>
+  <div class="bg-gray-800 w-min p-8">
+    <MdEditor :showCodeRowNumber="true" theme="dark" class="bg-gray-800 border-lighten h-700"
+              :toolbarsExclude="['link', 'mermaid', 'github', 'revoke', 'next']" v-model="data.text"
+              mermaidJs="node_modules/mermaid/dist/mermaid.min.js" katexJs="node_modules/katex/dist/katex.min.js" :sanitize="sanitize"
+              :onChange="execCache" @onSave="execSave"/>
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent, reactive, toRefs, onMounted, onUpdated} from 'vue'
-
+<script setup lang="ts">
+import {reactive} from 'vue'
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
-// 使用 sanitizeHtml 处理不安全的 html
 import sanitizeHtml from 'sanitize-html';
+import pubsub from "pubsub-js";
 
-interface shareData {
-  text: string,
-  load: number,
-  isDis: boolean
+const sanitize = (html) => sanitizeHtml(html)
+
+let data = reactive({
+  text: '',
+  cache: ''
+})
+
+let cacheTimer
+
+const execSave = (v: string): void => {
+  localStorage.setItem('textSave', v)
+}
+const execCache = (v: string): void => {
+  clearTimeout(cacheTimer)
+  cacheTimer = setTimeout(() => {
+    data.cache = v
+  }, 500)
 }
 
-export default defineComponent({
-  name: "EditorDescribe",
-  components: {MdEditor},
-  setup() {
-    const data = <shareData>reactive({
-      text: '',
-      load: 0,
-      isDis: false
-    })
+function saveLocalCache() {
+  localStorage.setItem('textSave', data.cache)
+}
+pubsub.subscribe('saveLocalCache', saveLocalCache)
+</script>
 
-    const codeSave = (v: string): void => {
-      localStorage.setItem('codeSave', v)
-    }
-
-    const sanitize = (html: string): string => {
-      console.log(sanitizeHtml(html))
-      return sanitizeHtml(html)
-    }
-
-    const href = window.location.href;
-    const url = href.substring(0, href.length - 10);
-
-
-    onMounted(() => {
-
-      if (localStorage.getItem('codeSave')) {
-        data.text = localStorage.getItem('codeSave') || ''
-      }
-    })
-
-    onUpdated(() => {
-      console.log(data.text)
-    })
-
-    return {
-      ...toRefs(data),
-      codeSave,
-      sanitize,
-    }
-  },
-});
+<script lang="ts">
+export default {
+  name: "EditorDescribe"
+}
 </script>
 
 <style>
 .md-toolbar-wrapper .md-toolbar {
   @apply border-b-lighten
-}
-
-.codeShare .md {
-  height: 600px;
-  width: 850px;
 }
 
 .md-content .md-input-wrapper textarea {
