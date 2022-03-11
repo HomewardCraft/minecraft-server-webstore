@@ -1,7 +1,16 @@
 import setCurrentToastComponent from "./setToastComponent.js";
 import axios from "../commonPlugins/axios.js";
+import pubsub from "pubsub-js";
+import {getCurrentInstance} from "vue";
 
-export default async function commit(information) {
+async function commit(information) {
+    // function cnm(value) {
+    //     description = value
+    //     if (description.toString().length <= 50) {
+    //         setCurrentToastComponent('fail', '描述不能过短, 当前长度: ' + description.toString().length)
+    //     }
+    // }
+
     let hasCategory = information.category !== '类型'
     if (!hasCategory) {
         setCurrentToastComponent('fail', '请选择类型')
@@ -27,7 +36,6 @@ export default async function commit(information) {
     }
 
     let priceIsInteger = Number.isInteger(information.price)
-    console.log(information)
     if (!priceIsInteger) {
         setCurrentToastComponent('fail', '请输入有效价格整数')
         return false
@@ -78,3 +86,5 @@ export default async function commit(information) {
 
     console.log(result);
 }
+
+export default commit

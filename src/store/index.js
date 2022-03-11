@@ -6,88 +6,18 @@ const {cookies} = useCookies();
 let ctx = getCurrentInstance()
 
 const actions = {
-    //响应组件中加的动作
     login(context, value) {
         context.commit('login', value)
-    },
-    logOut(context, value) {
-        context.commit('logOut', value)
-    },
-    addItemToCart(context, value) {
-        context.commit('addItemToCart', value)
-    },
-    removeItemFromCart(context, value) {
-        context.commit('removeItemFromCart', value)
-    },
-    increaseItemByOne(context, value) {
-        context.commit('increaseItemByOne', value)
-    },
-    decreaseItemByOne(context, value) {
-        context.commit('decreaseItemByOne', value)
-    },
-    removeThisItem(context, value) {
-        context.commit('removeThisItem', value)
     }
 }
 
 const mutations = {
-    //执行加
     login(state, value) {
         state.user.logged_in = true
         state.user.ign = value.name
         state.user.uuid = value.id
         cookies.set("user_session", state.user, "7D")
-    },
-    logOut(state, value) {
-        state.user.logged_in = false
-        state.user.ign = " "
-        state.user.uuid = " "
-        state.cart.items = []
-        state.cart.total = 0
-        state.fields.email = false
-        state.fields.email_add = ''
-        cookies.remove("user_session")
-        cookies.remove("user_cart")
-    },
-    addItemToCart(state, value) {
-        this.state.cart.items.push(value)
-        // console.log(state.cart)
-    },
-    removeItemFromCart(state, value) {
-        var index = {}
-        for (index in this.state.cart.items) {
-            if (this.state.cart.items[index].id == value.id) {
-                this.state.cart.items.splice(index, 1)
-            }
-        }
-        // console.log("(!) 现在购物车有以下物品")
-        // console.log(this.state.cart.items)
-        // console.log("=====================")
-    },
-    increaseItemByOne(state, value) {
-        for (var index in this.state.cart.items) {
-            if (this.state.cart.items[index].id == value.id) {
-                this.state.cart.items[index].quantity++
-                // console.log("(+) 添加成功 当前有" + this.state.cart.items[index].quantity + "个")
-            }
-        }
-    },
-    decreaseItemByOne(state, value) {
-        for (var index in this.state.cart.items) {
-            if (this.state.cart.items[index].id == value.id) {
-                this.state.cart.items[index].quantity--
-                // console.log("(-) 减少成功 当前有" + this.state.cart.items[index].quantity + "个")
-            }
-        }
-    },
-    removeThisItem(state, value) {
-        for (var index in this.state.cart.items) {
-            if (this.state.cart.items[index].id == value.id) {
-                this.state.cart.items.splice(index, 1)
-            }
-        }
     }
-
 }
 
 const state = {
@@ -96,14 +26,6 @@ const state = {
         "logged_in": false,
         "ign": " ",
         "uuid": " "
-    },
-    "cart": {
-        "items": [],
-        "total": 0
-    },
-    "fields": {
-        "email": false,
-        "email_add": ''
     }
 }
 

@@ -47,13 +47,4 @@ let hover = {
   bottom: 0;
   background: center/cover;
 }
-
-.crate-row .image .regular, .crate-row .image .hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: center/cover;
-}
 </style>

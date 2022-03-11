@@ -4,9 +4,8 @@
       <div class="title mb-6">
         <editor-title/>
       </div>
-      <div id="editorPanel" class="body bg-gray-900 grid gap-6 p-4">
+      <div id="editorPanel" class="body bg-gray-900 grid grid-cols-1 gap-6 p-4">
         <editor-main/>
-        <editor-describe/>
         <editor-button :changeEditorPanelCondition="changeEditorPanelCondition" :commit="commit"/>
       </div>
     </div>
