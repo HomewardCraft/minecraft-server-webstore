@@ -1,90 +1,146 @@
 import setCurrentToastComponent from "./setToastComponent.js";
 import axios from "../commonPlugins/axios.js";
-import pubsub from "pubsub-js";
-import {getCurrentInstance} from "vue";
+
+function discountCheck(target) {
+    if (!Number.isInteger(target)) {
+        setCurrentToastComponent('fail', '请输入有效折扣整数')
+        return false
+    }
+    if (target.toString().length > 2) {
+        setCurrentToastComponent('fail', '请输入有效折扣长度, 当前长度: ' + target.toString().length)
+        return false
+    }
+    if (target <= 0) {
+        setCurrentToastComponent('fail', '请输入有效折扣数量, 当前折扣: ' + target + '%')
+        return false
+    }
+    return true
+}
+
+function priceCheck(target) {
+    if (!Number.isInteger(target)) {
+        setCurrentToastComponent('fail', '请输入有效价格整数')
+        return false
+    }
+    if (target.toString().length > 7) {
+        setCurrentToastComponent('fail', '请输入有效价格长度, 当前长度: ' + target.toString().length)
+        return false
+    }
+    if (target < 100) {
+        setCurrentToastComponent('fail', '请输入有效价格数量, 当前价格: ' + target + '(' + target / 100 + ')')
+        return false
+    }
+    return true
+}
 
 async function commit(information) {
-    // function cnm(value) {
-    //     description = value
-    //     if (description.toString().length <= 50) {
-    //         setCurrentToastComponent('fail', '描述不能过短, 当前长度: ' + description.toString().length)
-    //     }
-    // }
+    if (information.markdownText !== null) {
+        if (information.markdownText.toString().length <= 50) {
+            setCurrentToastComponent('fail', '描述不能过短, 当前长度: ' + information.markdownText.toString().length)
+            return false
+        }
+    } else {
+        setCurrentToastComponent('fail', '请描述这个物品')
+        return false
+    }
 
-    let hasCategory = information.category !== '类型'
-    if (!hasCategory) {
+
+    if (information.category === '类型') {
         setCurrentToastComponent('fail', '请选择类型')
         return false
     }
 
-    let hasName = information.name !== null
-    if (!hasName) {
+
+    if (information.name === null) {
         setCurrentToastComponent('fail', '请输入名称')
         return false
     }
 
-    let hasPrice = information.price !== null
-    if (!hasPrice) {
+
+    if (information.price !== null) {
+        let priceIsPass = priceCheck(information.price)
+        if (!priceIsPass) {
+            return false
+        }
+    } else {
         setCurrentToastComponent('fail', '请设置价格')
         return false
     }
 
-    let hasCommand = information.command !== null
-    if (!hasCommand) {
+
+    if (information.command === null) {
         setCurrentToastComponent('fail', '请输入指令')
         return false
     }
 
-    let priceIsInteger = Number.isInteger(information.price)
-    if (!priceIsInteger) {
-        setCurrentToastComponent('fail', '请输入有效价格整数')
-        return false
-    }
 
-    let priceLengthIsAvailable = information.price.toString().length <= 7
-    if (!priceLengthIsAvailable) {
-        console.log(information.price.toString().length)
-        setCurrentToastComponent('fail', '请输入有效价格长度, 当前长度: ' + information.price.toString().length)
-        return false
-    }
+    let discountType = null
 
-    let priceAmount = information.price >= 100
-    if (!priceAmount) {
-        setCurrentToastComponent('fail', '请输入有效价格数量, 当前价格: ' + information.price + '(' + information.price / 100 + ')')
-        return false
-    }
+    let isDiscount = information.discount !== null
 
-    if (information.discount !== null) {
-        let discountIsInteger = Number.isInteger(information.price)
-        if (!discountIsInteger) {
-            setCurrentToastComponent('fail', '请输入有效折扣整数')
+    if (isDiscount) {
+        let isPass = discountCheck(information.discount)
+        if (!isPass) {
             return false
         }
-
-        let discountLengthIsAvailable = information.discount.toString().length <= 2
-        if (!discountLengthIsAvailable) {
-            setCurrentToastComponent('fail', '请输入有效折扣长度, 当前长度: ' + information.discount.toString().length)
-            return false
-        }
-
-        let discountAmount = information.discount > 0
-        if (!discountAmount) {
-            setCurrentToastComponent('fail', '请输入有效折扣数量, 当前折扣: ' + information.discount + '%')
-            return false
-        }
+        discountType = 'extra'
     }
 
-    const {
-        data: result
-    } = await axios.post('local/admin/insert', {
-        category: information.category,
-        name: information.name,
-        price: information.price,
-        discount: information.discount,
-        command: information.command
-    })
 
-    console.log(result);
+    let x1 = information.multiDiscount.x1
+    let x5 = information.multiDiscount.x5
+    let x10 = information.multiDiscount.x10
+    let x20 = information.multiDiscount.x20
+    let isMultiDiscount = x1 !== null || x5 !== null || x10 !== null || x20 !== null
+
+    if (isMultiDiscount) {
+        if (x1 !== null && x1 !== '') {
+            discountCheck(x1)
+        }
+        if (x5 !== null && x5 !== '') {
+            discountCheck(x5)
+        }
+        if (x10 !== null && x10 !== '') {
+            discountCheck(x10)
+        }
+        if (x20 !== null && x20 !== '') {
+            discountCheck(x20)
+        }
+        discountType = 'crate'
+    }
+
+
+    if (discountType === 'extra') {
+        const {
+            data: result
+        } = await axios.post('local/admin/insert', {
+            type: information.category,
+            name: information.name,
+            price: information.price,
+            onSale: isDiscount,
+            discount: information.discount,
+            command: information.command,
+            description: information.markdownText
+        })
+        console.log(result);
+    } else if (discountType === 'crate') {
+        const {
+            data: result
+        } = await axios.post('local/admin/insert', {
+            type: information.category,
+            name: information.name,
+            price: information.price,
+            onSale: isMultiDiscount,
+            multiDiscount: JSON.stringify(information.multiDiscount),
+            command: information.command,
+            description: information.markdownText
+        })
+        if (result) {
+            setCurrentToastComponent('success', '添加成功')
+        } else {
+            setCurrentToastComponent('fail', '添加失败')
+        }
+    }
 }
 
 export default commit

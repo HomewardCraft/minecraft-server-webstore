@@ -39,9 +39,29 @@
 
       <transition name="item">
         <div v-show="discountShowCase.isOpen" class="item-discount pointer-events-none grid grid-cols-2 my-auto transition-all ease-in-out duration-200 z-50">
-          <div class="discount-inner pointer-events-auto">
+          <div v-show="categories.crate" class="discount-inner pointer-events-auto">
             <h3 class="text-white font-bold">额度 (%)</h3>
             <input v-model="information.discount" maxlength="2" type="number" placeholder="78%" class="appearance-none"/>
+          </div>
+
+          <div v-show="!categories.crate" class="discount-inner c pointer-events-auto">
+            <h3 class="text-white font-bold ml-8">额度 (%)</h3>
+            <div class="inline-flex items-center">
+              <div class="font-bold m-2">1x</div>
+              <input v-model="information.multiDiscount.x1" maxlength="2" type="number" placeholder="98%" class="appearance-none"/>
+            </div>
+            <div class="inline-flex items-center">
+              <div class="font-bold m-2">5x</div>
+              <input v-model="information.multiDiscount.x5" maxlength="2" type="number" placeholder="92%" class="appearance-none"/>
+            </div>
+            <div class="inline-flex items-center">
+              <div class="font-bold m-2">10x</div>
+              <input v-model="information.multiDiscount.x10" maxlength="2" type="number" placeholder="88%" class="appearance-none"/>
+            </div>
+            <div class="inline-flex items-center">
+              <div class="font-bold m-2">20x</div>
+              <input v-model="information.multiDiscount.x20" maxlength="2" type="number" placeholder="78%" class="appearance-none"/>
+            </div>
           </div>
         </div>
       </transition>
@@ -64,19 +84,23 @@
                 mermaidJs="node_modules/mermaid/dist/mermaid.min.js" katexJs="node_modules/katex/dist/katex.min.js" :sanitize="sanitize"
                 @onSave="execSave"/>
     </transition>
+
     <div :class="imageUploadStyle.style" class="image-upload ease-in-out transition-opacity duration-500 bg-gray-800 p-8 h-700 flex border border-lighten">
       <div class="regular top-2.5 bg-gray-900 border border-lighten">
         <div class="image" :style="regular"/>
-        <div class="title">
-          <span class="text-4xl">regular</span>
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-          </svg>
+        <!-- todo 上传图片 -->
+        <div @click="" class="title">
+          <!--<span class="text-4xl">regular</span>-->
+          <!--<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">-->
+          <!--  <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>-->
+          <!--</svg>-->
         </div>
       </div>
+
       <div class="hover top-2.5 bg-gray-900 border border-lighten border-l-0">
         <div class="image" :style="hover"/>
-        <div class="title">
+        <!-- todo 上传图片 -->
+        <div @click="" class="title">
           <span class="text-4xl">hover</span>
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -153,13 +177,19 @@ function changeCategoryShowCaseCondition() {
   discountShowCase.isOpen = false
 }
 function changeCategoryShowCase(type) {
+
   categoryShowCase.isOpen = false
   information.category = type
   setTimeout(() => {
     if (type === 'Crate') {
+      information.multiDiscount.x1 = null
+      information.multiDiscount.x5 = null
+      information.multiDiscount.x10 = null
+      information.multiDiscount.x20 = null
       categories.crate = false
       categories.extra = true
     } else {
+      information.discount = null
       categories.extra = false
       categories.crate = true
     }
@@ -177,11 +207,18 @@ let information = reactive({
   name: null,
   price: null,
   discount: null,
+  multiDiscount: {
+    x1: null,
+    x5: null,
+    x10: null,
+    x20: null,
+  },
   command: null,
-  markdownText: null,
+  markdownText: '',
   imageAddress: null
 })
 function execCommit() {
+  information.markdownText = data.text
   commit(information)
 }
 pubsub.subscribe('commit', execCommit)
@@ -246,6 +283,10 @@ export default {
 
 .item-discount .discount-inner {
   grid-column: 2;
+}
+
+.item-discount .discount-inner.c {
+  margin-top: 0.4rem;
 }
 
 .md-toolbar-wrapper .md-toolbar {
