@@ -4,7 +4,7 @@
       <div class="title mb-6">
         <editor-title/>
       </div>
-      <div id="editorPanel" class="body bg-gray-900 grid grid-cols-1 gap-6 p-4">
+      <div id="editorPanel" class="editor bg-gray-900 grid grid-cols-1 gap-6 p-4">
         <editor-main/>
         <editor-button :changeEditorPanelCondition="changeEditorPanelCondition" :commit="commit"/>
       </div>
@@ -19,7 +19,6 @@ import pubsub from "pubsub-js";
 let currentStyle = ref('opacity-0 pointer-events-none')
 let isOpen = false
 
-
 function changeEditorPanelCondition() {
   if (!isOpen) {
     isOpen = true
@@ -33,20 +32,26 @@ function changeEditorPanelCondition() {
 }
 pubsub.subscribe('openEditorPanel', changeEditorPanelCondition)
 
-
 async function commit() {
   pubsub.publish('commit')
 }
 </script>
 
 <script>
-import EditorTitle from "../components/ComponentsEditor/EditorTitle.vue";
-import EditorMain from "../components/ComponentsEditor/EditorMain.vue";
-import EditorDescribe from "../components/ComponentsEditor/EditorDescribe.vue";
-import EditorButton from "../components/ComponentsEditor/EditorButton.vue";
+import EditorTitle from "../components/editor/EditorTitle.vue";
+import EditorMain from "../components/editor/EditorMain.vue";
+import EditorButton from "../components/editor/EditorButton.vue";
 
 export default {
   name: "EditorPanel",
-  components: {EditorTitle,EditorMain,EditorDescribe,EditorButton}
+  components: {EditorTitle,EditorMain,EditorButton}
 }
 </script>
+
+<style>
+.editor h3 {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  @apply text-gray-500 mb-1 font-bold
+}
+</style>

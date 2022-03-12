@@ -45,7 +45,11 @@ async function commit(information) {
     }
 
 
-    if (information.category === '类型') {
+    let type = null
+
+    if (information.category !== '类型') {
+        type = information.category.toLowerCase()
+    } else {
         setCurrentToastComponent('fail', '请选择类型')
         return false
     }
@@ -73,9 +77,6 @@ async function commit(information) {
         return false
     }
 
-
-    let discountType = null
-
     let isDiscount = information.discount !== null
 
     if (isDiscount) {
@@ -83,7 +84,6 @@ async function commit(information) {
         if (!isPass) {
             return false
         }
-        discountType = 'extra'
     }
 
 
@@ -106,11 +106,10 @@ async function commit(information) {
         if (x20 !== null && x20 !== '') {
             discountCheck(x20)
         }
-        discountType = 'crate'
     }
 
 
-    if (discountType === 'extra') {
+    if (type === 'extra') {
         const {
             data: result
         } = await axios.post('local/admin/insert', {
@@ -123,7 +122,7 @@ async function commit(information) {
             description: information.markdownText
         })
         console.log(result);
-    } else if (discountType === 'crate') {
+    } else if (type === 'crate') {
         const {
             data: result
         } = await axios.post('local/admin/insert', {
