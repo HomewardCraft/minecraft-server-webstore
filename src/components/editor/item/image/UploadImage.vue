@@ -1,13 +1,18 @@
 <template>
   <div :class="props.imageUploadStyle.style" class="image-upload ease-in-out transition-opacity duration-500 bg-gray-800 p-8 h-700 flex border border-lighten">
+
+
     <div class="regular top-2.5 bg-gray-900 border border-lighten">
-      <div class="image" :style="regular"/>
+
+      <div class="image" :style="{backgroundImage:'url(' + imageAddress.regular + ')'}"/>
+
       <div class="name inline-flex items-center bg-gray-800">
         <input v-model="information.imageName" :type="'imageName'" placeholder="图片名称(英文)">
         <div class="showcase bg-gray-800 text-gray-400 ml-10 max-w-min">
           {{information.imageName}}
         </div>
       </div>
+
       <div @click="uploadFile" class="title" id="uploadRegular">
         <input type="file" ref="uploadRegularInput" name="regular" @change="onFileChanged" class="pointer-events-none">
         <span class="text-4xl">regular</span>
@@ -15,9 +20,12 @@
           <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
         </svg>
       </div>
+
     </div>
+
+
     <div class="hover top-2.5 bg-gray-900 border border-lighten border-l-0">
-      <div class="image" :style="hover"/>
+      <div class="image" :style="{backgroundImage:'url(' + imageAddress.hover + ')'}"/>
       <div class="name inline-flex items-center bg-gray-800">
         <input v-model="information.imageName" :type="'imageName'" placeholder="图片名称(英文)">
         <div class="showcase bg-gray-800 text-gray-400 ml-10 max-w-min">
@@ -47,29 +55,20 @@ import {useCookies} from "vue3-cookies";
 import axios from "axios";
 import setCurrentToastComponent from "../../../../hooks/setToastComponent.js";
 
-const props = defineProps(['imageUploadStyle', 'imageRegular', 'imageHover', 'information']);
+const props = defineProps(['imageUploadStyle', 'imageAddress', 'information']);
 
 let information = props.information
-
-let regular = ref({
-  'backgroundImage': 'url(' + props.imageRegular + ')'
-})
-let hover = ref({
-  'backgroundImage': 'url(' + props.imageHover + ')'
-})
-
+let imageAddress = props.imageAddress
 const cookies = useCookies().cookies;
-
 const uploadRegularInput = ref<HTMLElement | null>(null)
 const uploadHoverInput = ref<HTMLElement | null>(null)
+
 const onFileChanged = async (event: Event) => {
   const input = event.target as HTMLInputElement
   let files = input.files
-
   if (!files.length) {
     return false
   }
-
   let name = null
   if (document.getElementById('uploadRegular').contains(event.target as Node)) {
     name = information.imageName
@@ -77,27 +76,30 @@ const onFileChanged = async (event: Event) => {
   if (document.getElementById('uploadHover').contains(event.target as Node)) {
     name = information.imageName + '_hover'
   }
-
   const formData = new FormData()
   formData.append('file', files[0])
   formData.append('category', information.category)
   formData.append('name', name)
-
   const {data:result} = await axios.post('local/admin/file/upload', formData, {
+  // const {data:result} = await axios.post('baioretto/webstore/api/admin/file/upload', formData, {
     headers: {
       'Authorization': cookies.get('authorization')
     }
   })
-
-  console.log(result);
-
-  if (document.getElementById('uploadHover').contains(event.target as Node)) {
-    // todo 写赋值逻辑
+  if (result.status !== 200) {
+    setCurrentToastComponent('fail', result.message)
+    return false
   }
+  const data = result.data.data
   if (document.getElementById('uploadRegular').contains(event.target as Node)) {
-    // todo 写赋值逻辑
+    imageAddress.regular = data.urlPath
   }
+  if (document.getElementById('uploadHover').contains(event.target as Node)) {
+    imageAddress.hover = data.urlPath
+  }
+  setCurrentToastComponent('success', '添加成功')
 }
+
 const uploadFile = (event) => {
   let onClick = null
   if (document.getElementById('uploadRegular').contains(event.target as Node)) {

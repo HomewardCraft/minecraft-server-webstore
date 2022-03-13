@@ -1,7 +1,10 @@
 <template>
   <div class="item-image">
     <div class="h-52 w-52 relative bg-gray-800 bg-bottom bg-no-repeat border border-light border-b-0">
-      <!-- image here -->
+      <div class="image group">
+        <div class="regular transition-opacity duration-300 ease-in-out group-hover:opacity-0" :style="{backgroundImage:'url(' + imageAddress.regular + ')'}"/>
+        <div class="hover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100" :style="{backgroundImage:'url(' + imageAddress.hover + ')'}"/>
+      </div>
     </div>
     <div @click="changeImageShowCaseCondition" class="bg-green-700 hover:bg-yellow-400 hover:text-yellow-900 border border-light border-t-0 text-gray-300 flex items-center justify-center text-center cursor-pointer py-2 font-bold opacity-100 transition-colors duration-150 ease-in-out">
       <span>上传图片</span>
@@ -19,10 +22,11 @@ export default {
 </script>
 
 <script setup>
-const props = defineProps(['editorCondition', 'imageUploadStyle']);
+const props = defineProps(['editorCondition', 'imageUploadStyle', 'imageAddress']);
 
 let changeEditorCondition = props.editorCondition
 let imageUploadStyle = props.imageUploadStyle
+let imageAddress = props.imageAddress
 
 function changeImageShowCaseCondition() {
   changeEditorCondition.isShow = !changeEditorCondition.isShow
@@ -35,3 +39,30 @@ function changeImageShowCaseCondition() {
   }
 }
 </script>
+
+<style>
+
+@screen lg {
+  .item-image .image {
+    max-width: 100%;
+    margin-left: 1.5rem;
+  }
+}
+
+.item-image .image {
+  min-height: 206px;
+  max-width: 206px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.item-image .image .regular, .item-image .image .hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: center/cover;
+}
+</style>

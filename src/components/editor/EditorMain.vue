@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-around items-center">
-    <item-image :editorCondition="editorCondition" :imageUploadStyle="imageUploadStyle"/>
+    <item-image :editorCondition="editorCondition" :imageUploadStyle="imageUploadStyle" :imageAddress="imageAddress"/>
 
     <div class="item-info grid gap-3">
       <item-category :information="information" :categoryShowCase="categoryShowCase" :categories="categories" :discountShowCase="discountShowCase"/>
@@ -18,7 +18,7 @@
   <div class="item-row-2 bg-gray-800 w-min p-8 grid">
     <item-describe :editorCondition="editorCondition" :data="data"/>
 
-    <upload-image :imageUploadStyle="imageUploadStyle" :imageRegular="imageRegular" :imageHover="imageHover" :information="information"/>
+    <upload-image :imageUploadStyle="imageUploadStyle" :imageAddress="imageAddress" :information="information"/>
   </div>
 </template>
 
@@ -29,8 +29,10 @@ import pubsub from "pubsub-js";
 import 'md-editor-v3/lib/style.css';
 import UploadImage from "./item/image/UploadImage.vue";
 
-let imageRegular = 'https://ba1oretto.com/webstore/images/crates/cosmetic_crate.png'
-let imageHover = 'https://ba1oretto.com/webstore/images/crates/cosmetic_crate_hover.png'
+let imageAddress = reactive({
+  regular: '',
+  hover: ''
+})
 
 let imageUploadStyle = reactive({
   style: 'opacity-0 pointer-events-none',
