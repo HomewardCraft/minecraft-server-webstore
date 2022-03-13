@@ -1,39 +1,27 @@
 <template>
-  <div :class="props.imageUploadStyle.style" class="image-upload ease-in-out transition-opacity duration-500 bg-gray-800 p-8 h-700 flex border border-lighten">
-
-
-    <div class="regular top-2.5 bg-gray-900 border border-lighten">
-
+  <div :class="props.imageUploadStyle.style" class="image-upload ease-in-out transition-opacity duration-500 bg-gray-800 p-8 h-700 flex justify-between border border-lighten">
+    <div class="regular border">
       <div class="image" :style="{backgroundImage:'url(' + imageAddress.regular + ')'}"/>
-
-      <div class="name inline-flex items-center bg-gray-800">
+      <div class="name">
         <input v-model="information.imageName" :type="'imageName'" placeholder="图片名称(英文)">
-        <div class="showcase bg-gray-800 text-gray-400 ml-10 max-w-min">
-          {{information.imageName}}
-        </div>
+        <input v-model="information.imageName" :type="'imageName'" class="pointer-events-none">
       </div>
-
       <div @click="uploadFile" class="title" id="uploadRegular">
-        <input type="file" ref="uploadRegularInput" name="regular" @change="onFileChanged" class="pointer-events-none">
+        <input type="file" ref="uploadRegularInput" name="regular" @change="onFileChanged">
         <span class="text-4xl">regular</span>
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
         </svg>
       </div>
-
     </div>
-
-
-    <div class="hover top-2.5 bg-gray-900 border border-lighten border-l-0">
+    <div class="hover border border-l-0">
       <div class="image" :style="{backgroundImage:'url(' + imageAddress.hover + ')'}"/>
-      <div class="name inline-flex items-center bg-gray-800">
+      <div class="name">
         <input v-model="information.imageName" :type="'imageName'" placeholder="图片名称(英文)">
-        <div class="showcase bg-gray-800 text-gray-400 ml-10 max-w-min">
-          {{information.imageName}}_hover
-        </div>
+        <input v-model="imageHover" :type="'imageName'" class="pointer-events-none">
       </div>
       <div @click="uploadFile" class="title" id="uploadHover">
-        <input type="file" ref="uploadHoverInput" name="hover" @change="onFileChanged" class="pointer-events-none">
+        <input type="file" ref="uploadHoverInput" name="hover" @change="onFileChanged">
         <span class="text-4xl">hover</span>
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -50,7 +38,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {defineProps, ref} from "vue";
+import {computed, defineProps, ref} from "vue";
 import {useCookies} from "vue3-cookies";
 import axios from "axios";
 import setCurrentToastComponent from "../../../../hooks/setToastComponent.js";
@@ -62,6 +50,8 @@ let imageAddress = props.imageAddress
 const cookies = useCookies().cookies;
 const uploadRegularInput = ref<HTMLElement | null>(null)
 const uploadHoverInput = ref<HTMLElement | null>(null)
+
+const imageHover = computed(() => information.imageName + '_hover')
 
 const onFileChanged = async (event: Event) => {
   const input = event.target as HTMLInputElement
@@ -127,45 +117,39 @@ const uploadFile = (event) => {
   grid-column: 1;
   grid-row: 1;
 }
+.image-upload .regular, .image-upload .hover {
+  grid-template-rows: 28rem 50px 8.5rem;
+  @apply grid bg-gray-900 border-lighten flex-grow
+}
 .image-upload .name {
-  width: 400px;
-  height: 49px;
+  @apply row-start-2 inline-flex justify-between bg-gray-800
 }
-.image-upload .title{
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-}
-.image-upload input[type=imageName] {
-  padding-top: 13px;
-  padding-bottom: 13px;
-  @apply bg-gray-800 text-white px-4 border border-light transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none
-}
-.image-upload input[type=file] {
-  position: absolute;
-  right: 0;
-  top: 0;
-  opacity: 0;
-}
-.regular .title, .hover .title {
+.image-upload .title, .image-upload .title {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  @apply bg-green-700 hover:bg-yellow-400 hover:text-yellow-900 border border-light text-gray-300 flex items-center justify-center text-center cursor-pointer font-bold opacity-100 transition-colors duration-150 ease-in-out
+  @apply bg-green-700 hover:bg-yellow-400 hover:text-yellow-900 border border-light text-gray-300 flex items-center justify-center text-center cursor-pointer font-bold opacity-100 transition-colors duration-150 ease-in-out row-start-3
 }
-.image-upload .regular, .image-upload .hover {
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  @apply flex flex-col justify-end
+.image-upload input[type=imageName] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  @apply bg-gray-800 text-white border border-light transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none flex-grow text-center
 }
-.image-upload .regular .image,.image-upload .hover .image {
+.image-upload input[type=file] {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  opacity: 0;
+  @apply pointer-events-none
+}
+.regular .image, .hover .image {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: center/cover;
-  height: 28rem;
-  @apply bg-bottom bg-no-repeat border-b-lighten border-b
+  @apply row-start-1
 }
 </style>
