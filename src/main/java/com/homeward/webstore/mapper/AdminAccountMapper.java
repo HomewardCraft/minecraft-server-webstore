@@ -4,6 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface AdministratorMapper {
+public interface AdminAccountMapper {
     Long AdministratorLogin(@Param("adminName") String adminName, @Param("adminPwd") String adminPwd);
 }

@@ -25,6 +25,6 @@ public class CustomExceptionAdvice {
     @Pointcut("execution(" +
             "@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
             "com.homeward.webstore.java.bean.VO.R " +
-            "com.homeward.webstore.controller.AdministratorController.administratorLogin(..))")
-    public void AdministratorControllerMethod() {}
+            "com.homeward.webstore.controller.AdminAccountController.administratorLogin(..))")
+    public void adminLoginMethod() {}
 }

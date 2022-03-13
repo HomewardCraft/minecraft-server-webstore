@@ -108,7 +108,7 @@ public class CustomExceptionAdvice {
     }
 
 
-    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.AdministratorControllerMethod()")
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.adminLoginMethod()")
     public R AdministratorException(ProceedingJoinPoint point) {
         R res;
         try {
@@ -121,6 +121,41 @@ public class CustomExceptionAdvice {
                 }
                 case "login information error" -> {
                     return R.no(AdministratorStatusEnum.LOGIN_INFORMATION_ERROR);
+                }
+                default -> {
+                    log.error(errorMessage);
+                    throwable.printStackTrace();
+                    return R.no(StatusEnum.UNEXPECTED_EXCEPTION);
+                }
+            }
+        }
+        return R.ok(res);
+    }
+
+
+
+    @Around("execution(@com.homeward.webstore.aop.annotations.JoinPointSymbol com.homeward.webstore.java.bean.VO.R com.homeward.webstore.controller.AdminItemManipulationController.uploadImage(..))")
+    public R AdministratorUploadImageException(ProceedingJoinPoint point) {
+        R res;
+        try {
+            res = (R) point.proceed();
+        } catch (Throwable throwable) {
+            String errorMessage = throwable.getMessage();
+            switch (errorMessage) {
+                case "file not found" -> {
+                    return R.no(AdministratorStatusEnum.FILE_NOT_FOUND);
+                }
+                case "file extend name not match" -> {
+                    return R.no(AdministratorStatusEnum.EXTEND_NAME_NOT_MATCH);
+                }
+                case "an error occur during read image information" -> {
+                    return R.no(AdministratorStatusEnum.IMAGE_INFORMATION_ERROR);
+                }
+                case "an error occur during create image to local host" -> {
+                    return R.no(AdministratorStatusEnum.IMAGE_CREATE_ERROR);
+                }
+                case "duplicate image found" -> {
+                    return R.no(AdministratorStatusEnum.DUPLICATE_IMAGE);
                 }
                 default -> {
                     log.error(errorMessage);
