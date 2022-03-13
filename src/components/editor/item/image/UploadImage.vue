@@ -91,7 +91,7 @@ const onFileChanged = async (event: Event) => {
 }
 
 const uploadFile = (event) => {
-  let onClick = null
+  let onClick
   if (document.getElementById('uploadRegular').contains(event.target as Node)) {
     onClick = uploadRegularInput.value as HTMLInputElement
   } else if (document.getElementById('uploadHover').contains(event.target as Node)) {
@@ -132,7 +132,7 @@ const uploadFile = (event) => {
 .image-upload input[type=imageName] {
   padding-top: 15px;
   padding-bottom: 15px;
-  @apply bg-gray-800 text-white border border-light transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none flex-grow text-center
+  @apply bg-gray-800 text-gray-400 border border-light transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none flex-grow text-center
 }
 .image-upload input[type=file] {
   position: absolute;

@@ -35,7 +35,7 @@ function priceCheck(target) {
 
 async function commit(information) {
     if (information.markdownText !== null) {
-        if (information.markdownText.toString().length <= 50) {
+        if (information.markdownText.toString().length <= 32) {
             setCurrentToastComponent('fail', '描述不能过短, 当前长度: ' + information.markdownText.toString().length)
             return false
         }
@@ -44,6 +44,14 @@ async function commit(information) {
         return false
     }
 
+    if (information.imageAddress !== {}) {
+        if (information.imageAddress.regular === null || information.imageAddress.regular === '') {
+            setCurrentToastComponent('fail', '请完整上传图片')
+            return false
+        }
+    } else {
+        setCurrentToastComponent('fail', '请先上传图片')
+    }
 
     let type = null
 
@@ -119,22 +127,30 @@ async function commit(information) {
             onSale: isDiscount,
             discount: information.discount,
             command: information.command,
-            description: information.markdownText
+            description: information.description,
+            imageAddress: information.imageAddress.regular
         })
-        console.log(result);
+        console.log(result)
+        if (result.status === 200) {
+            setCurrentToastComponent('success', '添加成功')
+        } else {
+            setCurrentToastComponent('fail', '添加失败')
+        }
     } else if (type === 'crate') {
         const {
             data: result
         } = await axios.post('local/admin/insert', {
-            type: information.category,
-            name: information.name,
-            price: information.price,
-            onSale: isMultiDiscount,
-            multiDiscount: JSON.stringify(information.multiDiscount),
-            command: information.command,
-            description: information.markdownText
-        })
-        if (result) {
+                type: information.category,
+                name: information.name,
+                price: information.price,
+                onSale: isMultiDiscount,
+                multiDiscount: JSON.stringify(information.multiDiscount),
+                command: information.command,
+                description: information.markdownText,
+                imageAddress: information.imageAddress.regular
+            })
+        console.log(result)
+        if (result.status === 200) {
             setCurrentToastComponent('success', '添加成功')
         } else {
             setCurrentToastComponent('fail', '添加失败')

@@ -74,11 +74,15 @@ let information = reactive({
   },
   command: null,
   markdownText: '',
-  imageAddress: null,
+  imageAddress: {},
   imageName: null,
 })
 function execCommit() {
   information.markdownText = data.text
+  information.imageAddress = {
+    regular: imageAddress.regular,
+    hover: imageAddress.hover
+  }
   commit(information)
 }
 pubsub.subscribe('commit', execCommit)

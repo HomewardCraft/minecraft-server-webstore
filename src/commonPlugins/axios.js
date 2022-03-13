@@ -9,14 +9,6 @@ const axiosInstance = axios.create({
     timeout: 5000
 })
 
-axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-axiosInstance.defaults.transformRequest = [(value) => {
-    let formattedData = ''
-    for (let data in value) {
-        formattedData += encodeURIComponent(data) + '=' + encodeURIComponent(value[data]) + '&'
-    }
-    return formattedData
-}]
 axiosInstance.interceptors.request.use(
     config => {
         config.headers['Authorization'] = authorization
