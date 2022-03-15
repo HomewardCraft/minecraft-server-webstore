@@ -103,16 +103,14 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         insertItemInformation(information);
     }
 
-    @Async
-    public void insertDescription(ItemWholeInfo information) {
+    private void insertDescription(ItemWholeInfo information) {
         Boolean isComplete = adminItemManipulationMapper.insertDescription(information);
         if (!isComplete) {
             CommonUtils.throwRuntimeException(AdministratorStatusEnum.DESCRIPTION_INSERT_ERROR);
         }
     }
 
-    @Async
-    public void insertItemInformation(ItemWholeInfo information) {
+    private void insertItemInformation(ItemWholeInfo information) {
         String type = information.getType().toLowerCase();
         if ("extras".equals(type)) {
             if (null == information.getRawSalePercent()) {
