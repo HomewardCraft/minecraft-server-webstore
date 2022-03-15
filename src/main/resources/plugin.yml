@@ -1,0 +1,15 @@
+name: ShopConnectBridge
+version: '${project.version}'
+main: com.arcanetravel.shopconnectbridge
+api-version: 1.18
+prefix: ArcaneTravel-WSB
+authors: [ Caizii ]
+description: 连接ArcaneTravelWebStore的商城桥梁系统
+website: kkk.fantang.cc
+depend:
+  - WolfyUtilities
+
+commands:
+  opentest:
+    description: 打开测试GUI
+    usage: /<command>
