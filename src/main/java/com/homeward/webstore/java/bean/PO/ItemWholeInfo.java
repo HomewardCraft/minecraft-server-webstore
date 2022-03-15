@@ -5,16 +5,26 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class ItemWholeInfo implements BasicPersistentObject{
+public class ItemWholeInfo implements BasicPersistentObject, Cloneable {
     private Integer id;
     private String type;
     private String name;
-    private String price;
+    private Integer price;
     private Boolean saleCondition;
     private Integer salePercent;
+    private String rawSalePercent;
+    private String command;
     private String imageAddress;
     private String imageHoverAddress;
-//   todo 描述
-}
+    private String description;
+    private String descriptionId;
 
-// 名字 图片地址 类型 价格 打折 打折比 描述
+    @Override
+    public ItemWholeInfo clone() {
+        try {
+            return (ItemWholeInfo) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+}

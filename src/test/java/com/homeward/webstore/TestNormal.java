@@ -12,8 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TestNormal {
-
-
     @Test
     @Disabled
     void testStringFormat() {
@@ -140,10 +138,7 @@ public class TestNormal {
 
     @Test
     void testUUID() {
-        long mostSigBits = Long.parseLong(UUID.randomUUID().toString().replaceAll("[^0-9]", ""));
-        String uuid = new UUID(mostSigBits, mostSigBits).toString();
-        String substring = uuid.substring(0, 15).replace("-", "");
-        System.out.println(substring);
+        System.out.println(UUID.randomUUID());
     }
 
     @Test
@@ -151,6 +146,13 @@ public class TestNormal {
         String template = "{{\"type\":\"Crate\",\"name\":\"legendary\",\"price\":114514,\"onSale\":false,\"multiDiscount\":\"{\\\"x1\\\":null,\\\"x5\\\":null,\\\"x10\\\":null,\\\"x20\\\":null}\",\"command\":\"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\",\"description\":\"wesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdwwesdawdasdw\",\"imageAddress\":\"https://ba1oretto.com/webstore/images/crates/legendary_crate.png\"}=}";
         JSONObject jsonObject = JSONObject.parseObject(template);
         System.out.println(jsonObject.getString("x1"));
+    }
+
+    @Test
+    void testSubstring() {
+        String prefix = "x10";
+        String substring = prefix.substring(1);
+        System.out.println(substring);
     }
 }
 

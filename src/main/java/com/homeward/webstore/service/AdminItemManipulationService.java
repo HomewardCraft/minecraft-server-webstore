@@ -5,7 +5,6 @@ import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface AdminItemManipulationService {
-    Long insertItem(ItemWholeInfo itemWholeInfo);
-
+    void insertItem(ItemWholeInfo itemWholeInfo);
     FileImageBO uploadImage(MultipartFile file, String category, String name);
 }

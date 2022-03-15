@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.homeward.webstore.mapper.AdminItemManipulationMapper">
+    <select id="isExist" resultType="Long">
+        select count(*) from item_info where name like concat('%', #{name}, '%')
+    </select>
+
+    <insert id="insertDescription" parameterType="ItemWholeInfo">
+        insert into item_desc (id, description) values(#{descriptionId}, #{description})
+    </insert>
+
+    <insert id="insertItemInformation" parameterType="ItemWholeInfo" flushCache="true" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into item_info (id, type, name, price, is_onsale, onsale_percent, command, image_address, image_hover_address, description_id) values(#{id}, #{type}, #{name}, #{price}, #{saleCondition}, #{salePercent}, #{command}, #{imageAddress}, #{imageHoverAddress}, #{descriptionId})
+    </insert>
+
+    <insert id="insertItemInformationList" parameterType="List" flushCache="true" useGeneratedKeys="true">
+        insert into item_info (id, type, name, price, is_onsale, onsale_percent, command, image_address, image_hover_address, description_id) values
+        <foreach collection="ItemInformation" item="info" index="index" separator=",">
+            (#{info.id}, #{info.type}, #{info.name}, #{info.price}, #{info.saleCondition}, #{info.salePercent}, #{info.command}, #{info.imageAddress}, #{info.imageHoverAddress}, #{info.descriptionId})
+        </foreach>
+    </insert>
+</mapper>
