@@ -1,15 +1,15 @@
 <template>
   <transition name="item">
     <MdEditor v-show="props.editorCondition.isShow" :showCodeRowNumber="true" theme="dark" class="md-editor bg-gray-800 border-lighten h-700" previewTheme="github"
-              :toolbarsExclude="['link', 'mermaid', 'github', 'revoke', 'next']" v-model="data.text"
+              :toolbarsExclude="['link', 'mermaid', 'github', 'revoke', 'next']" v-model="data.markdownText"
               mermaidJs="node_modules/mermaid/dist/mermaid.min.js" katexJs="node_modules/katex/dist/katex.min.js" :sanitize="sanitize"
-              @onSave="execSave"/>
+              @onSave="execSave" @onHtmlChanged="getHTMLCode"/>
   </transition>
 </template>
 
 <script lang="ts">
 export default {
-  name: "ItemDescribe"
+  name: "ItemDescription"
 }
 </script>
 
@@ -28,14 +28,18 @@ const execSave = (v: string): void => {
   localStorage.setItem('markdownText', v)
 }
 
-watch(() => data.text, (count) => {
+const getHTMLCode = (v: String): void => {
+  data.htmlText = v
+}
+
+watch(() => data.markdownText, (count) => {
   setTimeout(() => {
     data.cache = count
   }, 500)
 })
 
 function getMarkdownContent() {
-  data.text = localStorage.getItem('markdownText')
+  data.markdownText = localStorage.getItem('markdownText')
 }
 function persistCache() {
   localStorage.setItem('markdownText', data.cache)

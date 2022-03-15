@@ -27,7 +27,6 @@ export default {
 
 <script setup>
 import {reactive} from "vue";
-import {getCurrentInstance} from "vue";
 import {useCookies} from "vue3-cookies";
 import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
 import {useRouter} from "vue-router";
@@ -35,9 +34,9 @@ import LoginTitle from "../../ComponentsLogin/LoginTitle.vue";
 import LoginAvatar from "../../ComponentsLogin/LoginAvatar.vue";
 import LoginHelp from "../../ComponentsLogin/LoginHelp.vue";
 import pubsub from "pubsub-js";
+import axios from "axios";
 
 const {cookies} = useCookies()
-const http = getCurrentInstance().appContext.config.globalProperties.$http
 const router = useRouter()
 
 let admin = reactive({
@@ -47,7 +46,8 @@ let admin = reactive({
 
 function login() {
   const resultSet = async () => {
-    const result = await http.post('fantang/webstore/api/admin/login', {
+    // const result = await axios.post('baioretto/webstore/api/admin/login', {
+    const result = await axios.post('local/admin/login', {
       username: admin.username,
       password: admin.password
     })

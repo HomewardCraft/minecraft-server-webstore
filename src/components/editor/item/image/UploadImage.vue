@@ -71,6 +71,7 @@ const onFileChanged = async (event: Event) => {
   formData.append('category', information.category)
   formData.append('name', name)
   const {data:result} = await axios.post('local/admin/file/upload', formData, {
+  // todo 正式发布切换
   // const {data:result} = await axios.post('baioretto/webstore/api/admin/file/upload', formData, {
     headers: {
       'Authorization': cookies.get('authorization')

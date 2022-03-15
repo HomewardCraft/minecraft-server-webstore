@@ -1,5 +1,6 @@
 import setCurrentToastComponent from "./setToastComponent.js";
 import axios from "../commonPlugins/axios.js";
+import isBlank from "./isBlank.js";
 
 function discountCheck(target) {
     if (!Number.isInteger(target)) {
@@ -34,27 +35,34 @@ function priceCheck(target) {
 }
 
 async function commit(information) {
-    if (information.markdownText !== null) {
+    // 校验描述
+    if (isBlank(information.markdownText)) {
+        setCurrentToastComponent('fail', '请描述这个物品')
+        return false
+    } else {
         if (information.markdownText.toString().length <= 32) {
             setCurrentToastComponent('fail', '描述不能过短, 当前长度: ' + information.markdownText.toString().length)
             return false
         }
-    } else {
-        setCurrentToastComponent('fail', '请描述这个物品')
-        return false
     }
 
-    if (information.imageAddress !== {}) {
-        if (information.imageAddress.regular === null || information.imageAddress.regular === '') {
-            setCurrentToastComponent('fail', '请完整上传图片')
-            return false
-        }
-    } else {
-        setCurrentToastComponent('fail', '请先上传图片')
-    }
+    // 校验图片地址
+    // todo 生产状态解开
+    // if (!isBlank(information.imageAddress)) {
+    //     if (isBlank(information.imageAddress.regular)) {
+    //         setCurrentToastComponent('fail', '请上传regular图片')
+    //         return false
+    //     }
+    //     if (isBlank(information.imageAddress.hover)) {
+    //         setCurrentToastComponent('fail', '请上传hover图片')
+    //         return false
+    //     }
+    // } else {
+    //     setCurrentToastComponent('fail', '请先上传图片')
+    // }
 
+    // 定义类型
     let type = null
-
     if (information.category !== '类型') {
         type = information.category.toLowerCase()
     } else {
@@ -62,99 +70,80 @@ async function commit(information) {
         return false
     }
 
-
-    if (information.name === null) {
+    // 判断名称
+    if (isBlank(information.name)) {
         setCurrentToastComponent('fail', '请输入名称')
         return false
     }
 
-
-    if (information.price !== null) {
-        let priceIsPass = priceCheck(information.price)
-        if (!priceIsPass) {
-            return false
-        }
-    } else {
+    // 判断价格
+    if (isBlank(information.price)) {
         setCurrentToastComponent('fail', '请设置价格')
         return false
+    } else {
+        if (!priceCheck(information.price)) {
+            return false
+        }
     }
 
-
-    if (information.command === null) {
+    // 判断指令
+    if (isBlank(information.command)) {
         setCurrentToastComponent('fail', '请输入指令')
         return false
     }
 
-    let isDiscount = information.discount !== null
-
+    // extra是否打折
+    let isDiscount = !isBlank(information.discount)
     if (isDiscount) {
-        let isPass = discountCheck(information.discount)
-        if (!isPass) {
+        if (!discountCheck(information.discount)) {
             return false
         }
     }
 
-
-    let x1 = information.multiDiscount.x1
-    let x5 = information.multiDiscount.x5
-    let x10 = information.multiDiscount.x10
-    let x20 = information.multiDiscount.x20
-    let isMultiDiscount = x1 !== null || x5 !== null || x10 !== null || x20 !== null
-
-    if (isMultiDiscount) {
-        if (x1 !== null && x1 !== '') {
-            discountCheck(x1)
+    // crate是否打折
+    let x1 = !isBlank(information.multiDiscount.x1)
+    let x5 = !isBlank(information.multiDiscount.x5)
+    let x10 = !isBlank(information.multiDiscount.x10)
+    let x20 = !isBlank(information.multiDiscount.x20)
+    if (x1 || x5 || x10 || x20) {
+        if ((x1 && !discountCheck(information.multiDiscount.x1)) || (x5 && !discountCheck(information.multiDiscount.x5))) {
+            return false
         }
-        if (x5 !== null && x5 !== '') {
-            discountCheck(x5)
+        if (x10 && !discountCheck(information.multiDiscount.x10)) {
+            return false
         }
-        if (x10 !== null && x10 !== '') {
-            discountCheck(x10)
-        }
-        if (x20 !== null && x20 !== '') {
-            discountCheck(x20)
+        if (x20 && !discountCheck(information.multiDiscount.x20)) {
+            return false
         }
     }
 
+    let data = {
+        type: information.category,
+        name: information.name,
+        price: information.price,
+        saleCondition: null,
+        rawSalePercent: null,
+        command: information.command,
+        imageAddress: information.imageAddress.regular,
+        imageHoverAddress: information.imageAddress.hover,
+        description: information.htmlText
+    }
 
-    if (type === 'extra') {
-        const {
-            data: result
-        } = await axios.post('local/admin/insert', {
-            type: information.category,
-            name: information.name,
-            price: information.price,
-            onSale: isDiscount,
-            discount: information.discount,
-            command: information.command,
-            description: information.description,
-            imageAddress: information.imageAddress.regular
-        })
-        console.log(result)
-        if (result.status === 200) {
-            setCurrentToastComponent('success', '添加成功')
-        } else {
-            setCurrentToastComponent('fail', '添加失败')
-        }
-    } else if (type === 'crate') {
-        const {
-            data: result
-        } = await axios.post('local/admin/insert', {
-                type: information.category,
-                name: information.name,
-                price: information.price,
-                onSale: isMultiDiscount,
-                multiDiscount: JSON.stringify(information.multiDiscount),
-                command: information.command,
-                description: information.markdownText,
-                imageAddress: information.imageAddress.regular
-            })
-        console.log(result)
-        if (result.status === 200) {
-            setCurrentToastComponent('success', '添加成功')
-        } else {
-            setCurrentToastComponent('fail', '添加失败')
-        }
+    if (type === 'extras') {
+        data.saleCondition = isDiscount
+        data.rawSalePercent = information.discount
+    } else {
+        data.rawSalePercent = JSON.stringify(information.multiDiscount)
+    }
+
+    const {
+        data: result
+    } = await axios.post('local/admin/insert', data)
+    console.log(result)
+    if (result.status === 200) {
+        setCurrentToastComponent('success', '添加成功')
+    } else {
+        setCurrentToastComponent('fail', '添加失败')
     }
 }
 

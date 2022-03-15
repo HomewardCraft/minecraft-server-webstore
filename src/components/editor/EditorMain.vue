@@ -16,7 +16,7 @@
   </div>
 
   <div class="item-row-2 bg-gray-800 w-min p-8 grid">
-    <item-describe :editorCondition="editorCondition" :data="data"/>
+    <item-description :editorCondition="editorCondition" :data="data"/>
 
     <upload-image :imageUploadStyle="imageUploadStyle" :imageAddress="imageAddress" :information="information"/>
   </div>
@@ -44,8 +44,9 @@ let editorCondition = reactive({
 })
 
 let data = reactive({
-  text: '',
-  cache: ''
+  markdownText: '',
+  cache: '',
+  htmlText: ''
 })
 
 let categoryShowCase = reactive({
@@ -74,11 +75,13 @@ let information = reactive({
   },
   command: null,
   markdownText: '',
+  htmlText: '',
   imageAddress: {},
   imageName: null,
 })
 function execCommit() {
-  information.markdownText = data.text
+  information.markdownText = data.markdownText
+  information.htmlText = data.htmlText
   information.imageAddress = {
     regular: imageAddress.regular,
     hover: imageAddress.hover
@@ -95,7 +98,7 @@ import ItemName from "./item/basic/ItemName.vue";
 import ItemDiscount from "./item/basic/ItemDiscount.vue";
 import ItemPrice from "./item/basic/ItemPrice.vue";
 import ItemCommand from "./item/basic/ItemCommand.vue";
-import ItemDescribe from "./item/basic/ItemDescribe.vue";
+import ItemDescription from "./item/basic/ItemDescription.vue";
 
 export default {
   name: "EditorMain",
@@ -106,7 +109,7 @@ export default {
     ItemDiscount,
     ItemPrice,
     ItemCommand,
-    ItemDescribe,
+    ItemDescription,
   }
 }
 </script>
