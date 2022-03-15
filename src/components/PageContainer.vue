@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div class="page-container grid">
     <container-body/>
     <container-toasts/>
     <container-side-bar/>

@@ -1,6 +1,6 @@
 <template>
-  <div :class="currentStyle" class="editor modal fixed bg-black-80 inset-0 flex items-center justify-center transition-opacity duration-300 ease-in-out">
-    <div class="transition-transform duration-200 ease-in-out transform">
+  <div :class="currentStyle" class="editor row-start-1 col-start-1 top-0 flex items-center justify-center transition-opacity duration-300 ease-in-out">
+    <div class="transition-transform duration-200 ease-in-out transform ">
       <div class="title mb-6">
         <editor-title/>
       </div>
@@ -49,6 +49,9 @@ export default {
 </script>
 
 <style>
+.editor {
+  background: rgb(2, 4, 9);
+}
 .editor h3 {
   font-size: 1.25rem;
   line-height: 2rem;

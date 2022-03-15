@@ -1,5 +1,5 @@
 <template>
-  <div class="container-body homepage">
+  <div class="container-body homepage row-start-1 col-start-1">
     <div class="container mx-auto">
       <bread-crumb/>
       <router-view/>
