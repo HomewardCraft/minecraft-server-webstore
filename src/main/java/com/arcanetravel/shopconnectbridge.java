@@ -1,7 +1,10 @@
 package com.arcanetravel;
+
 import com.arcanetravel.guicluster.YourCluster;
 import com.arcanetravel.util.CommandRegister;
 import com.arcanetravel.util.EventRegister;
+import com.arcanetravel.util.GUIRegister;
+import dev.triumphteam.gui.guis.StorageGui;
 import me.wolfyscript.utilities.api.WolfyUtilCore;
 import me.wolfyscript.utilities.api.WolfyUtilities;
 import me.wolfyscript.utilities.api.inventory.gui.InventoryAPI;
@@ -11,12 +14,14 @@ import me.wolfyscript.utilities.api.language.LanguageAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.logging.Logger;
 
 
 public final class shopconnectbridge extends JavaPlugin {
 
     private final WolfyUtilities wolfyUtilsApi;
+    public StorageGui gui;
 
     public static Logger logger = Bukkit.getLogger();
     public InventoryAPI<CustomCache> invAPI;
@@ -56,6 +61,9 @@ public final class shopconnectbridge extends JavaPlugin {
         new CommandRegister(this).RegisterCommand();
         //事件注册器注册事件
         new EventRegister(this).RegisterEvent();
+
+
+        this.gui = new GUIRegister(this).gui;
 
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
 

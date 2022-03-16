@@ -13,3 +13,6 @@ commands:
   opentest:
     description: 打开测试GUI
     usage: /<command>
+  delivery:
+    description: 打开你的订单库存
+    usage: /<command>
