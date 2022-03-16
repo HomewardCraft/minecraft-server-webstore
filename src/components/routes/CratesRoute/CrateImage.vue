@@ -12,14 +12,14 @@ export default {
 </script>
 
 <script setup>
-let props = defineProps(['imageAddress'])
+const props = defineProps(['imageAddress', 'imageHoverAddress'])
 
-let regular = {
+const regular = {
   'backgroundImage': 'url(' + props.imageAddress + ')'
 }
 
-let hover = {
-  'backgroundImage': 'url(' + props.imageAddress.substring(0, props.imageAddress.length - 10) + '_crate_hover.png' + ')'
+const hover = {
+  'backgroundImage': 'url(' + props.imageHoverAddress + ')'
 }
 </script>
 

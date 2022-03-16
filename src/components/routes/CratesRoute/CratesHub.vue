@@ -15,16 +15,17 @@ export default {
 </script>
 
 <script setup>
-import {getCurrentInstance, ref} from "vue";
+import {ref} from "vue";
 import sendRoutePath from "../../../hooks/sendRoutePath.js";
+import axios from "axios";
 
-let http = getCurrentInstance().appContext.config.globalProperties.$http;
 let crates = ref('')
 
 async function getCratesList() {
   const {
     data: result
-  } = await http.get(`fantang/webstore/api/category/crates`)
+  // } = await axios.get(`baioretto/webstore/api/category/crates`)
+  } = await axios.get(`local/category/crates`)
 
   let imageAddress = ''
   let cratesObject = {}
@@ -34,18 +35,18 @@ async function getCratesList() {
     let item = result.data[i];
 
     if (imageAddress === '') {
-      imageAddress = item.itemBasicInfo.imageAddress
+      imageAddress = item.imageAddress
     }
 
-    if (imageAddress === item.itemBasicInfo.imageAddress) {
+    if (imageAddress === item.imageAddress) {
       crateArray.push(item)
     }
 
-    if (imageAddress !== item.itemBasicInfo.imageAddress) {
+    if (imageAddress !== item.imageAddress) {
       let name = imageAddress.substring(45, imageAddress.length - 10);
       cratesObject[name] = crateArray
       crateArray = []
-      imageAddress = item.itemBasicInfo.imageAddress
+      imageAddress = item.imageAddress
       crateArray.push(item)
     }
 

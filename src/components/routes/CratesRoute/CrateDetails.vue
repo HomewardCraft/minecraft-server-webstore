@@ -6,16 +6,16 @@
       <div class="h-11 flex justify-center items-center pt-3" v-if="!saleCondition">
         <div class="price opacity-50 text-xl"> ${{ originPrice }} USD </div>
       </div>
-      <purchase-button/>
+      <edit-button/>
     </div>
 </template>
 
 <script>
-import PurchaseButton from "./PurchaseButton.vue";
+import EditButton from "./EditButton.vue";
 
 export default {
   name: "CrateDetails",
-  components: {PurchaseButton}
+  components: {EditButton}
 }
 </script>
 
@@ -23,12 +23,11 @@ export default {
 let props = defineProps(['crate'])
 let crate = props.crate
 
-let amount = crate.itemBasicInfo.name.split(' ')[0]
+let amount = crate.name.split(' ')[0]
 
-let saleCondition = crate.itemSaleInfo.onsaleCondition;
+let saleCondition = crate.saleCondition;
 
-let originPrice = crate.itemBasicInfo.price / 100
+let originPrice = crate.price / 100
 
-let price = (crate.itemBasicInfo.price / 100) * (crate.itemSaleInfo.onsalePercent / 100)
-
+let price = (crate.price / 100) * (crate.salePercent / 100)
 </script>

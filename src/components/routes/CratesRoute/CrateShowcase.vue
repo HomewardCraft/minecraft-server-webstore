@@ -2,7 +2,7 @@
   <div class="crates pt-16">
     <div class="mb-12 crate-row">
       <div class="main bg-gray-900 border border-light grid lg:grid-cols-4">
-        <crate-image :imageAddress="imageAddress"/>
+        <crate-image :imageAddress="imageAddress" :imageHoverAddress="imageHoverAddress"/>
         <crate-inner-showcase :crates="props.crates"/>
       </div>
     </div>
@@ -21,5 +21,6 @@ export default {
 <script setup>
 const props = defineProps(['crates'])
 
-let imageAddress = props.crates[0].itemBasicInfo.imageAddress
+const imageAddress = props.crates[0].imageAddress
+const imageHoverAddress = props.crates[0].imageHoverAddress
 </script>

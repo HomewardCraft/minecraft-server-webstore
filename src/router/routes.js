@@ -2,6 +2,7 @@ import homepageRoute from "../pages/HomepageRoute.vue";
 import cratesRoute from "../pages/CratesRoute.vue";
 import extrasRoute from "../pages/ExtrasRoute.vue";
 import loginRoute from "../pages/LoginRoute.vue";
+import detailRoute from '../pages/DetailRoute.vue'
 
 export default [
     {
@@ -23,6 +24,11 @@ export default [
         name: 'crates',
         path: '/crates',
         component: cratesRoute
-    }
+    },
+    {
+        name: 'detail',
+        path: '/detail/:id',
+        component: detailRoute
+    },
 ]
 
