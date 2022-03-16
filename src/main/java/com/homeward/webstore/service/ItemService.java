@@ -1,14 +1,14 @@
 package com.homeward.webstore.service;
 
-import com.homeward.webstore.java.bean.BO.ItemInfoBO;
-import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
+import com.homeward.webstore.java.bean.PO.ItemDetail;
+import com.homeward.webstore.java.bean.PO.ItemShowCaseInfo;
 
 import java.util.List;
 
 public interface ItemService {
-    List<ItemInfoBO> getItemList(String type);
+    List<ItemShowCaseInfo> getItemList(String type);
 
-    ItemWholeInfo getSpecificItem(Integer itemId);
+    ItemDetail getSpecificItem(Integer itemId);
 
     String getRuleDetails(Integer ruleId);
 }

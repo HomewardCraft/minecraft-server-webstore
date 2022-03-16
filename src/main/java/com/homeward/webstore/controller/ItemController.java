@@ -1,6 +1,7 @@
 package com.homeward.webstore.controller;
 
-import com.homeward.webstore.java.bean.BO.ItemInfoBO;
+import com.homeward.webstore.java.bean.PO.ItemDetail;
+import com.homeward.webstore.java.bean.PO.ItemShowCaseInfo;
 import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
 import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.service.ItemService;
@@ -29,7 +30,7 @@ public class ItemController {
      */
     @GetMapping("/category/{itemCategory}")
     public R getItemList(@PathVariable("itemCategory") String type) {
-        List<ItemInfoBO> itemList = itemService.getItemList(type);
+        List<ItemShowCaseInfo> itemList = itemService.getItemList(type);
         return R.ok(itemList);
     }
 
@@ -40,7 +41,7 @@ public class ItemController {
      */
     @GetMapping("/production/{itemId}")
     public R getSpecificItem(@PathVariable("itemId") Integer id) {
-        ItemWholeInfo itemsLists = itemService.getSpecificItem(id);
+        ItemDetail itemsLists = itemService.getSpecificItem(id);
         return R.ok(itemsLists);
     }
 

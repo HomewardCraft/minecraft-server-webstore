@@ -4,65 +4,63 @@
 
 <mapper namespace="com.homeward.webstore.mapper.ItemMapper">
 <!--    <cache/>-->
-    <resultMap id="itemInfoBO" type="ItemInfoBO" autoMapping="true">
-        <collection property="itemBasicInfo" ofType="ItemBasicInfo">
-            <id column="i1_id" property="id"/>
-            <result column="i1_name" property="name"/>
-            <result column="i1_image_address" property="imageAddress"/>
-            <result column="i1_price" property="price"/>
-        </collection>
-        <collection property="itemSaleInfo" ofType="ItemSaleInfo">
-            <result column="i1_is_onsale" property="onsaleCondition"/>
-            <result column="i1_surplus_time" property="surplusTime"/>
-            <result column="i1_onsale_percent" property="onsalePercent"/>
-        </collection>
+    <resultMap id="itemShowCaseInformation" type="ItemShowCaseInfo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="is_onsale" property="saleCondition"/>
+        <result column="onsale_percent" property="salePercent"/>
+        <result column="imageAddress" property="image_address"/>
+        <result column="imageHoverAddress" property="image_hover_address"/>
     </resultMap>
-    <select id="getItemList" resultMap="itemInfoBO" useCache="true">
-        SELECT
-            i1.id i1_id,
-            i1.name i1_name,
-            i1.image_address i1_image_address,
-            i1.is_onsale i1_is_onsale,
-            i1.surplus_time i1_surplus_time,
-            i1.onsale_percent i1_onsale_percent,
-            i1.price i1_price
-        FROM
-            item_info AS i1,
-            (SELECT
-                id
-            FROM
-                item_info
-            WHERE type = #{items}) AS i2
-        WHERE i1.id = i2.id
+    <select id="getItemList" resultMap="itemShowCaseInformation" useCache="true">
+        select
+            id, name, price, is_onsale, onsale_percent, image_address, image_hover_address
+        from
+            item_info
+        where
+            type = #{category}
     </select>
 
-    <resultMap id="wholeInfo" type="ItemWholeInfo" autoMapping="true">
-        <id column="i1_id" property="id"/>
-        <result column="i1_name" property="name"/>
-        <result column="i1_image_address" property="imageAddress"/>
-        <result column="i1_type" property="type"/>
-        <result column="i1_price" property="price"/>
-        <result column="i1_is_onsale" property="saleCondition"/>
-        <result column="i1_onsale_percent" property="salePercent"/>
+
+    <resultMap id="itemDetail" type="ItemDetail">
+        <id column="t1_id" property="id"/>
+        <result column="t1_type" property="type"/>
+        <result column="t1_name" property="name"/>
+        <result column="t1_price" property="price"/>
+        <result column="t1_is_onsale" property="saleCondition"/>
+        <result column="t1_onsale_percent" property="salePercent"/>
+        <result column="t1_command" property="command"/>
+        <result column="t1_image_address" property="imageAddress"/>
+        <result column="t1_image_hover_address" property="imageHoverAddress"/>
+        <result column="t2_description" property="description"/>
     </resultMap>
-    <select id="getSpecificItem" resultMap="wholeInfo" useCache="true">
-        SELECT
-            i1.id i1_id,
-            i1.name i1_name,
-            i1.image_address i1_image_address,
-            i1.type i1_type,
-            i1.price i1_price,
-            i1.is_onsale i1_is_onsale,
-            i1.onsale_percent i1_onsale_percent
-        FROM
-            item_info AS i1,
-            (SELECT
-                id
-            FROM
-                item_info
-            WHERE id = #{itemId}) AS i2
-        WHERE i1.id = i2.id
+    <select id="getSpecificItem" resultMap="itemDetail" useCache="true">
+        select
+            t1.id t1_id,
+            t1.type t1_type,
+            t1.name t1_name,
+            t1.price t1_price,
+            t1.is_onsale t1_is_onsale,
+            t1.onsale_percent t1_onsale_percent,
+            t1.command t1_command,
+            t1.image_address t1_image_address,
+            t1.image_hover_address t1_image_hover_address,
+            t2.description t2_description
+        from
+            item_info as t1,
+            (select
+                id,
+                description
+            from
+                item_desc
+            ) as t2
+        where
+            t1.description_id = t2.id
+        and
+            t1.id = #{id}
     </select>
+
 
     <select id="getItemName" resultType="String" useCache="true">
         SELECT name

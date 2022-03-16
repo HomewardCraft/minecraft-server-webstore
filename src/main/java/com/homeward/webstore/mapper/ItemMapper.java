@@ -1,7 +1,7 @@
 package com.homeward.webstore.mapper;
 
-import com.homeward.webstore.java.bean.BO.ItemInfoBO;
-import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
+import com.homeward.webstore.java.bean.PO.ItemDetail;
+import com.homeward.webstore.java.bean.PO.ItemShowCaseInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,9 +11,9 @@ public interface ItemMapper {
     String getItemName(Integer id);
 
     //单个参数传递不加@Param
-    List<ItemInfoBO> getItemList(String category);
+    List<ItemShowCaseInfo> getItemList(String category);
 
-    ItemWholeInfo getSpecificItem(Integer itemId);
+    ItemDetail getSpecificItem(Integer id);
 
     String getRuleDetails(Integer ruleId);
 }

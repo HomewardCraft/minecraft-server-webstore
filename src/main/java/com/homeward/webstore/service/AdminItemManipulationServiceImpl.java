@@ -89,6 +89,7 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
 
 
     @Override
+
     @Transactional
     public void insertItem(ItemWholeInfo information) {
         Long itemAmount = isExist(information.getName());

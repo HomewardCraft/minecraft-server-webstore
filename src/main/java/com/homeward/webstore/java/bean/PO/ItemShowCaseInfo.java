@@ -5,9 +5,12 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class ItemBasicInfo implements BasicPersistentObject{
+public class ItemShowCaseInfo implements BasicPersistentObject{
     private Integer id;
     private String name;
-    private String imageAddress;
     private Integer price;
+    private Boolean saleCondition;
+    private Integer salePercent;
+    private String imageAddress;
+    private String imageHoverAddress;
 }
