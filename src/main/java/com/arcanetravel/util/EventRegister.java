@@ -2,6 +2,7 @@ package com.arcanetravel.util;
 
 
 import com.arcanetravel.shopconnectbridge;
+
 import static com.arcanetravel.util.CommonUtil.LOAD;
 import static com.arcanetravel.util.CommonUtil.WARN;
 

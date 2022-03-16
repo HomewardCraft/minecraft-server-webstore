@@ -1,9 +1,14 @@
 package com.arcanetravel;
 
+import com.arcanetravel.database.tables.ItemInfo;
 import com.arcanetravel.guicluster.YourCluster;
 import com.arcanetravel.util.CommandRegister;
+import com.arcanetravel.util.ConnectDataBase;
 import com.arcanetravel.util.EventRegister;
 import com.arcanetravel.util.GUIRegister;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.support.ConnectionSource;
 import dev.triumphteam.gui.guis.StorageGui;
 import me.wolfyscript.utilities.api.WolfyUtilCore;
 import me.wolfyscript.utilities.api.WolfyUtilities;
@@ -15,14 +20,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 
 public final class shopconnectbridge extends JavaPlugin {
 
     private final WolfyUtilities wolfyUtilsApi;
+    //全局GUI
     public StorageGui guiDeliver;
-
+    //全局数据库连接
+    public static ConnectionSource source;
     public static Logger logger = Bukkit.getLogger();
     public InventoryAPI<CustomCache> invAPI;
 
@@ -62,10 +70,21 @@ public final class shopconnectbridge extends JavaPlugin {
         //事件注册器注册事件
         new EventRegister(this).RegisterEvent();
 
-
         this.guiDeliver = new GUIRegister(this).guiDeliver;
 
+        //建立数据库连接
+        source = ConnectDataBase.onConnected();
+
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
+        System.out.println(source);
+
+        try {
+            Dao<ItemInfo, Integer> getCommand = DaoManager.createDao(source, ItemInfo.class);
+            ItemInfo a = getCommand.queryForId(1099);
+            System.out.println(a.getCommand());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
