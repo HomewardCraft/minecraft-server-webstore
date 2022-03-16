@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public final class shopconnectbridge extends JavaPlugin {
 
     private final WolfyUtilities wolfyUtilsApi;
-    public StorageGui gui;
+    public StorageGui guiDeliver;
 
     public static Logger logger = Bukkit.getLogger();
     public InventoryAPI<CustomCache> invAPI;
@@ -63,7 +63,7 @@ public final class shopconnectbridge extends JavaPlugin {
         new EventRegister(this).RegisterEvent();
 
 
-        this.gui = new GUIRegister(this).gui;
+        this.guiDeliver = new GUIRegister(this).guiDeliver;
 
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
 
