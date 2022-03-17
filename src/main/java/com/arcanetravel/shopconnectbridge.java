@@ -1,12 +1,9 @@
 package com.arcanetravel;
 
-import com.arcanetravel.database.tables.ItemInfo;
 import com.arcanetravel.guicluster.YourCluster;
 import com.arcanetravel.util.CommandRegister;
 import com.arcanetravel.util.ConnectDataBase;
 import com.arcanetravel.util.EventRegister;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import dev.triumphteam.gui.guis.StorageGui;
 import me.wolfyscript.utilities.api.WolfyUtilCore;
@@ -19,9 +16,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
+
+import static com.arcanetravel.util.Stream.serializeStream;
 
 
 public final class shopconnectbridge extends JavaPlugin {
@@ -51,6 +49,8 @@ public final class shopconnectbridge extends JavaPlugin {
         saveDefaultConfig();
         // Plugin startup logic
         System.out.println("初始化 ArcaneTravel DataBridge");
+        //注入输入流
+        serializeStream();
 
         try {
 

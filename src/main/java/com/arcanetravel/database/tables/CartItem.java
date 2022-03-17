@@ -3,12 +3,13 @@ package com.arcanetravel.database.tables;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "player_cart")
-public class PlayerCart {
+@DatabaseTable(tableName = "cart_item")
+public class CartItem {
+
     @DatabaseField(columnName = "uuid")
     private String uuid;
-    @DatabaseField(columnName = "command")
-    private String command;
+    @DatabaseField(columnName = "item_stack")
+    private String item_stack;
     @DatabaseField(columnName = "item_id")
     private int itemId;
     @DatabaseField(columnName = "amount")
@@ -22,12 +23,12 @@ public class PlayerCart {
         this.uuid = uuid;
     }
 
-    public String getCommand() {
-        return command;
+    public String getItem_stack() {
+        return item_stack;
     }
 
-    public void setCommand(String command) {
-        this.command = command;
+    public void setItem_stack(String item_stack) {
+        this.item_stack = item_stack;
     }
 
     public int getItemId() {

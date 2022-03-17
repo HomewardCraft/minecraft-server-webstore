@@ -3,6 +3,7 @@ package com.arcanetravel.command;
 import com.arcanetravel.event.WebStoreImport;
 import com.arcanetravel.gui.DeliverGUI;
 import com.arcanetravel.shopconnectbridge;
+import com.arcanetravel.util.ConvertWebCart;
 import dev.triumphteam.gui.guis.StorageGui;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -56,6 +57,8 @@ public class OpenDelivery implements CommandExecutor {
             player.sendMessage("当前槽位是空的");
         }
 
+        System.out.println("======================");
+        ConvertWebCart.onConvert();
 
         return true;
     }
