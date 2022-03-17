@@ -32,7 +32,7 @@ public final class shopconnectbridge extends JavaPlugin {
     public static HashMap<String, StorageGui> playerDeliverGUI = new HashMap<>();
 
     //全局数据库连接
-    public static ConnectionSource source;
+    public static ConnectionSource source = ConnectDataBase.onConnected();
     public static Logger logger = Bukkit.getLogger();
     public InventoryAPI<CustomCache> invAPI;
 
@@ -72,19 +72,12 @@ public final class shopconnectbridge extends JavaPlugin {
         //事件注册器注册事件
         new EventRegister(this).RegisterEvent();
 
-        //建立数据库连接
-        source = ConnectDataBase.onConnected();
 
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
         System.out.println(source);
 
-        try {
-            Dao<ItemInfo, Integer> getCommand = DaoManager.createDao(source, ItemInfo.class);
-//            ItemInfo a = getCommand.queryForId(1099);
-//            System.out.println(a.getCommand());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //TODO 初始化网络商店database倒入Inventory类型仓库
+
 
     }
 

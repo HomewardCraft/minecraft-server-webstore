@@ -1,13 +1,16 @@
 package com.arcanetravel.command;
 
+import com.arcanetravel.event.WebStoreImport;
 import com.arcanetravel.gui.DeliverGUI;
 import com.arcanetravel.shopconnectbridge;
 import dev.triumphteam.gui.guis.StorageGui;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -30,15 +33,22 @@ public class OpenDelivery implements CommandExecutor {
         StorageGui gui = DeliverGUI.getGui();
         Player player = (Player) sender;
 
-        if (guis.containsKey(String.valueOf(player.getUniqueId()))) {
+        if (guis.containsKey(String.valueOf(player.getUniqueId()))) { //如果全局GUI有该玩家gui
+            //让该玩家gui导入已购商品
+            guis.get(String.valueOf(player.getUniqueId())).addItem(new ItemStack(Material.APPLE));
+            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
+            //展示该GUI给玩家
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         } else {
             guis.put(String.valueOf(player.getUniqueId()), gui);
+            guis.get(String.valueOf(player.getUniqueId())).addItem(new ItemStack(Material.APPLE));
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         }
 
 
-        Bukkit.dispatchCommand(sender, "give Caizii apple 10");
+        Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
+
+//        Bukkit.dispatchCommand(sender, "give Caizii apple 10");
 
         try {
             player.sendMessage(gui.getInventory().getItem(9).displayName());

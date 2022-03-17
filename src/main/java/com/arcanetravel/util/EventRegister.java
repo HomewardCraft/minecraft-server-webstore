@@ -1,6 +1,8 @@
 package com.arcanetravel.util;
 
 
+import com.arcanetravel.event.WebStoreImport;
+import com.arcanetravel.listener.WebStoreImportListener;
 import com.arcanetravel.shopconnectbridge;
 
 import static com.arcanetravel.util.CommonUtil.LOAD;
@@ -18,7 +20,7 @@ public class EventRegister extends CommandRegister {
 
     public void RegisterEvent() {
         CommonUtil.showLog(WARN,"&f事件模块开始注册");
-//        plugin.getServer().getPluginManager().registerEvents(new GUIOpenEvent(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new WebStoreImportListener(), plugin);
         CommonUtil.showLog(LOAD,"&f事件模块注册完毕");
 
     }
