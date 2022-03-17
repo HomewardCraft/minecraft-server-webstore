@@ -4,7 +4,6 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "item_info")
-
 public class ItemInfo {
 
     @DatabaseField(generatedId = true, unique = true)
