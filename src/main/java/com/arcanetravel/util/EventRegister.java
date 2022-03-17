@@ -1,7 +1,6 @@
 package com.arcanetravel.util;
 
 
-import com.arcanetravel.event.WebStoreImport;
 import com.arcanetravel.listener.WebStoreImportListener;
 import com.arcanetravel.shopconnectbridge;
 

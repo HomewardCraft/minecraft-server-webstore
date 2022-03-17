@@ -3,6 +3,7 @@ package com.arcanetravel;
 import com.arcanetravel.guicluster.YourCluster;
 import com.arcanetravel.util.CommandRegister;
 import com.arcanetravel.util.ConnectDataBase;
+import com.arcanetravel.util.ConvertWebCart;
 import com.arcanetravel.util.EventRegister;
 import com.j256.ormlite.support.ConnectionSource;
 import dev.triumphteam.gui.guis.StorageGui;
@@ -77,7 +78,7 @@ public final class shopconnectbridge extends JavaPlugin {
         System.out.println(source);
 
         //TODO 初始化网络商店database倒入Inventory类型仓库
-
+        ConvertWebCart.onConvert();
 
     }
 
