@@ -126,7 +126,8 @@ async function commit(information) {
         command: information.command,
         imageAddress: information.imageAddress.regular,
         imageHoverAddress: information.imageAddress.hover,
-        description: information.htmlText
+        description: information.htmlText,
+        rawDescription: information.markdownText
     }
 
     if (type === 'extras') {

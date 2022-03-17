@@ -2,7 +2,7 @@
   <div v-show="true" v-html="rawHTMLText" class="description content-wrap"/>
   <!--<div v-show="false" v-html="compiledMarkdown"></div>-->
 
-  <div id="editor">
+  <div v-show="false" id="editor">
     <textarea :value="input" @input="update"></textarea>
   </div>
 </template>
