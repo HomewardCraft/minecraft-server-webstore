@@ -45,23 +45,29 @@ public class Stream {
     //编译OBJ反序列化
     public static Object writeDecodedObject(String stringObject) throws IOException, ClassNotFoundException {
 
+        byte[] serialized = Base64.getDecoder().decode(stringObject);
 
-//        System.out.println("Object object = null" + object);
+        ByteArrayInputStream in = new ByteArrayInputStream(serialized);
 
-            byte[] serialized = Base64.getDecoder().decode(stringObject);
-            System.out.println("byte[] serialized" + serialized);
-            ByteArrayInputStream in = new ByteArrayInputStream(serialized);
-            System.out.println("ByteArrayInputStream in" + in);
-            BukkitObjectInputStream bin = new BukkitObjectInputStream(in);
-            System.out.println("BukkitObjectInputStream bin" + bin);
-
-//            System.out.println("bin.readObject()" + bin.readObject());
-
-
-//            System.out.println("object" + object.toString());
+        BukkitObjectInputStream bin = new BukkitObjectInputStream(in);
 
 
         return bin.readObject();
+
+
+    }
+
+    //编译OBJ反序列化
+    public static Object writeDecodedObject1(String stringObject) throws IOException, ClassNotFoundException {
+
+        byte[] serialized = Base64.getDecoder().decode(stringObject);
+
+        ByteArrayInputStream innnnn = new ByteArrayInputStream(serialized);
+
+        BukkitObjectInputStream binnnnn = new BukkitObjectInputStream(innnnn);
+
+
+        return binnnnn.readObject();
 
 
     }

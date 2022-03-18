@@ -25,29 +25,6 @@ public class WebStoreImportListener implements Listener {
 
     private static ConnectionSource source = shopconnectbridge.source;
 
-    public ItemStack writeDecodedObject(String stringObject) throws IOException, ClassNotFoundException {
-
-
-//        System.out.println("Object object = null" + object);
-
-        byte[] serialized = Base64.getDecoder().decode(stringObject);
-        System.out.println("byte[] serialized" + serialized);
-        ByteArrayInputStream in = new ByteArrayInputStream(serialized);
-        System.out.println("ByteArrayInputStream in" + in);
-        BukkitObjectInputStream bin = new BukkitObjectInputStream(in);
-        System.out.println("BukkitObjectInputStream bin" + bin);
-
-//            System.out.println("bin.readObject()" + bin.readObject());
-
-
-//            System.out.println("object" + object.toString());
-
-
-        ItemStack item = (ItemStack) bin.readObject();
-        return item;
-
-
-    }
 
     @EventHandler
     public void onWebStoreImport(WebStoreImport event) throws SQLException, InterruptedException, IOException, ClassNotFoundException {
@@ -56,7 +33,7 @@ public class WebStoreImportListener implements Listener {
 
         List<CartItem> items = new ArrayList<>();
 
-        CartItem[] ccc = items.toArray(new CartItem[items.size()]);
+
         //TODO 查找CartItem是否有这位玩家的内容
         try {
             items = shopconnectbridge.cartItemDao.queryBuilder().where().eq("uuid", uniqueId).query();
@@ -78,15 +55,20 @@ public class WebStoreImportListener implements Listener {
             List<Integer> avaliableIndex = Arrays.asList(cache);
             int pointer = 0;
 
-//            event.getPlayer().sendMessage(String.valueOf(((ItemStack) Stream.writeDecodedObject(items.get(1).getItem_stack())).getType()));
-//            event.getPlayer().sendMessage(items.get(1).getItem_stack());
-//
-//            event.getPlayer().sendMessage("<======================>");
-//            event.getPlayer().sendMessage(String.valueOf(((ItemStack) Stream.writeDecodedObject(items.get(0).getItem_stack())).getType()));
-//            event.getPlayer().sendMessage(items.get(0).getItem_stack());
 
-//            event.getGui().addItem(writeDecodedObject(items.get(0).getItem_stack()));
-            event.getGui().addItem(writeDecodedObject(ccc[1].getItem_stack()));
+            CartItem items1 = items.get(0);
+            CartItem items2 = items.get(1);
+
+            ItemStack diamond = new ItemStack(Material.TNT);
+            String diamondcode = Stream.writeEncodedObject(diamond);
+            System.out.println(diamondcode);
+            ItemStack decodediamond = (ItemStack) Stream.writeDecodedObject(diamondcode);
+            System.out.println(decodediamond.getType());
+
+            event.getGui().addItem((ItemStack) Stream.writeDecodedObject(items1.getItem_stack()));
+//            event.getGui().addItem(writeDecodedObject(itemcode));
+            event.getGui().addItem((ItemStack) Stream.writeDecodedObject(items2.getItem_stack()));
+//            event.getGui().addItem(writeDecodedObject(itemcode));
 
 
 //            event.getGui().addItem((ItemStack) Stream.writeDecodedObject(items.get(2).getItem_stack()));

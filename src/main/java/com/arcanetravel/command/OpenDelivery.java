@@ -1,8 +1,10 @@
 package com.arcanetravel.command;
 
+import com.arcanetravel.database.tables.CartItem;
 import com.arcanetravel.event.WebStoreImport;
 import com.arcanetravel.gui.DeliverGUI;
 import com.arcanetravel.shopconnectbridge;
+import com.arcanetravel.util.Stream;
 import dev.triumphteam.gui.guis.StorageGui;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,7 +15,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class OpenDelivery implements CommandExecutor {
@@ -36,6 +43,7 @@ public class OpenDelivery implements CommandExecutor {
         if (guis.containsKey(String.valueOf(player.getUniqueId()))) { //如果全局GUI有该玩家gui
             //让该玩家gui导入已购商品
             Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
+
             //展示该GUI给玩家
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         } else {
