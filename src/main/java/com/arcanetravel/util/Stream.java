@@ -50,9 +50,10 @@ public class Stream {
         ByteArrayInputStream in = new ByteArrayInputStream(serialized);
 
         BukkitObjectInputStream bin = new BukkitObjectInputStream(in);
-
-
-        return bin.readObject();
+        Object o = bin.readObject();
+        bin.close();
+        in.close();
+        return o;
 
 
     }

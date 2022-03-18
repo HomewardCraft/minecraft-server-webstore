@@ -16,3 +16,6 @@ commands:
   delivery:
     description: 打开你的订单库存
     usage: /<command>
+  serialize:
+    description: 测试序列化方法
+    usage: /<command>
