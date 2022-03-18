@@ -24,8 +24,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import static com.arcanetravel.util.Stream.serializeStream;
-
 
 public final class shopconnectbridge extends JavaPlugin {
 
@@ -57,8 +55,6 @@ public final class shopconnectbridge extends JavaPlugin {
         saveDefaultConfig();
         // Plugin startup logic
         System.out.println("初始化 ArcaneTravel DataBridge");
-        //注入输入流
-        serializeStream();
 
         try {
 

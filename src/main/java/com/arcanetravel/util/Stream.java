@@ -1,6 +1,5 @@
 package com.arcanetravel.util;
 
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 
@@ -11,30 +10,28 @@ import java.util.Base64;
 
 public class Stream {
 
-    public static ByteArrayOutputStream io;
-    public static BukkitObjectOutputStream os;
-
-    public static void serializeStream() {
-        try {
-            io = new ByteArrayOutputStream();
-            os = new BukkitObjectOutputStream(io);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-
-    }
-
     //编译OBJ序列化
     public static String writeEncodedObject(Object object) {
+
 
         String encodeObject = null;
 
         try {
+
+            ByteArrayOutputStream io = new ByteArrayOutputStream();
+
+            BukkitObjectOutputStream os = new BukkitObjectOutputStream(io);
+
+
             os.writeObject(object);
             os.flush();
 
             byte[] serialized = io.toByteArray();
             encodeObject = Base64.getEncoder().encodeToString(serialized);
+
+            os.close();
+            io.close();
+
         } catch (IOException exception) {
             exception.printStackTrace();
         }
