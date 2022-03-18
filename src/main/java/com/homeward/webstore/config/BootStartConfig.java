@@ -16,8 +16,8 @@ public class BootStartConfig implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        long rowAffected = cartMapper.initializeCart();
-        String cartInitializeMessage = String.format("initialize player cart completed, %srow(s) affected.", rowAffected);
-        log.warn(cartInitializeMessage);
+        // long rowAffected = cartMapper.initializeCart();
+        // String cartInitializeMessage = String.format("initialize player cart completed, %srow(s) affected.", rowAffected);
+        // log.warn(cartInitializeMessage);
     }
 }

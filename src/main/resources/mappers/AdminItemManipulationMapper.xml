@@ -8,7 +8,7 @@
     </select>
 
     <insert id="insertDescription" parameterType="ItemWholeInfo">
-        insert into item_desc (id, description) values(#{descriptionId}, #{description})
+        insert into item_desc (id, description, rawDescription) values(#{descriptionId}, #{description}, #{rawDescription})
     </insert>
 
     <insert id="insertItemInformation" parameterType="ItemWholeInfo" flushCache="true" useGeneratedKeys="true" keyProperty="id" keyColumn="id">

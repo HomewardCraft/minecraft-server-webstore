@@ -17,6 +17,7 @@ public class ItemWholeInfo implements BasicPersistentObject, Cloneable {
     private String imageAddress;
     private String imageHoverAddress;
     private String description;
+    private String rawDescription;
     private String descriptionId;
 
     @Override

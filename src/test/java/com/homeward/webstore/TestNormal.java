@@ -7,6 +7,7 @@ import com.homeward.webstore.common.consts.SystemConst;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -154,6 +155,26 @@ public class TestNormal {
         String substring = prefix.substring(1);
         System.out.println(substring);
     }
+
+    @Test
+    void testCurrentTimeMillis() {
+        long l1 = System.currentTimeMillis();
+        try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long l2 = System.currentTimeMillis();
+        System.out.println(l2 - l1);
+    }
+
+    @Test
+    void testHashMap() {
+        JSONObject rawSalePercent = JSONObject.parseObject("{\"a\": 1, \"b\": 2}");
+        List<String> list = new ArrayList<>();
+        rawSalePercent.forEach((key, value) -> {
+            list.add(value.toString());
+        });
+        System.out.println(list);
+    }
 }
-
-

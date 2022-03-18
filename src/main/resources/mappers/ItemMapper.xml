@@ -34,6 +34,7 @@
         <result column="t1_image_address" property="imageAddress"/>
         <result column="t1_image_hover_address" property="imageHoverAddress"/>
         <result column="t2_description" property="description"/>
+        <result column="t2_rawDescription" property="rawDescription"/>
     </resultMap>
     <select id="getSpecificItem" resultMap="itemDetail" useCache="true">
         select
@@ -46,12 +47,14 @@
             t1.command t1_command,
             t1.image_address t1_image_address,
             t1.image_hover_address t1_image_hover_address,
-            t2.description t2_description
+            t2.description t2_description,
+            t2.rawDescription t2_rawDescription
         from
             item_info as t1,
             (select
                 id,
-                description
+                description,
+                rawDescription
             from
                 item_desc
             ) as t2
@@ -69,6 +72,7 @@
             id = #{itemId}
         </where>
     </select>
+
 
     <select id="getRuleDetails" resultType="String" useCache="true">
         SELECT description

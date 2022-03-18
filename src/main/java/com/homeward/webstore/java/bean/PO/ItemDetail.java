@@ -16,4 +16,5 @@ public class ItemDetail implements BasicPersistentObject{
     private String imageAddress;
     private String imageHoverAddress;
     private String description;
+    private String rawDescription;
 }
