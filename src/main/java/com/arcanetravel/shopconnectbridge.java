@@ -1,10 +1,13 @@
 package com.arcanetravel;
 
+import com.arcanetravel.database.tables.CartItem;
 import com.arcanetravel.guicluster.YourCluster;
 import com.arcanetravel.util.CommandRegister;
 import com.arcanetravel.util.ConnectDataBase;
 import com.arcanetravel.util.ConvertWebCart;
 import com.arcanetravel.util.EventRegister;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import dev.triumphteam.gui.guis.StorageGui;
 import me.wolfyscript.utilities.api.WolfyUtilCore;
@@ -17,6 +20,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -32,6 +36,9 @@ public final class shopconnectbridge extends JavaPlugin {
 
     //全局数据库连接
     public static ConnectionSource source = ConnectDataBase.onConnected();
+    //Dao
+    public static Dao<CartItem, String> cartItemDao = null;
+
     public static Logger logger = Bukkit.getLogger();
     public InventoryAPI<CustomCache> invAPI;
 
@@ -79,6 +86,13 @@ public final class shopconnectbridge extends JavaPlugin {
 
         //TODO 初始化网络商店database倒入Inventory类型仓库
         ConvertWebCart.onConvert();
+
+        //注册Dao
+        try {
+            cartItemDao = DaoManager.createDao(source, CartItem.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

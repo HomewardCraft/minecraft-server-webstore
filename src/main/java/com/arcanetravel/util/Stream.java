@@ -1,5 +1,6 @@
 package com.arcanetravel.util;
 
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 
@@ -42,22 +43,25 @@ public class Stream {
     }
 
     //编译OBJ反序列化
-    public static Object writeDecodedObject(String stringObject) {
-        Object object = null;
+    public static Object writeDecodedObject(String stringObject) throws IOException, ClassNotFoundException {
 
-        try {
+
+//        System.out.println("Object object = null" + object);
+
             byte[] serialized = Base64.getDecoder().decode(stringObject);
+            System.out.println("byte[] serialized" + serialized);
             ByteArrayInputStream in = new ByteArrayInputStream(serialized);
+            System.out.println("ByteArrayInputStream in" + in);
             BukkitObjectInputStream bin = new BukkitObjectInputStream(in);
+            System.out.println("BukkitObjectInputStream bin" + bin);
+
+//            System.out.println("bin.readObject()" + bin.readObject());
 
 
-            object = bin.readObject();
+//            System.out.println("object" + object.toString());
 
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
 
-        return object;
+        return bin.readObject();
 
 
     }

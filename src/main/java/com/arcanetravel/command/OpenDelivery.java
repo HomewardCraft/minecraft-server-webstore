@@ -35,13 +35,11 @@ public class OpenDelivery implements CommandExecutor {
 
         if (guis.containsKey(String.valueOf(player.getUniqueId()))) { //如果全局GUI有该玩家gui
             //让该玩家gui导入已购商品
-            guis.get(String.valueOf(player.getUniqueId())).addItem(new ItemStack(Material.APPLE));
             Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
             //展示该GUI给玩家
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         } else {
             guis.put(String.valueOf(player.getUniqueId()), gui);
-            guis.get(String.valueOf(player.getUniqueId())).addItem(new ItemStack(Material.APPLE));
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         }
 
