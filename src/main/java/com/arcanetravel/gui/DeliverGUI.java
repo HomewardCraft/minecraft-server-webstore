@@ -1,17 +1,15 @@
 package com.arcanetravel.gui;
 
-import com.arcanetravel.database.tables.CartItem;
-import com.arcanetravel.shopconnectbridge;
-import com.j256.ormlite.stmt.Where;
+import com.arcanetravel.event.GUIItemSave;
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.StorageGui;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,6 +35,19 @@ public class DeliverGUI {
 
         });
 
+        gui.setCloseGuiAction(event -> {
+            // Handle your close action
+            //储存物品到数据库
+            Bukkit.getServer().getPluginManager().callEvent(new GUIItemSave((Player) event.getPlayer(),gui));
+
+
+
+        });
+
+        gui.setDefaultClickAction(event -> {
+            // Handle your default action here
+
+        });
 
         return gui;
     }

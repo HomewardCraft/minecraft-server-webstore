@@ -6,6 +6,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "cart_item")
 public class CartItem {
 
+    @DatabaseField(id = true)
+    private int id;
     @DatabaseField(columnName = "uuid")
     private String uuid;
     @DatabaseField(columnName = "item_stack")
@@ -14,6 +16,17 @@ public class CartItem {
     private int itemId;
     @DatabaseField(columnName = "amount")
     private int amount;
+
+    public CartItem() {
+
+    }
+
+    public CartItem(String uuid, String item_stack, int itemId, int amount) {
+        this.uuid = uuid;
+        this.item_stack = item_stack;
+        this.itemId = itemId;
+        this.amount = amount;
+    }
 
     public String getUuid() {
         return uuid;

@@ -5,6 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "player_cart")
 public class PlayerCart {
+
     @DatabaseField(columnName = "uuid")
     private String uuid;
     @DatabaseField(columnName = "command")

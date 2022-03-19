@@ -94,6 +94,8 @@ public final class shopconnectbridge extends JavaPlugin {
     @Override
     public void onDisable() {
 
+
+
         // Plugin shutdown logic
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&c-&7] &f关闭成功"));
 
