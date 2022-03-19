@@ -78,7 +78,6 @@ public final class shopconnectbridge extends JavaPlugin {
 
 
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
-        System.out.println(source);
 
         //TODO 初始化网络商店database倒入Inventory类型仓库
         ConvertWebCart.onConvert();
