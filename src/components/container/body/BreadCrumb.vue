@@ -43,7 +43,6 @@ let routeObject = reactive({
 })
 
 function setRoutePath(value) {
-  console.log(value)
   routeObject.path = value.fullPath.replace('/', '')
   routeObject.item.name = ''
   routeObject.item.type = ''
