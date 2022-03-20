@@ -35,9 +35,6 @@ public class WebStoreImportListener implements Listener {
         }
 
         if (items.size() == 0) {
-            event.getPlayer().sendMessage("当前购买车为空");
-            event.getPlayer().sendMessage(uniqueId);
-
             //TODO 如果没有展示空的GUI
         } else {
             //TODO 如果有则判断当前还有多少空余的格子
@@ -65,9 +62,8 @@ public class WebStoreImportListener implements Listener {
                 }
             }
         }
-        //TODO TYPE 1 关闭GUI不进行任何操作 指定区间进行数据保存
 
-        //TODO TYPE 2 关闭GUI进行数据保存 GUI内未拿取的物品存入数据库
+        //TYPE 2 关闭GUI进行数据保存 GUI内未拿取的物品存入数据库
 
 
     }

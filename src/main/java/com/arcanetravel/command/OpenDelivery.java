@@ -4,7 +4,6 @@ import com.arcanetravel.event.WebStoreImport;
 import com.arcanetravel.gui.DeliverGUI;
 import com.arcanetravel.shopconnectbridge;
 import dev.triumphteam.gui.guis.StorageGui;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
