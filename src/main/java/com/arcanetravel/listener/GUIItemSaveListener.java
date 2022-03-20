@@ -4,8 +4,10 @@ import com.arcanetravel.database.tables.CartItem;
 import com.arcanetravel.event.GUIItemSave;
 import com.arcanetravel.shopconnectbridge;
 import com.arcanetravel.util.Stream;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,15 +39,12 @@ public class GUIItemSaveListener implements Listener {
                     exception.printStackTrace();
                 }
 
+
+                event.getGui().getInventory().setItem(number, new ItemStack(Material.AIR));
             }
         }
 
 
-        try {
-            event.getPlayer().sendMessage(event.getGui().getInventory().getItem(11).displayName());
-        } catch (Exception exception) {
-            event.getPlayer().sendMessage("当前槽位是空的");
-        }
     }
 
 }
