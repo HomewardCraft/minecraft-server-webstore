@@ -2,10 +2,7 @@ package com.arcanetravel;
 
 import com.arcanetravel.database.tables.CartItem;
 import com.arcanetravel.guicluster.YourCluster;
-import com.arcanetravel.util.CommandRegister;
-import com.arcanetravel.util.ConnectDataBase;
-import com.arcanetravel.util.ConvertWebCart;
-import com.arcanetravel.util.EventRegister;
+import com.arcanetravel.util.*;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
@@ -95,9 +92,12 @@ public final class shopconnectbridge extends JavaPlugin {
     public void onDisable() {
 
 
-
         // Plugin shutdown logic
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&c-&7] &f关闭成功"));
+
+        //保存所有玩家的GUI
+        CommonUtil.globalSave(playerDeliverGUI);
+
 
     }
 

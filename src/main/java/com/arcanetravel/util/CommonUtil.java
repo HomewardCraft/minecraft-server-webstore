@@ -1,8 +1,17 @@
 package com.arcanetravel.util;
 
+import com.arcanetravel.database.tables.CartItem;
+import com.arcanetravel.shopconnectbridge;
+import dev.triumphteam.gui.guis.StorageGui;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class CommonUtil {
 
@@ -19,4 +28,36 @@ public class CommonUtil {
         CommonUtil.logger.info(ChatColor.translateAlternateColorCodes('&', state + " " + log));
 
     }
+
+    //全局GUI储存 适用于关闭服务请求
+    public static void globalSave(HashMap<String, StorageGui> playerDeliverGUI) {
+
+        Integer[] cache = {11, 12, 13, 14, 15, 20, 21, 22, 23, 24};
+        List<Integer> avaliableIndex = Arrays.asList(cache);
+
+
+        for (String key : playerDeliverGUI.keySet()) {
+            StorageGui playerGui = playerDeliverGUI.get(key);
+            String uuid = String.valueOf(key.replace("-", ""));
+
+            for (Integer number : avaliableIndex) {
+                if (playerGui.getInventory().getItem(number) != null) {
+                    //
+                    CartItem cacheItem = new CartItem(uuid, Stream.writeEncodedObject(playerGui.getInventory().getItem(number)), number, 0);
+
+                    try {
+                        shopconnectbridge.cartItemDao.create(cacheItem);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+
+                }
+            }
+
+
+        }
+
+
+    }
+
 }

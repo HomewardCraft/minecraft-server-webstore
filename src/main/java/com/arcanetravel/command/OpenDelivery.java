@@ -31,8 +31,8 @@ public class OpenDelivery implements CommandExecutor {
         StorageGui gui = DeliverGUI.getGui();
         Player player = (Player) sender;
 
-
-        if (guis.containsKey(String.valueOf(player.getUniqueId()))) { //如果全局GUI有该玩家gui
+        //如果全局GUI有该玩家gui
+        if (guis.containsKey(String.valueOf(player.getUniqueId()))) {
             //让该玩家gui导入已购商品
             Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
 
@@ -40,6 +40,7 @@ public class OpenDelivery implements CommandExecutor {
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         } else {
             guis.put(String.valueOf(player.getUniqueId()), gui);
+            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         }
 

@@ -13,8 +13,8 @@ commands:
   opentest:
     description: 打开测试GUI
     usage: /<command>
-  delivery:
-    description: 打开你的订单库存
+  purchase:
+    description: 打开你的已购仓库
     usage: /<command>
   serialize:
     description: 测试序列化方法
