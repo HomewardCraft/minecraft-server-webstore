@@ -18,8 +18,10 @@
 ## 介绍 Introduction
 
     以界面的形式储存物品并且直接把物品转换成货币，通过指令 /gemdeposit 打开储存菜单
-![main](https://user-images.githubusercontent.com/39553613/151638266-056d83fd-d556-4f52-a4fc-075b0fff282a.gif)
-![info](https://user-images.githubusercontent.com/39553613/151641637-352eedd9-0f03-4e63-a86f-5dbc2bed2916.png)
+    
+
+![main](https://user-images.githubusercontent.com/39553613/159148443-bba892c3-4b22-4b22-8c27-d0223242fc7f.gif)
+![info](https://user-images.githubusercontent.com/39553613/159148459-93f19a59-10a5-4e35-b42b-c6f5ec69cc97.png)
 
 
 ## 发亮之处 Features
