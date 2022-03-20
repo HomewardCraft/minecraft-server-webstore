@@ -4,6 +4,7 @@ import com.arcanetravel.event.WebStoreImport;
 import com.arcanetravel.gui.DeliverGUI;
 import com.arcanetravel.shopconnectbridge;
 import dev.triumphteam.gui.guis.StorageGui;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,18 +32,28 @@ public class OpenDelivery implements CommandExecutor {
         StorageGui gui = DeliverGUI.getGui();
         Player player = (Player) sender;
 
-        //如果全局GUI有该玩家gui
-        if (guis.containsKey(String.valueOf(player.getUniqueId()))) {
-            //让该玩家gui导入已购商品
-            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
 
-            //展示该GUI给玩家
+        if (guis.containsKey(String.valueOf(player.getUniqueId()))) {
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         } else {
             guis.put(String.valueOf(player.getUniqueId()), gui);
-            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
             guis.get(String.valueOf(player.getUniqueId())).open(player);
         }
+
+        Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
+
+        //如果全局GUI有该玩家gui
+//        if (guis.containsKey(String.valueOf(player.getUniqueId()))) {
+//            //让该玩家gui导入已购商品
+//            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
+//
+//            //展示该GUI给玩家
+//            guis.get(String.valueOf(player.getUniqueId())).open(player);
+//        } else {
+//            guis.put(String.valueOf(player.getUniqueId()), gui);
+//            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
+//            guis.get(String.valueOf(player.getUniqueId())).open(player);
+//        }
 
         return true;
     }

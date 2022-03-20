@@ -19,7 +19,6 @@ public class WebStoreImportListener implements Listener {
 
     @EventHandler
     public void onWebStoreImport(WebStoreImport event) throws SQLException, InterruptedException, IOException, ClassNotFoundException {
-        event.getPlayer().sendMessage("激活自定义事件");
         String uniqueId = String.valueOf(event.getPlayer().getUniqueId()).replace("-", "");
 
         List<CartItem> items = new ArrayList<>();
@@ -69,6 +68,7 @@ public class WebStoreImportListener implements Listener {
         //TODO TYPE 1 关闭GUI不进行任何操作 指定区间进行数据保存
 
         //TODO TYPE 2 关闭GUI进行数据保存 GUI内未拿取的物品存入数据库
+
 
     }
 

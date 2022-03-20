@@ -38,8 +38,7 @@ public class DeliverGUI {
         gui.setCloseGuiAction(event -> {
             // Handle your close action
             //储存物品到数据库
-            Bukkit.getServer().getPluginManager().callEvent(new GUIItemSave((Player) event.getPlayer(),gui));
-
+            Bukkit.getServer().getPluginManager().callEvent(new GUIItemSave((Player) event.getPlayer(), gui));
 
 
         });
