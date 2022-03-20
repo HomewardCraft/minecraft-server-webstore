@@ -67,12 +67,10 @@ public final class shopconnectbridge extends JavaPlugin {
 
         }
 
-
         //指令注册器加载指令
         new CommandRegister(this).RegisterCommand();
         //事件注册器注册事件
         new EventRegister(this).RegisterEvent();
-
 
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
 
