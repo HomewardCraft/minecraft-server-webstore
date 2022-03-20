@@ -1,7 +1,6 @@
 package com.arcanetravel;
 
 import com.arcanetravel.database.tables.CartItem;
-import com.arcanetravel.guicluster.YourCluster;
 import com.arcanetravel.util.*;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
