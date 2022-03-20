@@ -1,0 +1,35 @@
+# 不要进行修改如果你不知道自己在干什么
+version: 1.0.25
+
+general-settings:
+  enable-log: true
+  # 玩家必须取出gui内所有物品才能关闭该gui
+  cancel-when-not-empty: false
+  # 玩家库存中如果有物品则登录自动打开此gui
+  auto-open-gui: false
+
+security-settings:
+  # 是否开启事物回滚
+  enable-rollback: true
+  # 是否导出转换记录
+  generate-convert-message: true
+  # 储存方法：
+  # close为关闭GUI进行储存
+  # disable 为服务器关闭时进行储存
+  # click 为进行鼠标点击更新物品时储存
+  # all 开放全部选项
+  save-method: close
+  # 先加载gui还是先加物品据再加载gui showlate为先加载gui再加载物品
+  showlate: true
+  # 数据库加载错误时取消gui的打开
+  enable-error-open: true
+  # 警告重启 重启会让gui缓存消失！ 不要使用/reload confirm 重启
+  warn-server-reload: true
+
+experimental-settings:
+  # 是否开启储存机制 减少数据库查询量 会修改储存方式
+  enable-store-method: false
+  # 是否开启自动更新gui内内容(GUI打开时实时刷新) 需要配置rcon
+  enable-auto-update: false
+
+

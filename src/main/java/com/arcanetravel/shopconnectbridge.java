@@ -40,6 +40,9 @@ public final class shopconnectbridge extends JavaPlugin {
 
         //注册默认Config,没有的话创建一个
         saveDefaultConfig();
+        this.saveResource("database.yml", false);
+        this.saveResource("message.yml", false);
+
         // Plugin startup logic
         System.out.println("初始化 ArcaneTravel DataBridge");
 
