@@ -6,8 +6,7 @@ prefix: ArcaneTravel-WSB
 authors: [ Caizii ]
 description: 连接ArcaneTravelWebStore的商城桥梁系统
 website: kkk.fantang.cc
-depend:
-  - WolfyUtilities
+depend: []
 
 commands:
   opentest:
