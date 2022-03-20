@@ -6,6 +6,7 @@
 
 <h4 align="center">为什么不写一个可以把指令转换成物品的插件呢 ？</h4>
 
+
 <p align="center">
 <a href="https://www.codefactor.io/repository/github/caishangqi/homeward-gemdeposit"><img src="https://www.codefactor.io/repository/github/caishangqi/homeward-gemdeposit/badge" alt="CodeFactor" /></a>
 <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/Caishangqi/Homeward-GemDeposit">
@@ -21,7 +22,7 @@
     
 
 ![main](https://user-images.githubusercontent.com/39553613/159148443-bba892c3-4b22-4b22-8c27-d0223242fc7f.gif)
-![info](https://user-images.githubusercontent.com/39553613/159148459-93f19a59-10a5-4e35-b42b-c6f5ec69cc97.png)
+![info](https://user-images.githubusercontent.com/39553613/159148533-9bedef73-3ea2-48f1-97bc-051378ec2d6f.png)
 
 
 ## 发亮之处 Features
