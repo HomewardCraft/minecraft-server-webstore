@@ -40,7 +40,7 @@
 
       <div class="description">
         <span>物品描述: </span>
-        <div id="test" v-show="true" v-html="description" class="content-wrap"/>
+        <div id="description" v-show="true" v-html="description" class="content-wrap"/>
         <textarea v-model="item.rawDescription"/>
       </div>
 
@@ -93,6 +93,11 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="button flex justify-between items-center flex-grow">
+        <div class="cancel bg-red-600">取消</div>
+        <div class="confirm bg-green-700">保存</div>
       </div>
     </div>
 </template>
@@ -255,8 +260,8 @@ function changeDiscountCondition() {
 async function getSpecificItem(id) {
   const {
     data: res
-    // } = await http.get(`baioretto/webstore/api/production/${id}`)
-  } = await axios.get(`local/production/${id}`)
+    } = await axios.get(`baioretto/webstore/api/production/${id}`)
+  // } = await axios.get(`local/production/${id}`)
   const result = res.data
   rawItem.name = result.name
   rawItem.price = result.price
@@ -290,29 +295,10 @@ const execSetBreadCrumb = function() {
 }
 const setBreadCrumb = execSetBreadCrumb()
 const saveCache = debounce(() => {
-  // localStorage.setItem('cache', JSON.stringify(cache))
+  localStorage.setItem('cache', JSON.stringify(cache))
 }, 300)
 
-const removeImage = async (event) => {
-  let name
-  if (document.getElementById('uploadRegular').contains(event.target)) {
-    name = uploadedImageName.regular
-  } else if (document.getElementById('uploadHover').contains(event.target)) {
-    name = uploadedImageName.hover
-  } else return false
-  const data = new FormData;
-  data.append('category', rawItem.type)
-  data.append('name', name)
-  const {data:result} = await axios.post('local/admin/file/unmount', data, {
-    headers: {
-      'Authorization': cookies.get('authorization')
-    }
-  })
-  if (result.status !== 200) {
-    setCurrentToastComponent('fail', result.message)
-    return false
-  }
-}
+
 const uploadFile = (event) => {
   let onClick
   if (document.getElementById('uploadRegular').contains(event.target)) {
@@ -322,6 +308,44 @@ const uploadFile = (event) => {
   } else return false
 
   onClick.click()
+}
+
+const removeImage = async (event) => {
+  let name
+  if (document.getElementById('uploadRegular').contains(event.target)) {
+    if (isBlank(uploadedImageName.regular)) {
+      setCurrentToastComponent('fail', '请先上传图片')
+      return false
+    }
+    name = uploadedImageName.regular
+  } else if (document.getElementById('uploadHover').contains(event.target)) {
+    if (isBlank(uploadedImageName.hover)) {
+      setCurrentToastComponent('fail', '请先上传图片')
+      return false
+    }
+    name = uploadedImageName.hover
+  } else return false
+  const data = new FormData;
+  data.append('category', rawItem.type)
+  data.append('name', name)
+  // const {data:result} = await axios.post('local/admin/file/unmount', data, {
+  const {data:result} = await axios.post('baioretto/webstore/api/admin/file/unmount', data, {
+    headers: {
+      'Authorization': cookies.get('authorization')
+    }
+  })
+  if (result.status === 200) {
+    if (document.getElementById('uploadRegular').contains(event.target)) {
+      item.image.regular = uploadedImageName.regular = null
+    }
+    if (document.getElementById('uploadHover').contains(event.target)) {
+      item.image.hover = uploadedImageName.hover = null
+    }
+    setCurrentToastComponent('success', "删除成功")
+  } else {
+    setCurrentToastComponent('fail', result.message)
+    return false
+  }
 }
 const onFileChanged = async (event) => {
   const input = event.target
@@ -340,9 +364,9 @@ const onFileChanged = async (event) => {
   formData.append('file', files[0])
   formData.append('category', rawItem.type)
   formData.append('name', name)
-  const {data:result} = await axios.post('local/admin/file/upload', formData, {
+  // const {data:result} = await axios.post('local/admin/file/upload', formData, {
     // todo 正式发布切换
-    // const {data:result} = await axios.post('baioretto/webstore/api/admin/file/upload', formData, {
+    const {data:result} = await axios.post('baioretto/webstore/api/admin/file/upload', formData, {
     headers: {
       'Authorization': cookies.get('authorization')
     }
@@ -374,6 +398,10 @@ getSpecificItem(route.params.id)
 </script>
 
 <style>
+.detail .button > div {
+  @apply mx-2 w-full p-4 text-center text-gray-300 font-bold text-2xl border border-light rounded-lg transition-colors hover:bg-yellow-400 hover:text-yellow-900
+}
+
 .modifier .image\:regular, .modifier .image\:hover {
   min-height: 206px;
   max-width: 206px;
@@ -414,7 +442,7 @@ getSpecificItem(route.params.id)
   @apply text-4xl text-gray-300 font-bold
 }
 
-.detail input, #test {
+.detail input, #description {
   @apply bg-gray-800 text-2xl mt-5 w-full py-2.5 px-4 border border-light transition-colors duration-150 ease-in-out focus:border-yellow-400 focus:outline-none
 }
 
