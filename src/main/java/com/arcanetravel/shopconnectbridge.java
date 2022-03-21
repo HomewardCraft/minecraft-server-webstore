@@ -6,8 +6,10 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import dev.triumphteam.gui.guis.StorageGui;
+import me.mattstudios.mf.base.CommandManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -22,15 +24,22 @@ public final class shopconnectbridge extends JavaPlugin {
     public static HashMap<String, StorageGui> playerDeliverGUI = new HashMap<>();
 
     //全局数据库连接
-    public static ConnectionSource source = ConnectDataBase.onConnected();
+    public static ConnectionSource source;
     //Dao
     public static Dao<CartItem, String> cartItemDao = null;
 
     public static Logger logger = Bukkit.getLogger();
 
+    public static FileConfiguration config;
 
+    //全局plugin
+    public static shopconnectbridge plugin;
+
+    public static CommandManager commandManager;
+
+    //构造器
     public shopconnectbridge() {
-
+        plugin = this;
     }
 
 
@@ -39,6 +48,8 @@ public final class shopconnectbridge extends JavaPlugin {
 
         //注册默认Config,没有的话创建一个
         saveDefaultConfig();
+        config = getConfig();
+
         this.saveResource("database.yml", false);
         this.saveResource("message.yml", false);
 
@@ -46,15 +57,20 @@ public final class shopconnectbridge extends JavaPlugin {
         System.out.println("初始化 ArcaneTravel DataBridge");
 
 
-        //指令注册器加载指令
-        new CommandRegister(this).RegisterCommand();
         //事件注册器注册事件
         new EventRegister(this).RegisterEvent();
+        //指令注册器 API
+        commandManager = new CommandManager(this);
+        //指令注册器加载指令
+        new CommandRegister(this).RegisterCommand();
+
 
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
 
+        source = ConnectDataBase.onConnected();
         //TODO 初始化网络商店database倒入Inventory类型仓库
         ConvertWebCart.onConvert();
+
 
         //注册Dao
         try {
@@ -73,7 +89,7 @@ public final class shopconnectbridge extends JavaPlugin {
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&c-&7] &f关闭成功"));
 
         //保存所有玩家的GUI
-        CommonUtil.globalSave(playerDeliverGUI);
+        Util.globalSave(playerDeliverGUI);
 
 
     }

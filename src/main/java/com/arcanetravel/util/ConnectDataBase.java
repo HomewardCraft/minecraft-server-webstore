@@ -7,11 +7,23 @@ import java.sql.SQLException;
 
 public class ConnectDataBase {
 
-    public static String databaseUrl = "jdbc:mysql://ba1oretto.com:3306/minecraft_webstore?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true";
-    public static String username = "remote";
-    public static String password = "sd;lawmd;ls1=1]ro90-2Sjm20050406";
+    public static String username;
+    public static String password;
+    public static String port;
+    public static String database;
+    public static String ip;
+
+    public static String databaseUrl;
+
 
     public static ConnectionSource onConnected() {
+
+        username = Util.getConfig("database.yml").getString("username");
+        password = Util.getConfig("database.yml").getString("password");
+        port = Util.getConfig("database.yml").getString("port");
+        database = Util.getConfig("database.yml").getString("name");
+        ip = Util.getConfig("database.yml").getString("ip");
+        databaseUrl = ("jdbc:mysql://" + ip + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true");
 
         ConnectionSource connectionSource =
                 null;

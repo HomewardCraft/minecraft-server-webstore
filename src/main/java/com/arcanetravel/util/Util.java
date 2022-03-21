@@ -5,13 +5,16 @@ import com.arcanetravel.shopconnectbridge;
 import dev.triumphteam.gui.guis.StorageGui;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class CommonUtil {
+public class Util {
 
     public static final String LOAD = "&7&l[&2+&7]";
     public static final String WARN = "&7&l[&6!&7]";
@@ -19,11 +22,12 @@ public class CommonUtil {
     public static final String ERROR = "&7&l[&cx&7]";
 
     public static java.util.logging.@NotNull Logger logger = Bukkit.getLogger();
+    public static shopconnectbridge plugin;
 
 
     public static void showLog(String state, String log) {
 
-        CommonUtil.logger.info(ChatColor.translateAlternateColorCodes('&', state + " " + log));
+        Util.logger.info(ChatColor.translateAlternateColorCodes('&', state + " " + log));
 
     }
 
@@ -48,7 +52,6 @@ public class CommonUtil {
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
-
                 }
             }
 
@@ -56,6 +59,21 @@ public class CommonUtil {
         }
 
 
+    }
+
+    public static FileConfiguration getConfig() {
+        plugin = shopconnectbridge.plugin;
+        return shopconnectbridge.config;
+    }
+
+
+    public static FileConfiguration getConfig(String filename) {
+
+        plugin = shopconnectbridge.plugin;
+        File customConfigFile = new File(plugin.getDataFolder(), filename);
+        FileConfiguration customConfig = YamlConfiguration.loadConfiguration(customConfigFile);
+
+        return customConfig;
     }
 
 }

@@ -3,6 +3,7 @@ package com.arcanetravel.command;
 import com.arcanetravel.event.WebStoreImport;
 import com.arcanetravel.gui.DeliverGUI;
 import com.arcanetravel.shopconnectbridge;
+import com.arcanetravel.util.Util;
 import dev.triumphteam.gui.guis.StorageGui;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -41,18 +42,7 @@ public class OpenDelivery implements CommandExecutor {
 
         Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
 
-        //如果全局GUI有该玩家gui
-//        if (guis.containsKey(String.valueOf(player.getUniqueId()))) {
-//            //让该玩家gui导入已购商品
-//            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
-//
-//            //展示该GUI给玩家
-//            guis.get(String.valueOf(player.getUniqueId())).open(player);
-//        } else {
-//            guis.put(String.valueOf(player.getUniqueId()), gui);
-//            Bukkit.getServer().getPluginManager().callEvent(new WebStoreImport(player, guis.get(String.valueOf(player.getUniqueId()))));
-//            guis.get(String.valueOf(player.getUniqueId())).open(player);
-//        }
+        System.out.println(Util.getConfig("database.yml").get("type"));
 
         return true;
     }

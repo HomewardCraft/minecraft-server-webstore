@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.arcanetravel.util.CommonUtil.*;
+import static com.arcanetravel.util.Util.*;
 
 public class ConvertWebCart {
 
@@ -28,7 +28,7 @@ public class ConvertWebCart {
         Dao<CartItem, String> cartItemDao = null;
 
         try {
-            CommonUtil.showLog(INFO, "转化数据库至物品类型");
+            Util.showLog(INFO, "转化数据库至物品类型");
             playerCartDao = DaoManager.createDao(source, PlayerCart.class);
             cartItemDao = DaoManager.createDao(source, CartItem.class);
 
@@ -47,12 +47,12 @@ public class ConvertWebCart {
 
             }
 
-            CommonUtil.showLog(LOAD, "转化数据库成功");
+            Util.showLog(LOAD, "转化数据库成功");
             onRemove();
         } catch (SQLException e) {
             e.printStackTrace();
             //TODO 转换失败备份初始数据 并且回滚事物
-            CommonUtil.showLog(ERROR, "转化数据库失败 准备回滚");
+            Util.showLog(ERROR, "转化数据库失败 准备回滚");
         }
 
 
@@ -70,11 +70,11 @@ public class ConvertWebCart {
 
             //清空数据库
             playerCartDao.deleteBuilder().delete();
-            CommonUtil.showLog(INFO, "主表清空完毕");
+            Util.showLog(INFO, "主表清空完毕");
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            CommonUtil.showLog(ERROR, "主表清空失败 请手动删除");
+            Util.showLog(ERROR, "主表清空失败 请手动删除");
         }
 
 

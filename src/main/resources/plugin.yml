@@ -6,7 +6,7 @@ prefix: ArcaneTravel-WSB
 authors: [ Caizii ]
 description: 连接ArcaneTravelWebStore的商城桥梁系统
 website: kkk.fantang.cc
-depend: []
+depend: [ ]
 
 commands:
   opentest:
@@ -17,4 +17,7 @@ commands:
     usage: /<command>
   serialize:
     description: 测试序列化方法
+    usage: /<command>
+  webstore:
+    description: 查询webstore的相关指令
     usage: /<command>
