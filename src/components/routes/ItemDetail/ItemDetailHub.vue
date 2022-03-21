@@ -44,21 +44,43 @@
         <textarea v-model="item.rawDescription"/>
       </div>
 
-
-
       <div class="picture">
-        <div class="item-image bg-gray-800 border border-light px-4 py-10 mb-6 flex flex-col justify-center items-center">
-          <div class="h-52 w-52 relative bg-gray-800 bg-bottom bg-no-repeat border border-light border-b-0">
-            <div class="image group">
-              <div class="regular transition-opacity duration-300 ease-in-out group-hover:opacity-0" :style="{backgroundImage:'url(' + rawItem.image.regular + ')'}"/>
-              <div class="hover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100" :style="{backgroundImage:'url(' + rawItem.image.hover + ')'}"/>
+        <div class="item-image modifier bg-gray-800 grid-cols-3 border border-light px-4 py-10 mb-6 grid">
+          <div class="col-start-1 flex items-center w-full">
+            <div class="image group border border-light">
+              <div class="regular transition-opacity duration-300 ease-in-out group-hover:opacity-0" :style="{backgroundImage:'url(' + item.image.regular + ')'}"/>
+              <div class="hover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100" :style="{backgroundImage:'url(' + item.image.hover + ')'}"/>
             </div>
           </div>
-          <div class="w-52 bg-green-700 hover:bg-yellow-400 hover:text-yellow-900 border border-light border-t-0 text-gray-300 flex items-center justify-center text-center cursor-pointer py-2 font-bold opacity-100 transition-colors duration-150 ease-in-out">
-            <span>修改图片</span>
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
+
+          <div class="col-start-2">
+            <div class="image:regular" :style="{backgroundImage:'url(' + item.image.regular + ')'}"/>
+            <div class="w-full">
+              <input v-model="imageName" placeholder="图片名称(英文)" class="text-center">
+              <input :value="regular" :type="'imageName'" class="pointer-events-non text-center">
+            </div>
+            <div @click="uploadFile" class="title" id="uploadRegular">
+              <input type="file" ref="uploadRegularInput" name="regular" @change="onFileChanged">
+              <span class="text-4xl">regular</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="col-start-3">
+            <div class="image:hover" :style="{backgroundImage:'url(' + item.image.hover + ')'}"/>
+            <div class="w-full">
+              <input v-model="imageName" placeholder="图片名称(英文)" class="text-center">
+              <input :value="hover" :type="'imageName'" class="pointer-events-none text-center">
+            </div>
+            <div @click="uploadFile" class="title" id="uploadHover">
+              <input type="file" ref="uploadHoverInput" name="hover" @change="onFileChanged">
+              <span class="text-4xl">hover</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -77,11 +99,13 @@ export default {
 
 <script setup>
 import {useRoute} from "vue-router";
-import {computed, onUpdated, reactive, watch} from "vue";
+import {computed, onUpdated, reactive, ref, watch} from "vue";
 import sendRoutePath from "../../../hooks/sendRoutePath.js";
 import axios from "axios";
 import {debounce} from "lodash";
 import {marked} from 'marked'
+import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
+import isBlank from "../../../hooks/isBlank.js";
 const route = useRoute()
 let routeValue = {
   name: null,
@@ -104,7 +128,11 @@ let item = reactive({
 })
 // 临时的 用于操作
 let tempItem = reactive({
-  price: null
+  price: null,
+  image: {
+    regular: null,
+    hover: null
+  }
 })
 // 接收的
 const rawItem = reactive({
@@ -118,7 +146,8 @@ const rawItem = reactive({
     hover: null
   },
   description: null,
-  rawDescription: null
+  rawDescription: null,
+  type: null
 })
 let cache
 let enableCache = false
@@ -127,6 +156,10 @@ let discountClass = reactive({
   button: 'bg-gray-800',
   input: 'pointer-events-none'
 })
+const uploadRegularInput = ref(null)
+const uploadHoverInput = ref(null)
+// 名称
+let imageName = ref('')
 
 const name = computed(() => {
   const prefix = rawItem.name.toString().split(' ', 1).toString().concat(' ')
@@ -136,6 +169,7 @@ const price = computed(() => {
   item.price = tempItem.price * 100
   return item.price / 100
 })
+
 const discount = computed(() => {
   return (item.price / 100) * (item.salePercent / 100)
 })
@@ -144,6 +178,12 @@ const command = computed(() => {
 })
 const description = computed(() => {
   return item.description
+})
+const regular = computed(() => {
+  return imageName.value
+})
+const hover = computed(() => {
+  return imageName.value + '_hover'
 })
 
 watch(rawItem, (rawItem) => {
@@ -156,6 +196,8 @@ watch(rawItem, (rawItem) => {
     item.salePercent = cache.salePercent
     item.command = cache.command
     item.rawDescription = cache.rawDescription
+    tempItem.image.regular = item.image.regular = cache.image.regular
+    tempItem.image.hover = item.image.hover = cache.image.hover
   } else {
     item.name = name
     tempItem.price = rawItem.price / 100
@@ -163,6 +205,10 @@ watch(rawItem, (rawItem) => {
     item.salePercent = rawItem.salePercent
     item.command = rawItem.command
     item.rawDescription = rawItem.rawDescription
+    item.command = rawItem.command
+    item.rawDescription = rawItem.rawDescription
+    tempItem.image.regular = item.image.regular = rawItem.image.regular
+    tempItem.image.hover = item.image.hover = rawItem.image.hover
     enableCache = true
   }
 })
@@ -179,6 +225,10 @@ watch(() => discountClass.isDiscount, () => {
 })
 watch(() => item.rawDescription, () => {
   item.description = marked(item.rawDescription);
+})
+watch(tempItem.image, (value) => {
+  item.image = {...value}
+  imageName.value = value.regular.toString().slice(value.regular.toString().lastIndexOf('/') + 1).split('.')[0]
 })
 
 
@@ -200,6 +250,7 @@ async function getSpecificItem(id) {
   rawItem.image.hover = result.imageHoverAddress
   rawItem.description = result.description
   rawItem.rawDescription = result.rawDescription
+  rawItem.type = result.type
   routeValue.name = result.name
   routeValue.type = result.type
 }
@@ -222,8 +273,51 @@ const execSetBreadCrumb = function() {
 }
 const setBreadCrumb = execSetBreadCrumb()
 const saveCache = debounce(() => {
-  localStorage.setItem('cache', JSON.stringify(cache))
+  // localStorage.setItem('cache', JSON.stringify(cache))
 }, 300)
+
+const uploadFile = (event) => {
+  let onClick
+  if (document.getElementById('uploadRegular').contains(event.target)) {
+    onClick = uploadRegularInput.value
+  } else if (document.getElementById('uploadHover').contains(event.target)) {
+    onClick = uploadHoverInput.value
+  } else return false
+
+  onClick.click()
+}
+const onFileChanged = async (event) => {
+  const input = event.target
+  let files = input.files
+  if (!files.length) {
+    return false
+  }
+  const formData = new FormData()
+  formData.append('file', files[0])
+  formData.append('category', rawItem.type)
+  // formData.append('name', imageName.value)
+  const {data:result} = await axios.post('local/admin/file/upload', formData, {
+    // todo 正式发布切换
+    // const {data:result} = await axios.post('baioretto/webstore/api/admin/file/upload', formData, {
+    headers: {
+      'Authorization': cookies.get('authorization')
+    }
+  })
+  if (result.status !== 200) {
+    setCurrentToastComponent('fail', result.message)
+    return false
+  }
+  const data = result.data.data
+  if (document.getElementById('uploadRegular').contains(event.target)) {
+    item.image.regular = data.urlPath
+  }
+  if (document.getElementById('uploadHover').contains(event.target)) {
+    item.image.hover = data.urlPath
+  }
+  setCurrentToastComponent('success', '添加成功')
+}
+
+
 
 onUpdated(() => {
   setCache()
@@ -234,6 +328,34 @@ getSpecificItem(route.params.id)
 </script>
 
 <style>
+.modifier .image\:regular, .modifier .image\:hover {
+  min-height: 206px;
+  max-width: 206px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: center/cover;
+}
+
+.modifier input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  @apply pointer-events-none
+}
+.modifier .title {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  @apply bg-green-700 hover:bg-yellow-400 hover:text-yellow-900 border border-light text-gray-300 flex items-center justify-center text-center cursor-pointer font-bold opacity-100 transition-colors duration-150 ease-in-out row-start-3
+}
+
 .detail > div {
   @apply mb-6
 }
