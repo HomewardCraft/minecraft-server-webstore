@@ -62,9 +62,9 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         }
 
         String categoryPath = category.toLowerCase();
-        // String imageDirectoryPath = projectPath + imageDirector;
         // todo 发布时切换
-        String imageDirectoryPath = testProjectPath + imageDirector;
+        String imageDirectoryPath = projectPath + imageDirector;
+        // String imageDirectoryPath = testProjectPath + imageDirector;
         String imagePath = String.format("%s%s/", imageDirectoryPath, categoryPath);
 
         String imageType = originImageName.split("\\.")[1];
@@ -74,7 +74,7 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         File image = new File(absolutePath);
 
         if (image.exists()) {
-            this.deleteImage(absolutePath);
+            this.deleteImage(category, imageName);
         }
 
         try {
@@ -83,7 +83,7 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
             CommonUtils.throwRuntimeException(AdministratorStatusEnum.IMAGE_CREATE_ERROR);
         }
 
-        String virtualPath = categoryPath + imageName;
+        String virtualPath = categoryPath + "/" + imageName;
         String urlPath = baseUrl + preUrl + imageDirector + virtualPath;
 
         return new FileImageBO(virtualPath, urlPath, imageName);
@@ -106,18 +106,19 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
     }
 
     @Override
-    public void unmountImage(String fullPath) {
-        this.deleteImage(fullPath);
+    public void unmountImage(String category, String name) {
+        this.deleteImage(category, name);
     }
 
 
-    private void deleteImage(String fullPath) {
+    private void deleteImage(String category, String name) {
         String imageAddress;
-        if (fullPath.contains(testProjectPath)) {
-            imageAddress = fullPath;
-        } else {
-            imageAddress = testProjectPath + fullPath.replaceAll(baseUrl + preUrl, "");
-        }
+        if (name.contains(baseUrl)) {
+            // imageAddress = name.replaceAll(baseUrl + preUrl, testProjectPath);
+            imageAddress = name.replaceAll(baseUrl + preUrl, projectPath);
+        // } else imageAddress = testProjectPath + imageDirector + category + "/" + name;
+        } else imageAddress = projectPath + imageDirector + category + "/" + name;
+        System.out.println(imageAddress);
         File image = new File(imageAddress);
         if (image.exists()) {
             boolean isDeleted = image.delete();

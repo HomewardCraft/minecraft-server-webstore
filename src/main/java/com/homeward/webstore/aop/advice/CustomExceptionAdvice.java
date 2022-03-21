@@ -134,7 +134,8 @@ public class CustomExceptionAdvice {
 
 
 
-    @Around("execution(@com.homeward.webstore.aop.annotations.JoinPointSymbol com.homeward.webstore.java.bean.VO.R com.homeward.webstore.controller.AdminItemManipulationController.uploadImage(..))")
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.uploadImageMethod() || " +
+            "com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.unmountImageMethod()")
     public R AdministratorUploadImageException(ProceedingJoinPoint point) {
         R res;
         try {
@@ -156,6 +157,9 @@ public class CustomExceptionAdvice {
                 }
                 case "duplicate image found" -> {
                     return R.no(AdministratorStatusEnum.DUPLICATE_IMAGE);
+                }
+                case "unhandled error occurred" -> {
+                    return R.no(AdministratorStatusEnum.BACKEND_ERROR);
                 }
                 default -> {
                     log.error(errorMessage);

@@ -33,8 +33,9 @@ public class AdminItemManipulationController {
 
     // !!!
     @PostMapping("/file/unmount")
-    public R unmountImage(String fullPath) {
-        adminItemManipulationService.unmountImage(fullPath);
+    @JoinPointSymbol
+    public R unmountImage(String category, String name) {
+        adminItemManipulationService.unmountImage(category, name);
         return R.ok();
     }
 }

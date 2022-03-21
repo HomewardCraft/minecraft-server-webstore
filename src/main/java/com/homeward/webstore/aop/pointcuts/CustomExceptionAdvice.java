@@ -27,4 +27,14 @@ public class CustomExceptionAdvice {
             "com.homeward.webstore.java.bean.VO.R " +
             "com.homeward.webstore.controller.AdminAccountController.administratorLogin(..))")
     public void adminLoginMethod() {}
+
+    @Pointcut("execution(@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
+            "com.homeward.webstore.java.bean.VO.R " +
+            "com.homeward.webstore.controller.AdminItemManipulationController.uploadImage(..))")
+    public void uploadImageMethod() {}
+
+    @Pointcut("execution(@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
+            "com.homeward.webstore.java.bean.VO.R " +
+            "com.homeward.webstore.controller.AdminItemManipulationController.unmountImage(..))")
+    public void unmountImageMethod() {}
 }
