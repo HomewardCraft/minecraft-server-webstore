@@ -53,13 +53,18 @@
             </div>
           </div>
 
-          <div class="col-start-2">
+          <div class="col-start-2" id="uploadRegular">
+            <div @click="removeImage" class="relative float-right">
+              <svg viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-900 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
+                <path d="M36.0002 5.00012L30.7462 -0.253906L17.8731 12.6191L5.00012 -0.253866L-0.253906 5.00016L12.6191 17.8732L-0.253784 30.7461L5.00024 36.0001L17.8731 23.1272L30.7461 36.0001L36.0001 30.7461L23.1272 17.8732L36.0002 5.00012Z" data-v-00ffbf09=""/>
+              </svg>
+            </div>
             <div class="image:regular" :style="{backgroundImage:'url(' + item.image.regular + ')'}"/>
             <div class="w-full">
               <input v-model="imageName" placeholder="图片名称(英文)" class="text-center">
               <input :value="regular" :type="'imageName'" class="pointer-events-non text-center">
             </div>
-            <div @click="uploadFile" class="title" id="uploadRegular">
+            <div @click="uploadFile" class="title">
               <input type="file" ref="uploadRegularInput" name="regular" @change="onFileChanged">
               <span class="text-4xl">regular</span>
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -68,13 +73,18 @@
             </div>
           </div>
 
-          <div class="col-start-3">
+          <div class="col-start-3" id="uploadHover">
+            <div @click="removeImage" class="relative float-right">
+              <svg viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-900 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
+                <path d="M36.0002 5.00012L30.7462 -0.253906L17.8731 12.6191L5.00012 -0.253866L-0.253906 5.00016L12.6191 17.8732L-0.253784 30.7461L5.00024 36.0001L17.8731 23.1272L30.7461 36.0001L36.0001 30.7461L23.1272 17.8732L36.0002 5.00012Z" data-v-00ffbf09=""/>
+              </svg>
+            </div>
             <div class="image:hover" :style="{backgroundImage:'url(' + item.image.hover + ')'}"/>
             <div class="w-full">
               <input v-model="imageName" placeholder="图片名称(英文)" class="text-center">
               <input :value="hover" :type="'imageName'" class="pointer-events-none text-center">
             </div>
-            <div @click="uploadFile" class="title" id="uploadHover">
+            <div @click="uploadFile" class="title">
               <input type="file" ref="uploadHoverInput" name="hover" @change="onFileChanged">
               <span class="text-4xl">hover</span>
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -106,6 +116,9 @@ import {debounce} from "lodash";
 import {marked} from 'marked'
 import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
 import isBlank from "../../../hooks/isBlank.js";
+import {useCookies} from "vue3-cookies";
+
+const cookies = useCookies().cookies
 const route = useRoute()
 let routeValue = {
   name: null,
@@ -160,6 +173,10 @@ const uploadRegularInput = ref(null)
 const uploadHoverInput = ref(null)
 // 名称
 let imageName = ref('')
+let uploadedImageName = {
+  regular: null,
+  hover: null
+}
 
 const name = computed(() => {
   const prefix = rawItem.name.toString().split(' ', 1).toString().concat(' ')
@@ -196,8 +213,8 @@ watch(rawItem, (rawItem) => {
     item.salePercent = cache.salePercent
     item.command = cache.command
     item.rawDescription = cache.rawDescription
-    tempItem.image.regular = item.image.regular = cache.image.regular
-    tempItem.image.hover = item.image.hover = cache.image.hover
+    tempItem.image.regular = item.image.regular = uploadedImageName.regular = cache.image.regular
+    tempItem.image.hover = item.image.hover = uploadedImageName.hover = cache.image.hover
   } else {
     item.name = name
     tempItem.price = rawItem.price / 100
@@ -207,8 +224,8 @@ watch(rawItem, (rawItem) => {
     item.rawDescription = rawItem.rawDescription
     item.command = rawItem.command
     item.rawDescription = rawItem.rawDescription
-    tempItem.image.regular = item.image.regular = rawItem.image.regular
-    tempItem.image.hover = item.image.hover = rawItem.image.hover
+    tempItem.image.regular = item.image.regular = uploadedImageName.regular = rawItem.image.regular
+    tempItem.image.hover = item.image.hover = uploadedImageName.hover = rawItem.image.hover
     enableCache = true
   }
 })
@@ -276,6 +293,26 @@ const saveCache = debounce(() => {
   // localStorage.setItem('cache', JSON.stringify(cache))
 }, 300)
 
+const removeImage = async (event) => {
+  let name
+  if (document.getElementById('uploadRegular').contains(event.target)) {
+    name = uploadedImageName.regular
+  } else if (document.getElementById('uploadHover').contains(event.target)) {
+    name = uploadedImageName.hover
+  } else return false
+  const data = new FormData;
+  data.append('category', rawItem.type)
+  data.append('name', name)
+  const {data:result} = await axios.post('local/admin/file/unmount', data, {
+    headers: {
+      'Authorization': cookies.get('authorization')
+    }
+  })
+  if (result.status !== 200) {
+    setCurrentToastComponent('fail', result.message)
+    return false
+  }
+}
 const uploadFile = (event) => {
   let onClick
   if (document.getElementById('uploadRegular').contains(event.target)) {
@@ -292,10 +329,17 @@ const onFileChanged = async (event) => {
   if (!files.length) {
     return false
   }
+  let name = null
+  if (document.getElementById('uploadRegular').contains(event.target)) {
+    name = imageName.value
+  }
+  if (document.getElementById('uploadHover').contains(event.target)) {
+    name = imageName.value + '_hover'
+  }
   const formData = new FormData()
   formData.append('file', files[0])
   formData.append('category', rawItem.type)
-  // formData.append('name', imageName.value)
+  formData.append('name', name)
   const {data:result} = await axios.post('local/admin/file/upload', formData, {
     // todo 正式发布切换
     // const {data:result} = await axios.post('baioretto/webstore/api/admin/file/upload', formData, {
@@ -310,9 +354,11 @@ const onFileChanged = async (event) => {
   const data = result.data.data
   if (document.getElementById('uploadRegular').contains(event.target)) {
     item.image.regular = data.urlPath
+    uploadedImageName.regular = data.fileName
   }
   if (document.getElementById('uploadHover').contains(event.target)) {
     item.image.hover = data.urlPath
+    uploadedImageName.hover = data.fileName
   }
   setCurrentToastComponent('success', '添加成功')
 }
