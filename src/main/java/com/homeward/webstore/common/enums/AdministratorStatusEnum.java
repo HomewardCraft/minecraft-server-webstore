@@ -16,7 +16,9 @@ public enum AdministratorStatusEnum implements BaseEnum {
     ITEM_TYPE_NOT_MATCH(403, "item type not match"),
     ITEM_NAME_DUPLICATED(403, "item name duplicated"),
     DESCRIPTION_INSERT_ERROR(500, "an error occur during insert item description"),
-    INFORMATION_INSERT_ERROR(500, "an error occur during insert item information");
+    INFORMATION_INSERT_ERROR(500, "an error occur during insert item information"),
+
+    BACKEND_ERROR(500, "unhandled error occurred");
 
 
     private final Integer statusCode;

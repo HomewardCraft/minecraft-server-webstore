@@ -1,6 +1,7 @@
 package com.homeward.webstore.java.bean.PO;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data

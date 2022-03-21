@@ -8,7 +8,6 @@ import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
 import com.homeward.webstore.mapper.AdminItemManipulationMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,6 +38,7 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         this.adminItemManipulationMapper = adminItemManipulationMapper;
     }
 
+
     @Override
     public FileImageBO uploadImage(MultipartFile file, String category, String name) {
         if (file == null) {
@@ -65,18 +65,20 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         // String imageDirectoryPath = projectPath + imageDirector;
         // todo 发布时切换
         String imageDirectoryPath = testProjectPath + imageDirector;
-        String imagePath = String.format("%s%s", imageDirectoryPath, categoryPath);
+        String imagePath = String.format("%s%s/", imageDirectoryPath, categoryPath);
 
         String imageType = originImageName.split("\\.")[1];
         String imageName = String.format("%s.%s", name.toLowerCase(), imageType);
         String absolutePath = String.format("%s%s", imagePath, imageName);
 
-        if (new File(absolutePath).exists()) {
-            CommonUtils.throwRuntimeException(AdministratorStatusEnum.DUPLICATE_IMAGE);
+        File image = new File(absolutePath);
+
+        if (image.exists()) {
+            this.deleteImage(absolutePath);
         }
 
         try {
-            file.transferTo(new File(absolutePath));
+            file.transferTo(image);
         } catch (IOException e) {
             CommonUtils.throwRuntimeException(AdministratorStatusEnum.IMAGE_CREATE_ERROR);
         }
@@ -89,7 +91,6 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
 
 
     @Override
-
     @Transactional
     public void insertItem(ItemWholeInfo information) {
         Long itemAmount = isExist(information.getName());
@@ -102,6 +103,26 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         insertDescription(information);
 
         insertItemInformation(information);
+    }
+
+    @Override
+    public void unmountImage(String fullPath) {
+        this.deleteImage(fullPath);
+    }
+
+
+    private void deleteImage(String fullPath) {
+        String imageAddress;
+        if (fullPath.contains(testProjectPath)) {
+            imageAddress = fullPath;
+        } else {
+            imageAddress = testProjectPath + fullPath.replaceAll(baseUrl + preUrl, "");
+        }
+        File image = new File(imageAddress);
+        if (image.exists()) {
+            boolean isDeleted = image.delete();
+            if (!isDeleted) CommonUtils.throwRuntimeException(AdministratorStatusEnum.BACKEND_ERROR);
+        } else CommonUtils.throwRuntimeException(AdministratorStatusEnum.FILE_NOT_FOUND);
     }
 
     private void insertDescription(ItemWholeInfo information) {
