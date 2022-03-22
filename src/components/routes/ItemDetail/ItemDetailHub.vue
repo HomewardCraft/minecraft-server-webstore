@@ -97,7 +97,7 @@
 
       <div class="button flex justify-between items-center flex-grow">
         <div class="cancel bg-red-600">取消</div>
-        <div class="confirm bg-green-700">保存</div>
+        <div @click="commit" class="confirm bg-green-700">保存</div>
       </div>
     </div>
 </template>
@@ -221,7 +221,7 @@ watch(rawItem, (rawItem) => {
     tempItem.image.regular = item.image.regular = uploadedImageName.regular = cache.image.regular
     tempItem.image.hover = item.image.hover = uploadedImageName.hover = cache.image.hover
   } else {
-    item.name = name
+    item.name = rawItem.name.toString().split(' ').slice(1).toString().replaceAll(',', ' ');
     tempItem.price = rawItem.price / 100
     discountClass.isDiscount = item.saleCondition = rawItem.saleCondition
     item.salePercent = rawItem.salePercent
@@ -298,6 +298,40 @@ const saveCache = debounce(() => {
   localStorage.setItem('cache', JSON.stringify(cache))
 }, 300)
 
+const commit = async () => {
+  //   name: null,
+  //   price: null,
+  //   saleCondition: null,
+  //   salePercent: null,
+  //   command: null,
+  //   image: {
+  //     regular: null,
+  //     hover: null
+  //   },
+  //   description: null,
+  //   rawDescription: null
+  const formData = new FormData;
+  formData.append('name', item.name)
+  formData.append('price', item.price)
+  formData.append('saleCondition', item.saleCondition)
+  formData.append('salePercent', item.salePercent)
+  formData.append('command', item.command)
+  formData.append('imageAddress', item.image.regular)
+  formData.append('imageHoverAddress', item.image.hover)
+  formData.append('description', item.description)
+  formData.append('rawDescription', item.rawDescription)
+  // const {data:result} = await axios.post('local/admin/update', formData, {
+  // // const {data:result} = await axios.post('baioretto/webstore/api/admin/update', formData, {
+  //   headers: {
+  //     'Authorization': cookies.get('authorization')
+  //   }
+  // })
+  // console.log(result)
+  formData.forEach((v, k) => {
+    console.log(k, v)
+  })
+}
+
 
 const uploadFile = (event) => {
   let onClick
@@ -309,7 +343,6 @@ const uploadFile = (event) => {
 
   onClick.click()
 }
-
 const removeImage = async (event) => {
   let name
   if (document.getElementById('uploadRegular').contains(event.target)) {
