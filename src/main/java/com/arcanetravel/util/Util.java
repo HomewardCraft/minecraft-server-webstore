@@ -31,6 +31,10 @@ public class Util {
 
     }
 
+    public static void showLog(String log) {
+        Util.logger.info(ChatColor.translateAlternateColorCodes('&', log));
+    }
+
     //全局GUI储存 适用于关闭服务请求
     public static void globalSave(HashMap<String, StorageGui> playerDeliverGUI) {
 

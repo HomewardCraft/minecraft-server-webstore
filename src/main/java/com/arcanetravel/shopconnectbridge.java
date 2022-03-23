@@ -1,6 +1,7 @@
 package com.arcanetravel;
 
 import com.arcanetravel.database.tables.CartItem;
+import com.arcanetravel.database.tables.PlayerCart;
 import com.arcanetravel.util.*;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -27,6 +28,7 @@ public final class shopconnectbridge extends JavaPlugin {
     public static ConnectionSource source;
     //Dao
     public static Dao<CartItem, String> cartItemDao = null;
+    public static Dao<PlayerCart, String> playerCartDao = null;
 
     public static Logger logger = Bukkit.getLogger();
 
@@ -54,8 +56,7 @@ public final class shopconnectbridge extends JavaPlugin {
         this.saveResource("message.yml", false);
 
         // Plugin startup logic
-        System.out.println("初始化 ArcaneTravel DataBridge");
-
+        Util.showLog("初始化 ArcaneTravel DataBridge");
 
         //事件注册器注册事件
         new EventRegister(this).RegisterEvent();
@@ -68,7 +69,7 @@ public final class shopconnectbridge extends JavaPlugin {
         logger.info(ChatColor.translateAlternateColorCodes('&', "&7&l[&2+&7] &f加载成功"));
 
         source = ConnectDataBase.onConnected();
-        //TODO 初始化网络商店database倒入Inventory类型仓库
+        //初始化网络商店database倒入Inventory类型仓库
         ConvertWebCart.onConvert();
 
 
@@ -90,6 +91,13 @@ public final class shopconnectbridge extends JavaPlugin {
 
         //保存所有玩家的GUI
         Util.globalSave(playerDeliverGUI);
+
+        //关闭连接源
+        try {
+            source.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }

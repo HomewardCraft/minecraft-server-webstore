@@ -1,7 +1,7 @@
 package com.arcanetravel.util;
 
-import com.arcanetravel.command.OpenDelivery;
 import com.arcanetravel.command.Main;
+import com.arcanetravel.command.OpenDelivery;
 import com.arcanetravel.command.TestSerialize;
 import com.arcanetravel.shopconnectbridge;
 import org.bukkit.ChatColor;
