@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import {reactive} from "vue";
-import commit from "../../hooks/commit.js";
+import {insert} from "../../hooks/commit.js";
 import pubsub from "pubsub-js";
 import 'md-editor-v3/lib/style.css';
 import UploadImage from "./item/image/UploadImage.vue";
@@ -86,7 +86,7 @@ function execCommit() {
     regular: imageAddress.regular,
     hover: imageAddress.hover
   }
-  commit(information)
+  insert(information)
 }
 pubsub.subscribe('commit', execCommit)
 </script>

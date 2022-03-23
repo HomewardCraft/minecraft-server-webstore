@@ -1,5 +1,5 @@
 import setCurrentToastComponent from "./setToastComponent.js";
-import axios from "../commonPlugins/axios.js";
+import axios from "axios";
 import isBlank from "./isBlank.js";
 
 function discountCheck(target) {
@@ -34,7 +34,8 @@ function priceCheck(target) {
     return true
 }
 
-async function commit(information) {
+
+async function insert(information) {
     // 校验描述
     if (isBlank(information.markdownText)) {
         setCurrentToastComponent('fail', '请描述这个物品')
@@ -148,4 +149,16 @@ async function commit(information) {
     }
 }
 
-export default commit
+async function update(information) {
+    console.log(information)
+    // const {data:result} = await axios.post('local/admin/update', data, {
+    // // const {data:result} = await axios.post('baioretto/webstore/api/admin/update', formData, {
+    //   headers: {
+    //     'Authorization': cookies.get('authorization')
+    //   }
+    // })
+    // if (result.status === 200) setCurrentToastComponent('success', '更新成功')
+    // else setCurrentToastComponent('fail', '更新失败')
+}
+
+export {insert, update}

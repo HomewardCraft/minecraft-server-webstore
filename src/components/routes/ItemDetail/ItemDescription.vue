@@ -1,9 +1,8 @@
 <template>
-  <div v-show="true" v-html="rawHTMLText" class="description content-wrap"/>
-  <!--<div v-show="false" v-html="compiledMarkdown"></div>-->
-
-  <div v-show="false" id="editor">
-    <textarea :value="input" @input="update"></textarea>
+  <div class="description">
+    <span>物品描述: </span>
+    <div id="description" v-show="true" v-html="props.description" class="content-wrap"/>
+    <textarea v-model="props.item.rawDescription"/>
   </div>
 </template>
 
@@ -14,21 +13,5 @@ export default {
 </script>
 
 <script setup>
-import {debounce} from "lodash";
-import {computed, onMounted} from "vue";
-import isBlank from "../../../hooks/isBlank.js";
-
-const props = defineProps(['description', 'markdown', 'cache']);
-
-const rawHTMLText = props.description
-
-let cache = props.cache
-let input = props.markdown.input
-
-const update = debounce((e) => {
-  input = cache.markdown = e.target.value
-  localStorage.setItem('detailCache', JSON.stringify(cache))
-}, 300)
-const compiledMarkdown = computed(() => marked(input.value))
-
+const props = defineProps(['item', 'description']);
 </script>

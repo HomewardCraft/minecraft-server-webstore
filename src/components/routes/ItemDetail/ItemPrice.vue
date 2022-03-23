@@ -1,4 +1,11 @@
 <template>
+  <div class="price font-bold">
+    <div class="inline-flex items-center">
+      <span>价格: </span>
+      <div class="text-3xl text-yellow-400 ml-5">${{ props.price }} USD</div>
+    </div>
+    <input v-model="props.tempItem.price">
+  </div>
 </template>
 
 <script>
@@ -8,6 +15,5 @@ export default {
 </script>
 
 <script setup>
-const props = defineProps(['rawInfo']);
-const rawInfo = props.rawInfo
+const props = defineProps(['tempItem', 'price']);
 </script>
