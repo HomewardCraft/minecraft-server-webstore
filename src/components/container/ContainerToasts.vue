@@ -31,20 +31,17 @@ let slot = reactive({
   color: ''
 })
 
-
-function setCurrentComponent(_, data) {
-  debounce(() => {
-    slot.currentSlotName = data.currentSlotName
-    slot.msg = data.msg
-    if (slot.currentSlotName === 'success') {
-      slot.color = 'bg-green-700'
-    } else {
-      slot.color = 'bg-red-500'
-    }
-    setTimeout(() => {
-      slot.currentSlotName = ''
-    }, 3000);
-  }, 100)
-}
+const setCurrentComponent = debounce(function (_, data) {
+  slot.currentSlotName = data.currentSlotName
+  slot.msg = data.msg
+  if (slot.currentSlotName === 'success') {
+    slot.color = 'bg-green-700'
+  } else {
+    slot.color = 'bg-red-500'
+  }
+  setTimeout(() => {
+    slot.currentSlotName = ''
+  }, 3000);
+}, 100)
 pubsub.subscribe('setCurrentToastComponent', setCurrentComponent)
 </script>

@@ -67,7 +67,7 @@ export default {
     async function getCratesList() {
       const {
         data: result
-      } = await http.get(`fantang/webstore/api/category/extras`)
+      } = await http.get(`backend/webstore/api/category/extras`)
 
       list.value = result.data
     }

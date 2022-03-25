@@ -11,10 +11,15 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: path => path.replace(/^\/mojang/, '')
       },
-      '/fantang': {
-        target: 'https://fantang.cc/',
+      '/backend': {
+        target: 'https://ba1oretto.com/',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/fantang/, '')
+        rewrite: path => path.replace(/^\/backend/, '')
+      },
+      '/local': {
+        target: 'http://127.0.0.1:50012/',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/local/, '')
       }
     }
   }

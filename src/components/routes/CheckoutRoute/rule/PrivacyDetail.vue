@@ -43,7 +43,7 @@ let information = ref('')
 async function getPrivacyInfo() {
   const {
     data: res
-  } = await http.get('fantang/webstore/api/rule/privacy')
+  } = await http.get('backend/webstore/api/rule/privacy')
   information.value = res
 }
 getPrivacyInfo()

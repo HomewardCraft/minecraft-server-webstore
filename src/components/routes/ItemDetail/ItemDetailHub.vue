@@ -34,7 +34,7 @@ let item = ref('')
 async function getItemDetail(id) {
   const {
     data: result
-  } = await http.get(`fantang/webstore/api/production/${id}`)
+  } = await http.get(`backend/webstore/api/production/${id}`)
 
   obj['res'] = result.data
 

@@ -3,6 +3,7 @@
     <div class="text-5xl text-white font-bold">Crates</div>
   </div>
   <crate-showcase v-for="crate in crates" :key="crate.id" :crates="crate"/>
+  <button @click="test">111</button>
 </template>
 
 <script>
@@ -15,37 +16,41 @@ export default {
 </script>
 
 <script setup>
-import {getCurrentInstance, ref} from "vue";
+import {reactive, ref} from "vue";
 import sendRoutePath from "../../../hooks/sendRoutePath.js";
+import axios from "axios";
+import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
+import {debounce} from "lodash";
 
-let http = getCurrentInstance().appContext.config.globalProperties.$http;
-let crates = ref('')
+const crates = ref('')
+
+
 
 async function getCratesList() {
   const {
     data: result
-  } = await http.get(`fantang/webstore/api/category/crates`)
+  } = await axios.get(`backend/webstore/api/category/crates`)
 
   let imageAddress = ''
   let cratesObject = {}
   let crateArray = []
 
   for (let i = 0; i < result.data.length; i++) {
-    let item = result.data[i];
+    const item = result.data[i];
 
     if (imageAddress === '') {
-      imageAddress = item.itemBasicInfo.imageAddress
+      imageAddress = item.imageAddress
     }
 
-    if (imageAddress === item.itemBasicInfo.imageAddress) {
+    if (imageAddress === item.imageAddress) {
       crateArray.push(item)
     }
 
-    if (imageAddress !== item.itemBasicInfo.imageAddress) {
+    if (imageAddress !== item.imageAddress) {
       let name = imageAddress.substring(45, imageAddress.length - 10);
       cratesObject[name] = crateArray
       crateArray = []
-      imageAddress = item.itemBasicInfo.imageAddress
+      imageAddress = item.imageAddress
       crateArray.push(item)
     }
 

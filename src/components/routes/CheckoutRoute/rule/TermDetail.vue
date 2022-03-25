@@ -39,7 +39,7 @@ let information = ref('')
 async function getTermInfo() {
   const {
     data: res
-  } = await http.get('fantang/webstore/api/rule/term')
+  } = await http.get('backend/webstore/api/rule/term')
   information.value = res
 }
 getTermInfo()
