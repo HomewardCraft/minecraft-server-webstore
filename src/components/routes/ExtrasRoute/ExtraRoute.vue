@@ -2,10 +2,10 @@
   <SearchUtil></SearchUtil>
 
   <div class="packages grid gap-6 md:grid-cols-2 pt-16">
-    <a v-for="items in list" :key="items.itemBasicInfo.id"
-       @click="goToDetail(items.itemBasicInfo.id)"
+    <a v-for="items in list" :key="items.id"
+       @click="goToDetail(items.id)"
        ref ="item"
-       :id="items.itemBasicInfo.id"
+       :id="items.id"
        class="package grid bg-gray-900 border border-lighten transform transition-all hover:opacity-75 hover:-translate-y-2"
     >
       <div class="image">
@@ -16,12 +16,12 @@
       </div>
 
       <div class="text px-6 text-center font-bold">
-        <div class="name text-white text-lg">{{ items.itemBasicInfo.name}}</div>
+        <div class="name text-white text-lg">{{ items.name}}</div>
         <div class="price pt-2 text-yellow-400">
-          <div class="discounted text-gray-500 text-sm font-italic line-through">${{ items.itemBasicInfo.price / 100 }}
+          <div class="discounted text-gray-500 text-sm font-italic line-through">${{ items.price / 100 }}
             USD
           </div>
-          <div class="final">${{ items.itemBasicInfo.price / 100 * (items.itemSaleInfo.onsalePercent / 100) }} USD</div>
+          <div class="final">${{ items.price / 100 * (items.salePercent / 100) }} USD</div>
         </div>
         <div class="button pt-10 pb-5 flex text-gray-500 items-center justify-center"><span
             data-v-45761ad8="">View Item Details</span>
