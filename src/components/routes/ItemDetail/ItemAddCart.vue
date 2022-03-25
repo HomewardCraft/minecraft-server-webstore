@@ -70,7 +70,7 @@ function addItemToCart() {
   showItem.quantity = 1
   GLOBAL_DATA.commit('addItemToCart', showItem)
   pubsub.publish('changeSaberCondition')
-  setCurrentToastComponent('success', '1')
+  setCurrentToastComponent('AddCartMessage', showItem)
 }
 
 function countItem() {

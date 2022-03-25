@@ -3,7 +3,7 @@
     <div class="title text-center lg:text-left font-bold text-3xl mb-6">{{ name }}</div>
     <div class="relative">
       <div class="amounts grid lg:grid-cols-4">
-        <crate-details v-for="crate in props.crates" :key="crate.index" :crate="crate" @click="toDetailPage(crate.itemBasicInfo.id)"/>
+        <crate-details v-for="crate in props.crates" :key="crate.index" :crate="crate" @click="toDetailPage(crate.id)"/>
       </div>
     </div>
   </div>
@@ -22,11 +22,11 @@ export default {
 <script setup>
 import {useRouter} from "vue-router";
 
-let router = useRouter()
-let props = defineProps(['crates'])
+const router = useRouter()
+const props = defineProps(['crates'])
 
-let amountAndName = props.crates[0].itemBasicInfo.name;
-let name = amountAndName.split(' ', 3)[1] + ' ' + amountAndName.split(' ', 3)[2]
+const amountAndName = props.crates[0].name;
+let name = amountAndName.split(' ', 3)[1] + ' ' + 'Crate'
 
 function toDetailPage(id) {
   router.push({

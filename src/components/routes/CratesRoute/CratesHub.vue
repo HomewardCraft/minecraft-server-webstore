@@ -3,7 +3,6 @@
     <div class="text-5xl text-white font-bold">Crates</div>
   </div>
   <crate-showcase v-for="crate in crates" :key="crate.id" :crates="crate"/>
-  <button @click="test">111</button>
 </template>
 
 <script>
@@ -16,15 +15,11 @@ export default {
 </script>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 import sendRoutePath from "../../../hooks/sendRoutePath.js";
 import axios from "axios";
-import setCurrentToastComponent from "../../../hooks/setToastComponent.js";
-import {debounce} from "lodash";
 
 const crates = ref('')
-
-
 
 async function getCratesList() {
   const {

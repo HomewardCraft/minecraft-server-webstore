@@ -3,7 +3,7 @@
     <div class="mb-12 crate-row">
       <div class="main bg-gray-900 border border-light grid lg:grid-cols-4">
         <crate-image :imageAddress="imageAddress"/>
-        <!--<crate-inner-showcase :crates="props.crates"/>-->
+        <crate-inner-showcase :crates="props.crates"/>
       </div>
     </div>
   </div>
@@ -21,5 +21,8 @@ export default {
 <script setup>
 const props = defineProps(['crates'])
 console.log(props.crates)
-const imageAddress = props.crates[0].imageAddress
+const imageAddress = {
+  regular: props.crates[0].imageAddress,
+  hover: props.crates[0].imageHoverAddress
+}
 </script>
