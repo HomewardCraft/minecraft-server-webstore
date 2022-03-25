@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface AdminItemManipulationService {
     void insertItem(ItemWholeInfo itemWholeInfo);
+    void updateItem(ItemWholeInfo itemWholeInfo);
     FileImageBO uploadImage(MultipartFile file, String category, String name);
     void unmountImage(String category, String name);
 }

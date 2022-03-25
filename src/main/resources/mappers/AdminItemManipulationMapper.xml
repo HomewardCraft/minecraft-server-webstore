@@ -3,9 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.homeward.webstore.mapper.AdminItemManipulationMapper">
-    <select id="isExist" resultType="Long">
+    <select id="isExist" resultType="Long" useCache="true">
         select count(*) from item_info where name like concat('%', #{name}, '%')
     </select>
+
+    <select id="selectDescriptionId" resultType="String" useCache="true">
+        select description_id from item_info where id = #{id}
+    </select>
+
+    <resultMap id="itemName" type="ItemName">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description_id" property="descriptionId"/>
+    </resultMap>
+    <select id="selectCratesId" resultMap="itemName" useCache="true">
+        select id, name, description_id from item_info where description_id = #{descriptionId}
+    </select>
+
 
     <insert id="insertDescription" parameterType="ItemWholeInfo">
         insert into item_desc (id, description, rawDescription) values(#{descriptionId}, #{description}, #{rawDescription})
@@ -21,4 +35,31 @@
             (#{info.id}, #{info.type}, #{info.name}, #{info.price}, #{info.saleCondition}, #{info.salePercent}, #{info.command}, #{info.imageAddress}, #{info.imageHoverAddress}, #{info.descriptionId})
         </foreach>
     </insert>
+
+
+    <update id="updateDescription">
+        update item_desc set description = #{description}, rawDescription = #{rawDescription} where id = #{descriptionId}
+    </update>
+
+    <update id="updateExtrasInformation" flushCache="true">
+        update item_info set name = #{name}, price = #{price}, is_onsale = #{saleCondition}, onsale_percent = #{salePercent}, command = #{command}, image_address = #{imageAddress}, image_hover_address = #{imageHoverAddress} where id = #{id}
+    </update>
+
+    <update id="updateCratesInformationName">
+        update item_info
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="name = case" suffix="end,">
+                <foreach collection="cratesInformationNameList" item="crate" index="index">
+                    when
+                    id = #{crate.id}
+                    then
+                    #{crate.name}
+                </foreach>
+            </trim>
+        </trim>
+        where description_id = #{descriptionId}
+    </update>
+    <update id="updateCratesInformation" flushCache="true">
+        update item_info set price = #{price}, is_onsale = #{saleCondition}, onsale_percent = #{salePercent}, command = #{command}, image_address = #{imageAddress}, image_hover_address = #{imageHoverAddress} where id = #{id}
+    </update>
 </mapper>

@@ -10,7 +10,6 @@ import java.util.List;
 public interface ItemMapper {
     String getItemName(Integer id);
 
-    //单个参数传递不加@Param
     List<ItemShowCaseInfo> getItemList(String category);
 
     ItemDetail getSpecificItem(Integer id);

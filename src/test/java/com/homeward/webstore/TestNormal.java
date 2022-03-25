@@ -1,9 +1,12 @@
 package com.homeward.webstore;
 
 import com.alibaba.fastjson.JSONObject;
+import com.homeward.webstore.java.bean.BO.ItemName;
+import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
 import com.homeward.webstore.java.bean.VO.R;
 import com.homeward.webstore.common.enums.StatusEnum;
 import com.homeward.webstore.common.consts.SystemConst;
+import org.apache.logging.log4j.util.PropertySource;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -176,5 +179,25 @@ public class TestNormal {
             list.add(value.toString());
         });
         System.out.println(list);
+    }
+
+    @Test
+    void testListAdd() {
+        JSONObject namePrefix = JSONObject.parseObject("{\"x1\":1,\"x5\":5,\"x10\":10,\"x20\":20}");
+        String nameSuffix = "custom name";
+
+        List<ItemName> name = new ArrayList<>();
+
+        ItemName itemName = new ItemName();
+
+        namePrefix.forEach((k, v) -> {
+            itemName.setAmount(Integer.valueOf(v + ""));
+            itemName.setName(k + " " + nameSuffix);
+            name.add(itemName.clone());
+        });
+
+        name.sort(Comparator.comparing(ItemName::getAmount));
+
+        System.out.println(name);
     }
 }

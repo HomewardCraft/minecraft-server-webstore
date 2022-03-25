@@ -20,7 +20,13 @@ public class AdminItemManipulationController {
     @PostMapping("/insert")
     public R insertItem(@RequestBody ItemWholeInfo information) {
         adminItemManipulationService.insertItem(information);
-        return R.ok("1");
+        return R.ok("");
+    }
+
+    @PostMapping("/update")
+    public R updateItem(@RequestBody ItemWholeInfo information) {
+        adminItemManipulationService.updateItem(information);
+        return R.ok("");
     }
 
     @PostMapping("/file/upload")
@@ -30,8 +36,6 @@ public class AdminItemManipulationController {
         return R.ok(fileImageBO);
     }
 
-
-    // !!!
     @PostMapping("/file/unmount")
     @JoinPointSymbol
     public R unmountImage(String category, String name) {

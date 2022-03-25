@@ -3,7 +3,9 @@ package com.homeward.webstore;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.common.util.JwtUtils;
+import com.homeward.webstore.java.bean.BO.ItemName;
 import com.homeward.webstore.java.bean.PO.ItemShowCaseInfo;
+import com.homeward.webstore.mapper.AdminItemManipulationMapper;
 import com.homeward.webstore.mapper.AuthenticationMapper;
 import com.homeward.webstore.mapper.CartMapper;
 import com.homeward.webstore.mapper.ItemMapper;
@@ -16,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
@@ -41,6 +44,9 @@ public class TestSpring {
 
     @Autowired
     private AuthenticationMapper authenticationMapper;
+
+    @Autowired
+    private AdminItemManipulationMapper adminItemManipulationMapper;
 
     @Test
     @Disabled
@@ -197,6 +203,24 @@ public class TestSpring {
         ApplicationHome applicationHome = new ApplicationHome();
         File dir = applicationHome.getDir();
         System.out.println(dir.getPath());
+    }
+
+    @Test
+    @Transactional
+    @Disabled
+    void testSelectName() {
+        List<ItemName> cratesName = adminItemManipulationMapper.selectCratesId("d3e5b21e-2bbf-4473-aee9-ff976d7bc1ba");
+
+        String name = "custom name";
+
+        cratesName.forEach(itemName -> {
+            String amount = itemName.getName().split(" ")[0];
+            itemName.setName(amount + " " + name);
+        });
+
+        Boolean nameIsUpdated = adminItemManipulationMapper.updateCratesInformationName(cratesName, "d3e5b21e-2bbf-4473-aee9-ff976d7bc1ba");
+        if (nameIsUpdated) System.out.println(1);
+        else System.out.println(2);
     }
 }
 

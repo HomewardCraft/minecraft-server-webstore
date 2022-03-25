@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.homeward.webstore.common.enums.AdministratorStatusEnum;
 import com.homeward.webstore.common.util.CommonUtils;
 import com.homeward.webstore.java.bean.BO.FileImageBO;
+import com.homeward.webstore.java.bean.BO.ItemName;
 import com.homeward.webstore.java.bean.PO.ItemWholeInfo;
 import com.homeward.webstore.mapper.AdminItemManipulationMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 @Service
 @PropertySource("classpath:/directories.properties")
@@ -38,6 +40,29 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         this.adminItemManipulationMapper = adminItemManipulationMapper;
     }
 
+    @Override
+    @Transactional
+    public void insertItem(ItemWholeInfo information) {
+        Long itemAmount = isExist(information.getName());
+        if (itemAmount != 0) {
+            CommonUtils.throwRuntimeException(AdministratorStatusEnum.ITEM_NAME_DUPLICATED);
+        }
+
+        information.setDescriptionId(UUID.randomUUID().toString());
+
+        insertDescription(information);
+
+        insertItemInformation(information);
+    }
+
+    @Override
+    @Transactional
+    public void updateItem(ItemWholeInfo information) {
+        String descriptionId = adminItemManipulationMapper.selectDescriptionId(information.getId());
+        information.setDescriptionId(descriptionId);
+        this.updateDescription(information);
+        this.updateItemInformation(information);
+    }
 
     @Override
     public FileImageBO uploadImage(MultipartFile file, String category, String name) {
@@ -87,22 +112,6 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         String urlPath = baseUrl + preUrl + imageDirector + virtualPath;
 
         return new FileImageBO(virtualPath, urlPath, imageName);
-    }
-
-
-    @Override
-    @Transactional
-    public void insertItem(ItemWholeInfo information) {
-        Long itemAmount = isExist(information.getName());
-        if (itemAmount != 0) {
-            CommonUtils.throwRuntimeException(AdministratorStatusEnum.ITEM_NAME_DUPLICATED);
-        }
-
-        information.setDescriptionId(UUID.randomUUID().toString());
-
-        insertDescription(information);
-
-        insertItemInformation(information);
     }
 
     @Override
@@ -178,6 +187,30 @@ public class AdminItemManipulationServiceImpl implements AdminItemManipulationSe
         } else {
             CommonUtils.throwRuntimeException(AdministratorStatusEnum.ITEM_TYPE_NOT_MATCH);
         }
+    }
+
+    private void updateDescription(ItemWholeInfo information) {
+        Boolean isComplete = adminItemManipulationMapper.updateDescription(information);
+        if (!isComplete) CommonUtils.throwRuntimeException(AdministratorStatusEnum.DESCRIPTION_INSERT_ERROR);
+    }
+
+    private void updateItemInformation(ItemWholeInfo information) {
+        if (information.getType().equals("crates")) {
+            Boolean isComplete = adminItemManipulationMapper.updateCratesInformation(information);
+            if (!isComplete) CommonUtils.throwRuntimeException(AdministratorStatusEnum.INFORMATION_INSERT_ERROR);
+
+            List<ItemName> cratesName = adminItemManipulationMapper.selectCratesId(information.getDescriptionId());
+            cratesName.forEach(itemName -> {
+                String amount = itemName.getName().split(" ")[0];
+                itemName.setName(amount + " " + information.getName());
+                System.out.println(itemName.getName());
+            });
+            Boolean nameIsUpdated = adminItemManipulationMapper.updateCratesInformationName(cratesName, information.getDescriptionId());
+            if (!nameIsUpdated) CommonUtils.throwRuntimeException(AdministratorStatusEnum.INFORMATION_INSERT_ERROR);
+        } else if (information.getType().equals("extras")) {
+            Boolean isComplete = adminItemManipulationMapper.updateExtrasInformation(information);
+            if (!isComplete) CommonUtils.throwRuntimeException(AdministratorStatusEnum.INFORMATION_INSERT_ERROR);
+        } else CommonUtils.throwRuntimeException(AdministratorStatusEnum.ITEM_TYPE_NOT_MATCH);
     }
 
     public Long isExist(String name) {
