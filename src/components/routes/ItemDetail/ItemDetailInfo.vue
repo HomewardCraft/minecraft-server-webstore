@@ -8,10 +8,7 @@
         <div class="text-3xl text-yellow-400 pt-5">${{ price }} USD</div>
       </div>
     </div>
-    <div class="description content-wrap">
-      <p>Unlock the ultimate enchanting potential for your tool, using slot runes! These powerful runes will add an additional slot for enchantments to your tools.</p>
-      <p>Once a purchase has been made, you will receive the slot rune in-game shortly after. Use an anvil to combine it with any of your tools!</p>
-    </div>
+    <div class="description content-wrap" v-html="item.description"/>
   </div>
 </template>
 
