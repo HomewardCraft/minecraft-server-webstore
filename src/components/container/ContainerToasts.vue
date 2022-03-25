@@ -1,48 +1,50 @@
 <template>
-  <div class="toasts fixed left-0 bottom-0 z-50 leading-loose grid gap-5 m-6">
+  <div class="toasts fixed left-0 bottom-0 z-50 leading-loose grid gap-5 m-6 select-none">
     <transition name="slide">
-      <keep-alive>
-        <component :is="currentComponent.componentName" :item="currentComponent.item"/>
-      </keep-alive>
+      <toast-condition-enum v-if="slot.currentSlotName !== ''" :name="slot.currentSlotName">
+        <template #[slot.currentSlotName]>
+          <div :class="slot.color" class="toast inline-flex text-white font-bold border border-lighten rounded-lg py-3 px-6 shadow-xl text-shadow">
+            {{slot.msg}}
+          </div>
+        </template>
+      </toast-condition-enum>
     </transition>
   </div>
 </template>
 
 <script>
-import ToastIdle from "./toast/ToastIdle.vue";
-import AddCartMessage from "./toast/AddCartMessage.vue";
-import RemoveCartMessage from "./toast/RemoveCartMessage.vue";
-import IncreaseItemMessage from "./toast/IncreaseItemMessage.vue";
-import DecreaseItemMessage from "./toast/DecreaseItemMessage.vue";
-import CheckoutEmpty from "./toast/CheckoutEmpty.vue";
+import ToastConditionEnum from "./toast/ToastConditionEnum.vue";
 export default {
   name: "ContainerToasts",
-  components: {ToastIdle, AddCartMessage, RemoveCartMessage, IncreaseItemMessage, DecreaseItemMessage, CheckoutEmpty}
+  components: {ToastConditionEnum}
 }
 </script>
 
 <script setup>
 import {reactive} from "vue";
 import pubsub from "pubsub-js";
+import {debounce} from "lodash";
 
-let currentComponent = reactive({
-  componentName: 'ToastIdle',
-  item: {
-    name: ''
-  }
+let slot = reactive({
+  currentSlotName: '',
+  msg: '',
+  color: ''
 })
 
-let timer
 
 function setCurrentComponent(_, data) {
-  clearTimeout(timer)
-  timer = setTimeout(() => {
-    currentComponent.item.name = data.itemMeta.name
-    currentComponent.componentName = data.componentName
+  debounce(() => {
+    slot.currentSlotName = data.currentSlotName
+    slot.msg = data.msg
+    if (slot.currentSlotName === 'success') {
+      slot.color = 'bg-green-700'
+    } else {
+      slot.color = 'bg-red-500'
+    }
     setTimeout(() => {
-      currentComponent.componentName = 'ToastIdle'
-    }, 2000);
-  }, 300)
+      slot.currentSlotName = ''
+    }, 3000);
+  }, 100)
 }
 pubsub.subscribe('setCurrentToastComponent', setCurrentComponent)
 </script>

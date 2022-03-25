@@ -46,7 +46,7 @@ let isAgree = false
 function changeCondition() {
   if (!isAgree) {
     dynamicStyle.checkbox = 'opacity-50'
-    dynamicStyle.tick = 'bg-green-600'
+    dynamicStyle.tick = ''
     dynamicStyle.button = 'bg-gray-800'
     dynamicStyle.text = 'opacity-0'
     dynamicStyle.absolute = ''
