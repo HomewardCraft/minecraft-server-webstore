@@ -24,8 +24,6 @@ import {useRouter} from "vue-router";
 const router = useRouter()
 const props = defineProps(['crates'])
 
-console.log(props.crates)
-
 const amountAndName = props.crates[0].name;
 const name = amountAndName.split(' ', 3)[1] + ' ' + 'Crate'
 

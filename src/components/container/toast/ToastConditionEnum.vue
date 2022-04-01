@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "LoginCondition"
+  name: "ToastConditionEnum"
 }
 </script>
 

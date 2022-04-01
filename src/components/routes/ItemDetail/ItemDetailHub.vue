@@ -40,6 +40,7 @@ import {debounce} from "lodash";
 import {marked} from 'marked'
 import {useCookies} from "vue3-cookies";
 import {update} from "../../../hooks/commit.js";
+import isBlank from "../../../hooks/isBlank.js";
 
 const cookies = useCookies().cookies
 const route = useRoute()
@@ -127,10 +128,10 @@ const hover = computed(() => {
 watch(rawItem, (rawItem) => {
   let name = rawItem.name.toString().split(' ').slice(1).toString().replaceAll(',', ' ');
   let cache = JSON.parse(localStorage.getItem('cache'));
-  if (cache !== null && cache !== undefined && cache.name === name) {
+  if (!isBlank(cache) && cache.name === name) {
     item.name = cache.name
     tempItem.price = cache.price / 100
-    discountClass.isDiscount = cache.saleCondition
+    discountClass.isDiscount = item.saleCondition = cache.saleCondition
     item.salePercent = cache.salePercent
     item.command = cache.command
     item.rawDescription = cache.rawDescription
@@ -154,7 +155,8 @@ watch(() => discountClass.isDiscount, () => {
   if (discountClass.isDiscount) {
     discountClass.button = 'bg-green-600'
     discountClass.input = 'pointer-events-auto'
-    item.salePercent = rawItem.salePercent
+    if (rawItem.salePercent === 100) item.salePercent = 0
+    else item.salePercent = rawItem.salePercent
   } else {
     discountClass.button = 'bg-gray-800'
     discountClass.input = 'pointer-events-none'
@@ -166,16 +168,19 @@ watch(() => item.rawDescription, () => {
 })
 watch(tempItem.image, (value) => {
   item.image = {...value}
-  tempItem.imageName = value.regular.toString().slice(value.regular.toString().lastIndexOf('/') + 1).split('.')[0]
+  if (!isBlank(value.regular)) {
+    tempItem.imageName = value.regular.toString().slice(value.regular.toString().lastIndexOf('/') + 1).split('.')[0]
+  }
 })
 
 
 async function getSpecificItem(id) {
   const {
     data: res
-    } = await axios.get(`baioretto/webstore/api/production/${id}`)
-  // } = await axios.get(`local/production/${id}`)
+    // } = await axios.get(`baioretto/webstore/api/production/${id}`)
+  } = await axios.get(`local/production/${id}`)
   const result = res.data
+  console.log(result)
   rawItem.name = result.name
   rawItem.price = result.price
   rawItem.saleCondition = result.saleCondition

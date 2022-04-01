@@ -1,14 +1,14 @@
 <template>
   <button @click="changeCategoryShowCaseCondition" class="item-category">
-    <span>{{information.category}}</span>
+    <span>{{cache.category}}</span>
   </button>
 
   <transition name="item">
-    <div v-show="categoryShowCase.isOpen" class="item-categories transition-all ease-in-out duration-200 bg-gray-800 shadow-lg rounded grid grid-flow-col z-50">
-      <button v-show="categories.crate" @click="changeCategoryShowCase('crates')" class="category h-full font-bold">
+    <div v-show="moduleCondition.categoryShowCase" class="item-categories transition-all ease-in-out duration-200 bg-gray-800 shadow-lg rounded grid grid-flow-col z-50">
+      <button v-show="cache.categories.crate" @click="changeCategoryShowCase('crates')" class="category h-full font-bold">
         <span>Crates</span>
       </button>
-      <button v-show="categories.extra" @click="changeCategoryShowCase('extras')" class="category h-full font-bold">
+      <button v-show="cache.categories.extra" @click="changeCategoryShowCase('extras')" class="category h-full font-bold">
         <span>Extras</span>
       </button>
     </div>
@@ -22,34 +22,33 @@ export default {
 </script>
 
 <script setup>
-const props = defineProps(['information', 'categoryShowCase', 'categories', 'discountShowCase']);
+const props = defineProps(['cache', 'moduleCondition']);
 
-let categoryShowCase = props.categoryShowCase
-let categories = props.categories
-let information = props.information
-let discountShowCase = props.discountShowCase
+const cache = props.cache
+const moduleCondition = props.moduleCondition
 
 function changeCategoryShowCase(type) {
-  categoryShowCase.isOpen = false
-  information.category = type
+  moduleCondition.categoryShowCase = false
+  cache.category = type
+  cache.clickable = ''
   setTimeout(() => {
     if (type === 'crates') {
-      information.discount = null
-      categories.crate = false
-      categories.extra = true
+      cache.discount = null
+      cache.categories.crate = false
+      cache.categories.extra = true
     } else {
-      information.multiDiscount.x1 = null
-      information.multiDiscount.x5 = null
-      information.multiDiscount.x10 = null
-      information.multiDiscount.x20 = null
-      categories.extra = false
-      categories.crate = true
+      cache.multiDiscount.x1 = null
+      cache.multiDiscount.x5 = null
+      cache.multiDiscount.x10 = null
+      cache.multiDiscount.x20 = null
+      cache.categories.extra = false
+      cache.categories.crate = true
     }
   }, 300)
 }
 function changeCategoryShowCaseCondition() {
-  categoryShowCase.isOpen = !categoryShowCase.isOpen
-  discountShowCase.isOpen = false
+  moduleCondition.categoryShowCase = !moduleCondition.categoryShowCase
+  moduleCondition.discountShowCase = false
 }
 </script>
 

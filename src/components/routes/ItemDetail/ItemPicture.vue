@@ -7,7 +7,6 @@
           <div class="hover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100" :style="{backgroundImage:'url(' + item.image.hover + ')'}"/>
         </div>
       </div>
-
       <div class="col-start-2" id="uploadRegular">
         <div @click="removeImage" class="relative float-right">
           <svg viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-900 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
@@ -17,7 +16,7 @@
         <div class="image:regular" :style="{backgroundImage:'url(' + item.image.regular + ')'}"/>
         <div class="w-full">
           <input v-model="tempItem.imageName" placeholder="图片名称(英文)" class="text-center">
-          <input :value="props.regular" :type="'imageName'" class="pointer-events-non text-center">
+          <input :value="props.regular" :type="'imageName'" class="pointer-events-none text-center">
         </div>
         <div @click="uploadFile" class="title">
           <input type="file" ref="uploadRegularInput" name="regular" @change="onFileChanged">
@@ -27,7 +26,6 @@
           </svg>
         </div>
       </div>
-
       <div class="col-start-3" id="uploadHover">
         <div @click="removeImage" class="relative float-right">
           <svg viewBox="0 0 36 36" fill="currentColor" class="w-4 h-4 box-content cursor-pointer p-4 rounded-full bg-gray-900 shadow-lg transition-colors duration-150 ease-in-out hover:text-red-400">
@@ -65,6 +63,7 @@ import {useCookies} from "vue3-cookies";
 import isBlank from "../../../hooks/isBlank.js";
 
 const props = defineProps(['item', 'rawItem', 'hover', 'regular', 'tempItem' ,'uploadedImageName']);
+const cookies = useCookies().cookies
 
 const item = props.item
 const tempItem = props.tempItem
@@ -73,7 +72,7 @@ const uploadedImageName = props.uploadedImageName
 
 const uploadRegularInput = ref(null)
 const uploadHoverInput = ref(null)
-const cookies = useCookies().cookies
+
 
 const uploadFile = (event) => {
   let onClick
@@ -82,7 +81,6 @@ const uploadFile = (event) => {
   } else if (document.getElementById('uploadHover').contains(event.target)) {
     onClick = uploadHoverInput.value
   } else return false
-
   onClick.click()
 }
 const removeImage = async (event) => {
@@ -159,6 +157,7 @@ const onFileChanged = async (event) => {
     item.image.hover = data.urlPath
     uploadedImageName.hover = data.fileName
   }
+
   setCurrentToastComponent('success', '添加成功')
 }
 </script>

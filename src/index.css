@@ -285,3 +285,15 @@ input[type=number].appearance-none {
 .gateways .gateway input:checked~.dot {
     opacity: 1;
 }
+
+.imageUpload-enter-active, .imageUpload-leave-active {
+    transition: all 0.22s ease-in-out;
+}
+.imageUpload-enter-from {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.imageUpload-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}

@@ -9,7 +9,7 @@
         </svg>
       </div>
     </div>
-    <input :class="discountClass.input" v-model="item.salePercent">
+    <input :class="discountClass.input" v-model="item.salePercent" type="number" class="appearance-none">
   </div>
 </template>
 

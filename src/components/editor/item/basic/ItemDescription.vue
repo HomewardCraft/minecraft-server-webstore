@@ -1,9 +1,9 @@
 <template>
   <transition name="item">
-    <MdEditor v-show="props.editorCondition.isShow" :showCodeRowNumber="true" theme="dark" class="md-editor bg-gray-800 border-lighten h-700" previewTheme="github"
-              :toolbarsExclude="['link', 'mermaid', 'github', 'revoke', 'next']" v-model="data.markdownText"
+    <MdEditor v-show="moduleCondition.editorCondition" :showCodeRowNumber="true" theme="dark" class="md-editor bg-gray-800 border-lighten h-700" previewTheme="github"
+              :toolbarsExclude="['link', 'mermaid', 'github', 'revoke', 'next']" v-model="cache.markdownText"
               mermaidJs="node_modules/mermaid/dist/mermaid.min.js" katexJs="node_modules/katex/dist/katex.min.js" :sanitize="sanitize"
-              @onSave="execSave" @onHtmlChanged="getHTMLCode"/>
+              @onSave="synchronizeMarkdownText" @onHtmlChanged="synchronizeHTMLCode"/>
   </transition>
 </template>
 
@@ -18,34 +18,19 @@ import MdEditor from 'md-editor-v3';
 import sanitizeHtml from "sanitize-html";
 import {watch} from "vue";
 import pubsub from "pubsub-js";
-const props = defineProps(['editorCondition', 'data']);
+const props = defineProps(['moduleCondition', 'cache']);
 
-let data = props.data
+const cache = props.cache
+const moduleCondition = props.moduleCondition
 
 const sanitize = (html) => sanitizeHtml(html)
 
-const execSave = (v: string): void => {
-  localStorage.setItem('markdownText', v)
+const synchronizeMarkdownText = (v: string): void => {
+  cache.markdownText = v
 }
-
-const getHTMLCode = (v: String): void => {
-  data.htmlText = v
+const synchronizeHTMLCode = (v: String): void => {
+  cache.htmlText = v
 }
-
-watch(() => data.markdownText, (count) => {
-  setTimeout(() => {
-    data.cache = count
-  }, 500)
-})
-
-function getMarkdownContent() {
-  data.markdownText = localStorage.getItem('markdownText')
-}
-function persistCache() {
-  localStorage.setItem('markdownText', data.cache)
-}
-pubsub.subscribe('saveLocalCache', persistCache)
-getMarkdownContent()
 </script>
 
 <style>

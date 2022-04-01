@@ -1,7 +1,7 @@
 <template>
   <div class="item-price my-auto grid">
     <h3 class="font-bold mb-2">物品价格</h3>
-    <input v-model="props.information.price" maxlength="7" type="number" placeholder="1元等于100" class="appearance-none"/>
+    <input v-model="cache.price" maxlength="7" type="number" placeholder="1元等于100" class="appearance-none"/>
   </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
 </script>
 
 <script setup>
-const props = defineProps(['information']);
+const props = defineProps(['cache']);
+const cache = props.cache
 </script>
 
 <style>

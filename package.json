@@ -25,6 +25,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.181",
     "@types/mermaid": "^8.2.8",
     "@types/pubsub-js": "^1.8.3",
     "@types/sanitize-html": "^2.6.2",

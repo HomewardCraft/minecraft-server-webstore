@@ -1,6 +1,9 @@
 import setCurrentToastComponent from "./setToastComponent.js";
 import axios from "axios";
 import isBlank from "./isBlank.js";
+import {useCookies} from "vue3-cookies";
+
+const {cookies} = useCookies()
 
 function discountCheck(target) {
     if (!Number.isInteger(target)) {
@@ -47,20 +50,18 @@ async function insert(information) {
         }
     }
 
-    // 校验图片地址
-    // todo 生产状态解开
-    // if (!isBlank(information.imageAddress)) {
-    //     if (isBlank(information.imageAddress.regular)) {
-    //         setCurrentToastComponent('fail', '请上传regular图片')
-    //         return false
-    //     }
-    //     if (isBlank(information.imageAddress.hover)) {
-    //         setCurrentToastComponent('fail', '请上传hover图片')
-    //         return false
-    //     }
-    // } else {
-    //     setCurrentToastComponent('fail', '请先上传图片')
-    // }
+    if (!isBlank(information.imageAddress)) {
+        if (isBlank(information.imageAddress.regular)) {
+            setCurrentToastComponent('fail', '请上传regular图片')
+            return false
+        }
+        if (isBlank(information.imageAddress.hover)) {
+            setCurrentToastComponent('fail', '请上传hover图片')
+            return false
+        }
+    } else {
+        setCurrentToastComponent('fail', '请先上传图片')
+    }
 
     // 定义类型
     let type = null
@@ -118,7 +119,7 @@ async function insert(information) {
         }
     }
 
-    let data = {
+    const data = {
         type: information.category,
         name: information.name,
         price: information.price,
@@ -140,12 +141,16 @@ async function insert(information) {
 
     const {
         data: result
-    } = await axios.post('local/admin/insert', data)
-    console.log(result)
+    } = await axios.post('local/admin/insert', data, {
+        headers: {
+            'Authorization': cookies.get('authorization')
+        }
+    })
     if (result.status === 200) {
         setCurrentToastComponent('success', '添加成功')
+        localStorage.removeItem('cache-insert')
     } else {
-        setCurrentToastComponent('fail', '添加失败')
+        setCurrentToastComponent('fail', result.message)
     }
 }
 

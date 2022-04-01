@@ -4,7 +4,7 @@
       <span>物品名称:</span>
       <div class="text-3xl text-yellow-400 ml-5">{{ props.name }}</div>
     </div>
-    <input v-model="props.item.name">
+    <input v-model="props.item.name" maxlength="24">
   </div>
 </template>
 

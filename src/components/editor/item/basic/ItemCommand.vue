@@ -1,7 +1,7 @@
 <template>
   <div class="item-command my-auto">
     <h3 class="font-bold ">附带指令</h3>
-    <input v-model="props.information.command" maxlength="128" placeholder="例如 /minecraft give @p items"/>
+    <input v-model="cache.command" maxlength="128" placeholder="例如 /minecraft give @p items"/>
   </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
 </script>
 
 <script setup>
-const props = defineProps(['information']);
+const props = defineProps(['cache']);
+const cache = props.cache
 </script>
 
 <style>

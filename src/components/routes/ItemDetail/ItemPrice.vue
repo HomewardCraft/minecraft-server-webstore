@@ -4,7 +4,7 @@
       <span>价格: </span>
       <div class="text-3xl text-yellow-400 ml-5">${{ props.price }} USD</div>
     </div>
-    <input v-model="props.tempItem.price">
+    <input v-model="props.tempItem.price" type="number" class="appearance-none">
   </div>
 </template>
 

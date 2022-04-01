@@ -1,68 +1,55 @@
 <template>
   <div class="flex justify-around items-center">
-    <item-image :editorCondition="editorCondition" :imageUploadStyle="imageUploadStyle" :imageAddress="imageAddress"/>
+    <!-- pass -->
+    <item-image :cache="cache" :moduleCondition="moduleCondition"/>
 
     <div class="item-info grid gap-3">
-      <item-category :information="information" :categoryShowCase="categoryShowCase" :categories="categories" :discountShowCase="discountShowCase"/>
+      <!-- pass -->
+      <item-category :cache="cache" :moduleCondition="moduleCondition"/>
 
-      <item-name :information="information"/>
+      <!-- pass -->
+      <item-name :cache="cache"/>
 
-      <item-discount :categoryShowCase="categoryShowCase" :discountShowCase="discountShowCase" :categories="categories" :information="information"/>
+      <!-- pass -->
+      <item-discount :cache="cache" :moduleCondition="moduleCondition"/>
 
-      <item-price :information="information"/>
+      <!-- pass -->
+      <item-price :cache="cache"/>
 
-      <item-command :information="information"/>
+      <!-- pass -->
+      <item-command :cache="cache"/>
     </div>
   </div>
 
   <div class="item-row-2 bg-gray-800 w-min p-8 grid">
-    <item-description :editorCondition="editorCondition" :data="data"/>
+    <!-- pass -->
+    <item-description :moduleCondition="moduleCondition" :cache="cache"/>
 
-    <upload-image :imageUploadStyle="imageUploadStyle" :imageAddress="imageAddress" :information="information"/>
+    <!-- pass -->
+    <upload-image :moduleCondition="moduleCondition" :cache="cache"/>
   </div>
 </template>
 
-<script setup lang="ts">
-import {reactive} from "vue";
+<script setup>
+import {onBeforeMount, reactive, watch} from "vue";
 import {insert} from "../../hooks/commit.js";
 import pubsub from "pubsub-js";
 import 'md-editor-v3/lib/style.css';
-import UploadImage from "./item/image/UploadImage.vue";
+import {debounce} from "lodash";
+import isBlank from "../../hooks/isBlank.js";
 
-let imageAddress = reactive({
-  regular: '',
-  hover: ''
+const moduleCondition = reactive({
+  editorCondition: true,
+  categoryShowCase: false,
+  discountShowCase: false,
+  imageUpload: {
+    style: 'opacity-0 pointer-events-none',
+    enable: false
+  },
+  buttonMessage: '上传图片'
 })
 
-let imageUploadStyle = reactive({
-  style: 'opacity-0 pointer-events-none',
-  isShow: false
-})
-
-let editorCondition = reactive({
-  isShow: true
-})
-
-let data = reactive({
-  markdownText: '',
-  cache: '',
-  htmlText: ''
-})
-
-let categoryShowCase = reactive({
-  isOpen: false
-})
-
-let discountShowCase = reactive({
-  isOpen: false
-})
-
-let categories = reactive({
-  crate: true,
-  extra: true
-})
-
-let information = reactive({
+const cache = reactive({
   category: '类型',
   name: null,
   price: null,
@@ -76,22 +63,55 @@ let information = reactive({
   command: null,
   markdownText: '',
   htmlText: '',
-  imageAddress: {},
+  imageAddress: {
+    crate: {
+      regular: '',
+      hover: ''
+    },
+    extra: ''
+  },
   imageName: null,
+  categories: {
+    crate: true,
+    extra: true
+  },
+  clickable: 'pointer-events-none',
+  enable: false
 })
+
 function execCommit() {
-  information.markdownText = data.markdownText
-  information.htmlText = data.htmlText
-  information.imageAddress = {
-    regular: imageAddress.regular,
-    hover: imageAddress.hover
-  }
-  insert(information)
+  insert(cache)
 }
 pubsub.subscribe('commit', execCommit)
+
+// set cache
+const setCache = debounce(() => {
+  localStorage.setItem('_insert', JSON.stringify(cache))
+}, 300)
+watch(cache, () => {
+  if (cache.enable) setCache()
+})
+onBeforeMount(() => {
+  const localCache = JSON.parse(localStorage.getItem('_insert'))
+  if (!isBlank(localCache)) {
+    cache.category = localCache.category
+    cache.name = localCache.name
+    cache.price = localCache.price
+    cache.discount = localCache.discount
+    cache.multiDiscount = {...localCache.multiDiscount}
+    cache.command = localCache.command
+    cache.markdownText = localCache.markdownText
+    cache.htmlText = localCache.htmlText
+    cache.imageAddress = {...localCache.imageAddress}
+    cache.imageName = localCache.imageName
+    cache.categories = {...localCache.categories}
+    cache.clickable = localCache.clickable
+  }
+  cache.enable = true
+})
 </script>
 
-<script lang="ts">
+<script>
 import ItemImage from "./item/basic/ItemImage.vue";
 import ItemCategory from "./item/basic/ItemCategory.vue";
 import ItemName from "./item/basic/ItemName.vue";
@@ -99,6 +119,7 @@ import ItemDiscount from "./item/basic/ItemDiscount.vue";
 import ItemPrice from "./item/basic/ItemPrice.vue";
 import ItemCommand from "./item/basic/ItemCommand.vue";
 import ItemDescription from "./item/basic/ItemDescription.vue";
+import UploadImage from "./item/image/UploadImage.vue";
 
 export default {
   name: "EditorMain",
@@ -110,6 +131,7 @@ export default {
     ItemPrice,
     ItemCommand,
     ItemDescription,
+    UploadImage
   }
 }
 </script>
@@ -123,10 +145,11 @@ export default {
 .item-leave-active {
   animation: imba ease-in-out 0.3s reverse;
 }
-
 .item-enter-active {
   animation: imba ease-in-out 0.3s;
 }
+
+
 
 .editor .item-info {
   justify-content: flex-end;
