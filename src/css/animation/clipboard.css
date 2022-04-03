@@ -1,0 +1,16 @@
+/* 剪切板动画 */
+.tooltip-enter-active {
+    animation: tooltip 1s;
+}
+.tooltip-leave-active {
+    animation: tooltip 1s reverse;
+}
+@keyframes tooltip {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 100;
+    }
+}
