@@ -36,7 +36,8 @@ module.exports = {
 
         },
         btn: {
-          'text': '#97438f'
+          'text': '#97438f',
+          'discord-t': '#5662ab'
         },
         nav: {
           home: '#f18725',
@@ -63,11 +64,18 @@ module.exports = {
         'body': 'auto 1fr auto'
       },
       backgroundColor: {
-        'btn': '#ffb0e2'
+        btn: {
+            DEFAULT: '#ffb0e2',
+            'discord': '#c1caff'
+        }
+
       },
       boxShadow: {
         'btn': '#d07fbe 0 5px 0',
-        'border': 'hsla(0,0%,100%,0.4) 0 0 0 1px inset'
+        'border': 'hsla(0,0%,100%,0.4) 0 0 0 1px inset',
+        'ip': '#a25223 0 3px 0',
+        'ip-count':'#bf6936 0 3px 0',
+        'discord': '#808bcb 0 5px 0'
       }
     },
   },

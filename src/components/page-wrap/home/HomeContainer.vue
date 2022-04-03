@@ -10,7 +10,7 @@
       <home-video-player></home-video-player>
     </div>
     <div
-        class="loading fixed inset-0 z-50 transition-opacity ease-in-out duration-300 flex flex-col items-center justify-center bg-black-80 pointer-events-none opacity-0">
+        class="loading fixed inset-0 z-50 transition-opacity ease-in-out duration-300 flex flex-col items-center justify-center bg-black/80 pointer-events-none opacity-0">
       <img src="https://assets.originrealms.com/static/img/animated-icon.gif" alt="Loading" class="animate-pulse">
       <div class="load-text font-bold uppercase text-4xl mt-3 animate-track">Loading...</div>
     </div>
