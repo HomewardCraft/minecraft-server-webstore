@@ -1,5 +1,21 @@
+/* 活塞位置 */
+.piston {
+    position: relative;
+    top: -10px;
+    z-index: 10;
+    cursor: pointer;
+    height: 0;
+}
+
 /* 活塞顶部 */
-.animation .top {
+.piston .head {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -63px;
+    transition: all .2s ease-in-out;
+}
+.piston .top {
     background: url(https://ba1oretto.com/webstore/images/piston/top.png) 50% no-repeat;
     background-size: contain;
     width: 100px;
@@ -10,7 +26,7 @@
 }
 
 /* 活塞中部 */
-.animation .neck {
+.piston .neck {
     background: url(https://ba1oretto.com/webstore/images/piston/middle.png) top no-repeat;
     background-size: 28px auto;
     width: 28px;
@@ -25,25 +41,18 @@
 }
 
 /* 活塞底座 */
-.animation .base {
+.piston .base {
     background: url(https://ba1oretto.com/webstore/images/piston/bottom.png) top no-repeat;
     background-size: 100%;
     width: 100px;
     height: 54px;
 }
 
-.tooltip-enter-active {
-    animation: tooltip 1s;
+
+.piston:hover .head {
+    top: -27px
 }
-.tooltip-leave-active {
-    animation: tooltip 1s reverse;
-}
-@keyframes tooltip {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 100;
-    }
+
+.piston:hover .neck {
+    height: 0
 }

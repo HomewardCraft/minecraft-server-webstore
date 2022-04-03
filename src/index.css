@@ -16,7 +16,7 @@
         font-family: proxima-nova,sans-serif;
     }
 
-    #app, body, html {
+    #app, #_frame, body, html {
         height: 100%;
     }
 }
