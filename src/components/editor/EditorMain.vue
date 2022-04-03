@@ -1,31 +1,16 @@
 <template>
   <div class="flex justify-around items-center">
-    <!-- pass -->
     <item-image :cache="cache" :moduleCondition="moduleCondition"/>
-
     <div class="item-info grid gap-3">
-      <!-- pass -->
       <item-category :cache="cache" :moduleCondition="moduleCondition"/>
-
-      <!-- pass -->
       <item-name :cache="cache"/>
-
-      <!-- pass -->
       <item-discount :cache="cache" :moduleCondition="moduleCondition"/>
-
-      <!-- pass -->
       <item-price :cache="cache"/>
-
-      <!-- pass -->
       <item-command :cache="cache"/>
     </div>
   </div>
-
   <div class="item-row-2 bg-gray-800 w-min p-8 grid">
-    <!-- pass -->
     <item-description :moduleCondition="moduleCondition" :cache="cache"/>
-
-    <!-- pass -->
     <upload-image :moduleCondition="moduleCondition" :cache="cache"/>
   </div>
 </template>
@@ -64,11 +49,11 @@ const cache = reactive({
   markdownText: '',
   htmlText: '',
   imageAddress: {
-    crate: {
+    crates: {
       regular: '',
       hover: ''
     },
-    extra: ''
+    extras: ''
   },
   imageName: null,
   categories: {
@@ -84,7 +69,6 @@ function execCommit() {
 }
 pubsub.subscribe('commit', execCommit)
 
-// set cache
 const setCache = debounce(() => {
   localStorage.setItem('_insert', JSON.stringify(cache))
 }, 300)
@@ -109,6 +93,30 @@ onBeforeMount(() => {
   }
   cache.enable = true
 })
+
+const cleanCache = () => {
+  localStorage.removeItem('_insert')
+  cache.category = '类型'
+  cache.name = null
+  cache.price = null
+  cache.discount = null
+  cache.multiDiscount.x1 = null
+  cache.multiDiscount.x5 = null
+  cache.multiDiscount.x10 = null
+  cache.multiDiscount.x20 = null
+  cache.command = null
+  cache.markdownText = ''
+  cache.htmlText = ''
+  cache.imageAddress.crates.regular = ''
+  cache.imageAddress.crates.hover = ''
+  cache.imageAddress.extras = ''
+  cache.imageName = null
+  cache.categories.crate = true
+  cache.categories.extra = true
+  cache.clickable = 'pointer-events-none'
+  cache.enable = false
+}
+pubsub.subscribe('cleanInsertCache', cleanCache)
 </script>
 
 <script>

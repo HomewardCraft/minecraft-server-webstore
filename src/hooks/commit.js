@@ -1,144 +1,145 @@
 import setCurrentToastComponent from "./setToastComponent.js";
-import axios from "axios";
 import isBlank from "./isBlank.js";
 import {useCookies} from "vue3-cookies";
+import axios from "axios";
+import pubsub from "pubsub-js";
 
 const {cookies} = useCookies()
 
-function discountCheck(target) {
-    if (!Number.isInteger(target)) {
-        setCurrentToastComponent('fail', '请输入有效折扣整数')
-        return false
-    }
-    if (target.toString().length > 2) {
-        setCurrentToastComponent('fail', '请输入有效折扣长度, 当前长度: ' + target.toString().length)
-        return false
-    }
-    if (target <= 0) {
-        setCurrentToastComponent('fail', '请输入有效折扣数量, 当前折扣: ' + target + '%')
-        return false
-    }
-    return true
-}
-
-function priceCheck(target) {
-    if (!Number.isInteger(target)) {
-        setCurrentToastComponent('fail', '请输入有效价格整数')
-        return false
-    }
-    if (target.toString().length > 7) {
-        setCurrentToastComponent('fail', '请输入有效价格长度, 当前长度: ' + target.toString().length)
-        return false
-    }
-    if (target < 100) {
-        setCurrentToastComponent('fail', '请输入有效价格数量, 当前价格: ' + target + '(' + target / 100 + ')')
-        return false
-    }
-    return true
-}
-
-
-async function insert(information) {
-    // 校验描述
-    if (isBlank(information.markdownText)) {
-        setCurrentToastComponent('fail', '请描述这个物品')
-        return false
-    } else {
-        if (information.markdownText.toString().length <= 32) {
-            setCurrentToastComponent('fail', '描述不能过短, 当前长度: ' + information.markdownText.toString().length)
-            return false
-        }
-    }
-
-    if (!isBlank(information.imageAddress)) {
-        if (isBlank(information.imageAddress.regular)) {
-            setCurrentToastComponent('fail', '请上传regular图片')
-            return false
-        }
-        if (isBlank(information.imageAddress.hover)) {
-            setCurrentToastComponent('fail', '请上传hover图片')
-            return false
-        }
-    } else {
-        setCurrentToastComponent('fail', '请先上传图片')
-    }
-
-    // 定义类型
-    let type = null
-    if (information.category !== '类型') {
-        type = information.category.toLowerCase()
-    } else {
+const checkCategory = (category) => {
+    if (category === '类型') {
         setCurrentToastComponent('fail', '请选择类型')
         return false
     }
-
-    // 判断名称
-    if (isBlank(information.name)) {
+    return category.toLowerCase()
+}
+const checkName = (name) => {
+    if (isBlank(name)) {
         setCurrentToastComponent('fail', '请输入名称')
         return false
     }
-
-    // 判断价格
-    if (isBlank(information.price)) {
+    return true
+}
+const checkPrice = (price) => {
+    if (isBlank(price)) {
         setCurrentToastComponent('fail', '请设置价格')
         return false
-    } else {
-        if (!priceCheck(information.price)) {
-            return false
-        }
     }
-
-    // 判断指令
-    if (isBlank(information.command)) {
+    if (!Number.isInteger(price)) {
+        setCurrentToastComponent('fail', '请输入有效价格整数')
+        return false
+    }
+    if (price.toString().length > 7) {
+        setCurrentToastComponent('fail', '请输入有效价格长度, 当前长度: ' + price.toString().length)
+        return false
+    }
+    if (price < 100) {
+        setCurrentToastComponent('fail', '请输入有效价格数量, 当前价格: ' + price / 100 + '元 (' + price + ')')
+        return false
+    }
+    return true
+}
+const checkCommand = (command) => {
+    if (isBlank(command)) {
         setCurrentToastComponent('fail', '请输入指令')
         return false
     }
-
-    // extra是否打折
-    let isDiscount = !isBlank(information.discount)
-    if (isDiscount) {
-        if (!discountCheck(information.discount)) {
+    return true
+}
+const checkDescription = (markdownText) => {
+    if (isBlank(markdownText)) {
+        setCurrentToastComponent('fail', '请描述这个物品')
+        return false
+    } else {
+        if (markdownText.toString().length <= 16) {
+            setCurrentToastComponent('fail', '描述不能过短, 当前长度: ' + markdownText.toString().length)
             return false
         }
     }
+    return true
+}
+const checkImageAddress = (category, imageAddress) => {
+    if (category === 'extras' && isBlank(imageAddress.extras)) {
+        setCurrentToastComponent('fail', '请上传图片')
+        return false
+    } else if (category === 'crates') {
+        if (isBlank(imageAddress.crates.regular)) {
+            setCurrentToastComponent('fail', '请上传图片')
+            return false
+        }
+        if (isBlank(imageAddress.crates.hover)) {
+            setCurrentToastComponent('fail', '请上传图片')
+            return false
+        }
+    }
+    return true
+}
+const checkDiscount = (discount) => {
+    if (!Number.isInteger(discount)) {
+        setCurrentToastComponent('fail', '请输入有效折扣整数')
+        return false
+    }
+    if (discount <= 0 || discount.toString().length > 2) {
+        setCurrentToastComponent('fail', '请输入有效折扣数量, 当前折扣: ' + discount + '%')
+        return false
+    }
+    return true
+}
 
-    // crate是否打折
-    let x1 = !isBlank(information.multiDiscount.x1)
-    let x5 = !isBlank(information.multiDiscount.x5)
-    let x10 = !isBlank(information.multiDiscount.x10)
-    let x20 = !isBlank(information.multiDiscount.x20)
-    if (x1 || x5 || x10 || x20) {
-        if ((x1 && !discountCheck(information.multiDiscount.x1)) || (x5 && !discountCheck(information.multiDiscount.x5))) {
-            return false
-        }
-        if (x10 && !discountCheck(information.multiDiscount.x10)) {
-            return false
-        }
-        if (x20 && !discountCheck(information.multiDiscount.x20)) {
-            return false
-        }
+async function insert(cache) {
+    const type = checkCategory(cache.category)
+    if (!type) return false
+
+    if (!checkName(cache.name)) return false
+    if (!checkPrice(cache.price)) return false
+    if (!checkCommand(cache.command)) return false
+    if (!checkDescription(cache.markdownText)) return false
+    if (!checkImageAddress(type, cache.imageAddress)) return false
+
+    let isDiscount
+    let x1
+    let x5
+    let x10
+    let x20
+    if (type === 'extras') {
+        isDiscount = !isBlank(cache.discount)
+        if (isDiscount && !checkDiscount(cache.discount)) return false
+    }
+    if (type === 'crates') {
+        x1 = !isBlank(cache.multiDiscount.x1)
+        x5 = !isBlank(cache.multiDiscount.x5)
+        x10 = !isBlank(cache.multiDiscount.x10)
+        x20 = !isBlank(cache.multiDiscount.x20)
+        if (x1 && !checkDiscount(cache.multiDiscount.x1)) return false
+        if (x5 && !checkDiscount(cache.multiDiscount.x5)) return false
+        if (x10 && !checkDiscount(cache.multiDiscount.x10)) return false
+        if (x20 && !checkDiscount(cache.multiDiscount.x20)) return false
     }
 
     const data = {
-        type: information.category,
-        name: information.name,
-        price: information.price,
+        type: cache.category,
+        name: cache.name,
+        price: cache.price,
         saleCondition: null,
         rawSalePercent: null,
-        command: information.command,
-        imageAddress: information.imageAddress.regular,
-        imageHoverAddress: information.imageAddress.hover,
-        description: information.htmlText,
-        rawDescription: information.markdownText
+        command: cache.command,
+        imageAddress: null,
+        imageHoverAddress: null,
+        description: cache.htmlText,
+        rawDescription: cache.markdownText
     }
 
     if (type === 'extras') {
         data.saleCondition = isDiscount
-        data.rawSalePercent = information.discount
+        if (!isDiscount) data.rawSalePercent = 100
+        else data.rawSalePercent = cache.discount
+        data.imageAddress = cache.imageAddress.extras
     } else {
-        data.rawSalePercent = JSON.stringify(information.multiDiscount)
+        data.rawSalePercent = JSON.stringify(cache.multiDiscount)
+        data.imageAddress = cache.imageAddress.crates.regular
+        data.imageHoverAddress = cache.imageAddress.crates.hover
     }
-
+    console.log(data)
     const {
         data: result
     } = await axios.post('local/admin/insert', data, {
@@ -148,9 +149,12 @@ async function insert(information) {
     })
     if (result.status === 200) {
         setCurrentToastComponent('success', '添加成功')
-        localStorage.removeItem('cache-insert')
+        pubsub.publish('openEditorPanel')
+        pubsub.publish('cleanInsertCache')
+        return true
     } else {
         setCurrentToastComponent('fail', result.message)
+        return false
     }
 }
 

@@ -3,7 +3,7 @@
     <transition name="imageUpload">
       <div v-show="cache.category === 'crates'" class="flex justify-between">
         <div class="regular border">
-          <div class="image" :style="{backgroundImage:'url(' + cache.imageAddress.crate.regular + ')'}"/>
+          <div class="image" :style="{backgroundImage:'url(' + cache.imageAddress.crates.regular + ')'}"/>
           <div class="name">
             <input v-model="cache.imageName" :type="'imageName'" placeholder="图片名称(英文)">
             <input v-model="cache.imageName" :type="'imageName'" class="pointer-events-none">
@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="hover border border-l-0">
-          <div class="image" :style="{backgroundImage:'url(' + cache.imageAddress.crate.hover + ')'}"/>
+          <div class="image" :style="{backgroundImage:'url(' + cache.imageAddress.crates.hover + ')'}"/>
           <div class="name">
             <input v-model="cache.imageName" :type="'imageName'" placeholder="图片名称(英文)">
             <input v-model="imageHover" :type="'imageName'" class="pointer-events-none">
@@ -35,7 +35,7 @@
     <transition name="imageUpload">
       <div v-show="cache.category === 'extras'">
         <div class="regular border">
-          <div class="relative top-0 left-0 right-0 bottom-0 bg-center bg-no-repeat" :style="{backgroundImage:'url(' + cache.imageAddress.extra + ')'}"/>
+          <div class="relative top-0 left-0 right-0 bottom-0 bg-center bg-no-repeat" :style="{backgroundImage:'url(' + cache.imageAddress.extras + ')'}"/>
           <div class="name">
             <input v-model="cache.imageName" :type="'imageName'" placeholder="图片名称(英文)">
           </div>
@@ -111,11 +111,11 @@ const onFileChanged = async (event) => {
 
   const data = result.data
   if (document.getElementById('uploadCrateRegular').contains(event.target))
-    cache.imageAddress.crate.regular = data.urlPath
+    cache.imageAddress.crates.regular = data.urlPath
   if (document.getElementById('uploadCrateHover').contains(event.target))
-    cache.imageAddress.crate.hover = data.urlPath
+    cache.imageAddress.crates.hover = data.urlPath
   if (document.getElementById('uploadExtra').contains(event.target))
-    cache.imageAddress.extra = data.urlPath
+    cache.imageAddress.extras = data.urlPath
 
   setCurrentToastComponent('success', '添加成功')
 

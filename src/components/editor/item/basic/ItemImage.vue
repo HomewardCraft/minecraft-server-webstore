@@ -3,11 +3,11 @@
     <div class="h-52 w-52 relative bg-gray-800 bg-bottom bg-no-repeat border border-light border-b-0">
       <div class="image group">
         <div v-show="cache.category === 'crates'">
-          <div class="regular transition-opacity duration-300 ease-in-out group-hover:opacity-0" :style="{backgroundImage:'url(' + cache.imageAddress.crate.regular + ')'}"/>
-          <div class="hover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100" :style="{backgroundImage:'url(' + cache.imageAddress.crate.hover + ')'}"/>
+          <div class="regular transition-opacity duration-300 ease-in-out group-hover:opacity-0" :style="{backgroundImage:'url(' + cache.imageAddress.crates.regular + ')'}"/>
+          <div class="hover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100" :style="{backgroundImage:'url(' + cache.imageAddress.crates.hover + ')'}"/>
         </div>
         <div v-show="cache.category === 'extras'">
-          <div class="regular" :style="{backgroundImage:'url(' + cache.imageAddress.extra + ')'}"/>
+          <div class="regular" :style="{backgroundImage:'url(' + cache.imageAddress.extras + ')'}"/>
         </div>
       </div>
     </div>
