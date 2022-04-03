@@ -35,7 +35,7 @@ export default {
   min-height: 600px;
   height: 70vh;
   z-index: -1;
-  background: url(https://ba1oretto.com/webstore/images/home-page-bg.png) bottom no-repeat;
+  background: url(https://ba1oretto.com/home/background.png) bottom no-repeat;
   background-size: cover;
 }
 

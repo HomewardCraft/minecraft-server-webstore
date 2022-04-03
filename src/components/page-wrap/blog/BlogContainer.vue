@@ -8,10 +8,10 @@
         </div>
         <div class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90">
           <h3 class="font-bold text-white mb-1 text-xl text-2xl mb-3">{{ post.version }} - {{ post.title }}</h3>
-          <p class="excerpt h-full mb-4 text-gray-500">{{ substring(post.preview) }}</p>
+          <p class="excerpt h-full mb-4 text-gray-500">{{ textSubstring(post.preview) }}</p>
           <div class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500">
             <!-- todo 颜色切换 -->
-            <div class="font-semibold tracking-wide uppercase tag tag-update" style="color: rgb(245, 183, 43);">{{ post.type }}</div>
+            <div class="font-semibold tracking-wide uppercase tag tag-update" :style="setColor(post.type)">{{ post.type }}</div>
             <div class="mx-2 hidden lg:block">–</div>
             <div class="date">{{ post.date }}</div>
           </div>
@@ -47,24 +47,49 @@ import {reactive} from "vue";
 
 const data = [{
   name: 'gigs-and-jigs',
-  imageAddress: 'https://ba1oretto.com/2022/4/Badger_Blog.jpg',
+  imageAddress: 'https://ba1oretto.com/blog/2022/4/Badger_Blog.jpg',
   version: '0.18.0',
   title: 'Gigs & Jigs Update',
   preview: 'Greetings adventurers! As many of you have recently seen, Origin Isles is undergoing some major construction to the right side of the island and there\'s plenty more to see! Bucklewasdwasdwasssssssssssss',
-  type: 'update',
+  type: 'Update',
   date: 'Mar 19th, 2022'
 },{
-  name: 'bandits-and-badlands',
-  imageAddress: 'https://ba1oretto.com/2022/3/Badlands_Blog.jpg',
-  version: '0.17.0',
-  title: 'Bandits & Badlands',
-  preview: 'Hello there! The arid region is being elevated to all new heights, as we see a whole new cast of foes arriving on Origin Realms, with so much to explore! Today we\'re excited to rewdaaasdlkwajdklawnjodlawhoudja;kldjaispojdwqpiajdksajipw',
-  type: 'update',
-  date: 'Mar 5th, 2022'
+  name: 'road-to-1-0-0',
+  imageAddress: 'https://ba1oretto.com/blog/2021/7/Dev_Update_Blog.jpeg',
+  version: '1.0.0',
+  title: 'The Road To 1.0.0',
+  preview: 'As promised in our last blog post, in today we\'ll be talking more about the path out of Beta as we approach update 1.0.0, and what that means for the future of Origin Realms. For more informationwadsioajdpwak[skd[awppo',
+  type: 'Dev Blog',
+  date: 'Jul 12th, 2021'
+},{
+  name: 'summer-time',
+  imageAddress: 'https://ba1oretto.com/blog/2021/7/Summer_Blog.jpeg',
+  version: '0.9.0',
+  title: 'Summer Time',
+  preview: 'Howdy there, travellers! In todays blog post, we\'re taking a look at the most tropical update to hit Origin Realms thus far - the summer update! Before you continue, I\'d like to nweasdalkjsd;kljwapiuspdkw;ap[sodkw[ak[',
+  type: 'Event',
+  date: 'Jul 12th, 2021'
+},{
+  name: 'blocks-and-rocks',
+  imageAddress: 'https://ba1oretto.com/blog/2020/7/Custom_Blocks2.jpg',
+  version: '0.01.0',
+  title: 'More Blocks & Rocks!',
+  preview: 'Greetings adventurer, and welcome back to another weekly blog! This week, we\'re giving all our love and attention to the building community as we uncover over100 brand new blocks deep dark fantasies deep dark fantasies deep dark fantasies',
+  type: 'Misc',
+  date: 'Jul 27th, 2020'
 }]
 
-const substring = (text) => {
+const textSubstring = (text) => {
   return text.toString().substring(0, 180) + '...'
+}
+
+const setColor = (type) => {
+  switch (type.toString().toLowerCase()) {
+    case 'update': return 'color: rgb(245, 183, 43)'
+    case 'dev blog': return 'color: rgb(51, 241, 127)'
+    case 'event': return 'color: rgb(67, 204, 218)'
+    case 'misc': return 'color: rgb(255, 134, 218)'
+  }
 }
 
 

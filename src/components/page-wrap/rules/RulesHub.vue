@@ -1,5 +1,5 @@
 <template>
-  <div data-page="blog" class="page-bg" style="background-image: url(https://ba1oretto.com/2022/4/Badger_Blog.jpg)"/>
+  <div data-page="blog" class="page-bg" style="background-image: url(https://ba1oretto.com/blog/2022/4/Badger_Blog.jpg)"/>
   <rules-container/>
 </template>
 
