@@ -15,17 +15,17 @@
             <div class="menu-collapse flex md:items-center flex-col md:flex-row">
               <ul class="md:flex md:justify-center md:items-center md:mb-3 md:-mx-3 uppercase font-bold tracking-widest text-lg text-shadow">
                 <li class="mx-3 mb-3 md:mb-0">
-                  <a href="/" class="flex items-center px-5 py-3 md:py-1 transition duration-200 border border-transparent hover:bg-nav-home hover:border-lighten">
+                  <a href="/" :class="currentPosition.home" class="flex items-center px-5 py-3 md:py-1 transition duration-200 border border-transparent hover:bg-nav-home hover:border-lighten">
                     <span class="block">Home</span>
                   </a>
                 </li>
                 <li class="mx-3 mb-3 md:mb-0">
-                  <a href="/blog" class="flex items-center px-5 py-3 md:py-1 transition duration-200 border border-transparent hover:bg-nav-blog hover:border-lighten bg-nav-blog border-lighten">
+                  <a href="/blog" :class="currentPosition.blog" class="flex items-center px-5 py-3 md:py-1 transition duration-200 border border-transparent hover:bg-nav-blog hover:border-lighten">
                     <span class="block">Blog</span>
                   </a>
                 </li>
                 <li class="mx-3 mb-3 md:mb-0">
-                  <a href="/rules" class="flex items-center px-5 py-3 md:py-1 transition duration-200 border border-transparent hover:bg-nav-help hover:border-lighten">
+                  <a href="/rules" :class="currentPosition.rules" class="flex items-center px-5 py-3 md:py-1 transition duration-200 border border-transparent hover:bg-nav-help hover:border-lighten">
                     <span class="block">Rules</span>
                   </a>
                 </li>
@@ -64,20 +64,37 @@ export default {
 </script>
 
 <script setup>
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import {debounce} from "lodash";
 import {copy} from "../hook/clipboard.js";
+import {useRoute, useRouter} from "vue-router";
 
 const ipStyle = ref(false)
+const currentPosition = reactive({
+  blog: '',
+  rules: '',
+})
+
+const route = useRoute()
+const currentPath = route.path.substring(1)
+
+switch (currentPath) {
+  case 'blog': {
+    currentPosition.blog = 'bg-nav-blog border-lighten'
+    break
+  }
+  case 'rules': {
+    currentPosition.rules = 'bg-nav-help border-lighten'
+    break
+  }
+}
 
 const copyIp = () => {
   changeIpStyle()
 }
-
 const privateBounce = debounce(() => {
   ipStyle.value = false
 }, 2500)
-
 const changeIpStyle = () => {
   ipStyle.value = true
   copy('.server-wrap')
