@@ -39,23 +39,29 @@
                 </div>
               </div>
               <div class="render-wrap relative"><span><div data-name="Eraze" class="render"
-                                                           style="display: none;"><img src="/_nuxt/img/e29b152.png"
-                                                                                       class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
-                  data-name="Syszee" class="render" style="display: none;"><img src="/_nuxt/img/49cacfa.png"
+                                                           style="display: none;"><img
+                  src="https://ba1oretto.com/home/op1.png"
+                  class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div>
+                <div
+                    data-name="Syszee" class="render" style="display: none;"><img
+                    src="https://ba1oretto.com/home/op1.png"
+                    class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
+                    data-name="Grinderwolf" class="render" style="display: none;"><img
+                    src="https://ba1oretto.com/home/op1.png"
+                    class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
+                    data-name="Endergized" class="render" style="display: none;"><img
+                    src="https://ba1oretto.com/home/op1.png"
+                    class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
+                    data-name="RobotPantaloons" class="render" style="display: none;"><img
+                    src="https://ba1oretto.com/home/op1.png"
+                    class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
+                    data-name="MrsSystemZee" class="render" style=""><img src="https://ba1oretto.com/home/op1.png"
+                                                                          class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
+                    data-name="Clx_" class="render" style="display: none;"><img src="https://ba1oretto.com/home/op1.png"
                                                                                 class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
-                  data-name="Grinderwolf" class="render" style="display: none;"><img src="/_nuxt/img/98f4475.png"
-                                                                                     class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
-                  data-name="Endergized" class="render" style="display: none;"><img src="/_nuxt/img/17d979d.png"
-                                                                                    class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
-                  data-name="RobotPantaloons" class="render" style="display: none;"><img
-                  src="/_nuxt/img/961e499.png"
-                  class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
-                  data-name="MrsSystemZee" class="render" style=""><img src="/_nuxt/img/cd89691.png"
-                                                                        class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
-                  data-name="Clx_" class="render" style="display: none;"><img src="/_nuxt/img/22612d3.png"
-                                                                              class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div><div
-                  data-name="graphiteIsaac" class="render" style="display: none;"><img src="/_nuxt/img/9758bfd.png"
-                                                                                       class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div></span>
+                    data-name="graphiteIsaac" class="render" style="display: none;"><img
+                    src="https://ba1oretto.com/home/op1.png"
+                    class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto"></div></span>
               </div>
             </div>
           </div>
@@ -137,5 +143,50 @@ export default {
 </script>
 
 <style scoped>
+#staff .island {
+  background: url(https://ba1oretto.com/home/island.png) 50% no-repeat;
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  top: 130px;
+  left: 0;
+  right: 0;
+  height: 280px;
+}
+
+@screen lg {
+  #staff .island {
+    background-size: 100% auto;
+    background-position: top;
+    top: 0;
+    bottom: 0;
+    left: auto;
+    right: -80px;
+    width: 656px;
+    height: auto;
+  }
+
+  #staff .render img {
+    height: auto;
+  }
+
+  .lg\:ml-6 {
+    margin-left: 1.5rem;
+  }
+
+  .lg\:mt-16 {
+    margin-top: 4rem;
+  }
+
+  .lg\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+#staff .render img {
+  transition: all .4s ease-in-out;
+  height: 240px;
+}
 
 </style>
