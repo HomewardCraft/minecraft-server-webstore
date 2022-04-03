@@ -1,3 +1,4 @@
+const plugin = require("tailwindcss/plugin");
 module.exports = {
   content: [
     "./index.html",
@@ -22,13 +23,27 @@ module.exports = {
           '500': '#eaa21a',
           '600': '#d68512',
           '900': '#87522b'
-        }
-      },
-      textColor: {
-        'ip': {
+        },
+        red: {
+          '500': '#ff4343',
+          '600': '#ff1313'
+        },
+        nav: {
+          home: '#f18725',
+          blog: '#22afdc',
+          help: '#20b966',
+        },
+        lighten: 'hsla(0,0%,100%,0.3)',
+        ip: {
+          '400': '#ffe7c2',
           '700': '#edc30a',
+          '800': '#bf6936',
           '900': '#ab5828',
           '1000': '#824610'
+        },
+        discord: {
+          '800': '#5763c7',
+          '900': '#3642a9'
         }
       },
       margin: {
@@ -39,5 +54,8 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addVariant }) {
+    })
+  ],
 }
