@@ -5,6 +5,7 @@
         <div class="md:ml-27.5 py-3 px-6 md:flex md:items-center md:justify-between">
           <div @click="copyIp" data-clipboard-text="play.fantang.cc" class="server-wrap server-minecraft flex relative font-bold text-sm uppercase justify-center lg:items-stretch transition-opacity duration-150 ease-in-out hover:opacity-80 text-ip-1000 cursor-pointer">
             <div class="server bg-yellow-600 tracking-widest py-2 px-3">play.fantang.cc</div>
+            <!-- todo 动态的 -->
             <div class="flex items-center px-3 tracking-wide bg-yellow-600 opacity-80">271</div>
             <transition name="tooltip">
               <div v-show="ipStyle" class="tooltip absolute left-0.5 -bottom-0.5 text-xs font-bold uppercase transition-opacity ease-in-out duration-200 text-ip-700">IP Copied!</div>

@@ -28,6 +28,13 @@ module.exports = {
           '500': '#ff4343',
           '600': '#ff1313'
         },
+        gray: {
+          '500': '#b3b7bc',
+          '900': '#0d0e0f'
+        },
+        btn: {
+          'text': '#97438f'
+        },
         nav: {
           home: '#f18725',
           blog: '#22afdc',
@@ -44,7 +51,7 @@ module.exports = {
         discord: {
           '800': '#5763c7',
           '900': '#3642a9'
-        }
+        },
       },
       margin: {
         '27.5': '110px',
@@ -52,6 +59,13 @@ module.exports = {
       gridTemplateRows: {
         'body': 'auto 1fr auto'
       },
+      backgroundColor: {
+        'btn': '#ffb0e2'
+      },
+      boxShadow: {
+        'btn': '#d07fbe 0 5px 0',
+        'border': 'hsla(0,0%,100%,0.4) 0 0 0 1px inset'
+      }
     },
   },
   plugins: [
