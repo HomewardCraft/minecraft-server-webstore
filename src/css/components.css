@@ -1,2 +1,4 @@
 @import "./components/footer.css";
+@import "./components/header.css";
+
 @import "animation/clipboard.css";
