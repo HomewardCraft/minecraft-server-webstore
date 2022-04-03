@@ -68,7 +68,6 @@ module.exports = {
             DEFAULT: '#ffb0e2',
             'discord': '#c1caff'
         }
-
       },
       boxShadow: {
         'btn': '#d07fbe 0 5px 0',

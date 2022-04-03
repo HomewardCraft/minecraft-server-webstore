@@ -7,7 +7,6 @@ import PageWrap from "./components/PageWrap.vue";
   <div id="_frame">
     <div class="body-wrap grid grid-rows-body h-full">
       <page-wrap/>
-      <page-footer/>
     </div>
   </div>
 </template>
