@@ -48,7 +48,8 @@
           to Copy</p>
         <p v-show = "ipStyle"
             class="top-0 left-0 right-0 opacity-1 transition-all duration-200 ease-in-out transform absolute opacity-0 -translate-y-2">
-          Copied to Clipboard</p></div>
+          Copied to Clipboard</p>
+      </div>
     </div>
   </div>
 </template>
@@ -80,6 +81,7 @@ const changeIpStyle = () => {
   copy('.server-wrap')
   privateBounce()
 }
+
 
 </script>
 
