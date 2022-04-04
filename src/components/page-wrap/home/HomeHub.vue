@@ -1,16 +1,11 @@
 <template>
-  <home-container></home-container>
+  <home-hero/>
 </template>
 
 <script>
-import HomeContainer from "./HomeContainer.vue";
-
+import HomeHero from "./HomeHero.vue";
 export default {
   name: "HomeHub",
-  components: {HomeContainer}
+  components: {HomeHero},
 }
 </script>
-
-<style scoped>
-
-</style>

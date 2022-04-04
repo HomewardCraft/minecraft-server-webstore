@@ -65,8 +65,8 @@ module.exports = {
       },
       backgroundColor: {
         btn: {
-            DEFAULT: '#ffb0e2',
-            'discord': '#c1caff'
+          DEFAULT: '#ffb0e2',
+          'discord': '#c1caff'
         }
       },
       boxShadow: {

@@ -1,3 +1,6 @@
 .text-shadow {
     text-shadow: rgb(0 0 0 / 30%) 0 2px 0;
 }
+.text-shadow-md {
+    text-shadow: rgb(0 0 0 / 30%) 0 2px 8px;
+}

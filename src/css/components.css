@@ -2,5 +2,6 @@
 @import "./components/header.css";
 @import "./components/wrap.css";
 @import "./components/blog.css";
+@import "./components/home.css";
 
 @import "animation/clipboard.css";

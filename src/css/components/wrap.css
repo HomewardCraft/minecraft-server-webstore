@@ -1,7 +1,9 @@
-.page-bg:after {
-    content: "";
-    bottom: 0;
-    background: linear-gradient(180deg,rgba(0,0,0,.8),rgba(0,0,0,.8) 60%,#000);
+.page-bg {
+    min-height: 600px;
+    height: 70vh;
+    z-index: -1;
+    background: url(https://ba1oretto.com/home/background.png) bottom no-repeat;
+    background-size: cover;
 }
 .page-bg, .page-bg:after {
     position: absolute;
@@ -9,10 +11,8 @@
     left: 0;
     right: 0;
 }
-.page-bg {
-    min-height: 600px;
-    height: 70vh;
-    z-index: -1;
-    background: url(https://ba1oretto.com/webstore/images/blog/sky.png) bottom no-repeat;
-    background-size: cover;
-}
+.page-bg:after {
+     content: "";
+     bottom: 0;
+     background: linear-gradient(180deg,rgba(0,0,0,.8),rgba(0,0,0,.8) 60%,#000);
+ }

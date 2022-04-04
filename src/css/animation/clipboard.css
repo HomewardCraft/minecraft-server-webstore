@@ -1,9 +1,9 @@
 /* 剪切板动画 */
 .tooltip-enter-active {
-    animation: tooltip 1s;
+    animation: tooltip 0.5s;
 }
 .tooltip-leave-active {
-    animation: tooltip 1s reverse;
+    animation: tooltip 0.5s reverse;
 }
 @keyframes tooltip {
     0% {
