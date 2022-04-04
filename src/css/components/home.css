@@ -18,3 +18,36 @@
     background-size: contain;
     padding-bottom: 50.25%;
 }
+.video-wrap {
+    position: relative;
+}
+.video-wrap .video {
+    background: url(https://ba1oretto.com/home/video-face.png) 50%/cover no-repeat;
+    cursor: pointer;
+    height: 0;
+    margin: 0 auto;
+    padding-bottom: 56.25%;
+}
+@screen sm {
+    .video-wrap .video {
+        padding: 0;
+        max-width: 500px;
+        height: 280px;
+    }
+}
+.video-wrap .play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.video-wrap:hover .play {
+    filter: drop-shadow(0 0 15px #8b5cf6);
+}
