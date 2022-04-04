@@ -2,7 +2,7 @@
   <section id="discord">
     <div class="container mx-auto px-10 py-20 md:py-32">
       <div class="grid lg:grid-cols-2 gap-3 items-center">
-        <div class="img text-center"><img src="/_nuxt/img/b780c20.png" class="block mx-auto md:h-discord"></div>
+        <div class="img text-center"><img src="https://ba1oretto.com/home/discord.png" class="block mx-auto md:h-discord"></div>
         <div class="text text-center lg:text-left"><h2 class="text-white text-3xl font-bold mb-4">Let's be
           social!</h2>
           <p class="mb-4 text-gray-500 font-medium">Here on Origin Realms we think communication is the key to an
@@ -23,5 +23,11 @@ export default {
 </script>
 
 <style scoped>
+
+@screen md {
+  .md\:h-discord {
+    height: 350px;
+  }
+}
 
 </style>

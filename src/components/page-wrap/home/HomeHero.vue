@@ -30,7 +30,7 @@
       <div class="img"></div>
     </div>
     <div class="cursor-pointer group inline-block mx-auto">
-      <div
+      <div @click = "copyIp"
           class="server mx-auto mt-8 font-bold text-sm uppercase flex flex-col justify-center items-center lg:items-stretch lg:flex-row transition-opacity duration-150 ease-in-out group-hover:opacity-75">
         <div class="server bg-ip-900 tracking-widest py-2 px-3 border border-lighten shadow-ip">
           play.originrealms.com
@@ -42,9 +42,12 @@
       </div>
       <div
           class="tooltips font-extrabold text-sm text-center tracking-widest uppercase mt-4 text-white relative text-shadow-md">
-        <p class="top-0 left-0 right-0 opacity-1 transition-all duration-200 ease-in-out transform relative">Click
+        <p
+            v-show = "!ipStyle"
+            class="top-0 left-0 right-0 opacity-1 transition-all duration-200 ease-in-out transform relative">Click
           to Copy</p>
-        <p class="top-0 left-0 right-0 opacity-1 transition-all duration-200 ease-in-out transform absolute opacity-0 -translate-y-2">
+        <p v-show = "ipStyle"
+            class="top-0 left-0 right-0 opacity-1 transition-all duration-200 ease-in-out transform absolute opacity-0 -translate-y-2">
           Copied to Clipboard</p></div>
     </div>
   </div>
@@ -54,6 +57,30 @@
 export default {
   name: "HomeHero"
 }
+</script>
+
+<script setup>
+
+import {copy} from "../../../hook/clipboard.js";
+import {debounce} from "lodash";
+import {ref} from "vue";
+
+const ipStyle = ref(false)
+
+const copyIp = () => {
+  changeIpStyle()
+}
+
+const privateBounce = debounce(() => {
+  ipStyle.value = false
+}, 2500)
+
+const changeIpStyle = () => {
+  ipStyle.value = true
+  copy('.server-wrap')
+  privateBounce()
+}
+
 </script>
 
 <style scoped>
