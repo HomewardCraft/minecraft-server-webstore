@@ -18,6 +18,9 @@ module.exports = {
       xl: '1100px'
     },
     extend: {
+      spacing: {
+        'discord': '350px'
+      },
       colors: {
         yellow: {
           '400': '#fac000',

@@ -36,26 +36,16 @@
     }
 }
 .video-wrap .play {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    @apply absolute top-0 left-0 right-0 bottom-0 m-auto flex flex-col items-center justify-center text-center
 }
 .video-wrap:hover .play {
     filter: drop-shadow(0 0 15px #8b5cf6);
 }
 @screen sl {
     #homeBlog .posts .post:nth-of-type(odd) .blackout, #homeBlog .posts .post:nth-of-type(odd) .cover, #homeBlog .posts .post:nth-of-type(odd) .post-body {
-        transform: scaleX(.9) scaleY(.9);
+        @apply scale-90
     }
     #homeBlog .posts .post:nth-of-type(odd) .blackout {
-        top: 4px;
+        @apply top-4
     }
 }
