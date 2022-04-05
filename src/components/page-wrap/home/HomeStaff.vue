@@ -42,10 +42,10 @@
                   <img src="/src/assets/image/test/17d979d.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="">
                 </div>
                 <div data-name="test2" class="render">
-                  <img src="/src/assets/image/test/961e499.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="">
+                  <img src="/src/assets/image/test/961e499.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="" style="display: none;">
                 </div>
                 <div data-name="test3" class="render">
-                  <img src="/src/assets/image/test/cd89691.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="">
+                  <img src="/src/assets/image/test/cd89691.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="" style="display: none;">
                 </div>
               </div>
 
