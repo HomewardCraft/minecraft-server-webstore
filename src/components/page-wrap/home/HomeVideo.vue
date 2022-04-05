@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
     <div class="grid lg:grid-cols-2 gap-5">
-      <div class="video-wrap">
+      <div @click="openPlayer" class="video-wrap">
         <div class="video border border-white transition duration-150 hover:shadow-pink">
           <div class="play transition-all ease-in-out duration-150">
             <svg viewBox="0 0 512 512" fill="currentColor" class="mx-auto mb-3 w-16 h-16 opacity-75">
@@ -19,6 +19,14 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import pubsub from "pubsub-js";
+
+const openPlayer = () => {
+  pubsub.publish('enablePlayer')
+}
+</script>
 
 <script>
 export default {

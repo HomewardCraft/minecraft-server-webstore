@@ -65,7 +65,8 @@ module.exports = {
         '27.5': '110px',
       },
       gridTemplateRows: {
-        'body': 'auto 1fr auto'
+        'body': 'auto 1fr auto',
+        'video': 'auto 1fr'
       },
       backgroundColor: {
         btn: {

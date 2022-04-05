@@ -10,10 +10,12 @@
   "dependencies": {
     "clipboard": "^2.0.10",
     "lodash": "^4.17.21",
+    "pubsub-js": "^1.9.4",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
+    "@types/pubsub-js": "^1.8.3",
     "@types/lodash": "^4.14.181",
     "@vitejs/plugin-vue": "^2.2.0",
     "autoprefixer": "^10.4.4",
