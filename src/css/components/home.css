@@ -55,7 +55,7 @@
     overflow: hidden;
 }
 .indicator {
-    @apply h-4
+    @apply h-1
 }
 .indicator .progress {
     background: #f472b6;
