@@ -6,15 +6,15 @@
         <h5 class="text-gray-500 font-medium">Stay up to date with the latest blog posts!</h5>
       </div>
       <div class="posts grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-        <a v-for="post in postList" :href="getURL(post.name)" class="post mb-4 lg:mb-0 group">
+        <a v-for="post in postList" :href="getPostURL(post.name)" class="post mb-4 lg:mb-0 group">
           <div class="cover-wrap mb-6">
             <div class="blackout"/>
-            <div :style="getImageAddress(post.imageAddress)" class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"/>
+            <div :style="getPostImageAddress(post.imageAddress)" class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"/>
           </div>
           <div class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90 text-center">
             <h3 class="font-bold text-white mb-1 text-xl">{{ post.version }} - {{ post.title }}</h3>
             <div class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500 justify-center">
-              <div :style="getColor(post.type)" class="font-semibold tracking-wide uppercase">{{ post.type }}</div>
+              <div :style="getPostColor(post.type)" class="font-semibold tracking-wide uppercase">{{ post.type }}</div>
               <div class="mx-2 hidden lg:block">–</div>
               <div class="date">{{ post.date }}</div>
             </div>
@@ -29,6 +29,8 @@
 </template>
 
 <script setup>
+import {getPostColor, getPostURL, getPostImageAddress} from "../../../hook/attribute-generator.js";
+
 const postList = [{
   name: 'bandits-and-badlands',
   title: 'Bandits & Badlands',
@@ -51,21 +53,6 @@ const postList = [{
   type: 'Update',
   date: 'Feb 14th, 2022'
 }]
-
-const getColor = (type) => {
-  switch (type.toString().toLowerCase()) {
-    case 'update': return 'color: rgb(245, 183, 43)'
-    case 'dev blog': return 'color: rgb(51, 241, 127)'
-    case 'event': return 'color: rgb(67, 204, 218)'
-    case 'misc': return 'color: rgb(255, 134, 218)'
-  }
-}
-const getURL =(name) => {
-  return '/blog/' + name
-}
-const getImageAddress = (address) => {
-  return 'background-image: url(' + address + ')'
-}
 </script>
 
 <script>

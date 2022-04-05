@@ -1,24 +1,23 @@
 <template>
   <div class="container mx-auto">
     <div class="md:grid md:grid-cols-2 md:gap-10">
-      <a v-for="post in data" key="index" :href="'/blog/' + post.name" class="post mb-4 lg:mb-0 group">
+      <a v-for="post in data" key="index" :href="getPostURL(post.name)" class="post mb-4 lg:mb-0 group">
         <div class="cover-wrap mb-6">
           <div class="blackout"/>
-          <div class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner cover-lg" :style="'background-image: url('+ post.imageAddress + ')'"/>
+          <div class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner cover-lg" :style="getPostImageAddress(post.imageAddress)"/>
         </div>
         <div class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90">
           <h3 class="font-bold text-white mb-1 text-xl text-2xl mb-3">{{ post.version }} - {{ post.title }}</h3>
           <p class="excerpt h-full mb-4 text-gray-500">{{ textSubstring(post.preview) }}</p>
           <div class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500">
             <!-- todo 颜色切换 -->
-            <div class="font-semibold tracking-wide uppercase tag tag-update" :style="setColor(post.type)">{{ post.type }}</div>
+            <div class="font-semibold tracking-wide uppercase tag tag-update" :style="getPostColor(post.type)">{{ post.type }}</div>
             <div class="mx-2 hidden lg:block">–</div>
             <div class="date">{{ post.date }}</div>
           </div>
         </div>
       </a>
     </div>
-
     <div class="flex items-center justify-between bg-black/50 p-4 mt-10 mb-20">
       <div :class="buttonCondition.previous" class="inline-block border border-lighten py-2 px-4 transition-all duration-150 ease-in-out">
         <svg fill="currentColor" viewBox="0 0 20 20" class="w-8 h-8">
@@ -44,6 +43,7 @@ export default {
 
 <script setup>
 import {reactive} from "vue";
+import {getPostURL, getPostColor, getPostImageAddress} from "../../../hook/attribute-generator.js";
 
 const data = [{
   name: 'gigs-and-jigs',
@@ -82,16 +82,6 @@ const data = [{
 const textSubstring = (text) => {
   return text.toString().substring(0, 180) + '...'
 }
-
-const setColor = (type) => {
-  switch (type.toString().toLowerCase()) {
-    case 'update': return 'color: rgb(245, 183, 43)'
-    case 'dev blog': return 'color: rgb(51, 241, 127)'
-    case 'event': return 'color: rgb(67, 204, 218)'
-    case 'misc': return 'color: rgb(255, 134, 218)'
-  }
-}
-
 const buttonCondition = reactive({
   previous: 'text-gray-500 bg-gray-900',
   next: 'text-btn-text bg-btn shadow-btn hover:opacity-75 cursor-pointer'
