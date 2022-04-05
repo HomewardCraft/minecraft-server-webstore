@@ -49,3 +49,57 @@
         @apply top-4
     }
 }
+#staff {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+.indicator {
+    @apply h-4
+}
+.indicator .progress {
+    background: #f472b6;
+    height: 4px;
+    width: 30px;
+    transition: width .15s linear;
+}
+#staff .island {
+    background: url(https://ba1oretto.com/home/staff-background.png) 50% no-repeat;
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    top: 130px;
+    left: 0;
+    right: 0;
+    height: 280px;
+}
+@screen xsm {
+    #staff .island {
+        top: 120px;
+    }
+}
+@screen lg {
+    #staff .island {
+        background-size: 100% auto;
+        background-position: top;
+        top: 0;
+        bottom: 0;
+        left: auto;
+        right: -80px;
+        width: 656px;
+        height: auto;
+    }
+}
+#staff .render img {
+    transition: all .4s ease-in-out;
+    height: 240px;
+}
+@screen lg {
+    #staff .render img {
+        height: auto;
+    }
+}
+#staff .arrow {
+    background: rgba(13,14,15,.6);
+    padding: 8px;
+}

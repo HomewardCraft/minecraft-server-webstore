@@ -11,6 +11,7 @@ module.exports = {
       }
     },
     screens: {
+      xsm: '478px',
       sm: '640px',
       md: '768px',
       lg: '992px',
@@ -22,6 +23,9 @@ module.exports = {
         'discord': '350px'
       },
       colors: {
+        pink: {
+          '600': '#e672bb'
+        },
         yellow: {
           '400': '#fac000',
           '500': '#eaa21a',
@@ -67,6 +71,9 @@ module.exports = {
       gridTemplateRows: {
         'body': 'auto 1fr auto',
         'video': 'auto 1fr'
+      },
+      gridTemplateColumns: {
+        'staff': '1fr minmax(300px,460px)'
       },
       backgroundColor: {
         btn: {

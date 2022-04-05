@@ -8,10 +8,9 @@
         </div>
         <div class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90">
           <h3 class="font-bold text-white mb-1 text-xl text-2xl mb-3">{{ post.version }} - {{ post.title }}</h3>
-          <p class="excerpt h-full mb-4 text-gray-500">{{ textSubstring(post.preview) }}</p>
+          <p class="excerpt h-full mb-4 text-gray-500">{{ textSubstring(post.preview, 180) }}</p>
           <div class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500">
-            <!-- todo 颜色切换 -->
-            <div class="font-semibold tracking-wide uppercase tag tag-update" :style="getPostColor(post.type)">{{ post.type }}</div>
+            <div class="font-semibold tracking-wide uppercase" :style="getPostColor(post.type)">{{ post.type }}</div>
             <div class="mx-2 hidden lg:block">–</div>
             <div class="date">{{ post.date }}</div>
           </div>
@@ -79,8 +78,8 @@ const data = [{
   date: 'Jul 27th, 2020'
 }]
 
-const textSubstring = (text) => {
-  return text.toString().substring(0, 180) + '...'
+const textSubstring = (text, position) => {
+  return text.toString().substring(0, position) + '...'
 }
 const buttonCondition = reactive({
   previous: 'text-gray-500 bg-gray-900',
