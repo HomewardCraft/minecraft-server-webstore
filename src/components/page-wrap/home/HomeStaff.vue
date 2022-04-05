@@ -181,9 +181,6 @@ const scrollStaff = (behaviour) => {
     }
   } else return false
 }
-const previousStaff = () => {
-
-}
 
 const cancelInterval = () => {
   clearInterval(interval)
