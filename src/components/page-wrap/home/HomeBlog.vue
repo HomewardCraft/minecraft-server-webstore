@@ -9,7 +9,7 @@
         <a v-for="post in postList" :href="getPostURL(post.name)" class="post mb-4 lg:mb-0 group">
           <div class="cover-wrap mb-6">
             <div class="blackout"/>
-            <div :style="getPostImageAddress(post.imageAddress)" class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"/>
+            <div :style="getImageAddress(post.imageAddress)" class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"/>
           </div>
           <div class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90 text-center">
             <h3 class="font-bold text-white mb-1 text-xl">{{ post.version }} - {{ post.title }}</h3>
@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import {getPostColor, getPostURL, getPostImageAddress} from "../../../hook/attribute-generator.js";
+import {getPostColor, getPostURL, getImageAddress} from "../../../hook/attribute-generator.js";
 
 const postList = [{
   name: 'bandits-and-badlands',

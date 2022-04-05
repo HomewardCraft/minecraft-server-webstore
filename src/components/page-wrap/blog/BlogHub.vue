@@ -1,5 +1,5 @@
 <template>
-  <div data-page="blog" class="page-bg" style="background-image: url(https://ba1oretto.com/blog/2022/4/Badger_Blog.jpg)"/>
+  <div data-page="blog" class="page-bg" :style="getImageAddress(latest.imageAddress)"/>
   <blog-container/>
   <div class="stone-bg dark pt-10 pb-20 blog-offset"/>
 </template>
@@ -15,4 +15,9 @@ export default {
 </script>
 
 <script setup>
+import {getImageAddress} from "../../../hook/attribute-generator.js";
+
+const latest = {
+  imageAddress: 'https://ba1oretto.com/blog/2022/04/Badger_Blog.jpg'
+}
 </script>

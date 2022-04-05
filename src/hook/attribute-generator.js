@@ -9,8 +9,8 @@ const getPostColor = (type) => {
 const getPostURL =(name) => {
     return '/blog/' + name
 }
-const getPostImageAddress = (address) => {
+const getImageAddress = (address) => {
     return 'background-image: url(' + address + ')'
 }
 
-export {getPostColor, getPostURL, getPostImageAddress}
+export {getPostColor, getPostURL, getImageAddress}

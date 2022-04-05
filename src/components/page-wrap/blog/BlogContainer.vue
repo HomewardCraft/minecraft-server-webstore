@@ -4,7 +4,7 @@
       <a v-for="post in data" key="index" :href="getPostURL(post.name)" class="post mb-4 lg:mb-0 group">
         <div class="cover-wrap mb-6">
           <div class="blackout"/>
-          <div class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner cover-lg" :style="getPostImageAddress(post.imageAddress)"/>
+          <div class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner cover-lg" :style="getImageAddress(post.imageAddress)"/>
         </div>
         <div class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90">
           <h3 class="font-bold text-white mb-1 text-xl text-2xl mb-3">{{ post.version }} - {{ post.title }}</h3>
@@ -43,11 +43,11 @@ export default {
 
 <script setup>
 import {reactive} from "vue";
-import {getPostURL, getPostColor, getPostImageAddress} from "../../../hook/attribute-generator.js";
+import {getPostURL, getPostColor, getImageAddress} from "../../../hook/attribute-generator.js";
 
 const data = [{
   name: 'gigs-and-jigs',
-  imageAddress: 'https://ba1oretto.com/blog/2022/4/Badger_Blog.jpg',
+  imageAddress: 'https://ba1oretto.com/blog/2022/04/Badger_Blog.jpg',
   version: '0.18.0',
   title: 'Gigs & Jigs Update',
   preview: 'Greetings adventurers! As many of you have recently seen, Origin Isles is undergoing some major construction to the right side of the island and there\'s plenty more to see! Bucklewasdwasdwasssssssssssss',
@@ -55,7 +55,7 @@ const data = [{
   date: 'Mar 19th, 2022'
 },{
   name: 'road-to-1-0-0',
-  imageAddress: 'https://ba1oretto.com/blog/2021/7/Dev_Update_Blog.jpeg',
+  imageAddress: 'https://ba1oretto.com/blog/2021/07/Dev_Update_Blog.jpeg',
   version: '1.0.0',
   title: 'The Road To 1.0.0',
   preview: 'As promised in our last blog post, in today we\'ll be talking more about the path out of Beta as we approach update 1.0.0, and what that means for the future of Origin Realms. For more informationwadsioajdpwak[skd[awppo',
@@ -63,7 +63,7 @@ const data = [{
   date: 'Jul 12th, 2021'
 },{
   name: 'summer-time',
-  imageAddress: 'https://ba1oretto.com/blog/2021/7/Summer_Blog.jpeg',
+  imageAddress: 'https://ba1oretto.com/blog/2021/07/Summer_Blog.jpeg',
   version: '0.9.0',
   title: 'Summer Time',
   preview: 'Howdy there, travellers! In todays blog post, we\'re taking a look at the most tropical update to hit Origin Realms thus far - the summer update! Before you continue, I\'d like to nweasdalkjsd;kljwapiuspdkw;ap[sodkw[ak[',
@@ -71,7 +71,7 @@ const data = [{
   date: 'Jul 12th, 2021'
 },{
   name: 'blocks-and-rocks',
-  imageAddress: 'https://ba1oretto.com/blog/2020/7/Custom_Blocks2.jpg',
+  imageAddress: 'https://ba1oretto.com/blog/2020/07/Custom_Blocks2.jpg',
   version: '0.01.0',
   title: 'More Blocks & Rocks!',
   preview: 'Greetings adventurer, and welcome back to another weekly blog! This week, we\'re giving all our love and attention to the building community as we uncover over100 brand new blocks deep dark fantasies deep dark fantasies deep dark fantasies',
