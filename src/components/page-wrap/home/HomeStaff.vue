@@ -14,33 +14,35 @@
                   <h3 class="text-white text-3xl font-bold">Meet The Team</h3>
                   <h5 class="text-gray-500">Learn about the people who make Origin Realms amazing!</h5>
                 </div>
-                <!-- todo -->
                 <div class="bio-wrap relative">
-                  <div v-show="contributor.test1.enable" data-name="test1" class="info py-5">
-                    <div class="name flex items-center text-pink-600 font-bold uppercase text-lg mb-1">test1 - Model Artist</div>
-                    <div class="bio text-gray-500">It is I, Samuel! Origin Realms offers loads of custom content, but making brand new items feel as if they belong in the game is no easy task! All of the models and characters you see in game were created by me, as well as their animations. I take pride in ensuring everything I do is the best quality down to the very last detail so that you, the player, have the most fun!</div>
-                  </div>
-                  <div v-show="contributor.test2.enable" data-name="test2" class="info py-5">
-                    <div class="name flex items-center text-pink-600 font-bold uppercase text-lg mb-1">test2 - Branding Artist</div>
-                    <div class="bio text-gray-500">The name is Wytze, and I’m the man behind all of the renders and imagery you see on our social media and this website! Creating a consistent style for these art pieces is incredibly important, I want everyone to feel as if they are looking at something that was made by Mojang, which is why I spent hours perfecting every single piece before it goes live! </div>
-                  </div>
-                  <div v-show="contributor.test3.enable" data-name="test3" class="info py-5">
-                    <div class="name flex items-center text-pink-600 font-bold uppercase text-lg mb-1">test3 - Community Manager</div>
-                    <div class="bio text-gray-500">Hello, I’m Ashley! My purpose here on Origin Realms is to make sure the community is having as much fun possible at all times. You’ll actively see me in game, on the discord and I’ll always be around to help if you need! I’m also in charge of our amazing volunteer staff team - it is important that Origin Realms is always a safe and happy place to play every day! </div>
-                  </div>
+                  <transition-group name="staff">
+                    <div v-show="contributor.test1.enable" key="1" data-name="test1" class="info py-5">
+                      <div class="name flex items-center text-pink-600 font-bold uppercase text-lg mb-1">test1 - Model Artist</div>
+                      <div class="bio text-gray-500">It is I, Samuel! Origin Realms offers loads of custom content, but making brand new items feel as if they belong in the game is no easy task! All of the models and characters you see in game were created by me, as well as their animations. I take pride in ensuring everything I do is the best quality down to the very last detail so that you, the player, have the most fun!</div>
+                    </div>
+                    <div v-show="contributor.test2.enable" key="2" data-name="test2" class="info py-5">
+                      <div class="name flex items-center text-pink-600 font-bold uppercase text-lg mb-1">test2 - Branding Artist</div>
+                      <div class="bio text-gray-500">The name is Wytze, and I’m the man behind all of the renders and imagery you see on our social media and this website! Creating a consistent style for these art pieces is incredibly important, I want everyone to feel as if they are looking at something that was made by Mojang, which is why I spent hours perfecting every single piece before it goes live! </div>
+                    </div>
+                    <div v-show="contributor.test3.enable" key="3" data-name="test3" class="info py-5">
+                      <div class="name flex items-center text-pink-600 font-bold uppercase text-lg mb-1">test3 - Community Manager</div>
+                      <div class="bio text-gray-500">Hello, I’m Ashley! My purpose here on Origin Realms is to make sure the community is having as much fun possible at all times. You’ll actively see me in game, on the discord and I’ll always be around to help if you need! I’m also in charge of our amazing volunteer staff team - it is important that Origin Realms is always a safe and happy place to play every day! </div>
+                    </div>
+                  </transition-group>
                 </div>
               </div>
-              <!-- todo -->
               <div class="render-wrap relative">
-                <div v-show="contributor.test1.enable" data-name="test1" class="render">
-                  <img src="/src/assets/image/test/17d979d.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="">
-                </div>
-                <div v-show="contributor.test2.enable" data-name="test2" class="render">
-                  <img src="/src/assets/image/test/961e499.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="test2">
-                </div>
-                <div v-show="contributor.test3.enable" data-name="test3" class="render">
-                  <img src="/src/assets/image/test/cd89691.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="test2">
-                </div>
+                <transition-group name="staff">
+                  <div v-show="contributor.test1.enable" key="1" data-name="test1" class="render">
+                    <img src="/src/assets/image/test/17d979d.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="">
+                  </div>
+                  <div v-show="contributor.test2.enable" key="2" data-name="test2" class="render">
+                    <img src="/src/assets/image/test/961e499.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="test2">
+                  </div>
+                  <div v-show="contributor.test3.enable" key="3" data-name="test3" class="render">
+                    <img src="/src/assets/image/test/cd89691.png" class="block mt-5 lg:mt-16 lg:ml-6 lg:mx-auto max-h-full max-w-full mx-auto" alt="test2">
+                  </div>
+                </transition-group>
               </div>
             </div>
           </div>
@@ -190,8 +192,9 @@ const startInterval = () => {
 }
 const loopWidth = () => {
   interval = setInterval(() => {
-    width.value += 0.5
+    width.value ++
     if (width.value === 100) {
+      scrollStaff('next')
       width.value = 0
     }
   }, 100)

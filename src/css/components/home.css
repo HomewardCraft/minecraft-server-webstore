@@ -78,6 +78,15 @@
         top: 120px;
     }
 }
+#staff .island:after {
+    content: "";
+    background: linear-gradient(180deg, #0d0e0f, transparent, #0d0e0f);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -1px
+}
 @screen lg {
     #staff .island {
         background-size: 100% auto;
@@ -88,6 +97,10 @@
         right: -80px;
         width: 656px;
         height: auto;
+    }
+
+    #staff .island:after {
+        display: none
     }
 }
 #staff .render img {
