@@ -1,83 +1,75 @@
 <template>
   <section id="homeBlog">
     <div class="container mx-auto">
-      <div class="section-title pt-48 pb-12 text-center"><h3 class="text-white text-3xl font-bold">Community
-        Blogs</h3> <h5 class="text-gray-500 font-medium">Stay up to date with the latest blog posts!</h5></div>
-      <div class="posts grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"><a data-v-184fcfab=""
-                                                                                 href="/blog/bandits-and-badlands"
-                                                                                 class="post mb-4 lg:mb-0 group">
-        <div data-v-184fcfab="" class="cover-wrap mb-6">
-          <div data-v-184fcfab="" class="blackout"></div>
-          <div data-v-184fcfab=""
-               class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"
-               style="background-image: url(&quot;https://assets.originrealms.com/2022/03/Badlands_Blog.jpg&quot;);"></div>
-        </div>
-        <div data-v-184fcfab=""
-             class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90 text-center"><h3
-            data-v-184fcfab="" class="font-bold text-white mb-1 text-xl">0.17.0 - Bandits &amp; Badlands</h3>
-          <!---->
-          <div data-v-184fcfab=""
-               class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500 justify-center">
-            <div data-v-184fcfab="" class="font-semibold tracking-wide uppercase tag tag-update"
-                 style="color: rgb(245, 183, 43);">Update
-            </div>
-            <div data-v-184fcfab="" class="mx-2 hidden lg:block">–</div>
-            <div data-v-184fcfab="" class="date">Mar 5th, 2022</div>
+      <div class="section-title pt-48 pb-12 text-center">
+        <h3 class="text-white text-3xl font-bold">Community Blogs</h3>
+        <h5 class="text-gray-500 font-medium">Stay up to date with the latest blog posts!</h5>
+      </div>
+      <div class="posts grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+        <a v-for="post in postList" :href="getURL(post.name)" class="post mb-4 lg:mb-0 group">
+          <div class="cover-wrap mb-6">
+            <div class="blackout"/>
+            <div :style="getImageAddress(post.imageAddress)" class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"/>
           </div>
-        </div>
-      </a><a data-v-184fcfab="" href="/blog/gigs-and-jigs" class="post mb-4 lg:mb-0 group">
-        <div data-v-184fcfab="" class="cover-wrap mb-6">
-          <div data-v-184fcfab="" class="blackout"></div>
-          <div data-v-184fcfab=""
-               class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"
-               style="background-image: url(&quot;https://assets.originrealms.com/2022/03/Badger_Blog.jpg&quot;);"></div>
-        </div>
-        <div data-v-184fcfab=""
-             class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90 text-center"><h3
-            data-v-184fcfab="" class="font-bold text-white mb-1 text-xl">0.18.0 - Gigs &amp; Jigs Update</h3>
-          <!---->
-          <div data-v-184fcfab=""
-               class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500 justify-center">
-            <div data-v-184fcfab="" class="font-semibold tracking-wide uppercase tag tag-update"
-                 style="color: rgb(245, 183, 43);">Update
+          <div class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90 text-center">
+            <h3 class="font-bold text-white mb-1 text-xl">{{ post.version }} - {{ post.title }}</h3>
+            <div class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500 justify-center">
+              <div :style="getColor(post.type)" class="font-semibold tracking-wide uppercase">{{ post.type }}</div>
+              <div class="mx-2 hidden lg:block">–</div>
+              <div class="date">{{ post.date }}</div>
             </div>
-            <div data-v-184fcfab="" class="mx-2 hidden lg:block">–</div>
-            <div data-v-184fcfab="" class="date">Mar 18th, 2022</div>
           </div>
-        </div>
-      </a><a data-v-184fcfab="" href="/blog/arts-and-hearts" class="post mb-4 lg:mb-0 group">
-        <div data-v-184fcfab="" class="cover-wrap mb-6">
-          <div data-v-184fcfab="" class="blackout"></div>
-          <div data-v-184fcfab=""
-               class="cover shadow-border bg-cover bg-center transition ease-in-out duration-150 group-hover:opacity-90 group-hover:shadow-purple-inner"
-               style="background-image: url(&quot;https://assets.originrealms.com/2022/02/Valentines_Blog.jpg&quot;);"></div>
-        </div>
-        <div data-v-184fcfab=""
-             class="post-body transition-opacity ease-in-out duration-150 group-hover:opacity-90 text-center"><h3
-            data-v-184fcfab="" class="font-bold text-white mb-1 text-xl">0.16.3 - Arts &amp; Hearts</h3> <!---->
-          <div data-v-184fcfab=""
-               class="flex lg:items-center flex-col-reverse lg:flex-row text-gray-500 justify-center">
-            <div data-v-184fcfab="" class="font-semibold tracking-wide uppercase tag tag-update"
-                 style="color: rgb(245, 183, 43);">Update
-            </div>
-            <div data-v-184fcfab="" class="mx-2 hidden lg:block">–</div>
-            <div data-v-184fcfab="" class="date">Feb 13th, 2022</div>
-          </div>
-        </div>
-      </a></div>
-      <div class="text-center pt-10 pb-32"><a href="/blog"
-                                              class="inline-block bg-btn border border-lighten py-4 px-8 text-xl shadow-btn uppercase font-extrabold tracking-wide text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 hover:px-10 hover:tracking-widest">View
-        all Posts</a></div>
+        </a>
+      </div>
+      <div class="text-center pt-10 pb-32">
+        <a href="/blog" class="inline-block bg-btn border border-lighten py-4 px-8 text-xl shadow-btn uppercase font-extrabold tracking-wide text-btn-text transition-all duration-150 ease-in-out hover:opacity-75 hover:px-10 hover:tracking-widest">View all Posts</a>
+      </div>
     </div>
   </section>
 </template>
+
+<script setup>
+const postList = [{
+  name: 'bandits-and-badlands',
+  title: 'Bandits & Badlands',
+  version: '0.17.0',
+  imageAddress: 'https://ba1oretto.com/blog/2022/03/Badlands_Blog.jpg',
+  type: 'Update',
+  date: 'Mar 5th, 2022'
+}, {
+  name: 'gigs-and-jigs',
+  title: 'Gigs & Jigs Update',
+  version: '0.18.0',
+  imageAddress: 'https://ba1oretto.com/blog/2022/04/Badger_Blog.jpg',
+  type: 'Update',
+  date: 'Mar 19th, 2022'
+}, {
+  name: 'arts-and-hearts',
+  title: 'Arts & Heart',
+  version: '0.16.3',
+  imageAddress: 'https://ba1oretto.com/blog/2022/02/Valentines_Blog.jpg',
+  type: 'Update',
+  date: 'Feb 14th, 2022'
+}]
+
+const getColor = (type) => {
+  switch (type.toString().toLowerCase()) {
+    case 'update': return 'color: rgb(245, 183, 43)'
+    case 'dev blog': return 'color: rgb(51, 241, 127)'
+    case 'event': return 'color: rgb(67, 204, 218)'
+    case 'misc': return 'color: rgb(255, 134, 218)'
+  }
+}
+const getURL =(name) => {
+  return '/blog/' + name
+}
+const getImageAddress = (address) => {
+  return 'background-image: url(' + address + ')'
+}
+</script>
 
 <script>
 export default {
   name: "HomeBlog"
 }
 </script>
-
-<style scoped>
-
-</style>

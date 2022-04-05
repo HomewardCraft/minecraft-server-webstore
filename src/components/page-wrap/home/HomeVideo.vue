@@ -11,7 +11,6 @@
           </div>
         </div>
       </div>
-
       <div class="text text-center lg:text-left md:flex md:flex-col md:justify-center">
         <h2 class="text-white text-3xl font-bold mb-4">What is Origin Realms?</h2>
         <p class="mb-2 font-medium text-gray-500">Origin Realms is a <b>Minecraft: Java Edition</b> server that aims to enhance and expand upon vanilla gameplay. Our goal is to take what people love about Minecraft survival and give it new life with custom blocks, new biomes, detailed characters, dungeons and much more!</p>

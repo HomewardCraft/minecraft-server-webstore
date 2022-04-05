@@ -51,3 +51,11 @@
 .video-wrap:hover .play {
     filter: drop-shadow(0 0 15px #8b5cf6);
 }
+@screen sl {
+    #homeBlog .posts .post:nth-of-type(odd) .blackout, #homeBlog .posts .post:nth-of-type(odd) .cover, #homeBlog .posts .post:nth-of-type(odd) .post-body {
+        transform: scaleX(.9) scaleY(.9);
+    }
+    #homeBlog .posts .post:nth-of-type(odd) .blackout {
+        top: 4px;
+    }
+}

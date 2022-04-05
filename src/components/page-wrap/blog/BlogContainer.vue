@@ -92,13 +92,6 @@ const setColor = (type) => {
   }
 }
 
-
-
-
-
-
-
-
 const buttonCondition = reactive({
   previous: 'text-gray-500 bg-gray-900',
   next: 'text-btn-text bg-btn shadow-btn hover:opacity-75 cursor-pointer'

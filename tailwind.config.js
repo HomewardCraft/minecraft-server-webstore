@@ -14,6 +14,7 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '992px',
+      sl: '1025px',
       xl: '1100px'
     },
     extend: {
@@ -75,7 +76,8 @@ module.exports = {
         'ip': '#a25223 0 3px 0',
         'ip-count':'#bf6936 0 3px 0',
         'discord': '#808bcb 0 5px 0',
-        'pink': 'rgba(235,75,229,0.45) 0 0 30px'
+        'pink': 'rgba(235,75,229,0.45) 0 0 30px',
+        'purple-inner': 'rgba(235,75,229,0.8) 0 0 0 1px inset'
       }
     },
   },
