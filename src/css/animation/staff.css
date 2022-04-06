@@ -1,7 +1,6 @@
 .staff-enter-active, .staff-leave-active {
     transition: all .3s ease-in-out
 }
-
 .staff-enter-from, .staff-leave-to {
     position: absolute;
     top: 0;
@@ -10,15 +9,12 @@
     opacity: 0;
     transform: translateX(-10px)
 }
-
 .staff-enter-from.render img, .staff-leave-to.render img {
     transform: scale(.9)
 }
-
 .staff-enter-to, .staff-leave-from {
     opacity: 1
 }
-
 .staff-enter-to.render img, .staff-leave-from.render img {
     transform: scale(1)
 }
