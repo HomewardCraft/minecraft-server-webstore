@@ -89,6 +89,16 @@ module.exports = {
         'discord': '#808bcb 0 5px 0',
         'pink': 'rgba(235,75,229,0.45) 0 0 30px',
         'purple-inner': 'rgba(235,75,229,0.8) 0 0 0 1px inset'
+      },
+      animation: {
+        'track': 'track 2s ease infinite'
+      },
+      keyframes: {
+        'track': {
+          '0%': { letterSpacing: 0 },
+          '50%': { letterSpacing: 3 },
+          '100%': { letterSpacing: 0 },
+        }
       }
     },
   },
