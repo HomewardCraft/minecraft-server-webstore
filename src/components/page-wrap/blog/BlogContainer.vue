@@ -44,6 +44,7 @@ import {reactive} from "vue";
 import {getDate, getPostURL, getTagColor, getImageAddress} from "../../../hook/attribute-generator.js";
 import axios from "axios";
 import pubsub from "pubsub-js";
+import {debounce} from "lodash";
 
 const params = {
   pageNum: 1,
@@ -62,6 +63,7 @@ const buttonCondition = {
   disable: 'text-gray-500 bg-gray-900 pointer-events-none',
   enable: 'text-btn-text bg-btn shadow-btn hover:opacity-75 cursor-pointer'
 }
+const superContainer = document.getElementById('app')
 
 const getPosts = async () => {
   const {data: res} = await axios.get('local/post/blog', {params})
@@ -77,21 +79,32 @@ const getPosts = async () => {
   data.posts = result.posts
   button.next = data.pagination.next === null ? buttonCondition.disable : buttonCondition.enable
   button.prev = data.pagination.prev === null ? buttonCondition.disable : buttonCondition.enable
-  pubsub.publish('changeLoadingBgCondition', false)
 }
-getPosts()
 
 const textSubstring = (text, position) => {
   return text.toString().substring(0, position) + '...'
 }
 
-const changePage = (next) => {
-  pubsub.publish('changeLoadingBgCondition', true)
-  const superContainer = document.getElementById('app')
-  superContainer.scrollIntoView({
-    behavior: 'smooth'
-  })
+const preventBounce = debounce((next) => {
   params.pageNum += next ? 1 : -1
-  getPosts()
+  getPosts().then(() => {
+    pubsub.publish('changeLoadingBgCondition', false)
+    superContainer.scrollIntoView()
+    superContainer.removeEventListener('wheel', preventWheel)
+  })
+}, 600)
+const preventWheel = (event) => {
+  event.preventDefault()
 }
+const changePage = (next) => {
+  superContainer.addEventListener('wheel', preventWheel)
+  superContainer.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  })
+  pubsub.publish('changeLoadingBgCondition', true)
+  preventBounce(next)
+}
+
+getPosts()
 </script>
