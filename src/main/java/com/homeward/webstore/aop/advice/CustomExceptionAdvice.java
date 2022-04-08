@@ -136,7 +136,7 @@ public class CustomExceptionAdvice {
 
     @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.uploadImageMethod() || " +
             "com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.unmountImageMethod()")
-    public R AdministratorUploadImageException(ProceedingJoinPoint point) {
+    public R AdministratorImageManipulationException(ProceedingJoinPoint point) {
         R res;
         try {
             res = (R) point.proceed();
@@ -152,13 +152,9 @@ public class CustomExceptionAdvice {
                 case "an error occur during read image information" -> {
                     return R.no(AdministratorStatusEnum.IMAGE_INFORMATION_ERROR);
                 }
-                case "an error occur during create image to local host" -> {
-                    return R.no(AdministratorStatusEnum.IMAGE_CREATE_ERROR);
-                }
-                case "duplicate image found" -> {
-                    return R.no(AdministratorStatusEnum.DUPLICATE_IMAGE);
-                }
                 case "unhandled error occurred" -> {
+                    log.error(errorMessage);
+                    throwable.printStackTrace();
                     return R.no(AdministratorStatusEnum.BACKEND_ERROR);
                 }
                 default -> {
@@ -168,6 +164,36 @@ public class CustomExceptionAdvice {
                 }
             }
         }
-        return R.ok(res);
+        return res;
+    }
+
+    @Around("com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.insertItemMethod() || " +
+            "com.homeward.webstore.aop.pointcuts.CustomExceptionAdvice.updateItemMethod()")
+    public R AdministratorItemManipulationException(ProceedingJoinPoint point) {
+        R res;
+        try {
+            res = (R) point.proceed();
+        } catch (Throwable throwable) {
+            String errorMessage = throwable.getMessage();
+            switch (errorMessage) {
+                case "item name duplicated" -> {
+                    return R.no(AdministratorStatusEnum.ITEM_NAME_DUPLICATED);
+                }
+                case "item type not match" -> {
+                    return R.no(AdministratorStatusEnum.ITEM_TYPE_NOT_MATCH);
+                }
+                case "unhandled error occurred" -> {
+                    log.error(errorMessage);
+                    throwable.printStackTrace();
+                    return R.no(AdministratorStatusEnum.BACKEND_ERROR);
+                }
+                default -> {
+                    log.error(errorMessage);
+                    throwable.printStackTrace();
+                    return R.no(StatusEnum.UNEXPECTED_EXCEPTION);
+                }
+            }
+        }
+        return res;
     }
 }

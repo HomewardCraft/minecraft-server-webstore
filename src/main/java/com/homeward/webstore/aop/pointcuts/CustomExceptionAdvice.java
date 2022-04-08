@@ -37,4 +37,14 @@ public class CustomExceptionAdvice {
             "com.homeward.webstore.java.bean.VO.R " +
             "com.homeward.webstore.controller.AdminItemManipulationController.unmountImage(..))")
     public void unmountImageMethod() {}
+
+    @Pointcut("execution(@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
+            "com.homeward.webstore.java.bean.VO.R " +
+            "com.homeward.webstore.controller.AdminItemManipulationController.insertItem(..))")
+    public void insertItemMethod() {}
+
+    @Pointcut("execution(@com.homeward.webstore.aop.annotations.JoinPointSymbol " +
+            "com.homeward.webstore.java.bean.VO.R " +
+            "com.homeward.webstore.controller.AdminItemManipulationController.updateItem(..))")
+    public void updateItemMethod() {}
 }

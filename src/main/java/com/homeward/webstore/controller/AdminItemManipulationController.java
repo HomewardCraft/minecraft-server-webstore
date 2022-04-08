@@ -18,15 +18,17 @@ public class AdminItemManipulationController {
     }
 
     @PostMapping("/insert")
+    @JoinPointSymbol
     public R insertItem(@RequestBody ItemWholeInfo information) {
         adminItemManipulationService.insertItem(information);
-        return R.ok("");
+        return R.ok();
     }
 
     @PostMapping("/update")
+    @JoinPointSymbol
     public R updateItem(@RequestBody ItemWholeInfo information) {
         adminItemManipulationService.updateItem(information);
-        return R.ok("");
+        return R.ok();
     }
 
     @PostMapping("/file/upload")

@@ -11,6 +11,8 @@ spring:
     #设定用户名和密码
     username: remote
     password: sd;lawmd;ls1=1]ro90-2Sjm20050406
+    hikari:
+      max-lifetime: 300000
   thymeleaf:
     prefix: classpath:/static/
 

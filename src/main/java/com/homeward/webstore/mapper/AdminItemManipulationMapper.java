@@ -18,7 +18,7 @@ public interface AdminItemManipulationMapper {
     Boolean updateCratesInformation(ItemWholeInfo information);
     Boolean updateCratesInformationName(@Param("cratesInformationNameList") List<ItemName> name, String descriptionId);
 
-    Long isExist(String name);
+    Long isExist(@Param("category") String category, @Param("name") String name);
     String selectDescriptionId(Integer itemId);
     List<ItemName> selectCratesId(String descriptionId);
 }

@@ -4,7 +4,17 @@
 
 <mapper namespace="com.homeward.webstore.mapper.AdminItemManipulationMapper">
     <select id="isExist" resultType="Long" useCache="true">
-        select count(*) from item_info where name like concat('%', #{name}, '%')
+        select count(*) from item_info
+        <where>
+            <choose>
+                <when test="category == 'crates'">
+                    name like concat('___', #{name})
+                </when>
+                <when test="category == 'extras'">
+                    name = #{name}
+                </when>
+            </choose>
+        </where>
     </select>
 
     <select id="selectDescriptionId" resultType="String" useCache="true">
@@ -21,7 +31,7 @@
     </select>
 
 
-    <insert id="insertDescription" parameterType="ItemWholeInfo">
+    <insert id="insertDescription" parameterType="ItemWholeInfo" flushCache="true">
         insert into item_desc (id, description, rawDescription) values(#{descriptionId}, #{description}, #{rawDescription})
     </insert>
 
@@ -37,7 +47,7 @@
     </insert>
 
 
-    <update id="updateDescription">
+    <update id="updateDescription" flushCache="true">
         update item_desc set description = #{description}, rawDescription = #{rawDescription} where id = #{descriptionId}
     </update>
 
@@ -45,7 +55,7 @@
         update item_info set name = #{name}, price = #{price}, is_onsale = #{saleCondition}, onsale_percent = #{salePercent}, command = #{command}, image_address = #{imageAddress}, image_hover_address = #{imageHoverAddress} where id = #{id}
     </update>
 
-    <update id="updateCratesInformationName">
+    <update id="updateCratesInformationName" flushCache="true">
         update item_info
         <trim prefix="set" suffixOverrides=",">
             <trim prefix="name = case" suffix="end,">
